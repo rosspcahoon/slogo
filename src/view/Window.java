@@ -47,7 +47,6 @@ public class Window extends JFrame {
     }
     
     public GridBagConstraints makeConsoleLayout() {
-        System.out.println("HERE1");
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = .5;
         c.weighty = 1;

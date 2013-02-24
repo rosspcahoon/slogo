@@ -1,31 +1,24 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class ErrorLogView extends FeedbackView {
     
     public ErrorLogView () {
-        //super();
-        make(this);
+        super();
+        addComponents();
     }
     
-    public JPanel make(JPanel result) {// name something better
-        result.setLayout(new GridBagLayout());
-        result.add(new JTextArea(20, 20), makeErrorLayout());
-        return result;
+    @Override
+    public void addComponents () {
     }
     
-    protected GridBagConstraints makeErrorLayout() {
-        GridBagConstraints c = new GridBagConstraints();
+    public static GridBagConstraints configLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.weighty = 1;
+        c.gridx = 1;
+        c.gridy = 0;
         return c;
     }
 

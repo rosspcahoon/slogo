@@ -1,32 +1,29 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class StateView extends FeedbackView {
-
-    public void display() {
-        
-    }
     
     public StateView () {
-        make(this);
+        super();
+        addComponents();
     }
     
-    public JPanel make(JPanel result) {// name something better
-        result.setLayout(new GridBagLayout());
-        result.add(new JTextArea(20,20), makeStateLayout());
-        return result;
+    @Override
+    public void addComponents () {
     }
     
-    protected GridBagConstraints makeStateLayout() {
-        GridBagConstraints c = new GridBagConstraints();
+    public static GridBagConstraints configLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.weighty = 1;
+        c.gridx = 0;
+        c.gridy = 0;
         return c;
+    }
+
+    public void display() {
+        
     }
 }

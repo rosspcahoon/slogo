@@ -3,12 +3,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Set;
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 import model.Room;
 
@@ -32,17 +36,22 @@ public class RoomView extends JPanel {
     private Room myRoom;
     
     public RoomView() {
-        new RoomView(SIZE);
+        make(this);
+        this.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
     }
 
-    /**
-     * Create a panel so that it knows its size
-     */
-    public RoomView (Dimension size) {
-        // set size (a bit of a pain)
-        setPreferredSize(size);
-        setSize(size);
-        // prepare to receive input
+    public JPanel make(JPanel result) {// name something better
+        result.setLayout(new GridBagLayout());
+        result.add(new JTextArea(20,20), makeLayout());
+        return result;
+    }
+    
+    protected GridBagConstraints makeLayout() {
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        return c;
     }
 
     /**

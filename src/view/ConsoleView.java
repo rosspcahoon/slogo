@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -13,13 +14,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
-public class ConsoleView extends JPanel {
+public class ConsoleView extends WindowView {
     private JTextField myTextField; 
     private JTextArea myCommandField;
 
 
     public ConsoleView () {
-        make(this);
+        super();
+        addComponents ();
     }
     private List<String> myCommandsHistory;
 
@@ -34,14 +36,13 @@ public class ConsoleView extends JPanel {
     public void saveCommandInput() {
         // a bit unsure abt this
     }
-
-    public JPanel make(JPanel result) {// name something better
-        result.setLayout(new GridBagLayout());
-        result.add(myTextField = new JTextField(), makeTextLayout());
-        result.add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout());
-        result.add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout());
-        result.add(myCommandField = new JTextArea(30, 30), makeCommandLayout());
-        return result;
+    @Override
+    public void addComponents () {
+        add(myTextField = new JTextField(), makeTextLayout());
+        add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout());
+        add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout());
+        add(myCommandField = new JTextArea(30, 30), makeCommandLayout());
+        return this;
     }
     
     protected GridBagConstraints makeCommandLayout () {
