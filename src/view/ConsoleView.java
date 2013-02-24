@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 public class ConsoleView extends JPanel {
     private JTextField myTextField; 
+    private JTextArea myCommandField;
 
 
     public ConsoleView () {
@@ -39,7 +40,20 @@ public class ConsoleView extends JPanel {
         result.add(myTextField = new JTextField(), makeTextLayout());
         result.add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout());
         result.add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout());
+        result.add(myCommandField = new JTextArea(30, 30), makeCommandLayout());
         return result;
+    }
+    
+    protected GridBagConstraints makeCommandLayout () {
+        GridBagConstraints c = new GridBagConstraints(); 
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.ipadx = 50; 
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 0;
+        return c;
     }
 
     protected GridBagConstraints makeTextLayout () {

@@ -8,11 +8,12 @@ import java.awt.Rectangle;
 import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import model.Room;
 
 
-public class RoomView extends JComponent {
+public class RoomView extends JPanel {
 
   //default serialization ID
     private static final long serialVersionUID = 1L;
@@ -42,8 +43,6 @@ public class RoomView extends JComponent {
         setPreferredSize(size);
         setSize(size);
         // prepare to receive input
-        setFocusable(true);
-        requestFocus();
     }
 
     /**
