@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.MenuBar;
@@ -9,9 +8,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import model.Room;
-import java.util.ResourceBundle;
 
+@SuppressWarnings("serial")
 public class Window extends JFrame {
 
     //TODO: Additional
@@ -23,7 +21,12 @@ public class Window extends JFrame {
     private TabView activeTab;
     private MenuBar myMenuBar;
     private JFileChooser myChooser;
+    private FeedbackView myFeedbackView;
+    private ConsoleView myConsoleView;
+    private RoomView myRoomView;
+    private GridBagConstraints myConstraints;
     public static ResourceBundle myResources;
+    
 
     public Window (String title, String language) {
         super(title);
@@ -40,59 +43,11 @@ public class Window extends JFrame {
     }
     
     public void addComponents() {
-        getContentPane().add(new ConsoleView(), makeConsoleLayout());
-        getContentPane().add(new RoomView(), makeRoomLayout());
-        getContentPane().add(new StateView(), makeStateLayout());
-        getContentPane().add(new ErrorLogView(), makeErrorLayout());
-    }
-    
-    public GridBagConstraints makeConsoleLayout() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = .5;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 4;
-        c.gridy = 0;
-        c.gridwidth = 2;
-        return c;
-    }
-    
-    public GridBagConstraints makeRoomLayout() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.ipady = 10;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 4;
-        return c;
-    }
-    
-    public GridBagConstraints makeStateLayout() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.ipady = 10;
-        c.gridx = 1;
-        c.gridy = 1;
-        c.gridwidth = 3;
-        return c;
-    }
-    
-    public GridBagConstraints makeErrorLayout() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.ipady = 40;
-        c.ipadx = 50; 
-        c.gridx = 4;
-        c.gridy = 1;
-        c.gridwidth = 3;
-        return c;
-    }
+        myConstraints = new GridBagConstraints();
+        getContentPane().add(myConsoleView = new ConsoleView(), myConsoleView.configLayout(myConstraints));
+        getContentPane().add(myRoomView = new RoomView(), myRoomView.configLayout(myConstraints));
+        getContentPane().add(myFeedbackView = new FeedbackView(), myFeedbackView.configLayout(myConstraints));
+    }      
 
     public void openFile() {
 

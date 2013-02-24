@@ -1,56 +1,37 @@
 package view;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.Set;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.Timer;
 import model.Room;
 
 
-public class RoomView extends JPanel {
+@SuppressWarnings("serial")
+public class RoomView extends WindowView {
 
-  //default serialization ID
-    private static final long serialVersionUID = 1L;
-     //animate 25 times per second if possible
-    public static final int FRAMES_PER_SECOND = 25;
-    // better way to think about timed events (in milliseconds)
-    public static final int ONE_SECOND = 1000;
-    public static final int DEFAULT_DELAY = ONE_SECOND / FRAMES_PER_SECOND;
-    //
-    public static final Dimension SIZE = new Dimension(800, 600);
-    // only one so that it maintains user's preferences
-    private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
-    
     // game to be animated
     private Room myRoom;
-    
+
     public RoomView() {
-        make(this);
-        this.setBorder(BorderFactory.createEmptyBorder(0,10,10,10)); 
+        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        System.out.println("Printing in RoomView");
+    }
+    @Override
+    public void addComponents () {
+        add(new JTextArea(20,20));
     }
 
-    public JPanel make(JPanel result) {// name something better
-        result.setLayout(new GridBagLayout());
-        result.add(new JTextArea(20,20), makeLayout());
-        return result;
-    }
-    
-    protected GridBagConstraints makeLayout() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
+    @Override
+    public GridBagConstraints configLayout (GridBagConstraints c) {
         c.weightx = 1;
         c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 4;
+        c.gridheight = 6;
         return c;
     }
 
@@ -72,9 +53,9 @@ public class RoomView extends JPanel {
             myRoom.paint((Graphics2D) pen);
         }
     }
-    
+
     public void update() {
-        
+
     }
-    
+
 }

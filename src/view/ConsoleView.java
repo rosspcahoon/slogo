@@ -1,30 +1,44 @@
 package view;
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.List;
-import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class ConsoleView extends WindowView {
     private JTextField myTextField; 
     private JTextArea myCommandField;
+    private List<String> myCommandsHistory;
+    private GridBagConstraints myConstraints;
 
 
     public ConsoleView () {
-        super();
-        addComponents ();
+        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
-    private List<String> myCommandsHistory;
-
+    
+    public void addComponents () {
+        myConstraints = new GridBagConstraints();
+        add(myTextField = new JTextField(), makeTextLayout(myConstraints));
+        add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout(myConstraints));
+        add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout(myConstraints));
+        add(myCommandField = new JTextArea(30, 30), makeCommandLayout(myConstraints));
+    }
+    
+    @Override
+    public GridBagConstraints configLayout(GridBagConstraints c) {
+        c.weightx = .5;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 4;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        c.gridheight = 6;
+        return c;
+    }
+    
     public void updateCommandDisplay() {
 
     }
@@ -36,17 +50,8 @@ public class ConsoleView extends WindowView {
     public void saveCommandInput() {
         // a bit unsure abt this
     }
-    @Override
-    public void addComponents () {
-        add(myTextField = new JTextField(), makeTextLayout());
-        add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout());
-        add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout());
-        add(myCommandField = new JTextArea(30, 30), makeCommandLayout());
-        return this;
-    }
     
-    protected GridBagConstraints makeCommandLayout () {
-        GridBagConstraints c = new GridBagConstraints(); 
+    protected GridBagConstraints makeCommandLayout (GridBagConstraints c) {
         c.weightx = 1;
         c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
@@ -57,8 +62,7 @@ public class ConsoleView extends WindowView {
         return c;
     }
 
-    protected GridBagConstraints makeTextLayout () {
-        GridBagConstraints c = new GridBagConstraints(); 
+    protected GridBagConstraints makeTextLayout (GridBagConstraints c) {
         c.weightx = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipadx = 50;  
@@ -67,8 +71,7 @@ public class ConsoleView extends WindowView {
         return c;
     }
 
-    public GridBagConstraints makeClearLayout() {
-        GridBagConstraints c = new GridBagConstraints();
+    public GridBagConstraints makeClearLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 1;
@@ -76,8 +79,7 @@ public class ConsoleView extends WindowView {
         return c;        
     }
 
-    public GridBagConstraints makeEnterLayout() {
-        GridBagConstraints c = new GridBagConstraints();
+    public GridBagConstraints makeEnterLayout (GridBagConstraints c) {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = 2;
