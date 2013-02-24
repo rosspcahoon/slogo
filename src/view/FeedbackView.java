@@ -1,6 +1,9 @@
 package view;
 
-public class FeedbackView {
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+
+public class FeedbackView extends JDialog {
 
     private ErrorLogView myErrorLogView;
     private StateView myStateView;

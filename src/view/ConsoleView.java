@@ -1,8 +1,9 @@
 package view;
 import java.util.List;
+import javax.swing.JFrame;
 
 
-public class ConsoleView {
+public class ConsoleView extends JFrame {
 
     private List<String> myCommandsHistory;
     

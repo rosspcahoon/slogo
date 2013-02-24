@@ -8,11 +8,6 @@ public interface ISLogoModel {
      * @param s
      * @return
      */
-    public boolean process (String s);
+    public boolean processCommand (Room r, String s);
     
-    /**
-     * TODO: consider better name, responsible for painting model elements
-     * @return
-     */
-    public boolean display();
 }
