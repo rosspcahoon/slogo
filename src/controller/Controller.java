@@ -25,7 +25,7 @@ public class Controller implements Observer {
     
     public Controller() {
         myModel = new Model();
-        myView = new Window("SLogo");
+        myView = new Window("SLogo", "English");
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
     }
