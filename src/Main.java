@@ -1,4 +1,9 @@
-
+/**
+ * This is just a test.
+ * 
+ * @author thomasvarner
+ *
+ */
 public class Main {
 
     /**
