@@ -34,7 +34,7 @@ public class Controller implements Observer {
         //Welcome message
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // display interface component
-        initializeRoom();
+//        initializeRoom();
         myView.pack();
         myView.setVisible(true);
 
@@ -88,7 +88,7 @@ public class Controller implements Observer {
     
     private void initializeRoom (int id) {
         Room theRoom = new Room(id);
-        TabView associatedTab = new TabView(id, this);
+        TabView associatedTab = new TabView(id, myView);
         Room2Tab.put(theRoom, associatedTab);
         Tab2Room.put(associatedTab, theRoom);
         theRoom.addObserver(this);

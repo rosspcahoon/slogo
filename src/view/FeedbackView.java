@@ -23,13 +23,13 @@ public class FeedbackView extends WindowView {
     
     @Override
     public GridBagConstraints configLayout (GridBagConstraints c) {
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
-        c.weighty = 1;
-        c.gridx = 0;
-        c.gridy = 6;
-        c.gridwidth = 6;
+        c.weighty = .125;
+        c.gridwidth = 8;
         c.gridheight = 1;
+        c.gridx = 0;
+        c.gridy = 7;
         return c;
     }
 }

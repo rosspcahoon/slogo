@@ -25,13 +25,13 @@ public class RoomView extends WindowView {
 
     @Override
     public GridBagConstraints configLayout (GridBagConstraints c) {
-        c.weightx = 1;
-        c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
+        c.weightx = .75;
+        c.weighty = .875;
+        c.gridwidth = 5;
+        c.gridheight = 6;
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 4;
-        c.gridheight = 6;
         return c;
     }
 

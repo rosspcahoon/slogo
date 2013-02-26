@@ -29,13 +29,13 @@ public class ConsoleView extends WindowView {
     
     @Override
     public GridBagConstraints configLayout(GridBagConstraints c) {
-        c.weightx = .5;
-        c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
-        c.gridx = 4;
-        c.gridy = 0;
-        c.gridwidth = 2;
+        c.weightx = 0.375;
+        c.weighty = .875;
+        c.gridwidth = 3;
         c.gridheight = 6;
+        c.gridx = 5;
+        c.gridy = 0;
         return c;
     }
     
