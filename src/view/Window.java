@@ -12,7 +12,9 @@ import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
@@ -29,7 +31,7 @@ public class Window extends JFrame {
     private List<TabView> myTabs;
     private TabView activeTab;
     private JTabbedPane myTabbedPane;
-    private MenuBar myMenuBar;
+    private JMenuBar myMenuBar;
     private JFileChooser myChooser;
     private FeedbackView myFeedbackView;
     private ConsoleView myConsoleView;
@@ -64,7 +66,8 @@ public class Window extends JFrame {
     }
     
     public void addComponents() {
-        getContentPane().add(new JMenuBar());
+        getContentPane().add(myMenuBar=new JMenuBar());
+        configMenu();
         myTabbedPane = new JTabbedPane();
         myTabbedPane.addTab("Tab 1", new TabView(2, this));
         myTabbedPane.addTab("Tab 2", new TabView(3, this));
@@ -73,7 +76,17 @@ public class Window extends JFrame {
 //        getContentPane().add(myRoomView = new RoomView(), myRoomView.configLayout(myConstraints));
 //        getContentPane().add(myFeedbackView = new FeedbackView(), myFeedbackView.configLayout(myConstraints));
     }      
-     public GridBagConstraints configLayout() {
+     private void configMenu () {
+         JMenu menu = new JMenu("File");
+         myMenuBar.add(menu);
+         JMenuItem openFile = new JMenuItem("Open File");
+         openFile.getAccessibleContext().setAccessibleDescription(
+                 "This doesn't really do anything");
+         menu.add(menu);
+    }
+
+
+    public GridBagConstraints configLayout() {
          GridBagConstraints c = new GridBagConstraints();
          c.fill = GridBagConstraints.BOTH;
          c.weightx = 1;

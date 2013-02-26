@@ -1,10 +1,8 @@
 package controller;
 
-import java.awt.BorderLayout;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,6 +13,14 @@ import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
+
+/**
+ * The controller is responsible for interfacing between the View and the Model.
+ * Among other things, it is responsible for handling events from the View, and
+ * ensuring that the model components are kept in sync.
+ * @author SLogo team 3
+ *
+ */
 
 public class Controller implements Observer {
 
@@ -30,14 +36,21 @@ public class Controller implements Observer {
         Tab2Room = new HashMap<TabView, Room>();
     }
     
+    /**
+     * Initialize the GUI.
+     */
     public void start() {
         //Welcome message
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // display interface component
-//        initializeRoom();
         myView.pack();
         myView.setVisible(true);
-
+    }
+    
+    /**
+     * 
+     */
+    public void newSlogoSession() {
+        initializeRoom();
     }
     
     /**
@@ -64,7 +77,7 @@ public class Controller implements Observer {
     }
     
     private void update(Room r, Object arg) {
-        getTabForRoom(r).paint((Paintable)r);
+        getTabForRoom(r).paint((Paintable) r);
     }
     
     private void update(TabView t, Object arg) {
