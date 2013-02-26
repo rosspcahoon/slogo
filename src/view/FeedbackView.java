@@ -9,11 +9,10 @@ public class FeedbackView extends WindowView {
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
     private Dimension mySize = new Dimension(800,100);
-    private Dimension myMinSize = new Dimension(400,50);
     
     public FeedbackView (){
-        this.setSize(mySize);
-        this.setMinimumSize(myMinSize);
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
     }
     
     @Override

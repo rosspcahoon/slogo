@@ -25,11 +25,10 @@ public class TabView extends JPanel {
     private FeedbackView myFeedbackView;
     private File myFile;
     private Dimension mySize = new Dimension(800,800);
-    private Dimension myMinSize = new Dimension(400,400);
     
     public TabView(int id, Window hostWindow) {
-        setSize(mySize);
-        setMinimumSize(myMinSize);
+        setPreferredSize(mySize);
+        setMinimumSize(mySize);
         this.setLayout(new GridBagLayout());
         myID = id;
         myWindow = hostWindow;

@@ -14,12 +14,11 @@ public class RoomView extends WindowView {
 
     // game to be animated
     private Room myRoom;
-    private Dimension mySize = new Dimension(900,900);
-    private Dimension myMinSize = new Dimension(300,300);
+    private Dimension mySize = new Dimension(800,800);
 
     public RoomView() {
-        this.setSize(mySize);
-        this.setMinimumSize(myMinSize);
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5)); 
     }
 

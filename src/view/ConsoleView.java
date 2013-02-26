@@ -15,11 +15,10 @@ public class ConsoleView extends WindowView {
     private List<String> myCommandsHistory;
     private GridBagConstraints myConstraints;
     private Dimension mySize = new Dimension(200,700);
-    private Dimension myMinSize = new Dimension(100,350);  
 
     public ConsoleView () {
-        this.setSize(mySize);
-        this.setMinimumSize(myMinSize);
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
 
