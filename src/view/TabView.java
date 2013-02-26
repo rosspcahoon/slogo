@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
@@ -23,18 +24,17 @@ public class TabView extends JPanel {
     private ConsoleView myConsoleView;
     private FeedbackView myFeedbackView;
     private File myFile;
+    private Dimension mySize = new Dimension(800,800);
+    private Dimension myMinSize = new Dimension(400,400);
     
     public TabView(int id, Window hostWindow) {
+        setSize(mySize);
+        setMinimumSize(myMinSize);
         this.setLayout(new GridBagLayout());
         myID = id;
         myWindow = hostWindow;
         myConstraints = new GridBagConstraints() ;
         addComponents();
-//        myConsoleView = new ConsoleView();
-//        myFeedbackView = new FeedbackView();
-//        getContentPane().add(myRoomView, BorderLayout.CENTER);
-//        getContentPane().add(myConsoleView, BorderLayout.CENTER);
-//        getContentPane().add(myFeedbackView, BorderLayout.CENTER);
     }
     
     public TabView(int id) {

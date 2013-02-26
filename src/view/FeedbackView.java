@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
@@ -7,11 +8,12 @@ public class FeedbackView extends WindowView {
     private GridBagConstraints myConstraints;
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
+    private Dimension mySize = new Dimension(800,100);
+    private Dimension myMinSize = new Dimension(400,50);
     
     public FeedbackView (){
-        super();
-        addComponents();
-        System.out.println("Printing in FeedbackView");
+        this.setSize(mySize);
+        this.setMinimumSize(myMinSize);
     }
     
     @Override

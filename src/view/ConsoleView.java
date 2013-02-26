@@ -1,4 +1,5 @@
 package view;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -13,20 +14,23 @@ public class ConsoleView extends WindowView {
     private JTextArea myCommandField;
     private List<String> myCommandsHistory;
     private GridBagConstraints myConstraints;
-
+    private Dimension mySize = new Dimension(200,700);
+    private Dimension myMinSize = new Dimension(100,350);  
 
     public ConsoleView () {
+        this.setSize(mySize);
+        this.setMinimumSize(myMinSize);
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
-    
+
     public void addComponents () {
         myConstraints = new GridBagConstraints();
         add(myTextField = new JTextField(), makeTextLayout(myConstraints));
         add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout(myConstraints));
         add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout(myConstraints));
-        add(myCommandField = new JTextArea(30, 30), makeCommandLayout(myConstraints));
+        add(myCommandField = new JTextArea(), makeCommandLayout(myConstraints));
     }
-    
+
     @Override
     public GridBagConstraints configLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
@@ -34,11 +38,11 @@ public class ConsoleView extends WindowView {
         c.weighty = .875;
         c.gridwidth = 2;
         c.gridheight = 6;
-        c.gridx = 5;
+        c.gridx = 6;
         c.gridy = 0;
         return c;
     }
-    
+
     public void updateCommandDisplay() {
 
     }
@@ -50,10 +54,10 @@ public class ConsoleView extends WindowView {
     public void saveCommandInput() {
         // a bit unsure abt this
     }
-    
+
     protected GridBagConstraints makeCommandLayout (GridBagConstraints c) {
-        c.weightx = .5;
-        c.weighty = .5;
+        c.weightx = 1;
+        c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
         c.ipadx = 50; 
         c.gridwidth = 3;
@@ -63,8 +67,8 @@ public class ConsoleView extends WindowView {
     }
 
     protected GridBagConstraints makeTextLayout (GridBagConstraints c) {
-        c.weightx = 0.5;
-        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.ipadx = 50;  
         c.gridx = 0;
         c.gridy = 1;
@@ -72,16 +76,16 @@ public class ConsoleView extends WindowView {
     }
 
     public GridBagConstraints makeClearLayout(GridBagConstraints c) {
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 0.5;
+        //c.fill = GridBagConstraints.BOTH;
+        //c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 1;
         return c;        
     }
 
     public GridBagConstraints makeEnterLayout (GridBagConstraints c) {
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 0.5;
+        //  c.fill = GridBagConstraints.BOTH;
+        //c.weightx = 0.5;
         c.gridx = 2;
         c.gridy = 1;
         return c;

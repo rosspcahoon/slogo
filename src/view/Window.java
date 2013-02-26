@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -38,10 +39,14 @@ public class Window extends JFrame {
     public static ResourceBundle myResources;
     private JPanel panel1;
     private JPanel panel3;
+    private Dimension mySize = new Dimension(800,800);
+    private Dimension myMinSize = new Dimension(400,400);
     
 
     public Window (String title, String language) {
         super(title);
+        setPreferredSize(mySize);
+        setMinimumSize(myMinSize);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myChooser = new JFileChooser(System.getProperties().getProperty(USER_DIR));
         // create and arrange sub-parts of the GUI
@@ -49,10 +54,7 @@ public class Window extends JFrame {
         //tabs
         myTabs = new ArrayList<TabView>();
         getContentPane().setLayout(new GridBagLayout());
-        // add components
-        createPage1();
-        createPage3();
-        
+       
         addComponents();
         pack();
         setVisible(true);
@@ -64,15 +66,13 @@ public class Window extends JFrame {
     }
     
     public void addComponents() {
-        getContentPane().add(new JMenuBar());
+        setJMenuBar(new MenuBarView());
         myTabbedPane = new JTabbedPane();
         myTabbedPane.addTab("Tab 1", new TabView(2, this));
         myTabbedPane.addTab("Tab 2", new TabView(3, this));
         getContentPane().add(myTabbedPane, configLayout());
-//        getContentPane().add(myConsoleView = new ConsoleView(), myConsoleView.configLayout(myConstraints));
-//        getContentPane().add(myRoomView = new RoomView(), myRoomView.configLayout(myConstraints));
-//        getContentPane().add(myFeedbackView = new FeedbackView(), myFeedbackView.configLayout(myConstraints));
     }      
+    
      public GridBagConstraints configLayout() {
          GridBagConstraints c = new GridBagConstraints();
          c.fill = GridBagConstraints.BOTH;
@@ -84,41 +84,7 @@ public class Window extends JFrame {
          c.gridy = 0;
          return c;
      }
-    public void createPage1()
-    {
-            panel1 = new JPanel();
-            panel1.setLayout( null );
-
-            JLabel label1 = new JLabel( "Username:" );
-            label1.setBounds( 10, 15, 150, 20 );
-            panel1.add( label1 );
-
-            JTextField field = new JTextField();
-            field.setBounds( 10, 35, 150, 20 );
-            panel1.add( field );
-
-            JLabel label2 = new JLabel( "Password:" );
-            label2.setBounds( 10, 60, 150, 20 );
-            panel1.add( label2 );
-
-            JPasswordField fieldPass = new JPasswordField();
-            fieldPass.setBounds( 10, 80, 150, 20 );
-            panel1.add( fieldPass );
-    }
     
-    public void createPage3()
-    {
-            panel3 = new JPanel();
-            panel3.setLayout( new GridLayout( 2, 1 ) );
-
-            panel3.add( new JLabel( "Field 1:" ) );
-            panel3.add( new TextArea() );
-            panel3.add( new JLabel( "Field 2:" ) );
-            panel3.add( new TextArea() );
-            panel3.add( new JLabel( "Field 3:" ) );
-            panel3.add( new TextArea() );
-    }
-
     public void openFile() {
 
     }

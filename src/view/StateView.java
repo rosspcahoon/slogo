@@ -18,8 +18,7 @@ public class StateView extends WindowView {
     @Override
     public void addComponents () {
         myConstraints = new GridBagConstraints();
-        myTextArea = new JTextArea(20,20);
-        myTextArea.setPreferredSize(new Dimension(20, 20));
+        myTextArea = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(myTextArea);             
         add(myTextArea, makeLayout(myConstraints));
     }
