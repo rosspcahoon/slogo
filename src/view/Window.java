@@ -39,14 +39,12 @@ public class Window extends JFrame {
     public static ResourceBundle myResources;
     private JPanel panel1;
     private JPanel panel3;
-    private Dimension mySize = new Dimension(800,800);
-    private Dimension myMinSize = new Dimension(400,400);
-    
+    private Dimension mySize = new Dimension(1200,800);    
 
     public Window (String title, String language) {
         super(title);
+        this.setResizable(false);
         setPreferredSize(mySize);
-        setMinimumSize(myMinSize);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myChooser = new JFileChooser(System.getProperties().getProperty(USER_DIR));
         // create and arrange sub-parts of the GUI
