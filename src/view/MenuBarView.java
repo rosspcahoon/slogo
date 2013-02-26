@@ -12,8 +12,10 @@ import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 public class MenuBarView extends JMenuBar {
+    private JFileChooser myChooser;
 
-    public MenuBarView() {
+    public MenuBarView(JFileChooser chooser) {
+        myChooser = chooser;
         addComponents();
     }
 
@@ -25,6 +27,19 @@ public class MenuBarView extends JMenuBar {
     public JMenu makeFileMenu() {
         JMenu result = new JMenu(Window.myResources.getString("FileMenu"));
         result.add(Window.myResources.getString("SaveCommand"));
+        result.add(Window.myResources.getString("NewCommand"));
+//        {
+//            public void actionPerformed (ActionEvent e) {
+//                try {
+//                    int response = myChooser.showOpenDialog(null);
+//                    if (response == JFileChooser.APPROVE_OPTION) {
+//                    }
+//                }
+//                catch (IOException io) {
+//                }
+//            }
+//        };
+        result.add(Window.myResources.getString("OpenCommand"));
         result.add(new JSeparator());
         result.add(Window.myResources.getString("QuitCommand"));
         return result;

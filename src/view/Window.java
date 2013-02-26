@@ -51,38 +51,28 @@ public class Window extends JFrame {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         //tabs
         myTabs = new ArrayList<TabView>();
-        getContentPane().setLayout(new GridBagLayout());
-       
+        getContentPane().setLayout(new GridBagLayout());       
         addComponents();
         pack();
         setVisible(true);
-    }
-    
-    
+    }    
+
     public GridBagConstraints getConstraints() {
         return myConstraints;
     }
-    
+
     public void addComponents() {
-        setJMenuBar(new MenuBarView());
+        setJMenuBar(new MenuBarView(myChooser));
+        initializeTabs();
+        getContentPane().add(myTabbedPane, configTabLayout());
+    }      
+    
+    public void initializeTabs() {
         myTabbedPane = new JTabbedPane();
         myTabbedPane.addTab("Tab 1", new TabView(2, this));
         myTabbedPane.addTab("Tab 2", new TabView(3, this));
-        getContentPane().add(myTabbedPane, configLayout());
-    }      
-    
-     public GridBagConstraints configLayout() {
-         GridBagConstraints c = new GridBagConstraints();
-         c.fill = GridBagConstraints.BOTH;
-         c.weightx = 1;
-         c.weighty = 1;
-         c.gridwidth = 1;
-         c.gridheight = 1;
-         c.gridx = 0;
-         c.gridy = 0;
-         return c;
-     }
-    
+    }
+
     public void openFile() {
 
     }
@@ -100,8 +90,20 @@ public class Window extends JFrame {
 
     }
 
-    //    public void add (TabView t) {
-    //        myTabs.add(t);
-    //        getContentPane().add(t, BorderLayout.CENTER);
-    //    }
+//    public void add (TabView t) {
+//        myTabs.add(t);
+//        myTabbedPane.addTab(t, configTabLayout());
+//    }
+    
+    public GridBagConstraints configTabLayout() {
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.gridx = 0;
+        c.gridy = 0;
+        return c;
+    }
 }
