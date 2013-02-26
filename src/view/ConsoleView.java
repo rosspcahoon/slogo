@@ -30,9 +30,9 @@ public class ConsoleView extends WindowView {
     @Override
     public GridBagConstraints configLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = 0.375;
+        c.weightx = .25;
         c.weighty = .875;
-        c.gridwidth = 3;
+        c.gridwidth = 2;
         c.gridheight = 6;
         c.gridx = 5;
         c.gridy = 0;
@@ -52,8 +52,8 @@ public class ConsoleView extends WindowView {
     }
     
     protected GridBagConstraints makeCommandLayout (GridBagConstraints c) {
-        c.weightx = 1;
-        c.weighty = 1;
+        c.weightx = .5;
+        c.weighty = .5;
         c.fill = GridBagConstraints.BOTH;
         c.ipadx = 50; 
         c.gridwidth = 3;
@@ -64,7 +64,7 @@ public class ConsoleView extends WindowView {
 
     protected GridBagConstraints makeTextLayout (GridBagConstraints c) {
         c.weightx = 0.5;
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH;
         c.ipadx = 50;  
         c.gridx = 0;
         c.gridy = 1;
@@ -72,7 +72,7 @@ public class ConsoleView extends WindowView {
     }
 
     public GridBagConstraints makeClearLayout(GridBagConstraints c) {
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 1;
@@ -80,7 +80,7 @@ public class ConsoleView extends WindowView {
     }
 
     public GridBagConstraints makeEnterLayout (GridBagConstraints c) {
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.5;
         c.gridx = 2;
         c.gridy = 1;

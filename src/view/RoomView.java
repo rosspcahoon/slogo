@@ -26,6 +26,7 @@ public class RoomView extends WindowView {
     @Override
     public GridBagConstraints configLayout (GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
+        //c.ipady = 40;      //make this component tall
         c.weightx = .75;
         c.weighty = .875;
         c.gridwidth = 5;
