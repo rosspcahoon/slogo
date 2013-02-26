@@ -14,7 +14,7 @@ public class RoomView extends WindowView {
 
     // game to be animated
     private Room myRoom;
-    private Dimension mySize = new Dimension(800,800);
+    private Dimension mySize = new Dimension(500,700);
 
     public RoomView() {
         this.setPreferredSize(mySize);
@@ -30,9 +30,9 @@ public class RoomView extends WindowView {
     @Override
     public GridBagConstraints configLayout (GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = .75;
+        c.weightx = .625;
         c.weighty = .875;
-        c.gridwidth = 6;
+        c.gridwidth = 5;
         c.gridheight = 6;
         c.gridx = 0;
         c.gridy = 0;

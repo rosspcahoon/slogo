@@ -14,7 +14,7 @@ public class ConsoleView extends WindowView {
     private JTextArea myCommandField;
     private List<String> myCommandsHistory;
     private GridBagConstraints myConstraints;
-    private Dimension mySize = new Dimension(200,700);
+    private Dimension mySize = new Dimension(300,700);
 
     public ConsoleView () {
         this.setPreferredSize(mySize);
@@ -33,11 +33,11 @@ public class ConsoleView extends WindowView {
     @Override
     public GridBagConstraints configLayout(GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = .25;
+        c.weightx = .375;
         c.weighty = .875;
-        c.gridwidth = 2;
+        c.gridwidth = 3;
         c.gridheight = 6;
-        c.gridx = 6;
+        c.gridx = 5;
         c.gridy = 0;
         return c;
     }
