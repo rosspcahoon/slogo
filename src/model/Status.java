@@ -1,47 +1,89 @@
 package model;
 
+
+/**
+ * Holds information on the turtle and error message.
+ * @author mp
+ *
+ */
 public class Status {
-    private String errorMessage;
+    private String myErrorMessage;
     private double myXCoord;
     private double myYCoord;
     private double myHeading;
 
+    /**
+     * Constructor
+     */
     public Status() {
-        errorMessage = "";
+        myErrorMessage = "";
         myXCoord = 0;
         myYCoord = 0;
         myHeading = 0;
     }
+    
+    /**
+     * getter for myErrorMessage
+     * @return myErrorMessage
+     */
     public String getErrorMessage () {
-        return errorMessage;
+        return myErrorMessage;
     }
 
+    /**
+     * setter for myErrorMessage
+     * @param errorMessage string
+     */
     public void setErrorMessage (String errorMessage) {
-        this.errorMessage = errorMessage;
+        this.myErrorMessage = errorMessage;
     }
 
+    /**
+     * getter for myXCoord
+     * @return myXCoord
+     */
     public double getMyXCoord () {
         return myXCoord;
     }
 
-    public void setMyXCoord (double myXCoord) {
-        this.myXCoord = myXCoord;
+    /**
+     * setter for myXCoord
+     * @param xCoord coordinate
+     */
+    public void setMyXCoord (double xCoord) {
+        this.myXCoord = xCoord;
     }
 
+    /**
+     * getter for myYCoord
+     * @return myYCoord
+     */
     public double getMyYCoord () {
         return myYCoord;
     }
 
-    public void setMyYCoord (double myYCoord) {
-        this.myYCoord = myYCoord;
+    /**
+     * setter for myYCoord
+     * @param yCoord coordinate
+     */
+    public void setMyYCoord (double yCoord) {
+        this.myYCoord = yCoord;
     }
 
+    /**
+     * getter for myHeading
+     * @return myHeading
+     */
     public double getMyHeading () {
         return myHeading;
     }
 
-    public void setMyHeading (double myHeading) {
-        this.myHeading = myHeading;
+    /**
+     * setter for myHeading
+     * @param heading 
+     */
+    public void setMyHeading (double heading) {
+        this.myHeading = heading;
     }
 
 
