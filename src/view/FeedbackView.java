@@ -11,7 +11,6 @@ import model.Renderable;
  */
 @SuppressWarnings("serial")
 public class FeedbackView extends WindowView {
-    private GridBagConstraints myConstraints;
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
     private Dimension mySize = new Dimension(800, 100);
@@ -19,18 +18,16 @@ public class FeedbackView extends WindowView {
     /**
      * Constructs the FeedbackView and sets the minimum size and default size of the view.
      */
-    public FeedbackView () {
+    public FeedbackView (TabView tab) {
+        super(tab);
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
     }
 
     @Override
     public void addComponents () {
-        myConstraints = new GridBagConstraints();
-        myErrorLogView = new ErrorLogView();
-        myStateView = new StateView();
-        add(myErrorLogView, myErrorLogView.configLayout(myConstraints));
-        add(myStateView, myStateView.configLayout(myConstraints));
+        add(myErrorLogView, myErrorLogView.configLayout(getConstraints()));
+        add(myStateView, myStateView.configLayout(getConstraints()));
     }
 
     @Override
@@ -52,6 +49,12 @@ public class FeedbackView extends WindowView {
         myErrorLogView.render(p);
         myStateView.render(p);
 
+    }
+
+    @Override
+    protected void initializeVariables () {
+        myErrorLogView = new ErrorLogView(this);
+        myStateView = new StateView(this);
     }
 
 

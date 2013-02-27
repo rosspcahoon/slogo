@@ -24,15 +24,14 @@ public class ErrorLogView extends WindowView {
     /**
      * Constructs the ErrorLogView and sets a default border
      */
-    public ErrorLogView () {
+    public ErrorLogView (FeedbackView hostFeedbackView) {
+        super(hostFeedbackView);
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
 
     @Override
     public void addComponents () {
         makeFocusListener();
-        myConstraints = new GridBagConstraints();
-        myTextArea = new JTextArea();
         myTextArea.setForeground(Color.RED);
         myTextArea.setFocusable(true);
         myTextArea.addFocusListener(myFocusListener);
@@ -106,6 +105,12 @@ public class ErrorLogView extends WindowView {
         //            display("Dude, check your syntax");
         //            display("Command not found");
         //        }
+    }
+
+    @Override
+    protected void initializeVariables () {
+        myConstraints = new GridBagConstraints();
+        myTextArea = new JTextArea();
     }
 
 }

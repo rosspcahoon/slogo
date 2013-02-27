@@ -203,4 +203,8 @@ public class Window extends JFrame {
             
         }
     }
+
+    public void processCommand (TabView tabView, String s) {
+        myController.processCommand(tabView, s);
+    }
 }
