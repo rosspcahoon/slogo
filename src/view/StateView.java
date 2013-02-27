@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.event.InputMethodListener;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -19,8 +20,9 @@ public class StateView extends WindowView {
     public void addComponents () {
         myConstraints = new GridBagConstraints();
         myTextArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(myTextArea);             
-        add(myTextArea, makeLayout(myConstraints));
+        myTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(myTextArea);        
+        add(scrollPane, makeLayout(myConstraints));
     }
 
     @Override

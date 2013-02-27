@@ -19,9 +19,10 @@ public class ErrorLogView extends WindowView {
     public void addComponents () {
         myConstraints = new GridBagConstraints();
         myTextArea = new JTextArea();
+        myTextArea.setEditable(false);
         myConstraints = new GridBagConstraints();
-        JScrollPane paneScrollPane = new JScrollPane(myTextArea);             
-        add(myTextArea, makeLayout(myConstraints));
+        JScrollPane scrollPane = new JScrollPane(myTextArea);             
+        add(scrollPane, makeLayout(myConstraints));
     }
 
     @Override
