@@ -1,7 +1,12 @@
 package view;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
+import java.util.Stack;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -10,9 +15,11 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ConsoleView extends WindowView {
+    private TabView myTabView;
     private JTextField myTextField; 
     private JTextArea myCommandField;
-    private List<String> myCommandsHistory;
+    private Stack<String> myCommandsHistory;
+    private Stack<String> historyBrowserHelper;
     private GridBagConstraints myConstraints;
     private Dimension mySize = new Dimension(300,700);
 
@@ -20,14 +27,19 @@ public class ConsoleView extends WindowView {
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        myCommandsHistory = new Stack<String>();
+        historyBrowserHelper = new Stack<String>();
     }
 
     public void addComponents () {
         myConstraints = new GridBagConstraints();
         add(myTextField = new JTextField(), makeTextLayout(myConstraints));
-        add(new JButton(Window.myResources.getString("ClearCommand")), makeClearLayout(myConstraints));
-        add(new JButton(Window.myResources.getString("ActionCommand")), makeEnterLayout(myConstraints));
+        myTextField.addActionListener(new GetCommandInputAction());
+        myTextField.addKeyListener(new CommandsHistoryListener());
+        add(makeClear(), makeClearLayout(myConstraints));
+        add(makeSubmit(), makeEnterLayout(myConstraints));
         add(myCommandField = new JTextArea(), makeCommandLayout(myConstraints));
+        myCommandField.setEditable(false);
     }
 
     @Override
@@ -42,12 +54,74 @@ public class ConsoleView extends WindowView {
         return c;
     }
 
-    public void updateCommandDisplay() {
-
+    public void resyncCommandsHistory() {
+        while (!historyBrowserHelper.isEmpty()) {
+            myCommandsHistory.push(historyBrowserHelper.pop());
+        }
     }
+    
+    protected JButton makeClear () {
+        JButton result = new JButton(Window.myResources.getString("ClearCommand"));
+        result.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                myTextField.setText("");
+            }
+        });
+        return result;
+    }
+    
+    protected JButton makeSubmit () {
+        JButton result = new JButton(Window.myResources.getString("ActionCommand"));
+        result.addActionListener(new GetCommandInputAction());
+        return result;
+    }
+    
+    private class GetCommandInputAction implements ActionListener {
 
-    public String getCommandInput() {
-        return "";
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            String result= myTextField.getText();
+            if (result != "") {
+                resyncCommandsHistory();
+                myCommandsHistory.add(result);
+    //            process(result);
+                myTextField.setText("");
+                myCommandField.append(result+"\n");
+                myCommandField.setCaretPosition(myCommandField.getText().length());
+            }
+        }
+        
+    }
+    
+    private class CommandsHistoryListener implements KeyListener {
+
+        @Override
+        public void keyTyped (KeyEvent e) {
+            
+        }
+
+        @Override
+        public void keyPressed (KeyEvent e) {
+            if (e.getKeyCode()==KeyEvent.VK_UP && !myCommandsHistory.isEmpty()) {
+                String s = myCommandsHistory.pop();
+                historyBrowserHelper.push(s);
+                myTextField.setText(s);
+            }
+            if (e.getKeyCode()==KeyEvent.VK_DOWN && !historyBrowserHelper.isEmpty()) {
+                String s =historyBrowserHelper.pop();
+                myCommandsHistory.push(s);
+                myTextField.setText(s);
+            }
+            
+        }
+
+        @Override
+        public void keyReleased (KeyEvent e) {
+            // TODO Auto-generated method stub
+            
+        }
+        
     }
 
     public void saveCommandInput() {

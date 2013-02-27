@@ -27,6 +27,7 @@ public class TabView extends JPanel {
     private Window myWindow;
     private GridBagConstraints myConstraints;
     private Controller myController;
+    private Paintable myRenderable; //TODO: make Renderable
     private RoomView myRoomView;
     private ConsoleView myConsoleView;
     private FeedbackView myFeedbackView;
@@ -43,12 +44,20 @@ public class TabView extends JPanel {
         addComponents();
     }
     
+    public void setRenderable(Paintable r) {
+        myRenderable = r;
+    }
+    
     public TabView(int id) {
         myID = id;
     }
     
     public int getID () {
         return myID;
+    }
+    
+    public void processConsoleInput (String s) {
+        myController.processCommand(this, s);
     }
     
     
@@ -72,16 +81,16 @@ public class TabView extends JPanel {
         display();
     }
     
-    private void listen2WorkspaceInput() {
-        if (userHasSubmittedInput()) {
-            myController.processCommand(this, myConsoleView.getCommandInput());
-        }
-    }
-    
-    private boolean userHasSubmittedInput () {
-        // TODO Auto-generated method stub
-        return false;
-    }
+//    private void listen2WorkspaceInput() {
+//        if (userHasSubmittedInput()) {
+//            myController.processCommand(this, myConsoleView.getCommandInput());
+//        }
+//    }
+//    
+//    private boolean userHasSubmittedInput () {
+//        // TODO Auto-generated method stub
+//        return false;
+//    }
 
     public void paint(Paintable p) {
         p.paint();

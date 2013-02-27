@@ -7,9 +7,14 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.MenuBar;
 import java.awt.TextArea;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,8 +36,6 @@ public class Window extends JFrame {
     private static final String USER_DIR = "user.dir";
     static final String TITLE = "SLogo"; //for default constructor
     private Controller myController;
-    private List<TabView> myTabs;
-    private TabView activeTab;
     private JTabbedPane myTabbedPane;
     private JMenuBar myMenuBar;
     private JFileChooser myChooser;
@@ -42,15 +45,14 @@ public class Window extends JFrame {
 
     public Window (String title, String language, Controller controller) {
         super(title);
-        myController=controller;
         this.setResizable(false);
         setPreferredSize(mySize);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myChooser = new JFileChooser(System.getProperties().getProperty(USER_DIR));
         // create and arrange sub-parts of the GUI
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+        myController=controller;
+        myChooser = new JFileChooser(System.getProperties().getProperty(USER_DIR));
         //tabs
-        myTabs = new ArrayList<TabView>();
         getContentPane().setLayout(new GridBagLayout());       
         addComponents();
         pack();
@@ -64,23 +66,13 @@ public class Window extends JFrame {
     /**
      * Way to initialize tab creation from the window
      */
-    public void addTab() {
+    private void addTab() {
         myController.newSLogoSession();
     }
 
     protected void addComponents() {
         setJMenuBar(myMenuBar=new MenuBarView(this));
-        configMenu();
         getContentPane().add(myTabbedPane=new JTabbedPane(), configLayout());
-    }
- 
-     private void configMenu () {
-         JMenu menu = new JMenu("File");
-         myMenuBar.add(menu);
-         JMenuItem openFile = new JMenuItem("Open File");
-         openFile.getAccessibleContext().setAccessibleDescription(
-                 "This doesn't really do anything");
-         menu.add(menu);
     }
 
 
@@ -119,5 +111,89 @@ public class Window extends JFrame {
 
     public JFileChooser getChooser () {
         return myChooser;
+    }
+
+    /**
+     * Open the provided file in a new tab
+     * @param file2open
+     */
+    private void openFile (File file2open) {
+        //TODO use the
+    }
+
+    private void quit () {
+        WindowEvent close = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
+    }
+
+    private void saveFile () {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    protected class NewTabAction extends AbstractAction {
+        public NewTabAction() {
+            super(Window.myResources.getString("NewCommand"));
+        }
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            addTab();
+        } 
+    }
+    
+    protected class OpenFileAction extends AbstractAction {
+
+        public OpenFileAction() {
+            super(Window.myResources.getString("OpenCommand"));
+        }
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            int response = myChooser.showOpenDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                File file2open = myChooser.getSelectedFile();
+                openFile(file2open);
+            }
+        }
+        
+    }
+
+    protected class QuitAction extends AbstractAction {
+        public QuitAction() {
+            super(Window.myResources.getString("QuitCommand"));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            quit();
+        }
+    }
+    
+    protected class SaveFileAction extends AbstractAction {
+        public SaveFileAction () {
+            super(Window.myResources.getString("SaveCommand"));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            saveFile();
+        }
+    }
+    
+    protected class WelcomeAction extends AbstractAction {
+        WelcomeAction() {
+            super(Window.myResources.getString("WelcomeCommand"));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            try {
+                String url = "http://www.cs.duke.edu/courses/spring13/compsci308/assign/03_slogo/";
+                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+              }
+              catch (java.io.IOException er) {
+                  System.out.println(er.getMessage());
+              }
+            
+        }
     }
 }

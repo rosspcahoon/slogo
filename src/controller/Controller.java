@@ -77,7 +77,7 @@ public class Controller implements Observer {
     }
     
     private void update(Room r, Object arg) {
-        getTabForRoom(r).paint((Paintable) r);
+        getTabForRoom(r).setRenderable((Paintable) r);
     }
     
     private void update(TabView t, Object arg) {
@@ -90,7 +90,9 @@ public class Controller implements Observer {
     }
     
     public void processCommand (TabView t, String cmd) {
-        myModel.processCommand(getRoomForTab(t), cmd);
+        Room room = getRoomForTab(t);
+        myModel.processCommand(room, cmd);
+        t.setRenderable((Paintable) room);
     }
     
     /**
