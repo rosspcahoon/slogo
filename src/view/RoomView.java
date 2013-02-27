@@ -3,47 +3,41 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.Set;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.Timer;
+import java.awt.GridBagConstraints;
+import javax.swing.BorderFactory;
+import javax.swing.JTextArea;
+import model.Renderable;
 import model.Room;
 
 
-public class RoomView extends JComponent {
+@SuppressWarnings("serial")
+public class RoomView extends WindowView {
 
-  //default serialization ID
-    private static final long serialVersionUID = 1L;
-     //animate 25 times per second if possible
-    public static final int FRAMES_PER_SECOND = 25;
-    // better way to think about timed events (in milliseconds)
-    public static final int ONE_SECOND = 1000;
-    public static final int DEFAULT_DELAY = ONE_SECOND / FRAMES_PER_SECOND;
-    //
-    public static final Dimension SIZE = new Dimension(800, 600);
-    // only one so that it maintains user's preferences
-    private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
-    
     // game to be animated
     private Room myRoom;
-    
+    private Dimension mySize = new Dimension(500,700);
+
     public RoomView() {
-        new RoomView(SIZE);
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
+        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5)); 
     }
 
-    /**
-     * Create a panel so that it knows its size
-     */
-    public RoomView (Dimension size) {
-        // set size (a bit of a pain)
-        setPreferredSize(size);
-        setSize(size);
-        // prepare to receive input
-        setFocusable(true);
-        requestFocus();
+    @Override
+    public void addComponents () {
+        add(new JTextArea(2,2));
+    }
+
+    @Override
+    public GridBagConstraints configLayout (GridBagConstraints c) {
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = .625;
+        c.weighty = .875;
+        c.gridwidth = 5;
+        c.gridheight = 6;
+        c.gridx = 0;
+        c.gridy = 0;
+        return c;
     }
 
     /**
@@ -64,9 +58,13 @@ public class RoomView extends JComponent {
             myRoom.paint((Graphics2D) pen);
         }
     }
-    
+
     public void update() {
-        
+
     }
-    
+
+    public void render (Renderable p) {
+        myRoom = (Room) p;     
+    }
+
 }
