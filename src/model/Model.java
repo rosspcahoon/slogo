@@ -6,7 +6,7 @@ import command.Command;
 
 public class Model implements ISLogoModel {
 
-    private Command myCommand;
+    private CommandLibrary myCommandLibrary;
     
     public Model(){
         myCommand = new Command();
@@ -18,7 +18,7 @@ public class Model implements ISLogoModel {
         Object feedback = new Object();
         s.trim();
         String[] output = s.split(" ");
-        myCommand.processCommand(r, output);
+        myCommandLibrary.processCommand(r, output);
         return true;
     }
 
