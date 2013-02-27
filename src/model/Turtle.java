@@ -21,7 +21,7 @@ public class Turtle extends Sprite {
         
     }
     
-    public void move() { 
+    public void move(int) { 
         
     }
     
