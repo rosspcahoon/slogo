@@ -1,5 +1,6 @@
 package view;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -13,20 +14,23 @@ public class RoomView extends WindowView {
 
     // game to be animated
     private Room myRoom;
+    private Dimension mySize = new Dimension(500,700);
 
     public RoomView() {
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-        System.out.println("Printing in RoomView");
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
+        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5)); 
     }
+
     @Override
     public void addComponents () {
-        add(new JTextArea(20,20));
+        add(new JTextArea(2,2));
     }
 
     @Override
     public GridBagConstraints configLayout (GridBagConstraints c) {
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = .75;
+        c.weightx = .625;
         c.weighty = .875;
         c.gridwidth = 5;
         c.gridheight = 6;

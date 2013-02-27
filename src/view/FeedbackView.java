@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
@@ -7,11 +8,11 @@ public class FeedbackView extends WindowView {
     private GridBagConstraints myConstraints;
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
+    private Dimension mySize = new Dimension(800,100);
     
     public FeedbackView (){
-        super();
-        addComponents();
-        System.out.println("Printing in FeedbackView");
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
     }
     
     @Override
@@ -26,10 +27,10 @@ public class FeedbackView extends WindowView {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 1;
         c.weighty = .125;
-        c.gridwidth = 8;
-        c.gridheight = 1;
         c.gridx = 0;
         c.gridy = 7;
+        c.gridheight = 1;
+        c.gridwidth = 8;
         return c;
     }
 }

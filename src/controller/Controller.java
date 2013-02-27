@@ -31,7 +31,7 @@ public class Controller implements Observer {
     
     public Controller() {
         myModel = new Model();
-        myView = new Window("SLogo", "English");
+        myView = new Window("SLogo", "English", this);
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
     }
@@ -44,12 +44,14 @@ public class Controller implements Observer {
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myView.pack();
         myView.setVisible(true);
+        newSLogoSession();
+        newSLogoSession();
     }
     
     /**
      * 
      */
-    public void newSlogoSession() {
+    public void newSLogoSession() {
         initializeRoom();
     }
     
@@ -93,19 +95,26 @@ public class Controller implements Observer {
         myModel.processCommand(getRoomForTab(t), cmd);
     }
     
+    /**
+     * Add a new room with id based on already existing rooms.
+     */
     private void initializeRoom() {
         int id = Room2Tab.size();
         initializeRoom(id);
     }
     
-    
+    /**
+     * Initialize a room with the ID provided
+     * also initialize a corresponding Tab in the view.
+     * @param id
+     */
     private void initializeRoom (int id) {
         Room theRoom = new Room(id);
         TabView associatedTab = new TabView(id, myView);
         Room2Tab.put(theRoom, associatedTab);
         Tab2Room.put(associatedTab, theRoom);
         theRoom.addObserver(this);
-        myView.add(associatedTab);
+        myView.addTab(associatedTab);
     }
 
 }
