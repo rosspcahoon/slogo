@@ -10,12 +10,20 @@ import javax.swing.JTextArea;
 import model.Renderable;
 import model.Status;
 
+/**
+ * ErrorLogView renders error messages from the Room to via a Status for display
+ * @author Ross Cahoon
+ *
+ */
 @SuppressWarnings("serial")
 public class ErrorLogView extends WindowView {
     private JTextArea myTextArea;
     private GridBagConstraints myConstraints;
     private FocusListener myFocusListener;
-
+    
+    /**
+     * Constructs the ErrorLogView and sets a default border
+     */
     public ErrorLogView () {
         this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
@@ -72,7 +80,6 @@ public class ErrorLogView extends WindowView {
                 myTextArea.setBackground(Color.WHITE);
                 myTextArea.setEditable(false);
             }
-
             @Override
             public void focusLost (FocusEvent arg0) {
             }
@@ -84,12 +91,14 @@ public class ErrorLogView extends WindowView {
         myTextArea.setBackground(Color.YELLOW);
         myTextArea.setEditable(false);
     }
-
+    /**
+     * Takes in a Renderable Room and extracts any error message, if any.
+     * @param p Renderable that the error message will attempt to be extracted from.
+     */
     public void render (Renderable p) {
-        if (((Status) p.getState()).getErrorMessage().equals("")){
+        if (((Status) p.getState()).getErrorMessage().equals("")) {
             Status thisStatus = (Status) p.getState();
             display(thisStatus.getErrorMessage());
-            thisStatus.setErrorMessage("");
         }
         //        Test Display
         //        for(int i =0 ; i<10; i++){

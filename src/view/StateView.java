@@ -7,13 +7,21 @@ import javax.swing.JTextArea;
 import model.Renderable;
 import model.Status;
 
+/**
+ * 
+ * @author Ross Cahoon
+ *
+ */
 @SuppressWarnings("serial")
 public class StateView extends WindowView {
     private JTextArea myTextArea;
     private GridBagConstraints myConstraints;
 
+    /**
+     * Constructs the StateView and sets a default border
+     */
     public StateView () {
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5 ,5 ,5 ));
     }
 
     @Override
@@ -51,11 +59,16 @@ public class StateView extends WindowView {
     private void display(double[] array) {
         myTextArea.setEditable(true);
         myTextArea.setText("");
-        myTextArea.append(Window.myResources.getString("FeedbackPosition") +"(" + array[0] + ", " + array[1] + ") " + "\n");
+        myTextArea.append(Window.myResources.getString("FeedbackPosition") + 
+                          "(" + array[0] + ", " + array[1] + ") " + "\n");
         myTextArea.append(Window.myResources.getString("FeedbackHeading") + array[2] + "\n");
         myTextArea.setEditable(false);
     }
 
+    /**
+     * Given a Renderable, it will display the current status of the Turtle is its coordinates
+     * @param p the Renderable that displayed information will be extracted from.
+     */
     public void render (Renderable p) {
         Status s = (Status) p.getState();
         double[] statusArray = {s.getMyXCoord(), s.getMyYCoord(), s.getMyHeading()};
