@@ -22,14 +22,14 @@ public class Controller implements Observer {
     private Window myView;
     private Map<Room, TabView> Room2Tab;
     private Map<TabView, Room> Tab2Room;
-    
+
     public Controller() {
         myModel = new Model();
         myView = new Window("SLogo");
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
     }
-    
+
     public void start() {
         //Welcome message
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,34 +39,34 @@ public class Controller implements Observer {
         myView.setVisible(true);
 
     }
-    
+
     /**
      * Load a file in a specific tab
      * @param f
      */
     private void loadFile (TabView t, File f) {
-        
+
     }
-    
+
     @Override
     public void update (Observable o, Object arg) {
         if (o instanceof Room) {
             update ((Room) o, arg);
         }
     }
-    
+
     private Room getRoomForTab (TabView t) {
         return Tab2Room.get(t);
     }
-    
+
     private TabView getTabForRoom (Room r) {
         return Room2Tab.get(r);
     }
-    
+
     private void update(Room r, Object arg) {
         getTabForRoom(r).paint((Paintable)r);
     }
-    
+
     private void update(TabView t, Object arg) {
         if (arg instanceof File) {
             loadFile(t, (File)arg);
@@ -75,17 +75,17 @@ public class Controller implements Observer {
             myModel.processCommand(getRoomForTab(t), (String) arg);
         }
     }
-    
+
     public void processCommand (TabView t, String cmd) {
         myModel.processCommand(getRoomForTab(t), cmd);
     }
-    
+
     private void initializeRoom() {
         int id = Room2Tab.size();
         initializeRoom(id);
     }
-    
-    
+
+
     private void initializeRoom (int id) {
         Room theRoom = new Room(id);
         TabView associatedTab = new TabView(id, this);
