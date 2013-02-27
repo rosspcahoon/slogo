@@ -8,6 +8,7 @@ public class Room extends Observable {
     private int myID;
     private Turtle myTurtle;
     
+    
     public Room (int id) {
         myID = id;
     }
@@ -19,4 +20,6 @@ public class Room extends Observable {
     public void paint(Graphics2D pen) {
         
     }
+    
+    public void 
 }
