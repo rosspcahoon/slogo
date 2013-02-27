@@ -3,7 +3,6 @@ package model;
 import java.awt.Graphics2D;
 import java.util.Observable;
 import util.Location;
-import util.Pixmap; 
 
 public class Room extends Observable implements Renderable{
 
@@ -13,10 +12,9 @@ public class Room extends Observable implements Renderable{
     private double myTurtleHead; 
     private Location myTurtleLocation;
     
-    private Status myStatus;
+    private boolean myTurtleVisibility; 
     
-    
-    
+    private Status myStatus; 
     
     public Room (int id) {
         myID = id;
@@ -24,6 +22,7 @@ public class Room extends Observable implements Renderable{
         myTurtlePenStatus = myTurtle.getPenStatus(); 
         myTurtleLocation = myTurtle.getCenter(); 
         myTurtleHead = myTurtle.getHead(); 
+        myTurtleVisibility = myTurtle.getVisibilityStatus(); 
     }
     
     public int getID () {
@@ -39,6 +38,15 @@ public class Room extends Observable implements Renderable{
         return myTurtlePenStatus; 
     }
     
+    public void visibilityOnOff () { 
+        myTurtle.toggleVisibility(); 
+        myTurtleVisibility = myTurtle.getVisibilityStatus(); 
+    }
+    
+    public boolean getVisibility () { 
+        return myTurtleVisibility; 
+    }
+    
     public Location getTurtleLocation () { 
         return myTurtleLocation; 
     }
@@ -48,12 +56,16 @@ public class Room extends Observable implements Renderable{
     }
     
     public void rotateTurtle(Graphics2D pen, double angle) { 
-        
+        myTurtleHead += angle; 
         myTurtle.rotate(pen, angle); 
     }
     
     public void moveTurtleForward(double distance) { 
         myTurtle.move(distance); 
+    }
+    
+    public void returnHome () { 
+        myTurtle.returnHome(); 
     }
     
     public Status getState() {

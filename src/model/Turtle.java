@@ -20,6 +20,9 @@ public class Turtle extends Sprite  {
     //turtle's pen 
     private boolean myPenUp = false; 
     
+    //is it on the screen/visible
+    private boolean myVisibility = false; 
+    
     //frame default sizes (as of now) 
     private static final int DEFAULT_FRAME_TOP = 250; 
     private static final int DEFAULT_FRAME_BOTTOM = -250; 
@@ -69,6 +72,14 @@ public class Turtle extends Sprite  {
         myPenUp = !(myPenUp); 
     }
     
+    public boolean getVisibilityStatus () { 
+        return myVisibility; 
+    }
+    
+    public void toggleVisibility () { 
+        myVisibility = !(myVisibility); 
+    }
+    
     // rotates turtle by specified angle (in degrees) 
     public void rotate(Graphics2D pen, double angle) { 
         myHead += angle; 
@@ -89,6 +100,10 @@ public class Turtle extends Sprite  {
             super.setCenter(DEFAULT_FRAME_RIGHT + (super.getWidth() / 2), super.getY()); 
         }
     } 
+    
+    public void returnHome () { 
+        super.setCenter(initialLocation); 
+    }
     
     //TO-DO
     public void notifyObservers (Object arg) { 
