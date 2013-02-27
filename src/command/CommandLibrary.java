@@ -21,6 +21,7 @@ public class CommandLibrary {
      */
     public CommandLibrary() {
         myCommands = new HashMap<String,Command>();
+        buildLibrary();
     }
     
     /**
@@ -47,6 +48,20 @@ public class CommandLibrary {
             return null;
         }
         return myCommands.get(name);
+    }
+    
+    /**
+     * Builds the command library.
+     */
+    private void buildLibrary() {
+        myCommands.put(CommandConstants.COMMAND_NAME_FORWARD, new ForwardCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_FD, new ForwardCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_BACK, new BackCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_BK, new BackCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_LEFT, new LeftCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_LT, new LeftCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_RIGHT, new RightCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_RT, new RightCommand());
     }
     
 }

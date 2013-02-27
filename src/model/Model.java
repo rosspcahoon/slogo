@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Observable;
 import command.Command;
+import command.CommandLibrary;
 
 /**
  * Controls the interaction of model side classes.
