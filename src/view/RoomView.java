@@ -11,7 +11,6 @@ import model.Renderable;
 @SuppressWarnings("serial")
 public class RoomView extends WindowView {
 
-    // game to be animated
     private Renderable myRoom;
     private Dimension mySize = new Dimension(500,700);
 
@@ -23,7 +22,7 @@ public class RoomView extends WindowView {
 
     @Override
     public void addComponents () {
-        add(new JTextArea(2,2));
+        add(new JTextArea(2, 2));
     }
 
     @Override
@@ -62,7 +61,7 @@ public class RoomView extends WindowView {
     }
 
     public void render (Renderable p) {
-        myRoom = p;     
+        myRoom = p;
+        repaint();
     }
-
 }
