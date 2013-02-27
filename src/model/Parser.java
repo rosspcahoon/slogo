@@ -10,16 +10,10 @@ public class Parser {
 
     }
 
-    public List<String> parseString(String input) {
-        ArrayList<String> parsedString = new ArrayList<String>();
+    public String[] parseString(String input) {
         input.trim();
-        String temp = input;
-        int spaceIndex = input.indexOf(' ');
-        while(spaceIndex > 0) {
-            parsedString.add(temp.substring(0, spaceIndex));
-            temp = temp.substring(spaceIndex);
-            spaceIndex = temp.indexOf(' ');
-        }
-        return parsedString;
+        String[] output = input.split(" ");
+        return output;
+        
     }
 }

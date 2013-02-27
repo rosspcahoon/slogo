@@ -15,6 +15,7 @@ import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
+import model.Status;
 
 public class Controller implements Observer {
 
@@ -65,6 +66,9 @@ public class Controller implements Observer {
 
     private void update(Room r, Object arg) {
         getTabForRoom(r).paint((Paintable)r);
+        if (arg instanceof Status) {
+            // call view's update status method
+        }
     }
 
     private void update(TabView t, Object arg) {

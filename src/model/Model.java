@@ -4,17 +4,21 @@ import java.util.List;
 import java.util.Observable;
 import command.Command;
 
-public class Model extends Observable implements ISLogoModel {
+public class Model implements ISLogoModel {
 
-    private Parser myParser;
-    private List<Command> myCommands;
-    private Room myRoom;
+    private Command myCommand;
+    
+    public Model(){
+        myCommand = new Command();
+    }
     
     @Override
     public boolean processCommand (Room r, String s) {
-        // TODO Auto-generated method stub
+        
         Object feedback = new Object();
-        notifyObservers(feedback);
+        s.trim();
+        String[] output = s.split(" ");
+        myCommand.processCommand(r, output);
         return true;
     }
 
