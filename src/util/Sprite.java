@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
+import java.util.Observable;
 
 
 /**
@@ -14,7 +15,7 @@ import java.awt.geom.Point2D;
  * 
  * @author Robert C. Duvall
  */
-public abstract class Sprite {
+public abstract class Sprite extends Observable {
     // canonical directions for a collision
     public static final int RIGHT_DIRECTION = 0;
     public static final int DOWN_DIRECTION = 90;
@@ -195,7 +196,13 @@ public abstract class Sprite {
     public void setVelocity (Vector velocity) {
         setVelocity(velocity.getDirection(), velocity.getMagnitude());
     }
-
+    /**
+     * Returns shape's image
+     * @return myView
+     */
+    public Pixmap getView () {
+        return myView;
+    }
     /**
      * Resets shape's image.
      */
