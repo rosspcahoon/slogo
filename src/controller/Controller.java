@@ -26,14 +26,13 @@ import model.Renderable;
 
 public class Controller implements Observer {
 
-//    private Model myModel;
     private Window myView;
     private Model myModel;
     private Map<Room, TabView> Room2Tab;
     private Map<TabView, Room> Tab2Room;
 
     public Controller() {
-//        myModel = new Model();
+        myModel = new Model();
         myView = new Window("SLogo", "English", this);
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();

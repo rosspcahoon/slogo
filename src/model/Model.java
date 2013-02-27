@@ -6,10 +6,10 @@ import command.Command;
 
 public class Model implements ISLogoModel {
 
-    private CommandLibrary myCommandLibrary;
+//    private CommandLibrary myCommandLibrary;
     
     public Model(){
-        myCommand = new Command();
+//        myCommand = new Command();
     }
     
     @Override
@@ -18,7 +18,7 @@ public class Model implements ISLogoModel {
         Object feedback = new Object();
         s.trim();
         String[] output = s.split(" ");
-        myCommandLibrary.processCommand(r, output);
+//        myCommandLibrary.processCommand(r, output);
         return true;
     }
 
