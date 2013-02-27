@@ -2,9 +2,9 @@ package command;
 
 import model.Room;
 
-public class ForwardCommand extends Command {
+public class BackCommand extends Command {
 
-    public ForwardCommand () {
+    public BackCommand () {
         super(CommandConstants.COMMAND_EXPECTED_ARGS_TWO);
     }
 
@@ -19,7 +19,7 @@ public class ForwardCommand extends Command {
 
     @Override
     public void execute (Room r) {
-        double distance = getProperty(CommandConstants.COMMAND_ARG_PIXELS);
+        double distance = - getProperty(CommandConstants.COMMAND_ARG_PIXELS);
         r.moveTurtleForward(distance);
         r.notifyObservers();
     }
