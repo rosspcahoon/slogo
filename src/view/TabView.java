@@ -83,7 +83,7 @@ public class TabView extends JPanel {
         return false;
     }
 
-    public void paint(Paintable p) {
+    public void paint(Renderable p) {
         p.paint();
     }
     
