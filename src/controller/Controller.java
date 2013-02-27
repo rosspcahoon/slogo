@@ -1,10 +1,8 @@
 package controller;
 
-import java.awt.BorderLayout;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -18,6 +16,14 @@ import model.Room;
 import model.Status;
 import model.Renderable;
 
+/**
+ * The controller is responsible for interfacing between the View and the Model.
+ * Among other things, it is responsible for handling events from the View, and
+ * ensuring that the model components are kept in sync.
+ * @author SLogo team 3
+ *
+ */
+
 public class Controller implements Observer {
 
     private Model myModel;
@@ -27,19 +33,27 @@ public class Controller implements Observer {
 
     public Controller() {
         myModel = new Model();
-        myView = new Window("SLogo");
+        myView = new Window("SLogo", "English", this);
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
     }
+    
+    /**
+     * Initialize the GUI.
+     */
 
     public void start() {
         //Welcome message
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // display interface component
-        initializeRoom();
         myView.pack();
         myView.setVisible(true);
-
+    }
+    
+    /**
+     * 
+     */
+    public void newSLogoSession() {
+        initializeRoom();
     }
 
     /**
@@ -65,11 +79,8 @@ public class Controller implements Observer {
         return Room2Tab.get(r);
     }
 
-    private void update(Room r, Object arg) {
-        getTabForRoom(r).paint((Renderable)r);
-        if (arg instanceof Status) {
-            // call view's update status method
-        }
+    private void update(Room r) {
+        getTabForRoom(r).render((Renderable) r);
     }
 
     private void update(TabView t, Object arg) {
@@ -85,19 +96,27 @@ public class Controller implements Observer {
         myModel.processCommand(getRoomForTab(t), cmd);
     }
 
+    
+    /**
+     * Add a new room with id based on already existing rooms.
+     */
     private void initializeRoom() {
         int id = Room2Tab.size();
         initializeRoom(id);
     }
 
-
+    /**
+     * Initialize a room with the ID provided
+     * also initialize a corresponding Tab in the view.
+     * @param id
+     */
     private void initializeRoom (int id) {
         Room theRoom = new Room(id);
-        TabView associatedTab = new TabView(id, this);
+        TabView associatedTab = new TabView(id, myView);
         Room2Tab.put(theRoom, associatedTab);
         Tab2Room.put(associatedTab, theRoom);
         theRoom.addObserver(this);
-        myView.add(associatedTab);
+        myView.addTab(associatedTab);
     }
 
 }
