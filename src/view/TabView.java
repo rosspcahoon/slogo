@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.Controller;
+import model.Renderable;
 import model.Room;
 
 /**
@@ -83,8 +84,9 @@ public class TabView extends JPanel {
         return false;
     }
 
-    public void paint(Renderable p) {
-        p.paint();
+    public void render(Renderable p) {
+        myRoomView.render(p);
+        myFeedbackView.render(p);
     }
     
 }

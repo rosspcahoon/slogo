@@ -6,6 +6,7 @@ import java.awt.event.InputMethodListener;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import model.Renderable;
 
 @SuppressWarnings("serial")
 public class StateView extends WindowView {
@@ -50,5 +51,10 @@ public class StateView extends WindowView {
 
     public void display() {
 
+    }
+
+    public void render (Renderable p) {
+        p.getState();
+        //TODO;
     }
 }

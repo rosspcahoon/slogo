@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import model.Renderable;
 
 @SuppressWarnings("serial")
 public class FeedbackView extends WindowView {
@@ -33,4 +34,12 @@ public class FeedbackView extends WindowView {
         c.gridwidth = 8;
         return c;
     }
+
+    public void render (Renderable p) {
+        myErrorLogView.render(p);
+        myStateView.render(p);
+        
+    }
+    
+    
 }

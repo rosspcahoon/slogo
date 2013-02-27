@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
+import model.Renderable;
 import model.Room;
 
 
@@ -60,6 +61,10 @@ public class RoomView extends WindowView {
 
     public void update() {
 
+    }
+
+    public void render (Renderable p) {
+        myRoom = (Room) p;     
     }
 
 }

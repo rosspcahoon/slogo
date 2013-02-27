@@ -13,6 +13,7 @@ import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
+import model.Renderable;
 
 /**
  * The controller is responsible for interfacing between the View and the Model.
@@ -77,7 +78,7 @@ public class Controller implements Observer {
     }
     
     private void update(Room r, Object arg) {
-        getTabForRoom(r).paint((Paintable) r);
+        getTabForRoom(r).render((Renderable) r);
     }
     
     private void update(TabView t, Object arg) {

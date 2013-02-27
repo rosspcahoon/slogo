@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import model.Renderable;
 
 @SuppressWarnings("serial")
 public class ErrorLogView extends WindowView {
@@ -49,5 +50,10 @@ public class ErrorLogView extends WindowView {
     }
     public void display() {
 
+    }
+
+    public void render (Renderable p) {
+        p.getState();
+        //TODO;
     }
 }
