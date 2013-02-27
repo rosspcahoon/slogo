@@ -7,7 +7,7 @@ import util.Sprite;
 import java.util.Observable; 
 import java.util.Observer; 
 
-public class Turtle extends Sprite extends Observable {
+public class Turtle extends Sprite {
 
     private Location myLocation; 
     private Location myHead; 
