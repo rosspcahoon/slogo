@@ -21,11 +21,15 @@ public class Turtle extends Sprite {
         
     }
     
-    public void move(int) { 
+    public void move(String direction, int distance) { 
         
     }
     
-    public void rotate() { 
+    public void rotate(double angle) { 
+        
+    }
+    
+    public void wrapAround() { 
         
     }
     
