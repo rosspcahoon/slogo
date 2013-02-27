@@ -1,19 +1,15 @@
 package controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import view.Paintable;
-import view.RoomView;
 import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
-import model.Status;
 import model.Renderable;
 
 /**
@@ -88,7 +84,7 @@ public class Controller implements Observer {
     }
     
     private void update(Room r, Object arg) {
-        getTabForRoom(r).setRenderable((Paintable) r);
+        getTabForRoom(r).setRenderable((Renderable) r);
     }
 
     /**
@@ -121,7 +117,7 @@ public class Controller implements Observer {
     public void processCommand (TabView t, String cmd) {
         Room room = getRoomForTab(t);
         myModel.processCommand(room, cmd);
-        t.setRenderable((Paintable) room);
+        t.setRenderable((Renderable) room);
     }
 
     
@@ -144,7 +140,8 @@ public class Controller implements Observer {
         myRoom2Tab.put(theRoom, associatedTab);
         myTab2Room.put(associatedTab, theRoom);
         theRoom.addObserver(this);
-        myView.addTab(associatedTab);
+        myView.addTab(associatedTab, (Renderable) theRoom);
+        
     }
 
 }

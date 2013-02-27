@@ -28,7 +28,7 @@ public class TabView extends JPanel {
     private Window myWindow;
     private GridBagConstraints myConstraints;
     private Controller myController;
-    private Paintable myRenderable; //TODO: make Renderable
+    private Renderable myRenderable;
     private RoomView myRoomView;
     private ConsoleView myConsoleView;
     private FeedbackView myFeedbackView;
@@ -45,7 +45,7 @@ public class TabView extends JPanel {
         addComponents();
     }
     
-    public void setRenderable(Paintable r) {
+    public void setRenderable(Renderable r) {
         myRenderable = r;
     }
     

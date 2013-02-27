@@ -70,8 +70,10 @@ public class StateView extends WindowView {
      * @param p the Renderable that displayed information will be extracted from.
      */
     public void render (Renderable p) {
-        Status s = (Status) p.getState();
-        double[] statusArray = {s.getMyXCoord(), s.getMyYCoord(), s.getMyHeading()};
-        display(statusArray);
+        if(p.getState() != null ){
+            Status s = (Status) p.getState();
+            double[] statusArray = {s.getMyXCoord(), s.getMyYCoord(), s.getMyHeading()};
+            display(statusArray);
+        }
     }
 }

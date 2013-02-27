@@ -96,7 +96,7 @@ public class ErrorLogView extends WindowView {
      * @param p Renderable that the error message will attempt to be extracted from.
      */
     public void render (Renderable p) {
-        if (((Status) p.getState()).getErrorMessage().equals("")) {
+        if (((Status) p.getState()) != null) {
             Status thisStatus = (Status) p.getState();
             display(thisStatus.getErrorMessage());
         }
