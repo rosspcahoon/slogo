@@ -44,8 +44,6 @@ public class Controller implements Observer {
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myView.pack();
         myView.setVisible(true);
-        newSLogoSession();
-        newSLogoSession();
     }
     
     /**
