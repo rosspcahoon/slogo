@@ -1,6 +1,7 @@
 package view;
 
 
+import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
@@ -27,6 +28,7 @@ public class MenuBarView extends JMenuBar {
 
     private JMenu makeFileMenu() {
         JMenu result = new JMenu(Window.myResources.getString("FileMenu"));
+        result.setMnemonic(KeyEvent.VK_F);
         result.add(myWindow.new NewTabAction());
         result.add(myWindow.new OpenFileAction());
         result.add(myWindow.new SaveFileAction());
@@ -37,6 +39,7 @@ public class MenuBarView extends JMenuBar {
     
     private JMenu makeHelpMenu() {
         JMenu result = new JMenu(Window.myResources.getString("HelpMenu"));
+        result.setMnemonic(KeyEvent.VK_H);
         result.add(myWindow.new WelcomeAction());
         return result;
     }

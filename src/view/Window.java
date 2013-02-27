@@ -9,6 +9,7 @@ import java.awt.MenuBar;
 import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import controller.Controller;
 
 @SuppressWarnings("serial")
@@ -118,7 +120,7 @@ public class Window extends JFrame {
      * @param file2open
      */
     private void openFile (File file2open) {
-        //TODO use the
+        //TODO 
     }
 
     private void quit () {
@@ -134,6 +136,7 @@ public class Window extends JFrame {
     protected class NewTabAction extends AbstractAction {
         public NewTabAction() {
             super(Window.myResources.getString("NewCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.META_MASK));
         }
         @Override
         public void actionPerformed (ActionEvent e) {
@@ -145,6 +148,7 @@ public class Window extends JFrame {
 
         public OpenFileAction() {
             super(Window.myResources.getString("OpenCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.META_MASK));
         }
         @Override
         public void actionPerformed (ActionEvent e) {
@@ -160,6 +164,7 @@ public class Window extends JFrame {
     protected class QuitAction extends AbstractAction {
         public QuitAction() {
             super(Window.myResources.getString("QuitCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.META_MASK));
         }
 
         @Override
@@ -171,6 +176,7 @@ public class Window extends JFrame {
     protected class SaveFileAction extends AbstractAction {
         public SaveFileAction () {
             super(Window.myResources.getString("SaveCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
         }
 
         @Override
@@ -182,6 +188,7 @@ public class Window extends JFrame {
     protected class WelcomeAction extends AbstractAction {
         WelcomeAction() {
             super(Window.myResources.getString("WelcomeCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.META_MASK));
         }
 
         @Override

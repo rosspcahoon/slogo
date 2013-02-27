@@ -13,6 +13,8 @@ import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
+import model.Status;
+import model.Renderable;
 
 /**
  * The controller is responsible for interfacing between the View and the Model.
@@ -24,13 +26,14 @@ import model.Room;
 
 public class Controller implements Observer {
 
-    private Model myModel;
+//    private Model myModel;
     private Window myView;
+    private Model myModel;
     private Map<Room, TabView> Room2Tab;
     private Map<TabView, Room> Tab2Room;
-    
+
     public Controller() {
-        myModel = new Model();
+//        myModel = new Model();
         myView = new Window("SLogo", "English", this);
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
@@ -39,6 +42,7 @@ public class Controller implements Observer {
     /**
      * Initialize the GUI.
      */
+
     public void start() {
         //Welcome message
         myView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,26 +56,26 @@ public class Controller implements Observer {
     public void newSLogoSession() {
         initializeRoom();
     }
-    
+
     /**
      * Load a file in a specific tab
      * @param f
      */
     private void loadFile (TabView t, File f) {
-        
+
     }
-    
+
     @Override
     public void update (Observable o, Object arg) {
         if (o instanceof Room) {
             update ((Room) o, arg);
         }
     }
-    
+
     private Room getRoomForTab (TabView t) {
         return Tab2Room.get(t);
     }
-    
+
     private TabView getTabForRoom (Room r) {
         return Room2Tab.get(r);
     }
@@ -79,21 +83,26 @@ public class Controller implements Observer {
     private void update(Room r, Object arg) {
         getTabForRoom(r).setRenderable((Paintable) r);
     }
-    
+
+    private void update(Room r) {
+        getTabForRoom(r).render((Renderable) r);
+    }
+
     private void update(TabView t, Object arg) {
         if (arg instanceof File) {
             loadFile(t, (File)arg);
         }
         if (arg instanceof String) {
-            myModel.processCommand(getRoomForTab(t), (String) arg);
+//            myModel.processCommand(getRoomForTab(t), (String) arg);
         }
     }
-    
+
     public void processCommand (TabView t, String cmd) {
         Room room = getRoomForTab(t);
         myModel.processCommand(room, cmd);
         t.setRenderable((Paintable) room);
     }
+
     
     /**
      * Add a new room with id based on already existing rooms.
@@ -102,7 +111,7 @@ public class Controller implements Observer {
         int id = Room2Tab.size();
         initializeRoom(id);
     }
-    
+
     /**
      * Initialize a room with the ID provided
      * also initialize a corresponding Tab in the view.

@@ -6,25 +6,32 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
-import model.Room;
+import model.Renderable;
 
-
+/**
+ * Renderables are painted in this view when passed in.
+ * @author Ross Cahoon
+ *
+ */
 @SuppressWarnings("serial")
 public class RoomView extends WindowView {
 
-    // game to be animated
-    private Room myRoom;
-    private Dimension mySize = new Dimension(500,700);
-
-    public RoomView() {
+    private Renderable myRoom;
+    private Dimension mySize = new Dimension(500, 700);
+    
+    /**
+     * Constructs the RoomView, and sets the minimum size, default size of the view
+     *  and sets the default border.
+     */
+    public RoomView () {
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5)); 
+        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
     }
 
     @Override
     public void addComponents () {
-        add(new JTextArea(2,2));
+        add(new JTextArea(2, 2));
     }
 
     @Override
@@ -58,8 +65,12 @@ public class RoomView extends WindowView {
         }
     }
 
-    public void update() {
-
+    /**
+     * Paints the Renderable in the view.
+     * @param p
+     */
+    public void render (Renderable p) {
+        myRoom = p;
+        repaint();
     }
-
 }
