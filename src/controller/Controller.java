@@ -11,7 +11,7 @@ import view.Paintable;
 import view.RoomView;
 import view.TabView;
 import view.Window;
-import model.Model;
+//import model.Model;
 import model.Room;
 import model.Status;
 import model.Renderable;
@@ -26,13 +26,13 @@ import model.Renderable;
 
 public class Controller implements Observer {
 
-    private Model myModel;
+//    private Model myModel;
     private Window myView;
     private Map<Room, TabView> Room2Tab;
     private Map<TabView, Room> Tab2Room;
 
     public Controller() {
-        myModel = new Model();
+//        myModel = new Model();
         myView = new Window("SLogo", "English", this);
         Room2Tab = new HashMap<Room, TabView>();
         Tab2Room = new HashMap<TabView, Room>();
@@ -88,12 +88,12 @@ public class Controller implements Observer {
             loadFile(t, (File)arg);
         }
         if (arg instanceof String) {
-            myModel.processCommand(getRoomForTab(t), (String) arg);
+//            myModel.processCommand(getRoomForTab(t), (String) arg);
         }
     }
 
     public void processCommand (TabView t, String cmd) {
-        myModel.processCommand(getRoomForTab(t), cmd);
+//        myModel.processCommand(getRoomForTab(t), cmd);
     }
 
     

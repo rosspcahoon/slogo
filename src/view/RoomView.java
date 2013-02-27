@@ -7,14 +7,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import model.Renderable;
-import model.Room;
-
 
 @SuppressWarnings("serial")
 public class RoomView extends WindowView {
 
     // game to be animated
-    private Room myRoom;
+    private Renderable myRoom;
     private Dimension mySize = new Dimension(500,700);
 
     public RoomView() {
@@ -64,7 +62,7 @@ public class RoomView extends WindowView {
     }
 
     public void render (Renderable p) {
-        myRoom = (Room) p;     
+        myRoom = p;     
     }
 
 }
