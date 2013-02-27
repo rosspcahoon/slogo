@@ -2,49 +2,76 @@ package model;
 
 import java.awt.Graphics2D;
 import java.util.Observable;
+import util.Location;
 
 public class Room extends Observable implements Renderable{
 
     private int myID;
-//    private Turtle myTurtle;
+    //    private Turtle myTurtle;
     private Status myStatus;
-    
-    
+    private Turtle myTurtle;
+    private boolean myTurtlePenStatus;
+    private double myTurtleHead; 
+    private Location myTurtleLocation;
+    private boolean myTurtleVisibility; 
+
+
     public Room (int id) {
         myID = id;
-//        myTurtle = new Turtle();
+        //        myTurtle = new Turtle();
     }
 
-
-    @Override
-    public Object getState () {
-        // TODO Auto-generated method stub
-        return null;
+    public int getID () {
+        return myID;
     }
 
+    public void penOnOff () { 
+        myTurtle.togglePen(); 
+        myTurtlePenStatus = myTurtle.getPenStatus(); 
+    }
 
-    @Override
-    public void paint (Graphics2D pen) {
-        // TODO Auto-generated method stub
-        
+    public boolean penStatus () { 
+        return myTurtlePenStatus; 
+    }
+
+    public void visibilityOnOff () { 
+        myTurtle.toggleVisibility(); 
+        myTurtleVisibility = myTurtle.getVisibilityStatus(); 
+    }
+
+    public boolean getVisibility () { 
+        return myTurtleVisibility; 
+    }
+
+    public Location getTurtleLocation () { 
+        return myTurtleLocation; 
+    }
+
+    public double getTurtleHead () { 
+        return myTurtleHead; 
+    }
+
+    public void rotateTurtle(Graphics2D pen, double angle) { 
+        myTurtleHead += angle; 
+        myTurtle.rotate(pen, angle); 
+    }
+
+    public void moveTurtleForward(double distance) { 
+        myTurtle.move(distance); 
+    }
+
+    public void returnHome () { 
+        myTurtle.returnHome(); 
+    }
+
+    public Status getState() {
+        return myStatus;
+    }
+
+    // draws line wherever turtle goes (if pen is on) 
+    public void paint(Graphics2D pen) {
+        myTurtle.paint(pen);
+        pen.drawLine((int) myTurtle.getOldLocation().getX(), (int) myTurtle.getOldLocation().getY(), (int) 
+                     myTurtle.getCurrentLocation().getX(),(int) myTurtle.getCurrentLocation().getY());
     }
 }
-//
-//    public int getID () {
-//        return myID;
-//    }
-//    
-//    @Override
-//    public Status getState() {
-//        return myStatus;
-//    }
-//    
-//    @Override
-//    public void paint(Graphics2D pen) {
-//        myTurtle.paint(pen);
-//        pen.drawLine((int) myTurtle.getOldX(), (int) myTurtle.getOldY(), (int) 
-//                     myTurtle.getCurrentX(),(int) myTurtle.getCurrentY());
-//    }
-//    
-//    public void 
-//}
