@@ -136,7 +136,7 @@ public class Window extends JFrame {
     protected class NewTabAction extends AbstractAction {
         public NewTabAction() {
             super(Window.myResources.getString("NewCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.META_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
         }
         @Override
         public void actionPerformed (ActionEvent e) {
@@ -148,7 +148,7 @@ public class Window extends JFrame {
 
         public OpenFileAction() {
             super(Window.myResources.getString("OpenCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.META_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         }
         @Override
         public void actionPerformed (ActionEvent e) {
@@ -164,7 +164,7 @@ public class Window extends JFrame {
     protected class QuitAction extends AbstractAction {
         public QuitAction() {
             super(Window.myResources.getString("QuitCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.META_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         }
 
         @Override
@@ -176,7 +176,7 @@ public class Window extends JFrame {
     protected class SaveFileAction extends AbstractAction {
         public SaveFileAction () {
             super(Window.myResources.getString("SaveCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.META_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         }
 
         @Override
@@ -188,7 +188,7 @@ public class Window extends JFrame {
     protected class WelcomeAction extends AbstractAction {
         WelcomeAction() {
             super(Window.myResources.getString("WelcomeCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.META_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
         }
 
         @Override

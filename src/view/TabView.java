@@ -44,8 +44,8 @@ public class TabView extends WindowView {
         myID = id;       
     }
     
-    public void setRenderable(Renderable room) {
-        myRenderable = room;
+    public void setRenderable(Renderable renderableRoom) {
+        myRenderable = renderableRoom;
     }
     
     public int getID () {
