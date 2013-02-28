@@ -63,9 +63,7 @@ public class TabView extends WindowView {
     
     //TODO: fix so that it inherits from 'WindowView'
     protected void addComponents() {
-        add(myConsoleView, myConsoleView.configLayout(getConstraints()));
-        add(myRoomView, myRoomView.configLayout(getConstraints()));
-        add(myFeedbackView, myFeedbackView.configLayout(getConstraints()));
+        EasyGridFactory.layoutDefaultTab(this, myRoomView, myFeedbackView, myConsoleView);
     }
     
     
