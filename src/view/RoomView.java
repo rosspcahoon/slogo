@@ -17,20 +17,19 @@ import model.Renderable;
 public class RoomView extends WindowView {
 
     private Renderable myRoom;
-    private Dimension mySize = new Dimension(500, 700);
+    private Dimension mySize;
     
     /**
      * Constructs the RoomView, and sets the minimum size, default size of the view
      *  and sets the default border.
      */
-    public RoomView () {
-        this.setPreferredSize(mySize);
-        this.setMinimumSize(mySize);
+    public RoomView (TabView hostTab) {
+        super(hostTab);
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
     }
 
     @Override
-    public void addComponents () {
+    protected void addComponents () {
         add(new JTextArea(2, 2));
     }
 
@@ -72,5 +71,12 @@ public class RoomView extends WindowView {
     public void render (Renderable p) {
         myRoom = p;
         repaint();
+    }
+
+    @Override
+    protected void initializeVariables () {
+        mySize = new Dimension(500, 700);
+        this.setPreferredSize(mySize);
+        this.setMinimumSize(mySize);
     }
 }

@@ -139,6 +139,7 @@ public class Controller implements Observer {
         TabView associatedTab = new TabView(id, myView);
         myRoom2Tab.put(theRoom, associatedTab);
         myTab2Room.put(associatedTab, theRoom);
+        associatedTab.setRenderable((Renderable) theRoom);
         theRoom.addObserver(this);
         myView.addTab(associatedTab, (Renderable) theRoom);
         

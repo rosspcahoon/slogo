@@ -22,7 +22,7 @@ import model.Room;
  * @author Ross Cahoon, Dagbedji Fagnisse
  *
  */
-public class TabView extends JPanel {
+public class TabView extends WindowView {
 
     private int myID;
     private Window myWindow;
@@ -35,22 +35,20 @@ public class TabView extends JPanel {
     private File myFile;
     private Dimension mySize = new Dimension(800,800);
     
-    public TabView(int id, Window hostWindow) {
+    public TabView(Window hostWindow) {
+        super(hostWindow);
         setPreferredSize(mySize);
         setMinimumSize(mySize);
-        this.setLayout(new GridBagLayout());
-        myID = id;
-        myWindow = hostWindow;
-        myConstraints = new GridBagConstraints() ;
-        addComponents();
     }
     
-    public void setRenderable(Renderable r) {
-        myRenderable = r;
+
+    public TabView(int id, Window hostWindow) {     
+        this(hostWindow);
+        myID = id;       
     }
     
-    public TabView(int id) {
-        myID = id;
+    public void setRenderable(Renderable renderableRoom) {
+        myRenderable = renderableRoom;
     }
     
     public int getID () {
@@ -58,19 +56,16 @@ public class TabView extends JPanel {
     }
     
     public void processConsoleInput (String s) {
-        myController.processCommand(this, s);
+        ((Window) getParent()).processCommand(this, s);
     }
     
     
-    public GridBagConstraints getConstraints() {
-        return myConstraints;
-    }
     
-    
-    public void addComponents() {
-        add(myConsoleView = new ConsoleView(), myConsoleView.configLayout(getConstraints()));
-        add(myRoomView = new RoomView(), myRoomView.configLayout(getConstraints()));
-        add(myFeedbackView = new FeedbackView(), myFeedbackView.configLayout(getConstraints()));
+    //TODO: fix so that it inherits from 'WindowView'
+    protected void addComponents() {
+        add(myConsoleView, myConsoleView.configLayout(getConstraints()));
+        add(myRoomView, myRoomView.configLayout(getConstraints()));
+        add(myFeedbackView, myFeedbackView.configLayout(getConstraints()));
     }
     
     
@@ -81,21 +76,17 @@ public class TabView extends JPanel {
     public void update () {
         display();
     }
-    
-//    private void listen2WorkspaceInput() {
-//        if (userHasSubmittedInput()) {
-//            myController.processCommand(this, myConsoleView.getCommandInput());
-//        }
-//    }
-//    
-//    private boolean userHasSubmittedInput () {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
 
     public void render(Renderable p) {
         myRoomView.render(p);
         myFeedbackView.render(p);
+    }
+
+    @Override
+    protected void initializeVariables () {
+         myConsoleView = new ConsoleView(this);
+         myRoomView = new RoomView(this);
+         myFeedbackView = new FeedbackView(this);
     }
     
 }

@@ -15,22 +15,20 @@ import model.Status;
 @SuppressWarnings("serial")
 public class StateView extends WindowView {
     private JTextArea myTextArea;
-    private GridBagConstraints myConstraints;
 
     /**
      * Constructs the StateView and sets a default border
      */
-    public StateView () {
+    public StateView (FeedbackView FeedbackView) {
+        super(FeedbackView);
         this.setBorder(BorderFactory.createEmptyBorder(5, 5 ,5 ,5 ));
     }
 
     @Override
-    public void addComponents () {
-        myConstraints = new GridBagConstraints();
-        myTextArea = new JTextArea();
+    protected void addComponents () {
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);        
-        add(scrollPane, makeLayout(myConstraints));
+        add(scrollPane, makeLayout(getConstraints()));
     }
 
     @Override
@@ -75,5 +73,10 @@ public class StateView extends WindowView {
             double[] statusArray = {s.getMyXCoord(), s.getMyYCoord(), s.getMyHeading()};
             display(statusArray);
         }
+    }
+
+    @Override
+    protected void initializeVariables () {
+        myTextArea = new JTextArea();
     }
 }
