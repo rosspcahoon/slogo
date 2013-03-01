@@ -27,6 +27,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import model.Renderable;
 import controller.Controller;
 
 @SuppressWarnings("serial")
@@ -107,8 +108,9 @@ public class Window extends JFrame {
         return c;
     }
     
-    public void addTab (TabView tab) {
+    public void addTab (TabView tab, Renderable p) {
         myTabbedPane.addTab("Tab"+tab.getID(), tab);
+        tab.render(p);
     }
 
     public JFileChooser getChooser () {

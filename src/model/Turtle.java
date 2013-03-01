@@ -30,9 +30,9 @@ public class Turtle extends Sprite  {
     private static final int DEFAULT_FRAME_LEFT = -350; 
     
     // need turtle image
-    private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.gif");
+    private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
-    private static Location initialLocation = new Location(0,0); 
+    private static Location initialLocation = new Location(350,250); 
     private static double initialAngle = 90; 
     
     public Turtle () { 

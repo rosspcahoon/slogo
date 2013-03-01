@@ -33,18 +33,6 @@ public class RoomView extends WindowView {
         add(new JTextArea(2, 2));
     }
 
-    @Override
-    public GridBagConstraints configLayout (GridBagConstraints c) {
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = .625;
-        c.weighty = .875;
-        c.gridwidth = 5;
-        c.gridheight = 6;
-        c.gridx = 0;
-        c.gridy = 0;
-        return c;
-    }
-
     /**
      * Paint the contents of the canvas.
      * 

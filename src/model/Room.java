@@ -18,7 +18,7 @@ public class Room extends Observable implements Renderable{
 
     public Room (int id) {
         myID = id;
-        //        myTurtle = new Turtle();
+        myTurtle = new Turtle();
     }
 
     public int getID () {
@@ -71,7 +71,9 @@ public class Room extends Observable implements Renderable{
     // draws line wherever turtle goes (if pen is on) 
     public void paint(Graphics2D pen) {
         myTurtle.paint(pen);
-        pen.drawLine((int) myTurtle.getOldLocation().getX(), (int) myTurtle.getOldLocation().getY(), (int) 
-                     myTurtle.getCurrentLocation().getX(),(int) myTurtle.getCurrentLocation().getY());
+        if(myTurtle.getOldLocation() != null){
+            pen.drawLine((int) myTurtle.getOldLocation().getX(), (int) myTurtle.getOldLocation().getY(), (int) 
+                         myTurtle.getCurrentLocation().getX(),(int) myTurtle.getCurrentLocation().getY());
+        }
     }
 }

@@ -26,7 +26,9 @@ public class TabView extends WindowView {
 
     private int myID;
     private Window myWindow;
-    private Renderable myRenderable; //TODO: make Renderable
+    private GridBagConstraints myConstraints;
+    private Controller myController;
+    private Renderable myRenderable;
     private RoomView myRoomView;
     private ConsoleView myConsoleView;
     private FeedbackView myFeedbackView;
@@ -39,6 +41,7 @@ public class TabView extends WindowView {
         setMinimumSize(mySize);
     }
     
+
     public TabView(int id, Window hostWindow) {     
         this(hostWindow);
         myID = id;       
@@ -60,9 +63,7 @@ public class TabView extends WindowView {
     
     //TODO: fix so that it inherits from 'WindowView'
     protected void addComponents() {
-        add(myConsoleView, myConsoleView.configLayout(getConstraints()));
-        add(myRoomView, myRoomView.configLayout(getConstraints()));
-        add(myFeedbackView, myFeedbackView.configLayout(getConstraints()));
+        EasyGridFactory.layoutDefaultTab(this, myRoomView, myFeedbackView, myConsoleView);
     }
     
     

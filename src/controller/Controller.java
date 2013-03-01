@@ -1,19 +1,15 @@
 package controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import view.Paintable;
-import view.RoomView;
 import view.TabView;
 import view.Window;
 import model.Model;
 import model.Room;
-import model.Status;
 import model.Renderable;
 
 /**
@@ -145,7 +141,8 @@ public class Controller implements Observer {
         myTab2Room.put(associatedTab, theRoom);
         associatedTab.setRenderable((Renderable) theRoom);
         theRoom.addObserver(this);
-        myView.addTab(associatedTab);
+        myView.addTab(associatedTab, (Renderable) theRoom);
+        
     }
 
 }
