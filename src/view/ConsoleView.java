@@ -106,7 +106,7 @@ public class ConsoleView extends WindowView {
         return c;
     }
     
-    public void editGridBagConstraints (GridBagConstraints c, int fill, double[] weight_xy, int[] grid_whxy) {
+    private void editGridBagConstraints (GridBagConstraints c, int fill, double[] weight_xy, int[] grid_whxy) {
         c.fill = fill;
         c.weightx = weight_xy[0];
         c.weighty = weight_xy[1];

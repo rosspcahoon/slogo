@@ -23,8 +23,6 @@ public abstract class WindowView extends JPanel {
 
     private WindowView () {
         setLayoutManager();
-        myConstraints = new GridBagConstraints();
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         initializeVariables(); 
         addComponents();
     }
@@ -40,6 +38,8 @@ public abstract class WindowView extends JPanel {
     
     private void setLayoutManager() {
         this.setLayout(new GridBagLayout());
+        myConstraints = new GridBagConstraints();
+        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
     }
     
     /**
@@ -51,10 +51,14 @@ public abstract class WindowView extends JPanel {
     }
 
     /**
-     * Initialize instances variables - Template component used in the constructor
+     * Initialize components variables instances variables 
+     * - Template component used in the constructor
      */
     protected abstract void initializeVariables ();
 
+    /**
+     * Add the components initialized according to layout rules
+     */
     protected abstract void addComponents ();
 
     public GridBagConstraints configLayout(GridBagConstraints c) {
