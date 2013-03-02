@@ -3,22 +3,39 @@ package view;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 public class EasyGridFactory {
-
-
-
-    public void layoutHorizontal(Container parent, JComponent ... children) {
+    public static void layoutHorizontal(Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
-
+        int size = children.length;
+        GridBagConstraints c = new GridBagConstraints();
+        configureDefault(c);
+        for (int i = 0; i < size; i++) {
+            c.gridx = i;
+            c.gridy = 0;
+            parent.add(children[i], c);
+        }  
     }
 
-    public void layoutVertical(Container parent, JComponent ... children) {
+    public static void layoutVertical(Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
+        int size = children.length;
+        GridBagConstraints c = new GridBagConstraints();
+        configureDefault(c);
+        for (int i = 0; i < size; i++) {
+            c.gridx = 0;
+            c.gridy = i;
+            parent.add(children[i], c);
+        }  
+    }
 
+    private static void configureDefault(GridBagConstraints c) {
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridwidth = 1;
+        c.gridheight = 1;
     }
 
     public static void layoutDefaultTab(Container parent, JComponent roomview, JComponent feedback, JComponent consoleview) {
@@ -53,7 +70,7 @@ public class EasyGridFactory {
     public static void layoutDefaultConsole(Container parent, JComponent clearbutton, JComponent commandarea, JComponent enterbutton, JComponent textfield) {
         parent.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
+
         c.weightx = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipadx = 50;  
@@ -66,7 +83,7 @@ public class EasyGridFactory {
         c.fill = GridBagConstraints.NONE;
         c.ipadx = 0;
         parent.add(clearbutton, c);  
-        
+
         c.gridx = 2;
         parent.add(enterbutton, c);
 
@@ -78,12 +95,5 @@ public class EasyGridFactory {
         c.gridx = 0;
         c.gridy = 0;
         parent.add(commandarea, c);
-
-
-
-
-
-
     }
-
 }

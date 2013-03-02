@@ -75,8 +75,6 @@ public class ConsoleView extends WindowView {
     private Stack<String> myCommandsHistory;
     private Stack<String> myHistoryBrowsingHelper;
 
-    private GridBagConstraints myConstraints;
-    
     private Dimension mySize = new Dimension(WIDTH, HEIGHT);
 
 
