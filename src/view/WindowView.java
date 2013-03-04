@@ -3,7 +3,6 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -18,7 +17,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public abstract class WindowView extends JPanel {
 
-    private GridBagConstraints myConstraints;
+    protected GridBagConstraints myConstraints;
     private Container myParent;
 
     private WindowView () {
