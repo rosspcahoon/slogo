@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JTextArea;
 import model.Renderable;
 
 /**
@@ -26,10 +25,9 @@ public class RoomView extends WindowView {
         super(hostTab);
         this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE); 
     }
-
+    
     @Override
-    protected void addComponents () {
-        add(new JTextArea(2, 2));
+    protected void addComponents () {        
     }
 
     /**
