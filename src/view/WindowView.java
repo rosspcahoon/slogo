@@ -3,7 +3,6 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -23,18 +22,29 @@ public abstract class WindowView extends JPanel {
 
     private WindowView () {
         setLayoutManager();
+        myConstraints = new GridBagConstraints();
+        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
         initializeVariables(); 
         addComponents();
     }
     
-    public Container getParent() {
-        return myParent;
-    }
     
+    /**
+     * Constructor for WindowView
+     * @param parent the parent of the View being created
+     */
     public WindowView (Container parent) {
         this();
         myParent = parent;
     }
+    
+    /**
+     * Returns the parent component of this component
+     */    
+    public Container getParent() {
+        return myParent;
+    }
+
     
     private void setLayoutManager() {
         this.setLayout(new GridBagLayout());
@@ -60,10 +70,6 @@ public abstract class WindowView extends JPanel {
      * Add the components initialized according to layout rules
      */
     protected abstract void addComponents ();
-
-    public GridBagConstraints configLayout(GridBagConstraints c) {
-        return new GridBagConstraints();
-    }
 }
 
 

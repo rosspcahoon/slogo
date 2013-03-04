@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 import model.Renderable;
 
@@ -18,14 +16,15 @@ public class RoomView extends WindowView {
 
     private Renderable myRoom;
     private Dimension mySize;
-    
+
     /**
      * Constructs the RoomView, and sets the minimum size, default size of the view
      *  and sets the default border.
+     *  @param hostTab is the parent view of this component
      */
     public RoomView (TabView hostTab) {
         super(hostTab);
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5)); 
+        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE); 
     }
 
     @Override
@@ -54,7 +53,7 @@ public class RoomView extends WindowView {
 
     /**
      * Paints the Renderable in the view.
-     * @param p
+     * @param p the Renderable that will be painted.
      */
     public void render (Renderable p) {
         myRoom = p;
@@ -63,7 +62,7 @@ public class RoomView extends WindowView {
 
     @Override
     protected void initializeVariables () {
-        mySize = new Dimension(500, 700);
+        mySize = ViewConstants.DEFAULT_ROOM_SIZE;
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
     }

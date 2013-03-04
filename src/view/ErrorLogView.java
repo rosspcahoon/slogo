@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Renderable;
@@ -20,13 +19,14 @@ public class ErrorLogView extends WindowView {
     private JTextArea myTextArea;
     private GridBagConstraints myConstraints;
     private FocusListener myFocusListener;
-    
+
     /**
      * Constructs the ErrorLogView and sets a default border
+     * @param hostFeedbackView the view that creates this view, its parent
      */
     public ErrorLogView (FeedbackView hostFeedbackView) {
         super(hostFeedbackView);
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
     }
 
     @Override
@@ -40,18 +40,6 @@ public class ErrorLogView extends WindowView {
         myConstraints = new GridBagConstraints();
         JScrollPane scrollPane = new JScrollPane(myTextArea);             
         add(scrollPane, makeLayout(myConstraints));
-    }
-
-    @Override
-    public GridBagConstraints configLayout(GridBagConstraints c) {
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 1;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        return c;
     }
 
     protected GridBagConstraints makeLayout (GridBagConstraints c) {
@@ -99,12 +87,6 @@ public class ErrorLogView extends WindowView {
             Status thisStatus = (Status) p.getState();
             display(thisStatus.getErrorMessage());
         }
-        //        Test Display
-        //        for(int i =0 ; i<10; i++){
-        //            display("You messed up");
-        //            display("Dude, check your syntax");
-        //            display("Command not found");
-        //        }
     }
 
     @Override
