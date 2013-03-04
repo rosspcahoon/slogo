@@ -2,6 +2,7 @@ package command;
 
 import java.util.HashMap;
 import model.Room;
+import model.RoomObject;
 
 /**
  * Class holding mappings for command keywords to command objects.
@@ -17,10 +18,16 @@ public class CommandLibrary {
     private HashMap<String,Command> myCommands;
     
     /**
+     * HashMap matching command names to their aliases.
+     */
+    private HashMap<String,String> myAliases;
+    
+    /**
      * Constructor for the CommandLibrary class--instantiates the HashMap.
      */
     public CommandLibrary() {
         myCommands = new HashMap<String,Command>();
+        myAliases = new HashMap<String,String>();
         buildLibrary();
     }
     
@@ -30,12 +37,12 @@ public class CommandLibrary {
      * @param r is the room to execute the command in.
      * @param args are the parsed input arguments.
      */
-    public void processCommand(Room r, String[] args) {
+    public void processCommand(Room r, RoomObject o, String[] args) {
+        args[0] = getAlias(args[0].toLowerCase());
         String s = args[0];
-        s = s.toLowerCase();
         Command c = getCommand(s);
         c.addProperties(args);
-        c.execute(r);
+        c.execute(r, o);
     }
     
     /**
@@ -51,17 +58,28 @@ public class CommandLibrary {
     }
     
     /**
-     * Builds the command library.
+     * Replaces the command alias with its original name, if it is an alias
+     * For instance, replaces fd 50 with forward 50.
+     */
+    private String getAlias(String name) {
+        if (!myAliases.containsKey(name)) {
+            return name;
+        }
+        return myAliases.get(name);
+    }
+    
+    /**
+     * Builds the command library and the alias map.
      */
     private void buildLibrary() {
-        myCommands.put(CommandConstants.COMMAND_NAME_FORWARD, new ForwardCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_FD, new ForwardCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_BACK, new BackCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_BK, new BackCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_LEFT, new LeftCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_LT, new LeftCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_RIGHT, new RightCommand());
-        myCommands.put(CommandConstants.COMMAND_NAME_RT, new RightCommand());
+        myAliases.put(CommandConstants.COMMAND_NAME_FD, CommandConstants.COMMAND_NAME_FORWARD);
+        myAliases.put(CommandConstants.COMMAND_NAME_BK, CommandConstants.COMMAND_NAME_BACK);
+        myAliases.put(CommandConstants.COMMAND_NAME_LT, CommandConstants.COMMAND_NAME_LEFT);
+        myAliases.put(CommandConstants.COMMAND_NAME_RT, CommandConstants.COMMAND_NAME_RIGHT);
+        myCommands.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_BACK, new MoveCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_LEFT, new MoveCommand());
+        myCommands.put(CommandConstants.COMMAND_NAME_RIGHT, new MoveCommand());
     }
     
 }

@@ -5,7 +5,7 @@ package model;
  * @author mp
  *
  */
-public interface Movable {
+public interface Moveable extends RoomObject {
 
     /**
      * moves forward the given distance (negative numbers move backwards)
@@ -20,12 +20,6 @@ public interface Movable {
     public void turnRight(double degrees);
     
     /**
-     * turns left the specified number of degrees
-     * @param degrees
-     */
-    public void turnLeft(double degrees);
-    
-    /**
      * moves the actor/object to the specified absolute coordinates
      * @param xCoord
      * @param yCoord
@@ -37,4 +31,5 @@ public interface Movable {
      * @param degrees
      */
     public void jumpturn(double degrees);
+
 }

@@ -9,7 +9,7 @@ import java.util.Observable;
 import java.util.Observer; 
 import java.awt.Graphics2D;
 
-public class Turtle extends Sprite  {
+public class Turtle extends Sprite implements Moveable {
     
     //turtle's head (angle) in degrees 
     private double myHead; 
@@ -123,5 +123,29 @@ public class Turtle extends Sprite  {
     //TO_DO
     public boolean hasChanged () { 
         return true; 
+    }
+
+    @Override
+    public void moveForward (double dist) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void turnRight (double degrees) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void jumpMove (double xCoord, double yCoord) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void jumpturn (double degrees) {
+        // TODO Auto-generated method stub
+        
     }
 }
