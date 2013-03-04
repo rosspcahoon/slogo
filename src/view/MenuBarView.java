@@ -16,6 +16,11 @@ import javax.swing.JSeparator;
 public class MenuBarView extends JMenuBar {
     private Window myWindow;
     
+    /**
+     * Constructor for MenuBarView
+     * @param window the parent view that component is inside of
+     */
+    
     public MenuBarView(Window window) {
         myWindow = window;
         addComponents();
@@ -27,7 +32,7 @@ public class MenuBarView extends JMenuBar {
     }
 
     private JMenu makeFileMenu() {
-        JMenu result = new JMenu(Window.myResources.getString("FileMenu"));
+        JMenu result = new JMenu(Window.getResources().getString("FileMenu"));
         result.setMnemonic(KeyEvent.VK_F);
         result.add(myWindow.new NewTabAction());
         result.add(myWindow.new OpenFileAction());
@@ -38,11 +43,9 @@ public class MenuBarView extends JMenuBar {
     }
     
     private JMenu makeHelpMenu() {
-        JMenu result = new JMenu(Window.myResources.getString("HelpMenu"));
+        JMenu result = new JMenu(Window.getResources().getString("HelpMenu"));
         result.setMnemonic(KeyEvent.VK_H);
         result.add(myWindow.new WelcomeAction());
         return result;
     }
-    
-
 }

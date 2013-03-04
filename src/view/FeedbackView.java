@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import model.Renderable;
 
 /**
@@ -13,10 +12,11 @@ import model.Renderable;
 public class FeedbackView extends WindowView {
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
-    private Dimension mySize = new Dimension(800, 100);
+    private Dimension mySize = ViewConstants.DEFAULT_FEEDBACK_SIZE;
 
     /**
      * Constructs the FeedbackView and sets the minimum size and default size of the view.
+     * @param tab is the Tabview which the current Feedback view is in
      */
     public FeedbackView (TabView tab) {
         super(tab);
@@ -26,21 +26,9 @@ public class FeedbackView extends WindowView {
 
     @Override
     public void addComponents () {
-        add(myErrorLogView, myErrorLogView.configLayout(getConstraints()));
-        add(myStateView, myStateView.configLayout(getConstraints()));
+        EasyGridFactory.layoutHorizontal(this, myErrorLogView, myStateView);
     }
 
-    @Override
-    public GridBagConstraints configLayout (GridBagConstraints c) {
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = .125;
-        c.gridx = 0;
-        c.gridy = 7;
-        c.gridheight = 1;
-        c.gridwidth = 8;
-        return c;
-    }
     /**
      * Passes the Renderable it receives to all views it contains.
      * @param p the Renderable that all views within this one will receive
@@ -48,7 +36,6 @@ public class FeedbackView extends WindowView {
     public void render (Renderable p) {
         myErrorLogView.render(p);
         myStateView.render(p);
-
     }
 
     @Override
@@ -56,6 +43,4 @@ public class FeedbackView extends WindowView {
         myErrorLogView = new ErrorLogView(this);
         myStateView = new StateView(this);
     }
-
-
 }
