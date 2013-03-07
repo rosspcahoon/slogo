@@ -26,11 +26,7 @@ public class Model implements ISLogoModel {
      */
     @Override
     public boolean processCommand (Room r, String s) {
-        
-        Object feedback = new Object();
-        s.trim();
-        String[] output = s.split(" ");
-        myCommandManager.process(r, output);
+        myCommandManager.process(r, s);
         return true;
     }
 
