@@ -17,7 +17,7 @@ import model.PenTrail;
  *
  */
 
-public class Turtle extends Moveable  {
+public class Turtle extends Moveable {
 
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.png");

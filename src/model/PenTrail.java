@@ -99,7 +99,7 @@ public class PenTrail extends Line2D.Double {
     }
     
     public void drawLine (Graphics2D pen) { 
-        pen.drawLine(myX1, myX2, myY1, myY2); 
+        pen.drawLine((int)myX1, (int)myX2, (int)myY1, (int)myY2); 
     }
 
 }

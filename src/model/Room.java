@@ -11,7 +11,7 @@ import util.Location;
  *
  */
 
-public class Room extends Observable implements Renderable{
+public class Room extends Observable{
 
     private int myID;
     private Status myStatus;
@@ -33,45 +33,6 @@ public class Room extends Observable implements Renderable{
         return myID;
     }
 
-    public void penOnOff () { 
-        myTurtle.togglePen(); 
-        myTurtlePenStatus = myTurtle.getPenStatus(); 
-    }
-
-    public boolean getPenStatus () { 
-        return myTurtlePenStatus; 
-    }
-
-    public void visibilityOnOff () { 
-        myTurtle.toggleVisibility(); 
-        myTurtleVisibility = myTurtle.getVisibility(); 
-    }
-
-    public boolean getVisibility () { 
-        return myTurtle.getVisibility(); 
-    }
-
-    public Location getCurrentLocation () { 
-        return myTurtle.getCurrentLocation(); 
-    }
-    
-    public Location getOldLocation () { 
-        return myTurtle.getOldLocation(); 
-    }
-
-    public double getHeadDirection () { 
-        return myTurtle.getHeadDirection(); 
-    }
-
-    public void rotateMoveable (double angle) { 
-        myTurtle.rotate(angle);
-
-    }
-
-    public void moveMovable (double distance) { 
-        myTurtle.move(distance); 
-    }
-
     public void returnHome () { 
         myTurtle.returnHome(); 
     }
@@ -79,20 +40,8 @@ public class Room extends Observable implements Renderable{
     public Status getState() {
         return myStatus;
     }
-
-    //has Movable object draw a line where it goes
-    public void drawLine (Graphics2D pen) {
-        myTurtle.drawLine(pen); 
-    }
     
-    public void update() { 
-        myTurtlePenStatus = getPenStatus (); 
-        myTurtleLocation = getCurrentLocation ();
-        myTurtleHead = getHeadDirection (); 
-        myTurtleVisibility = getVisibility ();    
-    }
-
-    public void paint (Graphics2D pen) {
-        myTurtle.paint(pen); 
+    public Turtle getTurtle() {
+        return myTurtle;
     }
 }
