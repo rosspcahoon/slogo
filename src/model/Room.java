@@ -4,18 +4,26 @@ import java.awt.Graphics2D;
 import java.util.Observable;
 import util.Location;
 
+
+/**
+ * Class for managing objects in the room 
+ * @author thomasvarner
+ *
+ */
+
 public class Room extends Observable implements Renderable{
 
     private int myID;
-    //    private Turtle myTurtle;
     private Status myStatus;
+    
     private Turtle myTurtle;
+    
     private boolean myTurtlePenStatus;
     private double myTurtleHead; 
     private Location myTurtleLocation;
     private boolean myTurtleVisibility; 
 
-
+    
     public Room (int id) {
         myID = id;
         myTurtle = new Turtle();
@@ -30,33 +38,37 @@ public class Room extends Observable implements Renderable{
         myTurtlePenStatus = myTurtle.getPenStatus(); 
     }
 
-    public boolean penStatus () { 
+    public boolean getPenStatus () { 
         return myTurtlePenStatus; 
     }
 
     public void visibilityOnOff () { 
         myTurtle.toggleVisibility(); 
-        myTurtleVisibility = myTurtle.getVisibilityStatus(); 
+        myTurtleVisibility = myTurtle.getVisibility(); 
     }
 
     public boolean getVisibility () { 
-        return myTurtleVisibility; 
+        return myTurtle.getVisibility(); 
     }
 
-    public Location getTurtleLocation () { 
-        return myTurtleLocation; 
+    public Location getCurrentLocation () { 
+        return myTurtle.getCurrentLocation(); 
+    }
+    
+    public Location getOldLocation () { 
+        return myTurtle.getOldLocation(); 
     }
 
-    public double getTurtleHead () { 
-        return myTurtleHead; 
+    public double getHeadDirection () { 
+        return myTurtle.getHeadDirection(); 
     }
 
-    public void rotateTurtle(Graphics2D pen, double angle) { 
-        myTurtleHead += angle; 
-        myTurtle.rotate(pen, angle); 
+    public void rotateMoveable (double angle) { 
+        myTurtle.rotate(angle);
+
     }
 
-    public void moveTurtleForward(double distance) { 
+    public void moveMovable (double distance) { 
         myTurtle.move(distance); 
     }
 
@@ -68,12 +80,19 @@ public class Room extends Observable implements Renderable{
         return myStatus;
     }
 
-    // draws line wherever turtle goes (if pen is on) 
-    public void paint(Graphics2D pen) {
-        myTurtle.paint(pen);
-        if(myTurtle.getOldLocation() != null){
-            pen.drawLine((int) myTurtle.getOldLocation().getX(), (int) myTurtle.getOldLocation().getY(), (int) 
-                         myTurtle.getCurrentLocation().getX(),(int) myTurtle.getCurrentLocation().getY());
-        }
+    //has Movable object draw a line where it goes
+    public void drawLine (Graphics2D pen) {
+        myTurtle.drawLine(pen); 
+    }
+    
+    public void update() { 
+        myTurtlePenStatus = getPenStatus (); 
+        myTurtleLocation = getCurrentLocation ();
+        myTurtleHead = getHeadDirection (); 
+        myTurtleVisibility = getVisibility ();    
+    }
+
+    public void paint (Graphics2D pen) {
+        myTurtle.paint(pen); 
     }
 }
