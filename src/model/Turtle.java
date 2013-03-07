@@ -9,20 +9,14 @@ import java.util.Observable;
 import java.util.Observer; 
 import java.awt.Graphics2D;
 
+/**
+ * "Turtle" actor in slogo display. Turtles are moveable objects that can 
+ * be moved, rotated, draw trails, and be set to show or be invisible.
+ * @author mp, tv
+ *
+ */
 public class Turtle extends Sprite implements Moveable {
-    
-    //turtle's head (angle) in degrees 
-    private double myHeading; 
-    
-    private Location myOldLocation; 
-    private Location myCurrentLocation; 
-    
-    //turtle's pen 
-    private boolean myPenDown; 
-    
-    //is it on the screen/visible
-    private boolean myVisibility; 
-    
+        
     //frame default sizes (as of now) 
     private static final int DEFAULT_FRAME_TOP = 250; 
     private static final int DEFAULT_FRAME_BOTTOM = -250; 
@@ -35,7 +29,22 @@ public class Turtle extends Sprite implements Moveable {
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20, 20); 
     private static final Location initialLocation = new Location (350, 250); 
 
+    //turtle's head (angle) in degrees 
+    private double myHeading; 
     
+    private Location myOldLocation; 
+    private Location myCurrentLocation; 
+    
+    //turtle's pen 
+    private boolean myPenDown; 
+    
+    //is it on the screen/visible
+    private boolean myVisibility; 
+    
+
+    /**
+     * Constructor
+     */
     public Turtle () { 
         super(DEFAULT_TURTLE_IMAGE, initialLocation, DEFAULT_TURTLE_SIZE); 
         myOldLocation = null; 
@@ -45,10 +54,6 @@ public class Turtle extends Sprite implements Moveable {
         myVisibility = true;
     }
  
-    public void move (double distance) { 
-        super.translate(new Vector(myHeading, distance)); 
-        setLocations();  
-    }
     
     public void setLocations () { 
         myOldLocation = myCurrentLocation; 
@@ -59,26 +64,32 @@ public class Turtle extends Sprite implements Moveable {
         return myOldLocation; 
     }
     
+    @Override
     public double getXCoord() {
         return myCurrentLocation.getX();
     }
     
+    @Override
     public double getYCoord() {
         return myCurrentLocation.getY();
     }
+    
     
     public Location getCurrentLocation () { 
         return myCurrentLocation; 
     }
     
+    @Override
     public double getHeading() { 
         return myHeading; 
     }
     
+    @Override
     public boolean penDownStatus () { 
         return myPenDown; 
     }
     
+    @Override
     public void setPenStatus (boolean bool) { 
         myPenDown = bool;
     }
@@ -114,6 +125,9 @@ public class Turtle extends Sprite implements Moveable {
         }
     } 
     
+    /**
+     * returns this turtle to the position it was created at
+     */
     public void returnHome () { 
         super.setCenter(initialLocation); 
     }
