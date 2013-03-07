@@ -12,38 +12,41 @@ import java.awt.Graphics2D;
 public class Turtle extends Sprite implements Moveable {
     
     //turtle's head (angle) in degrees 
-    private double myHead; 
+    private double myHeading; 
     
     private Location myOldLocation; 
     private Location myCurrentLocation; 
     
     //turtle's pen 
-    private boolean myPenUp = false; 
+    private boolean myPenDown; 
     
     //is it on the screen/visible
-    private boolean myVisibility = false; 
+    private boolean myVisibility; 
     
     //frame default sizes (as of now) 
     private static final int DEFAULT_FRAME_TOP = 250; 
     private static final int DEFAULT_FRAME_BOTTOM = -250; 
     private static final int DEFAULT_FRAME_RIGHT = 350; 
     private static final int DEFAULT_FRAME_LEFT = -350; 
+    private static final double initialAngle = 90; 
     
     // need turtle image
-    private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.png");
-    private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
-    private static Location initialLocation = new Location(350,250); 
-    private static double initialAngle = 90; 
+    private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap ("turtle.png");
+    private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20, 20); 
+    private static final Location initialLocation = new Location (350, 250); 
+
     
     public Turtle () { 
         super(DEFAULT_TURTLE_IMAGE, initialLocation, DEFAULT_TURTLE_SIZE); 
         myOldLocation = null; 
         myCurrentLocation = initialLocation; 
-        myHead = initialAngle; 
+        myHeading = initialAngle; 
+        myPenDown = true;
+        myVisibility = true;
     }
  
     public void move (double distance) { 
-        super.translate(new Vector(myHead, distance)); 
+        super.translate(new Vector(myHeading, distance)); 
         setLocations();  
     }
     
@@ -56,33 +59,43 @@ public class Turtle extends Sprite implements Moveable {
         return myOldLocation; 
     }
     
+    public double getXCoord() {
+        return myCurrentLocation.getX();
+    }
+    
+    public double getYCoord() {
+        return myCurrentLocation.getY();
+    }
+    
     public Location getCurrentLocation () { 
         return myCurrentLocation; 
     }
     
-    public double getHead() { 
-        return myHead; 
+    public double getHeading() { 
+        return myHeading; 
     }
     
-    public boolean getPenStatus () { 
-        return myPenUp; 
+    public boolean penDownStatus () { 
+        return myPenDown; 
     }
     
-    public void togglePen () { 
-        myPenUp = !(myPenUp); 
+    public void setPenStatus (boolean bool) { 
+        myPenDown = bool;
     }
     
+    @Override
     public boolean getVisibilityStatus () { 
         return myVisibility; 
     }
     
-    public void toggleVisibility () { 
-        myVisibility = !(myVisibility); 
+    @Override
+    public void setVisibilityStatus(boolean bool){
+        myVisibility = bool;
     }
     
     // rotates turtle by specified angle (in degrees) 
     public void rotate(Graphics2D pen, double angle) { 
-        myHead += angle; 
+        myHeading += angle; 
         super.getView().paint(pen, super.getCenter(), DEFAULT_TURTLE_SIZE, angle); 
     }
     
@@ -104,11 +117,7 @@ public class Turtle extends Sprite implements Moveable {
     public void returnHome () { 
         super.setCenter(initialLocation); 
     }
-    
-    //TO-DO
-    public void notifyObservers (Object arg) { 
-        
-    }
+
     
     //TO-DO
     public void addObserver (Object o) { 
@@ -127,25 +136,25 @@ public class Turtle extends Sprite implements Moveable {
 
     @Override
     public void moveForward (double dist) {
-        // TODO Auto-generated method stub
+        myCurrentLocation.translate(new Vector(myHeading, dist));
         
     }
 
     @Override
     public void turnRight (double degrees) {
-        // TODO Auto-generated method stub
+        myHeading += degrees;
         
     }
 
     @Override
     public void jumpMove (double xCoord, double yCoord) {
-        // TODO Auto-generated method stub
+        myCurrentLocation = new Location(xCoord, yCoord);
         
     }
 
     @Override
-    public void jumpturn (double degrees) {
-        // TODO Auto-generated method stub
+    public void jumpTurn (double degrees) {
+        myHeading = degrees;
         
     }
 }
