@@ -3,8 +3,8 @@ package model;
 import java.util.List;
 
 import java.util.Observable;
-import command.Command;
-import command.CommandLibrary;
+import command.backup.Command;
+import command.backup.CommandLibrary;
 
 /**
  * Controls the interaction of model side classes.

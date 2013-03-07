@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * interface for movable characters/actors
  * @author mp

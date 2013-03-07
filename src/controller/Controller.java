@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import view.TabView;
 import view.Window;
 import model.Model;
-import model.Room;
 import model.Renderable;
+import model.Room;
 
 /**
  * The controller is responsible for interfacing between the View and the Model.

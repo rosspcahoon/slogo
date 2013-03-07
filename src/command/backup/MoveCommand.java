@@ -1,9 +1,10 @@
-package command;
+package command.backup;
 
 import model.Moveable;
 import model.Room;
 import model.RoomObject;
 
+@Deprecated
 public class MoveCommand extends Command {
 
     public MoveCommand () {

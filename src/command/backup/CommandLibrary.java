@@ -1,4 +1,4 @@
-package command;
+package command.backup;
 
 import java.util.HashMap;
 import model.Room;
@@ -9,6 +9,7 @@ import model.RoomObject;
  * @author james
  *
  */
+@Deprecated
 public class CommandLibrary {
 
     /**
