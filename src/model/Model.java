@@ -3,8 +3,7 @@ package model;
 import java.util.List;
 
 import java.util.Observable;
-import command.backup.Command;
-import command.backup.CommandLibrary;
+import model.command.CommandManager;
 
 /**
  * Controls the interaction of model side classes.
@@ -13,10 +12,10 @@ import command.backup.CommandLibrary;
  */
 public class Model implements ISLogoModel {
 
-    private CommandLibrary myCommandLibrary;
+    private CommandManager myCommandManager;
     
     public Model(){
-        myCommandLibrary = new CommandLibrary();
+        myCommandManager = new CommandManager();
     }
     
     /**
@@ -31,7 +30,7 @@ public class Model implements ISLogoModel {
         Object feedback = new Object();
         s.trim();
         String[] output = s.split(" ");
-//        myCommandLibrary.processCommand(r, output);
+        myCommandManager.process(r, output);
         return true;
     }
 
