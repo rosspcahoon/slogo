@@ -102,8 +102,14 @@ public class CommandLibrary {
         myCommandNodes.put(CommandConstants.COMMAND_NAME_AND, new AndCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_OR, new OrCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_NOT, new NotCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LIST_OPEN, new ListCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_MAKE, new MakeCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_REPEAT, new RepeatCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IF, new IfCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IFELSE, new IfElseCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_TO, new ToCommandNode());
     }
-    
+
     /**
      * Builds the command alias map.
      */
@@ -132,5 +138,6 @@ public class CommandLibrary {
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_GREATER, CommandConstants.COMMAND_NAME_IS_GREATER);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_EQUAL, CommandConstants.COMMAND_NAME_IS_EQUAL);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_NOT_EQUAL, CommandConstants.COMMAND_NAME_IS_NOT_EQUAL);
+        myCommandAliases.put(CommandConstants.COMMAND_ALIAS_SET, CommandConstants.COMMAND_NAME_MAKE);
     }
 }

@@ -77,11 +77,24 @@ public class CommandConstants {
     public static final String COMMAND_ALIAS_IS_GREATER = "greaterp";
     public static final String COMMAND_ALIAS_IS_EQUAL = "equalp";
     public static final String COMMAND_ALIAS_IS_NOT_EQUAL = "notequalp";
+
+    // command names (control)
+    public static final String COMMAND_NAME_LIST_OPEN = "[";
+    public static final String COMMAND_NAME_LIST_CLOSE = "]";
+    public static final String COMMAND_NAME_MAKE = "make";
+    public static final String COMMAND_NAME_REPEAT = "repeat";
+    public static final String COMMAND_NAME_IF = "if";
+    public static final String COMMAND_NAME_IFELSE = "ifelse";
+    public static final String COMMAND_NAME_TO = "to";
+    
+    // command aliases (control)
+    public static final String COMMAND_ALIAS_SET = "set";
     
     // command arg numbers
     public static final int COMMAND_EXPECTED_ARGS_ZERO = 0;
     public static final int COMMAND_EXPECTED_ARGS_ONE = 1;
     public static final int COMMAND_EXPECTED_ARGS_TWO = 2;
+    public static final int COMMAND_EXPECTED_ARGS_THREE = 3;
     
     // command result ints
     public static final int COMMAND_RETURN_TRUE = 1;

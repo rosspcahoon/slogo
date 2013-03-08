@@ -1,12 +1,13 @@
 package model.command;
 
 import java.util.Scanner;
+import model.Room;
 
 /**
  * The class managing the command tree structure. Responsible for scanning
  * the input and creating the command tree, then executing the commands in
  * the newly created tree.
- * Successor to the CommandLibrary.java class.
+ * Successor to the old CommandLibrary.java class.
  * @author james
  *
  */
@@ -15,7 +16,8 @@ public class CommandManager {
     private CommandNode myCurrentRoot;
     private String myCurrentInput;
     private int myCurrentResult;
-    private Scanner myScanner;
+    private Room myCurrentRoom;
+    private Scanner myCurrentScanner;
     
     /**
      * Initializes the CommandManager's instance variables and builds its
@@ -25,7 +27,8 @@ public class CommandManager {
         myCurrentRoot = null;
         myCurrentInput = null;
         myCurrentResult = -1;
-        myScanner = null;
+        myCurrentScanner = null;
+        myCurrentRoom = null;
     }
     
     /**
@@ -33,10 +36,10 @@ public class CommandManager {
      * executes the command and returns the result.
      * @param input
      */
-    public int process(String input) {
-        //TODO: finish implementing
+    public int process(Room room, String input) {
         myCurrentInput = input;
-        myScanner = new Scanner(myCurrentInput);
+        myCurrentScanner = new Scanner(myCurrentInput);
+        myCurrentRoom = room;
         createTree();
 //        printTree();
         executeTree();
@@ -49,18 +52,19 @@ public class CommandManager {
      * Creates the command tree from the input string.
      */
     private void createTree() {
-        //TODO: finish implementing
-        String rootString = myScanner.next();
+        String rootString = myCurrentScanner.next();
         rootString = rootString.toLowerCase();
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
-        myCurrentRoot.setUp(myScanner);
+        myCurrentRoot.setUp(myCurrentScanner);
+        if (myCurrentScanner.hasNext()) {
+            //TODO: throw bad input error
+        }
     }
     
     /**
      * Executes the command tree appropriately.
      */
     private void executeTree() {
-        //TODO: implement
         myCurrentResult = myCurrentRoot.resolve();
     }
     
@@ -68,11 +72,11 @@ public class CommandManager {
      * Cleans up the tree after command execution.
      */
     private void cleanTree() {
-        myScanner.close();
+        myCurrentScanner.close();
         myCurrentRoot = null;
         myCurrentInput = null;
         myCurrentResult = -1;
-        myScanner = null;
+        myCurrentScanner = null;
     }
     
     /**
@@ -92,15 +96,13 @@ public class CommandManager {
         }
     }
     
-//    public static void main(String[] args) {
-//        CommandManager test = new CommandManager();
-//        test.process("fd random sum 50 10");
-//        System.out.println();
-//        test.process("bk quotient product random 50 10 sum random 30 minus 10");
-//        System.out.println();
-//        test.process("bk / * random 50 10 + random 30 ~ 10");
-//        System.out.println();
-//        test.process("pENdoWn?");
-//        System.out.println();
-//    }
+    public static void main(String[] args) {
+        CommandManager test = new CommandManager();
+        test.process(null, "if random 2 [ fd 50 rt 30 ]");
+        System.out.println();
+        test.process(null, "ifelse random 2 [ fd 50 rt 30 ] [ bk sum 10 random 5 ]");
+        System.out.println();
+        test.process(null, "repeat random 5 [ fd 50 ]");
+        System.out.println();
+    }
 }
