@@ -11,7 +11,7 @@ import util.Location;
  *
  */
 
-public class Room extends Observable{
+public class Room extends Observable implements Renderable{
 
     private int myID;
     private Status myStatus;
@@ -43,5 +43,9 @@ public class Room extends Observable{
     
     public Turtle getTurtle() {
         return myTurtle;
+    }
+    
+    public void paint(Graphics2D pen) {
+        myTurtle.paint(pen);
     }
 }
