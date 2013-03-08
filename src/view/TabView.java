@@ -81,17 +81,7 @@ public class TabView extends JPanel {
     public void update () {
         display();
     }
-    
-//    private void listen2WorkspaceInput() {
-//        if (userHasSubmittedInput()) {
-//            myController.processCommand(this, myConsoleView.getCommandInput());
-//        }
-//    }
-//    
-//    private boolean userHasSubmittedInput () {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
+
 
     public void render(Renderable p) {
         myRoomView.render(p);
