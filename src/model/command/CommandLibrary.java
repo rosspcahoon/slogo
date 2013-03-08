@@ -27,6 +27,11 @@ public class CommandLibrary {
     private static Map<String,String> myCommandAliases;
     
     /**
+     * HashMap for user-created variables
+     */
+    private static Map<String,Integer> myUserVariables = new HashMap<String, Integer>();
+    
+    /**
      * Static initialization block--calls the static method buildLibrary().
      */
     static {
@@ -40,6 +45,11 @@ public class CommandLibrary {
      */
     public static CommandNode getCommandNode(String name) {
         name = getAlias(name);
+        if (myUserVariables.containsKey(name)) {
+            NumberCommandNode result = new NumberCommandNode();
+            result.setMyValue(myUserVariables.get(name));
+            return result;
+        }
         if (!myCommandNodes.containsKey(name)) {
             try {
                 int value = Integer.parseInt(name);
@@ -52,6 +62,24 @@ public class CommandLibrary {
             }
         }
         return myCommandNodes.get(name).getCopyOfInstance();
+    }
+    
+    /**
+     * adds the input user variable name and value into the hashmap
+     * @param variable
+     * @param value
+     */
+    public static void addUserVariable(String variable, int value) {
+        myUserVariables.put(variable,value);
+    }
+    
+    /**
+     * returns the value associated with the input variableName
+     * @param variableName
+     * @return
+     */
+    public static Integer getUserVariable(String variableName) {
+        return myUserVariables.get(variableName);
     }
     
     /**

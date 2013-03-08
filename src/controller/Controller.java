@@ -20,7 +20,7 @@ import model.Room;
  *
  */
 
-public class Controller implements Observer {
+public class Controller implements Observer, IController{
 
     private Window myView;
     private Model myModel;
@@ -91,6 +91,7 @@ public class Controller implements Observer {
      * Model side notify - calls to view to render
      * @param r - updated room
      */
+    @Override
     private void update(Room r) {
         getTabForRoom(r).render((Renderable) r);
     }
@@ -100,6 +101,7 @@ public class Controller implements Observer {
      * @param t
      * @param arg
      */
+    @Override
     private void update(TabView t, Object arg) {
         if (arg instanceof File) {
             loadFile(t, (File)arg);
