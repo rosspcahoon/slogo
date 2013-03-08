@@ -32,15 +32,12 @@ public abstract class RoomObject extends Sprite {
     }
      
     public void setCurrentLocation (Location location) { 
+        myOldLocation = myCurrentLocation;
         myCurrentLocation = location; 
     }
     
     public Location getCurrentLocation () { 
         return myCurrentLocation; 
-    }
-    
-    public void setOldLocation (Location location) { 
-        myOldLocation = location; 
     }
     
     public Location getOldLocation () { 
