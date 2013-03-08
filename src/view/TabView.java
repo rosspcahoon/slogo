@@ -74,6 +74,10 @@ public class TabView extends WindowView {
     protected void addComponents() {
         EasyGridFactory.layoutDefaultTab(this, myRoomView, myFeedbackView, myConsoleView);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
 
     /**
      * Takes in a Renderable and passes it to the views that will output information about it

@@ -6,12 +6,15 @@ import java.awt.GridBagLayout;
 import javax.swing.JComponent;
 
 public class EasyGridFactory {
+<<<<<<< HEAD
 
     /**
      * Creates horizontal grid layout with equal sized components
      * @param parent The parent container which the children will go in
      * @param children The array of children components that will be added to the parent
      */    
+=======
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
     public static void layoutHorizontal(Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
         int size = children.length;
@@ -24,11 +27,14 @@ public class EasyGridFactory {
         }  
     }
 
+<<<<<<< HEAD
     /**
      * Creates vertical grid layout with equal sized components
      * @param parent The parent container which the children will go in
      * @param children The array of children components that will be added to the parent
      */ 
+=======
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
     public static void layoutVertical(Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
         int size = children.length;
@@ -49,6 +55,7 @@ public class EasyGridFactory {
         c.gridheight = 1;
     }
 
+<<<<<<< HEAD
     /**
      * The layout for the Tab for SLogo
      * @param parent The parent component that all the other components will go into, should
@@ -59,6 +66,9 @@ public class EasyGridFactory {
      */
     public static void layoutDefaultTab(Container parent, JComponent roomview,
                                         JComponent feedback, JComponent consoleview) {
+=======
+    public static void layoutDefaultTab(Container parent, JComponent roomview, JComponent feedback, JComponent consoleview) {
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
         parent.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -87,6 +97,7 @@ public class EasyGridFactory {
         parent.add(consoleview, c);
     }
 
+<<<<<<< HEAD
     /**
      * The layout for the ConsoleView for SLogo
      * @param parent The parent component that all the other components will go into, should
@@ -99,6 +110,9 @@ public class EasyGridFactory {
     public static void layoutDefaultConsole(Container parent, JComponent clearbutton, 
                                             JComponent commandarea, JComponent enterbutton, 
                                             JComponent textfield) {
+=======
+    public static void layoutDefaultConsole(Container parent, JComponent clearbutton, JComponent commandarea, JComponent enterbutton, JComponent textfield) {
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
         parent.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -127,4 +141,8 @@ public class EasyGridFactory {
         c.gridy = 0;
         parent.add(commandarea, c);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9671166287d04548176f62c11e4f4a9fb4211ba2
