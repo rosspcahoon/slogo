@@ -47,7 +47,8 @@ public class Room extends Observable implements Renderable{
     }
     
     public void paint(Graphics2D pen) {
-        myTurtle.updateStatus(myStatus);
+        myTurtle.setState(myStatus);
         myTurtle.paint(pen);
+        myStatus = myTurtle.getState();
     }
 }

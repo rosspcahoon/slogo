@@ -25,6 +25,8 @@ public class Turtle extends BasicMoveable implements Renderable {
     private static Location myInitialLocation = new Location(350,250); 
     private static double myInitialAngle = 90; 
     
+    private Status myStatus;
+    
     
     public Turtle () { 
         super (DEFAULT_TURTLE_IMAGE, myInitialLocation, DEFAULT_TURTLE_SIZE, myInitialAngle); 
@@ -47,15 +49,21 @@ public class Turtle extends BasicMoveable implements Renderable {
     
     public void updateStatus(Status stat) {
         stat.setMyHeading(getHeading());
-        stat.setMyCoords(getCurrentLocation());
+        if(getCurrentLocation()!= null) {
+            stat.setMyCoords(getCurrentLocation());
+        }
     }
     
-    public Object getState() {
-        return null;
+    public void setState(Status state) {
+        myStatus = state;
+    }
+    
+    public Status getState() {
+        return myStatus;
     }
     
     public void paint(Graphics2D pen) {
-        drawLine(pen);
+        updateStatus(myStatus);
         super.paint(pen);
     }
     
