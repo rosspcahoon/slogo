@@ -2,7 +2,7 @@ package command.backup;
 
 import java.util.HashMap;
 import model.Room;
-import model.RoomObject;
+import model.BasicRoomObject;
 
 /**
  * Class holding mappings for command keywords to command objects.
@@ -38,7 +38,7 @@ public class CommandLibrary {
      * @param r is the room to execute the command in.
      * @param args are the parsed input arguments.
      */
-    public void processCommand(Room r, RoomObject o, String[] args) {
+    public void processCommand(Room r, BasicRoomObject o, String[] args) {
         args[0] = getAlias(args[0].toLowerCase());
         String s = args[0];
         Command c = getCommand(s);

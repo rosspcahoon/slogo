@@ -12,7 +12,7 @@ import util.Vector;
  * @author james, mp
  *
  */
-public abstract class RoomObject extends Sprite {
+public abstract class BasicRoomObject extends Sprite implements IRoomObject {
 
     
     private Location myCurrentLocation;  
@@ -21,13 +21,13 @@ public abstract class RoomObject extends Sprite {
     private boolean myVisibility;
     private boolean myPenStatus;
      
-    public RoomObject (Pixmap image, Location center, Dimension size) {
+    public BasicRoomObject (Pixmap image, Location center, Dimension size) {
          super(image, center, size);
          myCurrentLocation = center;
          myInitialLocation = center; 
      }
     
-    public RoomObject (Pixmap image, Location center, Dimension size, Vector vector) { 
+    public BasicRoomObject (Pixmap image, Location center, Dimension size, Vector vector) { 
         super (image, center, size, vector); 
     }
      
@@ -36,6 +36,7 @@ public abstract class RoomObject extends Sprite {
         myCurrentLocation = location; 
     }
     
+    @Override
     public Location getCurrentLocation () { 
         return myCurrentLocation; 
     }
@@ -67,6 +68,7 @@ public abstract class RoomObject extends Sprite {
      * false = object will not show
      * @param bool
      */
+    @Override
     public void setVisibilityStatus(boolean bool) {
         myVisibility = bool;
     }
@@ -75,6 +77,7 @@ public abstract class RoomObject extends Sprite {
      * gets this object's visibility status
      * @return boolean true = showing false = not showing
      */
+    @Override
     public boolean getVisibilityStatus() {
         return myVisibility; 
     }

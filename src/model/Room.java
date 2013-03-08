@@ -27,6 +27,7 @@ public class Room extends Observable implements Renderable{
     public Room (int id) {
         myID = id;
         myTurtle = new Turtle();
+        myStatus = new Status();
     }
 
     public int getID () {
@@ -46,6 +47,7 @@ public class Room extends Observable implements Renderable{
     }
     
     public void paint(Graphics2D pen) {
+        myTurtle.updateStatus(myStatus);
         myTurtle.paint(pen);
     }
 }

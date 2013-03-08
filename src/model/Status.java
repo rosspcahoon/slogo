@@ -1,5 +1,7 @@
 package model;
 
+import util.Location;
+
 
 /**
  * Holds information on the turtle and error message.
@@ -68,6 +70,15 @@ public class Status {
      */
     public void setMyYCoord (double yCoord) {
         this.myYCoord = yCoord;
+    }
+    
+    /**
+     * sets the status's coordinates using a location object
+     * @param loc
+     */
+    public void setMyCoords(Location loc) {
+        myXCoord = loc.getX();
+        myYCoord = loc.getY();
     }
 
     /**

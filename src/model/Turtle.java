@@ -17,13 +17,14 @@ import model.PenTrail;
  *
  */
 
-public class Turtle extends Moveable {
+public class Turtle extends BasicMoveable implements Renderable {
 
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
     private static Location myInitialLocation = new Location(350,250); 
     private static double myInitialAngle = 90; 
+    
     
     public Turtle () { 
         super (DEFAULT_TURTLE_IMAGE, myInitialLocation, DEFAULT_TURTLE_SIZE, myInitialAngle); 
@@ -43,4 +44,22 @@ public class Turtle extends Moveable {
             penTrail.drawLine(pen); 
         }
     }
+    
+    public void updateStatus(Status stat) {
+        stat.setMyHeading(getHeading());
+        stat.setMyCoords(getCurrentLocation());
+    }
+    
+    public Object getState() {
+        return null;
+    }
+    
+    public void paint(Graphics2D pen) {
+        drawLine(pen);
+        super.paint(pen);
+    }
+    
+    
+    
+    
 }

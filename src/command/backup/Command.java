@@ -2,7 +2,7 @@ package command.backup;
 
 import java.util.HashMap;
 import model.Room;
-import model.RoomObject;
+import model.BasicRoomObject;
 
 /**
  * Abstract class representing a command that can be executed in the room.
@@ -56,6 +56,6 @@ public abstract class Command {
     /**
      * Executes the command in the given room.
      */
-    public abstract void execute(Room r, RoomObject o);
+    public abstract void execute(Room r, BasicRoomObject o);
     
 }

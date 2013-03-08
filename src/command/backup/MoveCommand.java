@@ -1,8 +1,8 @@
 package command.backup;
 
-import model.Moveable;
+import model.BasicMoveable;
 import model.Room;
-import model.RoomObject;
+import model.BasicRoomObject;
 
 @Deprecated
 public class MoveCommand extends Command {
@@ -30,12 +30,12 @@ public class MoveCommand extends Command {
     }
 
     @Override
-    public void execute (Room r, RoomObject o) {
-        if (!(o instanceof Moveable)) {
+    public void execute (Room r, BasicRoomObject o) {
+        if (!(o instanceof BasicMoveable)) {
             //TODO: add error reporting
             return;
         }
-        Moveable m = (Moveable) o;
+        BasicMoveable m = (BasicMoveable) o;
         Double distance = getProperty(CommandConstants.COMMAND_ARG_PIXELS);
         Double degrees = getProperty(CommandConstants.COMMAND_ARG_DEGREES); 
         if (distance != null) {

@@ -6,14 +6,14 @@ import util.Location;
 import util.Pixmap;
 import util.Sprite; 
 import util.Vector;
-import model.RoomObject;
+import model.BasicRoomObject;
 
 /**
  * interface for movable characters/actors
  * @author mp
  *
  */
-public abstract class Moveable extends RoomObject {
+public abstract class BasicMoveable extends BasicRoomObject implements IMoveable{
 
     
   //Moveable's pen 
@@ -32,7 +32,7 @@ public abstract class Moveable extends RoomObject {
     private double myHeading;
     private static double myMagnitude = 0; 
     
-    public Moveable (Pixmap image, Location center, Dimension size, double angle) { 
+    public BasicMoveable (Pixmap image, Location center, Dimension size, double angle) { 
         super(image, center, size, new Vector(angle, myMagnitude)); 
         myHeading = angle; 
     }
@@ -40,6 +40,7 @@ public abstract class Moveable extends RoomObject {
      * moves forward the given distance (negative numbers move backwards)
      * @param dist
      */
+    @Override
     public double moveForward(double dist) {
         getCurrentLocation().translate(new Vector(myHeading, dist));
         return dist;
@@ -49,6 +50,7 @@ public abstract class Moveable extends RoomObject {
      * turns right the specified number of degrees (negative value is a left turn)
      * @param degrees
      */
+    @Override
     public double turnRight(double degrees) {
         myHeading += degrees;
         return degrees;
@@ -59,6 +61,7 @@ public abstract class Moveable extends RoomObject {
      * @param xCoord
      * @param yCoord
      */
+    @Override
     public double jumpMove(double xCoord, double yCoord) {
         Location newLoc = new Location(xCoord, yCoord);
         double dist = getCurrentLocation().difference(newLoc).getMagnitude();
@@ -70,6 +73,7 @@ public abstract class Moveable extends RoomObject {
      * re-orients the actor/object to the specified absolute degrees
      * @param degrees
      */
+    @Override
     public double jumpTurn(double degrees) {
         double difference = degrees - myHeading;
         myHeading = degrees;
@@ -80,6 +84,7 @@ public abstract class Moveable extends RoomObject {
      * returns this moveable object's heading
      * @return heading
      */
+    @Override
     public double getHeading() {
          return myHeading;
     }
@@ -88,8 +93,9 @@ public abstract class Moveable extends RoomObject {
      * returns the state of this object's pen trail.
      * true - the pen is down, and a trail will be drawn when the object moves
      * false - the pen is up, no trail will be drawn
-     * @return
+     * @return myPenDown
      */
+    @Override
     public boolean getPenStatus() { 
         return myPenDown; 
     }
@@ -98,6 +104,7 @@ public abstract class Moveable extends RoomObject {
      * set's this moveable object's pen status. true = pen down. false = pen up
      * @param bool
      */
+    @Override
     public int setPenStatus(boolean bool) {
         myPenDown = bool;
         if (bool) {
