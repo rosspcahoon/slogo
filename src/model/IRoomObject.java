@@ -2,6 +2,12 @@ package model;
 
 import util.Location;
 
+/**
+ * interface for room objects. Room objects have a location and a visibility
+ * state
+ * @author mp
+ *
+ */
 public interface IRoomObject {
     
     /**
@@ -19,6 +25,10 @@ public interface IRoomObject {
      */
     public boolean getVisibilityStatus();
     
+    /**
+     * return this object's current Location
+     * @return current location Location object
+     */
     public Location getCurrentLocation ();
 
 }

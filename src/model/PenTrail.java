@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 /**
  * 
- * @author Matt Parides, Thomas Varner
+ * @author Thomas Varner
  *
  */
 
@@ -26,16 +26,31 @@ public class PenTrail extends Line2D.Double {
     
     private boolean myPenUp = false;
     
+    /**
+     * Constructor
+     */
     public PenTrail () { 
         super (0,0,0,0); 
     }
     
+    /**
+     * Constructor
+     * @param point1
+     * @param point2
+     */
     public PenTrail (Point2D point1, Point2D point2) { 
         super (point1, point2); 
         myP1 = point1; 
         myP2 = point2;    
     }
     
+    /**
+     * Constructor
+     * @param x1
+     * @param x2
+     * @param y1
+     * @param y2
+     */
     public PenTrail (double x1, double x2, double y1, double y2) { 
         super (x1, x2, y1, y2); 
         myX1 = x1; 
@@ -44,10 +59,17 @@ public class PenTrail extends Line2D.Double {
         myY2 = y2; 
     }
 
+    /**
+     * getter for the pen's status
+     * @return myPenUp
+     */
     public boolean getPenStatus () { 
         return myPenUp; 
     }
     
+    /**
+     * toggle for pen
+     */
     public void togglePen () { 
         myPenUp = !(myPenUp); 
     }

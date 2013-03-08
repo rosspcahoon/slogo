@@ -27,7 +27,9 @@ public class Turtle extends BasicMoveable implements Renderable {
     
     private Status myStatus;
     
-    
+    /**
+     * Constructor
+     */
     public Turtle () { 
         super (DEFAULT_TURTLE_IMAGE, myInitialLocation, DEFAULT_TURTLE_SIZE, myInitialAngle); 
     }
@@ -47,6 +49,10 @@ public class Turtle extends BasicMoveable implements Renderable {
         }
     }
     
+    /**
+     * updates the Status object that is associated with this turtle object.
+     * @param stat
+     */
     public void updateStatus(Status stat) {
         stat.setMyHeading(getHeading());
         if(getCurrentLocation()!= null) {
@@ -54,14 +60,24 @@ public class Turtle extends BasicMoveable implements Renderable {
         }
     }
     
+    /**
+     * setter for myStatus Status object
+     * @param state
+     */
     public void setState(Status state) {
         myStatus = state;
     }
     
+    /**
+     * getter for myStatus Status object
+     */
     public Status getState() {
         return myStatus;
     }
     
+    /**
+     * updates myStatus to the turtle's current state, and paints the turtle.
+     */
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         super.paint(pen);

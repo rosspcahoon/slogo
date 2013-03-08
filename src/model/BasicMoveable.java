@@ -9,7 +9,9 @@ import util.Vector;
 import model.BasicRoomObject;
 
 /**
- * interface for movable characters/actors
+ * Abstract class for basic moveable characters/actors. Gives objects access to
+ * environment bounds, and basic methods for movement (relative movement and 
+ * absolute movement methods included for spacial movement and rotation).
  * @author mp
  *
  */
@@ -32,6 +34,13 @@ public abstract class BasicMoveable extends BasicRoomObject implements IMoveable
     private double myHeading;
     private static double myMagnitude = 0; 
     
+    /**
+     * Constructor
+     * @param image
+     * @param center
+     * @param size
+     * @param angle
+     */
     public BasicMoveable (Pixmap image, Location center, Dimension size, double angle) { 
         super(image, center, size, new Vector(angle, myMagnitude)); 
         myHeading = angle; 

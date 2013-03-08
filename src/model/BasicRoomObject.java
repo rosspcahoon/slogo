@@ -8,7 +8,7 @@ import util.Sprite;
 import util.Vector;
 
 /**
- * Interface for objects in a room.
+ * Abstract class for objects in a room. Basic functionality for a "turtle" actor
  * @author james, mp
  *
  */
@@ -21,16 +21,34 @@ public abstract class BasicRoomObject extends Sprite implements IRoomObject {
     private boolean myVisibility;
     private boolean myPenStatus;
      
+    
+    /**
+     * Constructor
+     * @param image
+     * @param center
+     * @param size
+     */
     public BasicRoomObject (Pixmap image, Location center, Dimension size) {
          super(image, center, size);
          myCurrentLocation = center;
          myInitialLocation = center; 
      }
     
+    /**
+     * Constructor
+     * @param image
+     * @param center
+     * @param size
+     * @param vector
+     */
     public BasicRoomObject (Pixmap image, Location center, Dimension size, Vector vector) { 
         super (image, center, size, vector); 
     }
      
+    /**
+     * setter for this room object's current location
+     * @param location Location object
+     */
     public void setCurrentLocation (Location location) { 
         myOldLocation = myCurrentLocation;
         myCurrentLocation = location; 
@@ -41,23 +59,35 @@ public abstract class BasicRoomObject extends Sprite implements IRoomObject {
         return myCurrentLocation; 
     }
     
+    /**
+     * getter for this room object's previous location.
+     * @return myOldLocation Location object
+     */
     public Location getOldLocation () { 
         return myOldLocation; 
     }
     
-    public void setInitialLocation (Location location ) { 
-        myInitialLocation = location; 
-    }
     
+    /**
+     * getter for this room object's initial location (point of initialization)
+     * @return myIntialLocation Location object
+     */
     public Location getInitialLocation () { 
         return myInitialLocation; 
     }
     
+    /**
+     * updates the current and previous locations (presumably after the object
+     * changes position).
+     */
     public void updateLocations () { 
         myOldLocation = myCurrentLocation; 
         myCurrentLocation = new Location (super.getCenter ());
     }
     
+    /**
+     * returns the object to the position it was initialized at.
+     */
     public void returnHome () { 
         super.setCenter(myInitialLocation); 
     }
