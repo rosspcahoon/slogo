@@ -1,6 +1,7 @@
 package model.command;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import model.command.turtle.commands.*;
 import model.command.turtle.queries.*;
@@ -27,29 +28,61 @@ public class CommandLibrary {
     private static Map<String,String> myCommandAliases;
     
     /**
-     * HashMap for user-created variables
+     * HashMap for user-created variables. Changes based on the context in which
+     * we are executing, i.e. if we are executing normal commands or user defined
+     * commands which have their own custom set argument names
      */
-    private static Map<String,Integer> myUserVariables = new HashMap<String, Integer>();
+    private static Map<String,Integer> myCurrentUserVariables;
     
     /**
-     * Static initialization block--calls the static method buildLibrary().
+     * HashMap for globally defined user variables.
+     */
+    private static Map<String,Integer> myDefaultUserVariables;
+    
+    /**
+     * HashMap pointing to different user-defined variable sets.
+     */
+    private static Map<String,Map<String,Integer>> myUserVariableLibraries;
+    
+    /**
+     * HashMap for user-defined commands.
+     */
+    private static Map<String,UserDefinedCommandNode> myUserCommands;
+    
+    /**
+     * Static initialization block--calls the static buildLibrary() methods.
      */
     static {
         buildCommandLibrary();
         buildAliasLibrary();
+        myDefaultUserVariables = new HashMap<String,Integer>();
+        myUserVariableLibraries = new HashMap<String,Map<String,Integer>>();
+        myUserCommands = new HashMap<String,UserDefinedCommandNode>();
+        myCurrentUserVariables = new HashMap<String,Integer>();
+        myCurrentUserVariables = myDefaultUserVariables;
     }
     
     /**
      * Gets the appropriate command object from the library, or gives an
      * error if none exists.
      */
-    public static CommandNode getCommandNode(String name) {
+    public static CommandNode getCommandNode(String name) {        
         name = getAlias(name);
-        if (myUserVariables.containsKey(name)) {
-            NumberCommandNode result = new NumberCommandNode();
-            result.setMyValue(myUserVariables.get(name));
+        
+        // if the input is a user variable
+        if (name.substring(0,1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
+            StringCommandNode result = new StringCommandNode();
+            result.setMyValue(name);
             return result;
         }
+
+        // if the input is a user defined command
+        if (myUserCommands.containsKey(name)) {
+            UserDefinedCommandNode result = myUserCommands.get(name);
+            return result;
+        }
+        
+        // if the input is a number
         if (!myCommandNodes.containsKey(name)) {
             try {
                 int value = Integer.parseInt(name);
@@ -61,25 +94,67 @@ public class CommandLibrary {
                 return null;
             }
         }
+        
+        // return the command node from the command library
         return myCommandNodes.get(name).getCopyOfInstance();
     }
     
     /**
-     * adds the input user variable name and value into the hashmap
-     * @param variable
-     * @param value
+     * Adds the input user variable name and value into the hashmap
      */
-    public static void addUserVariable(String variable, int value) {
-        myUserVariables.put(variable,value);
+    public static void addUserVariable(String variableName, int value) {
+        myCurrentUserVariables.put(variableName,value);
     }
     
     /**
-     * returns the value associated with the input variableName
-     * @param variableName
-     * @return
+     * Returns the value associated with the input variableName
      */
     public static Integer getUserVariable(String variableName) {
-        return myUserVariables.get(variableName);
+        if (!myCurrentUserVariables.containsKey(variableName)) {
+            return -1;
+        }
+        return myCurrentUserVariables.get(variableName);
+    }
+    
+    /**
+     * Sets a certain user-defined variable library as the current. Libraries
+     * are identified by the name of the user-defined command with which they
+     * are associated.
+     */
+    public static void loadVariableLibrary(String commandName) {
+        if (!myUserVariableLibraries.containsKey(commandName)) {
+            Map<String,Integer> newLibrary = new HashMap<String,Integer>();
+            myUserVariableLibraries.put(commandName, newLibrary);
+        }
+        myCurrentUserVariables = myUserVariableLibraries.get(commandName);
+    }
+    
+    /**
+     * If no command name is specified, load the default library.
+     */
+    public static void loadVariableLibrary() {
+        myCurrentUserVariables = myDefaultUserVariables;
+    }
+    
+    /**
+     * Creates a new user variable library and adds it to the list.
+     */
+    public static void createVariableLibrary(String command, List<String> names, List<Integer> values) {
+        Map<String,Integer> newLibrary = new HashMap<String,Integer>();
+        if (names.size() != values.size()) {
+            //TODO: throw error
+        }
+        for (int i=0; i<names.size(); i++) {
+            newLibrary.put(names.get(i), values.get(i));
+        }
+        myUserVariableLibraries.put(command, newLibrary);
+    }
+    
+    /**
+     * Adds a user defined command to the library.
+     */
+    public static void addUserDefinedCommand(String name, UserDefinedCommandNode command) {
+        myUserCommands.put(name, command);
     }
     
     /**

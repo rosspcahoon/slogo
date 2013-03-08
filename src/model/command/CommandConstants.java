@@ -81,6 +81,7 @@ public class CommandConstants {
     // command names (control)
     public static final String COMMAND_NAME_LIST_OPEN = "[";
     public static final String COMMAND_NAME_LIST_CLOSE = "]";
+    public static final String COMMAND_NAME_VARIABLE_START = ":";
     public static final String COMMAND_NAME_MAKE = "make";
     public static final String COMMAND_NAME_REPEAT = "repeat";
     public static final String COMMAND_NAME_IF = "if";

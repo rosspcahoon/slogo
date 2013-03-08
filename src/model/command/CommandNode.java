@@ -49,6 +49,7 @@ public abstract class CommandNode {
      * the means to continue reading the input string.
      */
     public void setUp(Scanner s) throws NoSuchElementException {
+        clearChildren();
         int expected = getMyExpectedArgs();
         for (int i=0; i<expected; i++) {
             String nextString = s.next();
@@ -76,15 +77,22 @@ public abstract class CommandNode {
     /**
      * Adds a child to this node's list.
      */
-    protected void addChild(CommandNode child) {
+    public void addChild(CommandNode child) {
         myChildren.add(child);
     }
     
     /**
      * Reads the children of the node.
      */
-    protected List<CommandNode> getChildren() {
+    public List<CommandNode> getChildren() {
         return myChildren;
+    }
+    
+    /**
+     * Clears the children.
+     */
+    public void clearChildren() {
+        myChildren.clear();
     }
     
     
