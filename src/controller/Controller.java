@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import view.TabView;
 import view.Window;
 import model.Model;
-import model.Room;
 import model.Renderable;
+import model.Room;
 
 /**
  * The controller is responsible for interfacing between the View and the Model.
@@ -20,7 +20,7 @@ import model.Renderable;
  *
  */
 
-public class Controller implements Observer {
+public class Controller implements Observer, IController {
 
     private Window myView;
     private Model myModel;
@@ -139,7 +139,6 @@ public class Controller implements Observer {
         TabView associatedTab = new TabView(id, myView);
         myRoom2Tab.put(theRoom, associatedTab);
         myTab2Room.put(associatedTab, theRoom);
-        associatedTab.setRenderable((Renderable) theRoom);
         theRoom.addObserver(this);
         myView.addTab(associatedTab, (Renderable) theRoom);
         

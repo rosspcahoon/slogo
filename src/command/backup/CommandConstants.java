@@ -1,4 +1,4 @@
-package command;
+package command.backup;
 
 /**
  * Class holding keyword strings for the command structure.

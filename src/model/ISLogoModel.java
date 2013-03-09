@@ -1,5 +1,12 @@
 package model;
 
+
+/**
+ * interface for Slogo models. models control the workflow used to process 
+ * commands
+ * @author mp
+ *
+ */
 public interface ISLogoModel {
 
     /**
@@ -8,6 +15,6 @@ public interface ISLogoModel {
      * @param s
      * @return
      */
-    public boolean processCommand (Room r, String s);
+    abstract boolean processCommand (Room r, String s);
     
 }

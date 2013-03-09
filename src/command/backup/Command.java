@@ -1,13 +1,15 @@
-package command;
+package command.backup;
 
 import java.util.HashMap;
 import model.Room;
+import model.BasicRoomObject;
 
 /**
  * Abstract class representing a command that can be executed in the room.
  * @author james
  *
  */
+@Deprecated
 public abstract class Command {
     
     private HashMap<String,Double> myProperties;
@@ -54,6 +56,6 @@ public abstract class Command {
     /**
      * Executes the command in the given room.
      */
-    public abstract void execute(Room r);
+    public abstract void execute(Room r, BasicRoomObject o);
     
 }

@@ -4,76 +4,72 @@ import java.awt.Graphics2D;
 import java.util.Observable;
 import util.Location;
 
+
+/**
+ * Class for managing objects in the room 
+ * @author thomasvarner, Matthew Parides
+ *
+ */
+
 public class Room extends Observable implements Renderable{
 
     private int myID;
-    //    private Turtle myTurtle;
     private Status myStatus;
+    
     private Turtle myTurtle;
+    
     private boolean myTurtlePenStatus;
     private double myTurtleHead; 
     private Location myTurtleLocation;
     private boolean myTurtleVisibility; 
 
-
+    /**
+     * Constructor
+     * @param id
+     */
     public Room (int id) {
         myID = id;
         myTurtle = new Turtle();
+        myStatus = new Status();
     }
 
+    /**
+     * getter for this room's number ID
+     * @return myID
+     */
     public int getID () {
         return myID;
     }
 
-    public void penOnOff () { 
-        myTurtle.togglePen(); 
-        myTurtlePenStatus = myTurtle.getPenStatus(); 
-    }
-
-    public boolean penStatus () { 
-        return myTurtlePenStatus; 
-    }
-
-    public void visibilityOnOff () { 
-        myTurtle.toggleVisibility(); 
-        myTurtleVisibility = myTurtle.getVisibilityStatus(); 
-    }
-
-    public boolean getVisibility () { 
-        return myTurtleVisibility; 
-    }
-
-    public Location getTurtleLocation () { 
-        return myTurtleLocation; 
-    }
-
-    public double getTurtleHead () { 
-        return myTurtleHead; 
-    }
-
-    public void rotateTurtle(Graphics2D pen, double angle) { 
-        myTurtleHead += angle; 
-        myTurtle.rotate(pen, angle); 
-    }
-
-    public void moveTurtleForward(double distance) { 
-        myTurtle.move(distance); 
-    }
-
+    /**
+     * returns the turtle to its initial location
+     */
     public void returnHome () { 
         myTurtle.returnHome(); 
     }
 
+    /**
+     * getter for myStatus Status object
+     * @return myStatus
+     */
     public Status getState() {
         return myStatus;
     }
-
-    // draws line wherever turtle goes (if pen is on) 
+    
+    /**
+     * getter for myTurtle Turtle object
+     * @return myTurtle
+     */
+    public Turtle getTurtle() {
+        return myTurtle;
+    }
+    
+    /**
+     * paints all RoomObjects in this room.
+     */
     public void paint(Graphics2D pen) {
+        myTurtle.setState(myStatus);
         myTurtle.paint(pen);
-        if(myTurtle.getOldLocation() != null){
-            pen.drawLine((int) myTurtle.getOldLocation().getX(), (int) myTurtle.getOldLocation().getY(), (int) 
-                         myTurtle.getCurrentLocation().getX(),(int) myTurtle.getCurrentLocation().getY());
-        }
+        myStatus = myTurtle.getState();
     }
 }

@@ -2,7 +2,6 @@ package view;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 /**
@@ -11,7 +10,7 @@ import javax.swing.JPanel;
  * (it could have been called as well SLogoViewContainer)
  * It is also responsible for requiring explicitation of parent-child relations
  * 
- * @author Ross, Cahoon, Dagbedji Fagnisse
+ * @author Ross Cahoon, Dagbedji Fagnisse
  *
  */
 @SuppressWarnings("serial")
@@ -23,7 +22,7 @@ public abstract class WindowView extends JPanel {
     private WindowView () {
         setLayoutManager();
         myConstraints = new GridBagConstraints();
-        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
         initializeVariables(); 
         addComponents();
     }
@@ -49,7 +48,7 @@ public abstract class WindowView extends JPanel {
     private void setLayoutManager() {
         this.setLayout(new GridBagLayout());
         myConstraints = new GridBagConstraints();
-        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
     }
     
     /**
@@ -62,12 +61,13 @@ public abstract class WindowView extends JPanel {
 
     /**
      * Initialize components variables instances variables 
-     * - Template component used in the constructor
+     * - Template step used in the constructor
      */
     protected abstract void initializeVariables ();
 
     /**
-     * Add the components initialized according to layout rules
+     * Add the components previously initialized according to layout rules
+     * - Template step used in the constructor
      */
     protected abstract void addComponents ();
 }

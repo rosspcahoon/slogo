@@ -26,7 +26,7 @@ public class ErrorLogView extends WindowView {
      */
     public ErrorLogView (FeedbackView hostFeedbackView) {
         super(hostFeedbackView);
-        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
     }
 
     @Override

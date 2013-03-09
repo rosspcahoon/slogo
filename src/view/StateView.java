@@ -21,7 +21,7 @@ public class StateView extends WindowView {
      */
     public StateView (FeedbackView feedbackview) {
         super(feedbackview);
-        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
     }
 
     @Override
