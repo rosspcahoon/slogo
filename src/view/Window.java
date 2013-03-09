@@ -78,7 +78,7 @@ public class Window extends JFrame {
      */
     public void addTab (TabView tab, Renderable p) {
         myTabbedPane.addTab("Tab" + tab.getID(), tab);
-        tab.render(p);
+        tab.setRenderable(p);
     }
     /**
      * Returns the JFileChooser for this View

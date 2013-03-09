@@ -52,6 +52,7 @@ public class TabView extends WindowView {
      */
     public void setRenderable(Renderable renderableRoom) {
         myRenderable = renderableRoom;
+        render(myRenderable);
     }
 
     /**
