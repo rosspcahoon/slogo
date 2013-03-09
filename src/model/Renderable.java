@@ -18,6 +18,7 @@ public interface Renderable {
 
     /**
      * paints everything in the Renderable object
+     * @param pen - used to paint
      */
     public void paint(Graphics2D pen);
 }

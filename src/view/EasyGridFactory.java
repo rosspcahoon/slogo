@@ -5,7 +5,19 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JComponent;
 
+/**
+ * Class responsible for layout logic.
+ * @author Ross Cahoon, Dagbedji Fagnisse
+ *
+ */
 public class EasyGridFactory {
+    
+    /**
+     * Enforcing utility class
+     */
+    private EasyGridFactory () {
+        
+    }
 
     /**
      * Creates horizontal grid layout with equal sized components

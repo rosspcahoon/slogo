@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
@@ -11,7 +10,7 @@ import javax.swing.border.Border;
  *
  */
 public class ViewConstants {
-
+    
     /**
      * The size for Window objects
      */
@@ -35,5 +34,13 @@ public class ViewConstants {
     /**
      * The border size for views
      */
-    public static final Border DEFAULT_BORDER_SIZE = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+    public static final Border DEFAULT_BORDER = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+    
+    /**
+     * Added to fully prevent instantiation of this utility class.
+     */
+    private ViewConstants() {
+        
+    }
+
 }

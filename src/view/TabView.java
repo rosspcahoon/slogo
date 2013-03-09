@@ -1,7 +1,6 @@
 package view;
 
 
-import controller.Controller;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import model.Renderable;
@@ -17,13 +16,9 @@ import model.Renderable;
 public class TabView extends WindowView {
 
     private int myID;
-    @SuppressWarnings("unused")
     private Window myWindow;
     @SuppressWarnings("unused")
     private GridBagConstraints myConstraints;
-    @SuppressWarnings("unused")
-    private Controller myController;
-    @SuppressWarnings("unused")
     private Renderable myRenderable;
     private RoomView myRoomView;
     private ConsoleView myConsoleView;
@@ -32,6 +27,7 @@ public class TabView extends WindowView {
 
     private TabView(Window hostWindow) {
         super(hostWindow);
+        setWindow();
         setPreferredSize(mySize);
         setMinimumSize(mySize);
     }
@@ -44,6 +40,10 @@ public class TabView extends WindowView {
     public TabView(int id, Window hostWindow) {     
         this(hostWindow);
         myID = id;       
+    }
+    
+    private void setWindow() {
+        myWindow = (Window) getParent();
     }
 
     /**
@@ -68,10 +68,9 @@ public class TabView extends WindowView {
      * @param s The string to be parsed.
      */
     public void processConsoleInput (String s) {
-        ((Window) getParent()).processCommand(this, s);
+        myWindow.processCommand(this, s);
     }    
 
-    //TODO: fix so that it inherits from 'WindowView'
     protected void addComponents() {
         EasyGridFactory.layoutDefaultTab(this, myRoomView, myFeedbackView, myConsoleView);
     }

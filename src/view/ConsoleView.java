@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Stack;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -48,8 +47,7 @@ public class ConsoleView extends WindowView {
         super(tab);
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
-        this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH, 
-                                                       BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
     }
 
     @Override
@@ -127,6 +125,7 @@ public class ConsoleView extends WindowView {
         }
 
     }
+    
     private class GetCommandInputAction implements ActionListener {
 
         @Override

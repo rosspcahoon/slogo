@@ -23,7 +23,7 @@ public class RoomView extends WindowView {
      */
     public RoomView (TabView hostTab) {
         super(hostTab);
-        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE); 
+        this.setBorder(ViewConstants.DEFAULT_BORDER); 
     }
     
     @Override

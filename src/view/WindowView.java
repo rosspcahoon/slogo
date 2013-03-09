@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  * (it could have been called as well SLogoViewContainer)
  * It is also responsible for requiring explicitation of parent-child relations
  * 
- * @author Ross, Cahoon, Dagbedji Fagnisse
+ * @author Ross Cahoon, Dagbedji Fagnisse
  *
  */
 @SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public abstract class WindowView extends JPanel {
     private WindowView () {
         setLayoutManager();
         myConstraints = new GridBagConstraints();
-        this.setBorder(ViewConstants.DEFAULT_BORDER_SIZE);
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
         initializeVariables(); 
         addComponents();
     }
@@ -62,6 +62,9 @@ public abstract class WindowView extends JPanel {
      */
     protected abstract void initializeVariables ();
 
+    /**
+     * Add the components previously initialized - Template component used in the constructor
+     */
     protected abstract void addComponents ();
 }
 
