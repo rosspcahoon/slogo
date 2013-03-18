@@ -38,20 +38,9 @@ public class ErrorLogView extends WindowView {
         myTextArea.setEditable(false);
 
         myConstraints = new GridBagConstraints();
-        JScrollPane scrollPane = new JScrollPane(myTextArea);             
-        add(scrollPane, makeLayout(myConstraints));
+        EasyGridFactory.layoutVertical(this, new JScrollPane(myTextArea));
     }
 
-    protected GridBagConstraints makeLayout (GridBagConstraints c) {
-        c.weightx = 1;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH; 
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.gridx = 0;
-        c.gridy = 0;
-        return c;
-    }
     private void display(String error) {
         myTextArea.setEditable(true);
         myTextArea.append(error + "\n");
