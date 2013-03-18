@@ -27,19 +27,7 @@ public class StateView extends WindowView {
     @Override
     protected void addComponents () {
         myTextArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(myTextArea);        
-        add(scrollPane, makeLayout(new GridBagConstraints()));
-    }
-
-    protected GridBagConstraints makeLayout (GridBagConstraints c) {
-        c.weightx = 1;
-        c.weighty = 1;
-        c.fill = GridBagConstraints.BOTH; 
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.gridx = 0;
-        c.gridy = 0;
-        return c;
+        EasyGridFactory.layoutVertical(this, new JScrollPane(myTextArea));
     }
 
     private void display(double[] array) {
