@@ -11,12 +11,12 @@ import javax.swing.JComponent;
  *
  */
 public class EasyGridFactory {
-    
+
     /**
      * Enforcing utility class
      */
     private EasyGridFactory () {
-        
+
     }
 
     /**
@@ -25,15 +25,7 @@ public class EasyGridFactory {
      * @param children The array of children components that will be added to the parent
      */    
     public static void layoutHorizontal(Container parent, JComponent ... children) {
-        parent.setLayout(new GridBagLayout());
-        int size = children.length;
-        GridBagConstraints c = new GridBagConstraints();
-        configureDefault(c);
-        for (int i = 0; i < size; i++) {
-            c.gridx = i;
-            c.gridy = 0;
-            parent.add(children[i], c);
-        }  
+        layoutHelper(true, parent, children);
     }
 
     /**
@@ -42,6 +34,10 @@ public class EasyGridFactory {
      * @param children The array of children components that will be added to the parent
      */ 
     public static void layoutVertical(Container parent, JComponent ... children) {
+        layoutHelper(false, parent, children);
+    }
+
+    private static void layoutHelper(boolean isHorizontal, Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
         int size = children.length;
         GridBagConstraints c = new GridBagConstraints();
@@ -49,6 +45,10 @@ public class EasyGridFactory {
         for (int i = 0; i < size; i++) {
             c.gridx = 0;
             c.gridy = i;
+            if(isHorizontal){
+                c.gridx = i;
+                c.gridy = 0;
+            }
             parent.add(children[i], c);
         }  
     }
