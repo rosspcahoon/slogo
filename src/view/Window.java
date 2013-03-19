@@ -4,12 +4,14 @@ package view;
 import controller.Controller;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -112,7 +114,7 @@ public class Window extends JFrame {
     public void processCommand (TabView tabView, String s) {
         myController.processCommand(tabView, s);
     }
-    
+
     /**
      * Gets the resource bundle
      *
@@ -190,7 +192,7 @@ public class Window extends JFrame {
             }
         }
     }
-    
+
     protected class ChangeBackgroundAction extends AbstractAction {
         public ChangeBackgroundAction () {
             super(Window.ourResources.getString("ChangeBackground"));
@@ -199,10 +201,35 @@ public class Window extends JFrame {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-           //TODO: Add action
+            int response = myChooser.showOpenDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                Image img;
+                try {
+                    img = ImageIO.read(myChooser.getSelectedFile());
+                    TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+                    if(temp != null) {
+                        temp.setBackground(img);
+                    }
+                }
+                catch (java.io.IOException er) {
+                    System.out.println(er.getMessage());
+                }
+            }
         }
     }
     
+    protected class ToggleGridAction extends AbstractAction {
+        public ToggleGridAction () {
+            super(Window.ourResources.getString("ReferenceCommand"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            //TODO: Add action
+        }
+    }
+
     protected class ChangeTurtleAction extends AbstractAction {
         public ChangeTurtleAction () {
             super(Window.ourResources.getString("ChangeTurtle"));
@@ -211,10 +238,10 @@ public class Window extends JFrame {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-           //TODO: Add action
+            //TODO: Add action
         }
     }
-    
+
     protected class ChangePenAction extends AbstractAction {
         public ChangePenAction () {
             super(Window.ourResources.getString("ChangePenProperties"));
@@ -223,7 +250,7 @@ public class Window extends JFrame {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-           //TODO: Add action
+            //TODO: Add action
         }
     }
 }

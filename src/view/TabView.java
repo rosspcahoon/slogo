@@ -3,6 +3,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import model.Renderable;
 
 /**
@@ -53,6 +54,14 @@ public class TabView extends WindowView {
     public void setRenderable(Renderable renderableRoom) {
         myRenderable = renderableRoom;
         render(myRenderable);
+    }
+    
+    /**
+     * Sets background image for the Roomview
+     * @param img the image to be set.
+     */
+    public void setBackground(Image img) {
+        myRoomView.setBackground(img);
     }
 
     /**

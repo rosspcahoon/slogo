@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Renderable;
@@ -26,7 +27,7 @@ public class StateView extends WindowView {
     @Override
     protected void addComponents () {
         myTextArea.setEditable(false);
-        EasyGridFactory.layoutVertical(this, new JScrollPane(myTextArea));
+        EasyGridFactory.layoutHorizontal(this, new JScrollPane(myTextArea));
     }
 
     private void display(double[] array) {

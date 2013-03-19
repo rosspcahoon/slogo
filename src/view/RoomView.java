@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import model.Renderable;
 
 /**
@@ -15,6 +16,7 @@ public class RoomView extends WindowView {
 
     private Renderable myRoom;
     private Dimension mySize;
+    private Image myBackgroundImage;
 
     /**
      * Constructs the RoomView, and sets the minimum size, default size of the view
@@ -44,9 +46,12 @@ public class RoomView extends WindowView {
         pen.setColor(Color.WHITE);
         pen.fillRect(0, 0, getSize().width, getSize().height);
         // first time needs to be special cased :(
+        if (myBackgroundImage != null) {
+            pen.drawImage(myBackgroundImage, 0, 0, getSize().width, getSize().height, null);
+        }
         if (myRoom != null) {
             myRoom.paint((Graphics2D) pen);
-        }
+        } 
     }
 
     /**
@@ -63,5 +68,14 @@ public class RoomView extends WindowView {
         mySize = ViewConstants.DEFAULT_ROOM_SIZE;
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
+    }
+    
+    /**
+     * Sets background image for the Roomview
+     * @param img the image to be set.
+     */
+    public void setBackground(Image img) {
+        myBackgroundImage = img;
+        repaint();
     }
 }
