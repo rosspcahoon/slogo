@@ -33,7 +33,7 @@ public class StateView extends WindowView {
         myTextArea.setEditable(true);
         myTextArea.setText("");
         myTextArea.append(Window.getResources().getString("FeedbackPosition") + 
-                          "(" + array[0] + ", " + array[1] + ") " + "\n");
+                          "(" + array[0] + ", " + array[1] + ")      ");
         myTextArea.append(Window.getResources().getString("FeedbackHeading") + array[2] + "\n");
         myTextArea.setEditable(false);
     }
