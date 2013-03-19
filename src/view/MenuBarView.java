@@ -28,6 +28,7 @@ public class MenuBarView extends JMenuBar {
 
     private void addComponents () {
         this.add(makeFileMenu());
+        this.add(makePreferencesMenu());
         this.add(makeHelpMenu());
     }
 
@@ -39,6 +40,12 @@ public class MenuBarView extends JMenuBar {
         result.add(myWindow.new SaveFileAction());
         result.add(new JSeparator());
         result.add(myWindow.new QuitAction());
+        return result;
+    }
+    
+    private JMenu makePreferencesMenu() {
+        JMenu result = new JMenu(Window.getResources().getString("PreferencesMenu"));
+        result.setMnemonic(KeyEvent.VK_P);
         return result;
     }
     

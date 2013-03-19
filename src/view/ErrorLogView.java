@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JScrollPane;
@@ -17,7 +16,6 @@ import model.Status;
 @SuppressWarnings("serial")
 public class ErrorLogView extends WindowView {
     private JTextArea myTextArea;
-    private GridBagConstraints myConstraints;
     private FocusListener myFocusListener;
 
     /**
@@ -37,7 +35,6 @@ public class ErrorLogView extends WindowView {
         myTextArea.addFocusListener(myFocusListener);
         myTextArea.setEditable(false);
 
-        myConstraints = new GridBagConstraints();
         EasyGridFactory.layoutVertical(this, new JScrollPane(myTextArea));
     }
 
@@ -80,7 +77,6 @@ public class ErrorLogView extends WindowView {
 
     @Override
     protected void initializeVariables () {
-        myConstraints = new GridBagConstraints();
         myTextArea = new JTextArea();
     }
 

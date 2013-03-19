@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.GridBagConstraints;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Renderable;
