@@ -46,6 +46,9 @@ public class MenuBarView extends JMenuBar {
     private JMenu makePreferencesMenu() {
         JMenu result = new JMenu(Window.getResources().getString("PreferencesMenu"));
         result.setMnemonic(KeyEvent.VK_P);
+        result.add(myWindow.new ChangeBackgroundAction());
+        result.add(myWindow.new ChangeTurtleAction());
+        result.add(myWindow.new ChangePenAction());
         return result;
     }
     

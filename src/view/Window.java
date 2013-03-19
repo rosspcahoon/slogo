@@ -190,4 +190,40 @@ public class Window extends JFrame {
             }
         }
     }
+    
+    protected class ChangeBackgroundAction extends AbstractAction {
+        public ChangeBackgroundAction () {
+            super(Window.ourResources.getString("ChangeBackground"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.SHIFT_MASK));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+           //TODO: Add action
+        }
+    }
+    
+    protected class ChangeTurtleAction extends AbstractAction {
+        public ChangeTurtleAction () {
+            super(Window.ourResources.getString("ChangeTurtle"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.SHIFT_MASK));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+           //TODO: Add action
+        }
+    }
+    
+    protected class ChangePenAction extends AbstractAction {
+        public ChangePenAction () {
+            super(Window.ourResources.getString("ChangePenProperties"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
+        }
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+           //TODO: Add action
+        }
+    }
 }
