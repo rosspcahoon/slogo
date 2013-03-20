@@ -120,7 +120,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     @Override
     public double moveForward(double dist) {
-        getCurrentLocation().translate(new Vector(myHeading, dist));
+        Location currentLoc = getCurrentLocation();
+        currentLoc.translate(new Vector(myHeading, dist));
+        setCurrentLocation(currentLoc);
         return dist;
     }
     
