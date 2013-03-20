@@ -43,6 +43,8 @@ public abstract class Doodad extends Sprite implements IRoomObject {
      */
     public Doodad (Pixmap image, Location center, Dimension size, Vector vector) { 
         super (image, center, size, vector); 
+        myCurrentLocation = center;
+        myInitialLocation = center; 
     }
      
     /**
