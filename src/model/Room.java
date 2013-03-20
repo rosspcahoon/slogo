@@ -45,8 +45,9 @@ public class Room extends Observable implements Renderable{
     /**
      * returns the turtle to its initial location
      */
-    public void returnHome () { 
-        myTurtle.returnHome(); 
+    public double returnHome () { 
+        double distance = myTurtle.returnHome(); 
+        return distance;
     }
 
     /**
@@ -72,5 +73,15 @@ public class Room extends Observable implements Renderable{
         myTurtle.setState(myStatus);
         myTurtle.paint(pen);
         myStatus = myTurtle.getState();
+    }
+    
+    /**
+     * clears the lines and moves the actor back to its initial location
+     * @return dist - distance moved
+     */
+    public double clear() {
+        double dist = returnHome();
+        myTurtle.clearLines();
+        return dist;
     }
 }
