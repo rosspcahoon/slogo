@@ -63,15 +63,12 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * Should be called after location have been updated.
      * @param pen
      */
-    public void drawLine (Graphics2D pen) { 
+    public void makeLine () { 
         
         
         PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
                                           super.getOldLocation().getY(), super.getCurrentLocation().getY()); 
         myTrail.add(penTrail);
-        if (getPenStatus()) { 
-            penTrail.drawLine(pen); 
-        }
     }
     
     /**
@@ -106,8 +103,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         super.paint(pen);
+        System.out.println(this.getCenter().getX());
         for(PenTrail penT: myTrail) {
-            pen.draw(penT);
+            penT.drawLine(pen);
         }
 
         
@@ -123,6 +121,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         Location currentLoc = getCurrentLocation();
         currentLoc.translate(new Vector(myHeading, dist));
         setCurrentLocation(currentLoc);
+        makeLine();
         return dist;
     }
     
