@@ -29,7 +29,7 @@ public class SetHeadingCommandNode extends CommandNode {
         int result = child.resolve();
 //        System.out.printf("Set turtle heading to %d degrees\n", result);
         Room room = getMyRoom();
-        room.getTurtle().jumpTurn(result);
+        result = (int) room.getTurtle().jumpTurn(result);
         return result;
     }
 

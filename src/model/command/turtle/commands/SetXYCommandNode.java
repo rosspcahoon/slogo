@@ -1,6 +1,7 @@
 package model.command.turtle.commands;
 
 import java.util.List;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -28,8 +29,11 @@ public class SetXYCommandNode extends CommandNode {
         CommandNode yChild = children.get(1);
         int xCoord = xChild.resolve();
         int yCoord = yChild.resolve();
-        System.out.printf("Moved turtle to location %d %d\n", xCoord, yCoord);
-        return xCoord;
+//        System.out.printf("Moved turtle to location %d %d\n", xCoord, yCoord);
+        Room room = getMyRoom();
+        int result = (int) room.getTurtle().jumpMove(xCoord, yCoord);
+        // TODO: return pixels moved
+        return result;
     }
 
 }
