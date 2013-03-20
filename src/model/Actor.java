@@ -64,8 +64,6 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * @param pen
      */
     public void makeLine () { 
-        
-        
         PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
                                           super.getOldLocation().getY(), super.getCurrentLocation().getY()); 
         myTrail.add(penTrail);
@@ -103,12 +101,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         super.paint(pen);
-        System.out.println(this.getCenter().getX());
         for(PenTrail penT: myTrail) {
             penT.drawLine(pen);
         }
-
-        
     }
     
     
@@ -119,6 +114,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     @Override
     public double moveForward(double dist) {
         Location currentLoc = getCurrentLocation();
+        updateLocations();
         currentLoc.translate(new Vector(myHeading, dist));
         setCurrentLocation(currentLoc);
         makeLine();
