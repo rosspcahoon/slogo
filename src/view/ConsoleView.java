@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Stack;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -53,7 +54,7 @@ public class ConsoleView extends WindowView {
     @Override
     protected void addComponents () {
         EasyGridFactory.layoutDefaultConsole(this, makeClear(), 
-                                             myCommandField, makeSubmit(), myTextField);
+                                             new JScrollPane(myCommandField), makeSubmit(), myTextField);
     }
 
     @Override
