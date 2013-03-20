@@ -4,6 +4,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import model.Renderable;
 
 /**
@@ -17,6 +24,8 @@ public class RoomView extends WindowView {
     private Renderable myRoom;
     private Dimension mySize;
     private Image myBackgroundImage;
+    private boolean myGridToggle;
+    private java.awt.Image myGrid;
 
     /**
      * Constructs the RoomView, and sets the minimum size, default size of the view
@@ -25,9 +34,11 @@ public class RoomView extends WindowView {
      */
     public RoomView (TabView hostTab) {
         super(hostTab);
-        this.setBorder(ViewConstants.DEFAULT_BORDER); 
+        this.setBorder(ViewConstants.DEFAULT_BORDER);
+        myGridToggle = false;
+       
     }
-    
+
     @Override
     protected void addComponents () {        
     }
@@ -49,9 +60,18 @@ public class RoomView extends WindowView {
         if (myBackgroundImage != null) {
             pen.drawImage(myBackgroundImage, 0, 0, getSize().width, getSize().height, null);
         }
+        if(myGridToggle) {
+            URL url = this.getClass().getResource("/images/grid25.jpg");
+            try {
+                myGrid = ImageIO.read(url);
+            }
+            catch (IOException e) {
+            }
+            pen.drawImage(myGrid, 0, 0, getSize().width, getSize().height, null);
+        }
         if (myRoom != null) {
             myRoom.paint((Graphics2D) pen);
-        } 
+        }
     }
 
     /**
@@ -69,7 +89,7 @@ public class RoomView extends WindowView {
         this.setPreferredSize(mySize);
         this.setMinimumSize(mySize);
     }
-    
+
     /**
      * Sets background image for the Roomview
      * @param img the image to be set.
@@ -77,5 +97,16 @@ public class RoomView extends WindowView {
     public void setBackground(Image img) {
         myBackgroundImage = img;
         repaint();
+    }
+    /**
+     * Toggles the reference grid for the workspace
+     */
+    public void toggleGrid() {
+        myGridToggle ^= true;  
+        repaint();
+    }
+    
+    public void setTurtle(Image img) {
+        //myRoom.setTurtle(img);
     }
 }

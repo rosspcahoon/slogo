@@ -63,6 +63,20 @@ public class TabView extends WindowView {
     public void setBackground(Image img) {
         myRoomView.setBackground(img);
     }
+    /**
+     * Toggles the reference grid for the workspace
+     */
+    public void toggleGrid() {
+        myRoomView.toggleGrid();
+    }
+    
+   /**
+    * Sets Turtle image for the RoomView
+    * @param img the image to be set.
+    */
+    public void setTurtle(Image img) {
+        myRoomView.setTurtle(img);
+    }
 
     /**
      * Get the ID for this component

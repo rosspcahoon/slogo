@@ -23,7 +23,7 @@ public class Turtle extends BasicMoveable implements Renderable {
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
     private static Location myInitialLocation = new Location(350,250); 
-    private static double myInitialAngle = 90; 
+    private static double myInitialAngle = 0; 
     
     private Status myStatus;
     

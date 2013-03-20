@@ -221,12 +221,14 @@ public class Window extends JFrame {
     protected class ToggleGridAction extends AbstractAction {
         public ToggleGridAction () {
             super(Window.ourResources.getString("ReferenceCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.SHIFT_MASK));
         }
-
         @Override
         public void actionPerformed (ActionEvent e) {
-            //TODO: Add action
+            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+            if(temp != null) {
+                temp.toggleGrid();
+            }
         }
     }
 
@@ -238,7 +240,20 @@ public class Window extends JFrame {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-            //TODO: Add action
+            int response = myChooser.showOpenDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                Image img;
+                try {
+                    img = ImageIO.read(myChooser.getSelectedFile());
+                    TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+                    if(temp != null) {
+                        temp.setTurtle(img);
+                    }
+                }
+                catch (java.io.IOException er) {
+                    System.out.println(er.getMessage());
+                }
+            }
         }
     }
 
