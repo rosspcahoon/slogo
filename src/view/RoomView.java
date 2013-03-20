@@ -61,13 +61,13 @@ public class RoomView extends WindowView {
             pen.drawImage(myBackgroundImage, 0, 0, getSize().width, getSize().height, null);
         }
         if(myGridToggle) {
-            URL url = this.getClass().getResource("/images/grid25.png");
+            URL url = this.getClass().getResource("/images/grid.png");
             try {
                 myGrid = ImageIO.read(url);
             }
             catch (IOException e) {
             }
-            pen.drawImage(myGrid, 0, 0, getSize().width, getSize().height, null);
+            pen.drawImage(myGrid, 0, 0, null);
         }
         if (myRoom != null) {
             myRoom.paint((Graphics2D) pen);
