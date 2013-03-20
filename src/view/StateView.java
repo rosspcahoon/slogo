@@ -32,6 +32,7 @@ public class StateView extends WindowView {
         myTabbedPane = new JTabbedPane();
         EasyGridFactory.layoutHorizontal(this, myTabbedPane);
         myTabbedPane.addTab("Feedback", new JScrollPane(myTextArea));
+        myTabbedPane.addTab("Variables", new JScrollPane());
     }
 
     private void display(double[] array) {
