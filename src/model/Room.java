@@ -3,6 +3,7 @@ package model;
 import java.awt.Graphics2D;
 import java.util.Observable;
 import util.Location;
+import model.Actor;
 
 
 /**
@@ -16,7 +17,7 @@ public class Room extends Observable implements Renderable{
     private int myID;
     private Status myStatus;
     
-    private Turtle myTurtle;
+    private Actor myTurtle;
     
     private boolean myTurtlePenStatus;
     private double myTurtleHead; 
@@ -29,7 +30,7 @@ public class Room extends Observable implements Renderable{
      */
     public Room (int id) {
         myID = id;
-        myTurtle = new Turtle();
+        myTurtle = new Actor(0);
         myStatus = new Status();
     }
 
@@ -44,8 +45,9 @@ public class Room extends Observable implements Renderable{
     /**
      * returns the turtle to its initial location
      */
-    public void returnHome () { 
-        myTurtle.returnHome(); 
+    public double returnHome () { 
+        double distance = myTurtle.returnHome(); 
+        return distance;
     }
 
     /**
@@ -60,7 +62,7 @@ public class Room extends Observable implements Renderable{
      * getter for myTurtle Turtle object
      * @return myTurtle
      */
-    public Turtle getTurtle() {
+    public Actor getTurtle() {
         return myTurtle;
     }
     
@@ -71,5 +73,15 @@ public class Room extends Observable implements Renderable{
         myTurtle.setState(myStatus);
         myTurtle.paint(pen);
         myStatus = myTurtle.getState();
+    }
+    
+    /**
+     * clears the lines and moves the actor back to its initial location
+     * @return dist - distance moved
+     */
+    public double clear() {
+        double dist = returnHome();
+        myTurtle.clearLines();
+        return dist;
     }
 }

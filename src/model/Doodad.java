@@ -12,7 +12,7 @@ import util.Vector;
  * @author james, mp
  *
  */
-public abstract class BasicRoomObject extends Sprite implements IRoomObject {
+public abstract class Doodad extends Sprite implements IRoomObject {
 
     
     private Location myCurrentLocation;  
@@ -28,7 +28,7 @@ public abstract class BasicRoomObject extends Sprite implements IRoomObject {
      * @param center
      * @param size
      */
-    public BasicRoomObject (Pixmap image, Location center, Dimension size) {
+    public Doodad (Pixmap image, Location center, Dimension size) {
          super(image, center, size);
          myCurrentLocation = center;
          myInitialLocation = center; 
@@ -41,7 +41,7 @@ public abstract class BasicRoomObject extends Sprite implements IRoomObject {
      * @param size
      * @param vector
      */
-    public BasicRoomObject (Pixmap image, Location center, Dimension size, Vector vector) { 
+    public Doodad (Pixmap image, Location center, Dimension size, Vector vector) { 
         super (image, center, size, vector); 
     }
      
@@ -88,8 +88,10 @@ public abstract class BasicRoomObject extends Sprite implements IRoomObject {
     /**
      * returns the object to the position it was initialized at.
      */
-    public void returnHome () { 
+    public double returnHome () { 
+        double distanceMoved = distance(myInitialLocation);
         super.setCenter(myInitialLocation); 
+        return distanceMoved;
     }
     
     /**
