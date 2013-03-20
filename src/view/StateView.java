@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import model.Renderable;
 import model.Status;
@@ -14,6 +15,7 @@ import model.Status;
 @SuppressWarnings("serial")
 public class StateView extends WindowView {
     private JTextArea myTextArea;
+    private JTabbedPane myTabbedPane;
 
     /**
      * Constructs the StateView and sets a default border
@@ -27,7 +29,9 @@ public class StateView extends WindowView {
     @Override
     protected void addComponents () {
         myTextArea.setEditable(false);
-        EasyGridFactory.layoutHorizontal(this, new JScrollPane(myTextArea));
+        myTabbedPane = new JTabbedPane();
+        EasyGridFactory.layoutHorizontal(this, myTabbedPane);
+        myTabbedPane.addTab("Feedback", new JScrollPane(myTextArea));
     }
 
     private void display(double[] array) {
