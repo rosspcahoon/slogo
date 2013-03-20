@@ -29,7 +29,7 @@ public class DifferenceCommandNode extends CommandNode {
         int firstOperand = one.resolve();
         int secondOperand = two.resolve();
         int result = firstOperand - secondOperand;
-        System.out.printf("Subtracted %d from %d to get %d\n", secondOperand, firstOperand, result);
+//        System.out.printf("Subtracted %d from %d to get %d\n", secondOperand, firstOperand, result);
         return result;
     }
     

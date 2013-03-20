@@ -29,7 +29,7 @@ public class QuotientCommandNode extends CommandNode {
         int firstOperand = one.resolve();
         int secondOperand = two.resolve();
         int result = firstOperand / secondOperand;
-        System.out.printf("Divided %d by %d to get %d\n", firstOperand, secondOperand, result);
+//        System.out.printf("Divided %d by %d to get %d\n", firstOperand, secondOperand, result);
         return result;
     }
     

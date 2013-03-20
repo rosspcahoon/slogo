@@ -33,7 +33,7 @@ public class RepeatCommandNode extends CommandNode {
         for (int i=0; i<numIterations; i++) {
             result = commands.resolve();
         }
-        System.out.printf("Repeated %d times, returning %d\n", numIterations, result);
+//        System.out.printf("Repeated %d times, returning %d\n", numIterations, result);
         return result;
     }
 

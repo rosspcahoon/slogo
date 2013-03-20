@@ -36,7 +36,7 @@ public class IfElseCommandNode extends CommandNode {
         } else {
             result = falseCommands.resolve();
         }
-        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);
+//        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);
         return result;
     }
 

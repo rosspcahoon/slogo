@@ -1,5 +1,6 @@
 package model.command.turtle.commands;
 
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -22,7 +23,9 @@ public class HideTurtleCommandNode extends CommandNode {
 
     @Override
     public int resolve () {
-        System.out.printf("Turtle visibility off\n");
+//        System.out.printf("Turtle visibility off\n");
+        Room room = getMyRoom();
+        room.getTurtle().setVisibilityStatus(false);
         return CommandConstants.COMMAND_RETURN_FALSE;
     }
 

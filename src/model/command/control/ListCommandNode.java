@@ -2,6 +2,7 @@ package model.command.control;
 
 import java.util.List;
 import java.util.Scanner;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
@@ -29,7 +30,7 @@ public class ListCommandNode extends CommandNode {
         for (CommandNode child : children) {
             result = child.resolve();
         }
-        System.out.printf("Executed command list with final command returning %d\n", result);
+//        System.out.printf("Executed command list with final command returning %d\n", result);
         return result;
     }
     
@@ -39,7 +40,7 @@ public class ListCommandNode extends CommandNode {
      * create its children until we encounter its end.
      */
     @Override
-    public void setUp(Scanner s) {
+    public void setUp(Scanner s, Room r) {
         int expected = 0;
         while (s.hasNext()) {
             String nextString = s.next();
@@ -49,7 +50,8 @@ public class ListCommandNode extends CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s);
+            setMyRoom(r);
+            nextNode.setUp(s, r);
             expected++;
         }
         super.setMyExpectedArgs(expected);

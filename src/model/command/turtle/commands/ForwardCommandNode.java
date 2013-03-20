@@ -1,6 +1,7 @@
 package model.command.turtle.commands;
 
 import java.util.List;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -26,8 +27,9 @@ public class ForwardCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
-        System.out.printf("Move turtle forward %d pixels\n", result);
-        // TODO: Move the turtle forward by "result" pixels
+//        System.out.printf("Move turtle forward %d pixels\n", result);
+        Room room = getMyRoom();
+        room.getTurtle().moveForward(result);
         return result;
     }
     
