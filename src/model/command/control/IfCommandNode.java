@@ -33,7 +33,7 @@ public class IfCommandNode extends CommandNode {
         if (conditionResult > CommandConstants.COMMAND_RETURN_FALSE) {
             result = commands.resolve();
         }
-        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);
+//        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);
         return result;
     }
 

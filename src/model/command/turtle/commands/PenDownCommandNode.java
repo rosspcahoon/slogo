@@ -1,5 +1,6 @@
 package model.command.turtle.commands;
 
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -22,7 +23,9 @@ public class PenDownCommandNode extends CommandNode {
 
     @Override
     public int resolve () {
-        System.out.printf("Put turtle pen down\n");
+//        System.out.printf("Put turtle pen down\n");
+        Room room = getMyRoom();
+        room.getTurtle().setPenStatus(true);
         return CommandConstants.COMMAND_RETURN_TRUE;
     }
 

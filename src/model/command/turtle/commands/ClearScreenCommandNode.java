@@ -1,5 +1,6 @@
 package model.command.turtle.commands;
 
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -22,8 +23,12 @@ public class ClearScreenCommandNode extends CommandNode {
 
     @Override
     public int resolve () {
-        System.out.printf("Cleared screen\n");
-        return 0;
+//        System.out.printf("Cleared screen\n");
+        Room room = getMyRoom();
+        // TODO: make this clear the entire screen
+        // TODO: make returnHome return distance moved
+        room.returnHome();
+        return -1;
     }
 
 }

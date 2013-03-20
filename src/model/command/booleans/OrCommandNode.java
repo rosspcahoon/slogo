@@ -34,7 +34,7 @@ public class OrCommandNode extends CommandNode {
         } else {
             result = CommandConstants.COMMAND_RETURN_FALSE;
         }
-        System.out.printf("Checked if %d OR %d, got %d\n", firstOperand, secondOperand, result);
+//        System.out.printf("Checked if %d OR %d, got %d\n", firstOperand, secondOperand, result);
         return result;
     }
     

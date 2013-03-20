@@ -94,7 +94,7 @@ public class Status {
      * @param heading 
      */
     public void setMyHeading (double heading) {
-        this.myHeading = heading;
+        myHeading = heading;
     }
 
 

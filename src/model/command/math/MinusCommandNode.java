@@ -27,7 +27,7 @@ public class MinusCommandNode extends CommandNode {
         CommandNode child = children.get(0);
         int childValue = child.resolve();
         int result = -childValue;
-        System.out.printf("Negated %d to get %d\n", childValue, result);
+//        System.out.printf("Negated %d to get %d\n", childValue, result);
         return result;
     }
     

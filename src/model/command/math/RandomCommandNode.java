@@ -29,7 +29,7 @@ public class RandomCommandNode extends CommandNode {
         int childValue = child.resolve();
         Random random = new Random();
         int result = random.nextInt(childValue);
-        System.out.printf("Random number up to %d got %d\n", childValue, result);
+//        System.out.printf("Random number up to %d got %d\n", childValue, result);
         return result;
     }
     

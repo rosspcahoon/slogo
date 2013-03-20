@@ -3,6 +3,7 @@ package model.command.control;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
@@ -39,7 +40,7 @@ public class MakeCommandNode extends CommandNode {
         String nameString = variable.getMyValue();
         int result = value.resolve();
         CommandLibrary.addUserVariable(nameString, result);
-        System.out.printf("Made variable %s with value %d\n", nameString, result);
+//        System.out.printf("Made variable %s with value %d\n", nameString, result);
         return result;
     }
 
@@ -49,21 +50,22 @@ public class MakeCommandNode extends CommandNode {
      * set up as they are before.
      */
     @Override
-    public void setUp(Scanner s) throws NoSuchElementException {
+    public void setUp(Scanner s, Room r) throws NoSuchElementException {
         super.clearChildren();
         String varName = s.next();
         varName = varName.toLowerCase();
         StringCommandNode nameNode = new StringCommandNode();
         nameNode.setMyValue(varName);
         addChild(nameNode);
-        nameNode.setUp(s);
+        nameNode.setUp(s, r);
+        setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=1; i<expected; i++) {
             String nextString = s.next();
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s);
+            nextNode.setUp(s, r);
         }
     }
 }

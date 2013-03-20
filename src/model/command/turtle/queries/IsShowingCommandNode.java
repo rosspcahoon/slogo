@@ -1,5 +1,6 @@
 package model.command.turtle.queries;
 
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -22,8 +23,15 @@ public class IsShowingCommandNode extends CommandNode {
 
     @Override
     public int resolve () {
-        System.out.printf("Returned turtle visibility status\n");
-        return 0;
+//        System.out.printf("Returned turtle visibility status\n");
+        Room room = getMyRoom();
+        int result = -1;
+        if (room.getTurtle().getVisibilityStatus()) {
+            result = CommandConstants.COMMAND_RETURN_TRUE;
+        } else {
+            result = CommandConstants.COMMAND_RETURN_FALSE;
+        }
+        return result;
     }
 
 }

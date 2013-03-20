@@ -1,6 +1,7 @@
 package model.command.turtle.commands;
 
 import java.util.List;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -28,8 +29,12 @@ public class TowardsCommandNode extends CommandNode {
         CommandNode yChild = children.get(1);
         int xCoord = xChild.resolve();
         int yCoord = yChild.resolve();
-        System.out.printf("Turned turtle to face %d %d\n", xCoord, yCoord);
-        return xCoord;
+        Room room = getMyRoom();
+        // TODO: command to turn towards a certain (x,y) coordinate pair
+        // TODO: make command return degrees moved
+//        room.getTurtle().
+//        System.out.printf("Turned turtle to face %d %d\n", xCoord, yCoord);
+        return -1;
     }
 
 }

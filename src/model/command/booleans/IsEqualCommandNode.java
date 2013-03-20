@@ -34,7 +34,7 @@ public class IsEqualCommandNode extends CommandNode {
         } else {
             result = CommandConstants.COMMAND_RETURN_FALSE;
         }
-        System.out.printf("Checked if %d equal to %d, got %d\n", firstOperand, secondOperand, result);
+//        System.out.printf("Checked if %d equal to %d, got %d\n", firstOperand, secondOperand, result);
         return result;
     }
     

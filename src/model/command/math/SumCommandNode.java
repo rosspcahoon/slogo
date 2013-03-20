@@ -29,7 +29,7 @@ public class SumCommandNode extends CommandNode {
         int firstOperand = one.resolve();
         int secondOperand = two.resolve();
         int result = firstOperand + secondOperand;
-        System.out.printf("Summed %d and %d to get %d\n", firstOperand, secondOperand, result);
+//        System.out.printf("Summed %d and %d to get %d\n", firstOperand, secondOperand, result);
         return result;
     }
     

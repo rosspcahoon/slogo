@@ -1,6 +1,7 @@
 package model.command.turtle.commands;
 
 import java.util.List;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -26,7 +27,9 @@ public class RightCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
-        System.out.printf("Turn turtle right %d degrees\n", result);
+//        System.out.printf("Turn turtle right %d degrees\n", result);
+        Room room = getMyRoom();
+        room.getTurtle().turnRight(result);
         return result;
     }
 
