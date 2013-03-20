@@ -61,7 +61,7 @@ public class RoomView extends WindowView {
             pen.drawImage(myBackgroundImage, 0, 0, getSize().width, getSize().height, null);
         }
         if(myGridToggle) {
-            URL url = this.getClass().getResource("/images/grid25.jpg");
+            URL url = this.getClass().getResource("/images/grid25.png");
             try {
                 myGrid = ImageIO.read(url);
             }
