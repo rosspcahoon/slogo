@@ -242,18 +242,24 @@ public class Window extends JFrame {
         public void actionPerformed (ActionEvent e) {
             int response = myChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
-                Image img;
-                try {
-                    img = ImageIO.read(myChooser.getSelectedFile());
-                    TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-                    if(temp != null) {
-                        temp.setTurtle(img);
-                    }
+                String imgURL = myChooser.getSelectedFile().getAbsolutePath();
+                TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+                if(temp != null) {
+//                        temp.setTurtle(img);
                 }
-                catch (java.io.IOException er) {
-                    System.out.println(er.getMessage());
-                }
+                registerTurtleShape(imgURL);
+                setTurtleShape();
             }
+        }
+
+        private void setTurtleShape () {
+            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+            myController.processCommand(temp, "setshape "+"last");
+        }
+
+        private void registerTurtleShape (String imgURL) {
+            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+            myController.processCommand(temp, "registershape "+imgURL);
         }
     }
 
