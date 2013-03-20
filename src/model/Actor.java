@@ -1,12 +1,14 @@
 package model;
 
-import java.awt.Dimension;
+import java.awt.Dimension; 
 import util.Location;
 import util.Pixmap;
 import util.Sprite;
 import util.Vector;
 import java.util.Observable; 
 import java.util.Observer; 
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.Graphics2D;
 import model.PenTrail;
 import model.Doodad;
@@ -33,6 +35,8 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     //Moveable's pen 
     private boolean myPenDown = true; 
     
+    private List<PenTrail> myTrail;
+    
     //is it on the screen/visible
     private boolean myVisibility = false; 
     
@@ -45,13 +49,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * Constructor
      */
     public Actor (double angle) { 
-        super (DEFAULT_TURTLE_IMAGE, myInitialLocation, DEFAULT_TURTLE_SIZE); 
-        myHeading = angle;
+        this(DEFAULT_TURTLE_IMAGE, myInitialLocation, DEFAULT_TURTLE_SIZE, angle);       
     }
     
     public Actor (Pixmap image, Location center, Dimension size, double angle) {
         super(image, center, size, new Vector(angle, myMagnitude)); 
         myHeading = angle; 
+        myTrail = new ArrayList<PenTrail>();
     }
     
     /**
@@ -64,6 +68,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         
         PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
                                           super.getOldLocation().getY(), super.getCurrentLocation().getY()); 
+        myTrail.add(penTrail);
         if (getPenStatus()) { 
             penTrail.drawLine(pen); 
         }
@@ -101,6 +106,11 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         super.paint(pen);
+        for(PenTrail penT: myTrail) {
+            pen.draw(penT);
+        }
+
+        
     }
     
     
@@ -110,7 +120,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     @Override
     public double moveForward(double dist) {
-        getCurrentLocation().translate(new Vector(myHeading, dist));
+        Location currentLoc = getCurrentLocation();
+        currentLoc.translate(new Vector(myHeading, dist));
+        setCurrentLocation(currentLoc);
         return dist;
     }
     
@@ -181,6 +193,12 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         return 0;
     }
     
+    /**
+     * clears the lines held in myTrail
+     */
+    public void clearLines() {
+        myTrail.clear();
+    }
     
     
 }

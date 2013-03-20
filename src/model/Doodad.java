@@ -88,8 +88,10 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     /**
      * returns the object to the position it was initialized at.
      */
-    public void returnHome () { 
+    public double returnHome () { 
+        double distanceMoved = distance(myInitialLocation);
         super.setCenter(myInitialLocation); 
+        return distanceMoved;
     }
     
     /**
