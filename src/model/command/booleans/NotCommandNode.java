@@ -32,7 +32,7 @@ public class NotCommandNode extends CommandNode {
         } else {
             result = CommandConstants.COMMAND_RETURN_TRUE;
         }
-        System.out.printf("Checked if NOT %d, got %d\n", childValue, result);
+//        System.out.printf("Checked if NOT %d, got %d\n", childValue, result);
         return result;
     }
     

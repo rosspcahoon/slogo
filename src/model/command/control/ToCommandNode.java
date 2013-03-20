@@ -3,6 +3,7 @@ package model.command.control;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
@@ -62,7 +63,7 @@ public class ToCommandNode extends CommandNode {
         result.addCommands(commandList);
         result.setMyExpectedArgs(parameters.getChildren().size());
         CommandLibrary.addUserDefinedCommand(nameString, result);
-        System.out.printf("New command %s created, returning %d\n", nameString, CommandConstants.COMMAND_RETURN_TRUE);
+//        System.out.printf("New command %s created, returning %d\n", nameString, CommandConstants.COMMAND_RETURN_TRUE);
         return CommandConstants.COMMAND_RETURN_TRUE;
     }
     
@@ -72,21 +73,22 @@ public class ToCommandNode extends CommandNode {
      * set up as they are before.
      */
     @Override
-    public void setUp(Scanner s) throws NoSuchElementException {
+    public void setUp(Scanner s, Room r) throws NoSuchElementException {
         super.clearChildren();
         String commandName = s.next();
         commandName = commandName.toLowerCase();
         StringCommandNode nameNode = new StringCommandNode();
-        nameNode.setMyValue(commandName);
+        nameNode.setMyValue(commandName);        
         addChild(nameNode);
-        nameNode.setUp(s);
+        nameNode.setUp(s, r);
+        setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=1; i<expected; i++) {
             String nextString = s.next();
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s);
+            nextNode.setUp(s, r);
         }
     }
 

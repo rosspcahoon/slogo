@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import model.Room;
 
 /**
  * Abstract class representing a node in the command tree.
@@ -14,9 +15,17 @@ public abstract class CommandNode {
 
     private List<CommandNode> myChildren;
     private int myExpectedArgs;
+    private Room myRoom;
     
     protected CommandNode() {
         myChildren = new ArrayList<CommandNode>();
+    }    
+    
+    /**
+     * Sets the number of expected args for this node.
+     */
+    public void setMyExpectedArgs(int args) {
+        myExpectedArgs = args;
     }
     
     /**
@@ -27,10 +36,17 @@ public abstract class CommandNode {
     }
     
     /**
-     * Sets the number of expected args for this node.
+     * Sets the current room.
      */
-    public void setMyExpectedArgs(int args) {
-        myExpectedArgs = args;
+    public void setMyRoom(Room r) {
+        myRoom = r;
+    }
+    
+    /**
+     * Gets the current room.
+     */
+    public Room getMyRoom() {
+        return myRoom;
     }
     
     /**
@@ -48,7 +64,7 @@ public abstract class CommandNode {
      * its children nodes with the appropriate arguments. The passed scanner holds
      * the means to continue reading the input string.
      */
-    public void setUp(Scanner s) throws NoSuchElementException {
+    public void setUp(Scanner s, Room r) throws NoSuchElementException {
         clearChildren();
         int expected = getMyExpectedArgs();
         for (int i=0; i<expected; i++) {
@@ -56,7 +72,8 @@ public abstract class CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s);
+            setMyRoom(r);
+            nextNode.setUp(s, r);
         }
     }
     

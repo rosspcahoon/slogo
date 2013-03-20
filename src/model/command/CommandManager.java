@@ -55,7 +55,7 @@ public class CommandManager {
         String rootString = myCurrentScanner.next();
         rootString = rootString.toLowerCase();
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
-        myCurrentRoot.setUp(myCurrentScanner);
+        myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom);
         if (myCurrentScanner.hasNext()) {
             //TODO: throw bad input error
         }
@@ -77,6 +77,13 @@ public class CommandManager {
         myCurrentInput = null;
         myCurrentResult = -1;
         myCurrentScanner = null;
+    }
+    
+    /**
+     * Gets the current room.
+     */
+    public Room getCurrentRoom() {
+        return myCurrentRoom;
     }
     
     /**

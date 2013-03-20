@@ -1,5 +1,6 @@
 package model.command.turtle.queries;
 
+import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
@@ -22,8 +23,10 @@ public class XCorCommandNode extends CommandNode {
 
     @Override
     public int resolve () {
-        System.out.printf("Returned turtle xcor\n");
-        return 0;
+//        System.out.printf("Returned turtle xcor\n");
+        Room room = getMyRoom();
+        int result = (int) room.getTurtle().getCurrentLocation().getX();
+        return result;
     }
 
 }

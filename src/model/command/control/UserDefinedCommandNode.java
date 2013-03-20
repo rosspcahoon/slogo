@@ -46,7 +46,7 @@ public class UserDefinedCommandNode extends CommandNode {
         CommandLibrary.loadVariableLibrary(myName);
         int result = myCommands.resolve();
         CommandLibrary.loadVariableLibrary();
-        System.out.printf("User defined command %s executed, returning %d\n", myName, result);
+//        System.out.printf("User defined command %s executed, returning %d\n", myName, result);
         return result;
     }
     
