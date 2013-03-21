@@ -121,7 +121,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     @Override
     public double moveForward(double dist) {
         Location currentLoc = getCurrentLocation();
-        updateOldLocation();
+  //      updateOldLocation();
         Vector moveVector = wrapAround(dist);
         currentLoc.translate(moveVector);
         makeLine();
@@ -240,6 +240,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * @return distance to move after wrap
      */
     public double checkY(double yLoc) {
+        updateOldLocation();
         if(yLoc < myFrameTop) {
             setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameTop));
             makeLine();
@@ -248,7 +249,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
             setOldLocation(new Location(getCurrentLocation().getX(), myFrameBottom));
             return yLoc - myFrameTop;
         }
-        if(yLoc > myFrameBottom) {
+        if(yLoc > myFrameBottom - 100) {
             setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameBottom));
             makeLine();
             updateOldLocation();
@@ -268,7 +269,6 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         double excessX = checkX(deltaX + currentX);
         double excessY = checkY(deltaY + currentY);
         Vector moveVector = new Vector(new Location(excessX, 0), new Location(0, excessY));
-        System.out.println(moveVector);
         return moveVector;
     }
     
