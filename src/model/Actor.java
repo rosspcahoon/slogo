@@ -1,17 +1,16 @@
 package model;
 
-import java.awt.Dimension; 
-import util.Location;
-import util.Pixmap;
-import util.Sprite;
-import util.Vector;
+import java.awt.Dimension;  
 import java.util.Observable; 
 import java.util.Observer; 
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
-import model.PenTrail;
-import model.Doodad;
+import static java.lang.Math.*;
+import util.Location;
+import util.Pixmap;
+import util.Sprite;
+import util.Vector;
 
 /**
  * Class for basic moveable characters/actors. Gives objects access to
@@ -23,10 +22,10 @@ import model.Doodad;
 public class Actor extends Doodad implements Renderable, IMoveable {
 
     //frame default sizes (as of now)--will remove/replace 
-    private static final int DEFAULT_FRAME_TOP = 250; 
-    private static final int DEFAULT_FRAME_BOTTOM = -250; 
-    private static final int DEFAULT_FRAME_RIGHT = 350; 
-    private static final int DEFAULT_FRAME_LEFT = -350; 
+    private static final int DEFAULT_FRAME_TOP = 0; 
+    private static final int DEFAULT_FRAME_BOTTOM = 500; 
+    private static final int DEFAULT_FRAME_RIGHT = 700; 
+    private static final int DEFAULT_FRAME_LEFT = 0; 
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle1.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
@@ -36,6 +35,11 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private boolean myPenDown = true; 
     
     private List<PenTrail> myTrail;
+    
+    private int myFrameTop;
+    private int myFrameBottom;
+    private int myFrameRight;
+    private int myFrameLeft;
     
     //is it on the screen/visible
     private boolean myVisibility = false; 
@@ -53,9 +57,12 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     }
     
     public Actor (Pixmap image, Location center, Dimension size, double angle) {
-        super(image, center, size, new Vector(angle, myMagnitude)); 
-        myHeading = angle; 
+        super(image, center, size, angle);  
         myTrail = new ArrayList<PenTrail>();
+        myFrameTop = DEFAULT_FRAME_TOP;
+        myFrameBottom = DEFAULT_FRAME_BOTTOM;
+        myFrameRight = DEFAULT_FRAME_RIGHT;
+        myFrameLeft = DEFAULT_FRAME_LEFT;
     }
     
     /**
@@ -114,9 +121,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     @Override
     public double moveForward(double dist) {
         Location currentLoc = getCurrentLocation();
-        updateLocations();
-        currentLoc.translate(new Vector(myHeading, dist));
-        setCurrentLocation(currentLoc);
+        updateOldLocation();
+        Vector moveVector = wrapAround(dist);
+        currentLoc.translate(moveVector);
         makeLine();
         return dist;
     }
@@ -127,7 +134,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     @Override
     public double turnRight(double degrees) {
-        myHeading += degrees;
+        getHeadingVector().turn(degrees);
         return degrees;
     }
     
@@ -145,23 +152,27 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     }
     
     /**
+     * re-orient the actor/object to face the input coordinates
+     * @param xCoord
+     * @param yCoord
+     * @return
+     */
+    public double jumpTurn(double xCoord, double yCoord) {
+        double xDiff = getCurrentLocation().getX() - xCoord;
+        double yDiff = getCurrentLocation().getY() - yCoord;
+        double angle = tan(yDiff / xDiff);
+        return turnRight(angle);
+    }
+    
+    /**
      * re-orients the actor/object to the specified absolute degrees
      * @param degrees
      */
     @Override
     public double jumpTurn(double degrees) {
-        double difference = degrees - myHeading;
-        myHeading = degrees;
+        double difference = degrees - getHeading();
+        setHeading(degrees);
         return difference;
-    }
-    
-    /**
-     * returns this moveable object's heading
-     * @return heading
-     */
-    @Override
-    public double getHeading() {
-         return myHeading;
     }
     
     /**
@@ -195,5 +206,70 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myTrail.clear();
     }
     
+    /**
+     * check for x coordinate wraparound. returns the distance to move in the x
+     * coordinate after the wraparound is done.
+     * @param xLoc
+     * @return distance to move after wrap
+     */
+    public double checkX(double xLoc) {
+        updateOldLocation();
+        if(xLoc < myFrameLeft) {
+            setCurrentLocation(new Location(myFrameLeft, getCurrentLocation().getY()));
+            makeLine();
+            updateOldLocation();
+            setCurrentLocation(new Location(myFrameRight, getCurrentLocation().getY()));
+            setOldLocation(new Location(myFrameRight, getCurrentLocation().getY()));
+            return xLoc - myFrameLeft;
+        }
+        if(xLoc > myFrameRight) {
+            setCurrentLocation(new Location(myFrameRight, getCurrentLocation().getY()));
+            makeLine();
+            updateOldLocation();
+            setCurrentLocation(new Location(myFrameLeft, getCurrentLocation().getY()));
+            setOldLocation(new Location(myFrameLeft, getCurrentLocation().getY()));
+            return myFrameRight - xLoc;
+        }
+        return getCurrentLocation().getX() - xLoc;
+    }
+    
+    /**
+     * check for y coordinate wraparound. returns the distance to move in the y
+     * coordinate after the wraparound is done.
+     * @param yLoc
+     * @return distance to move after wrap
+     */
+    public double checkY(double yLoc) {
+        if(yLoc < myFrameTop) {
+            setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameTop));
+            makeLine();
+            updateOldLocation();
+            setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameBottom));
+            setOldLocation(new Location(getCurrentLocation().getX(), myFrameBottom));
+            return yLoc - myFrameTop;
+        }
+        if(yLoc > myFrameBottom) {
+            setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameBottom));
+            makeLine();
+            updateOldLocation();
+            setCurrentLocation(new Location(getCurrentLocation().getX(), myFrameTop));
+            setOldLocation(new Location(getCurrentLocation().getX(), myFrameTop));
+            return myFrameBottom - yLoc;
+        }
+        return getCurrentLocation().getY() - yLoc;
+    }
+    
+    public Vector wrapAround(double distMove) {
+        Vector vec = new Vector(getHeading(), distMove);
+        double deltaX = vec.getXChange();
+        double deltaY = vec.getYChange();
+        double currentX = getCurrentLocation().getX();
+        double currentY = getCurrentLocation().getY();
+        double excessX = checkX(deltaX + currentX);
+        double excessY = checkY(deltaY + currentY);
+        Vector moveVector = new Vector(new Location(excessX, 0), new Location(0, excessY));
+        System.out.println(moveVector);
+        return moveVector;
+    }
     
 }

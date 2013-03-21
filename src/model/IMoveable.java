@@ -37,12 +37,6 @@ public interface IMoveable {
     public boolean getPenStatus();
     
     /**
-     * return this moveable object's heading
-     * @return heading
-     */
-    public double getHeading();
-    
-    /**
      * turns right the input degrees (negative is a left turn)
      * @param degrees
      * @return degrees turned

@@ -1,6 +1,7 @@
 package model;
 
 import util.Location;
+import util.Vector;
 
 /**
  * interface for room objects. Room objects have a location and a visibility
@@ -30,5 +31,11 @@ public interface IRoomObject {
      * @return current location Location object
      */
     public Location getCurrentLocation ();
+    
+    /**
+     * return this moveable object's heading
+     * @return heading
+     */
+    public double getHeading();
 
 }

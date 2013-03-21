@@ -17,10 +17,11 @@ public abstract class Doodad extends Sprite implements IRoomObject {
 
     
     private Location myCurrentLocation;  
-    private Location myOldLocation = null; 
+    private Location myOldLocation; 
     private Location myInitialLocation; 
     private boolean myVisibility;
     private boolean myPenStatus;
+    private Vector myHeading;
      
     
     /**
@@ -32,7 +33,9 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     public Doodad (Pixmap image, Location center, Dimension size) {
          super(image, center, size);
          myCurrentLocation = center;
+         myOldLocation = center;
          myInitialLocation = center; 
+         myHeading = new Vector(0, 0);
      }
     
     /**
@@ -42,10 +45,9 @@ public abstract class Doodad extends Sprite implements IRoomObject {
      * @param size
      * @param vector
      */
-    public Doodad (Pixmap image, Location center, Dimension size, Vector vector) { 
-        super (image, center, size, vector); 
-        myCurrentLocation = center;
-        myInitialLocation = center; 
+    public Doodad (Pixmap image, Location center, Dimension size, double heading) { 
+        this(image,center,size);
+        myHeading = new Vector(heading, 0);
     }
      
     /**
@@ -53,13 +55,31 @@ public abstract class Doodad extends Sprite implements IRoomObject {
      * @param location Location object
      */
     public void setCurrentLocation (Location location) { 
-        myOldLocation = myCurrentLocation;
+//        System.out.println(myCurrentLocation);
+//        System.out.println(myOldLocation);
         myCurrentLocation = location; 
     }
     
     @Override
     public Location getCurrentLocation () { 
         return myCurrentLocation; 
+    }
+    
+    /**
+     * sets the heading of this object
+     * @param heading
+     */
+    public void setHeading(double heading) {
+        myHeading.setDirection(heading);
+    }
+    
+    /**
+     * return the heading of this object
+     * @return myHeading
+     */
+    @Override
+    public double getHeading() {
+        return myHeading.getDirection();
     }
     
     /**
@@ -70,6 +90,11 @@ public abstract class Doodad extends Sprite implements IRoomObject {
         return myOldLocation; 
     }
     
+    public void setOldLocation(Location loc) {
+        myOldLocation = loc;
+        System.out.println(myOldLocation);
+        System.out.println(myCurrentLocation);
+    }
     
     /**
      * getter for this room object's initial location (point of initialization)
@@ -80,12 +105,12 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     }
     
     /**
-     * updates the current and previous locations (presumably after the object
-     * changes position).
+     * updates the old location with the current Location (generally used before
+     * the object is moved)
      */
-    public void updateLocations () { 
-        myOldLocation = myCurrentLocation; 
-        myCurrentLocation = new Location (super.getCenter ());
+    public void updateOldLocation () { 
+        Location temp = new Location(myCurrentLocation);
+        myOldLocation = temp; 
     }
     
     /**
@@ -119,7 +144,11 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     
     public void paint(Graphics2D pen) {
         super.setCenter(myCurrentLocation);
-        super.paint(pen);
+        super.paint(pen, myHeading.getDirection());
+    }
+    
+    public Vector getHeadingVector() {
+        return myHeading;
     }
     
 }
