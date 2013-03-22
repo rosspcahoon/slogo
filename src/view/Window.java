@@ -70,7 +70,7 @@ public class Window extends JFrame {
         myMenuBar = new MenuBarView(this);
         myTabbedPane = new JTabbedPane();
         setJMenuBar(myMenuBar);
-        EasyGridFactory.layoutHorizontal(getContentPane(), myTabbedPane);
+        EasyGridFactory.layoutHorizontal(this, myTabbedPane);
     }
 
     /**
