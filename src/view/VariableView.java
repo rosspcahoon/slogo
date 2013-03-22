@@ -1,6 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Renderable;
@@ -13,7 +16,6 @@ import model.Status;
  */
 @SuppressWarnings("serial")
 public class VariableView extends WindowView {
-    private JTextArea myVariableText;
 
     /**
      * Constructs the StateView and sets a default border
@@ -30,9 +32,20 @@ public class VariableView extends WindowView {
     }
 
     private void display(HashMap<String, Integer> varlist) {
+        JComponent[] variablePanels;
+        variablePanels = new JComponent[varlist.size()];
+        this.removeAll();
+        int count = 0;        
         for(String s: varlist.keySet()){
-            EasyGridFactory.layoutHorizontal(this, new JTextArea("s"), new JTextField(varlist.get(s)));
+            
+            JPanel tempPanel = new JPanel();
+            EasyGridFactory.layoutHorizontal(tempPanel, new JTextArea("s"), new JTextField(varlist.get(s)));
+            variablePanels[count] = tempPanel;
+            count++;
         }
+        
+//        EasyGridFactory.layoutVertical(this, new JTextArea(Window.getResources().getString("VariableTitle")), variablePanels));  
+        EasyGridFactory.layoutVertical(this, new JTextArea(Window.getResources().getString("VariableTitle")));  
     }
 
     /**
@@ -41,7 +54,7 @@ public class VariableView extends WindowView {
      */
     public void render (Renderable p) {
         if (p.getState() != null) {
-            Status s = (Status) p.getState();
+//            Status s = (Status) p.getState();
             //All hypothetical
             HashMap<String, Integer> varlist = new HashMap<String, Integer>();
 //            Hasn't been added to Status object yet
@@ -52,6 +65,5 @@ public class VariableView extends WindowView {
 
     @Override
     protected void initializeVariables () {
-        myVariableText = new JTextArea();
     }
 }
