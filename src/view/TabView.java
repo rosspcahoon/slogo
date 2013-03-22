@@ -30,7 +30,6 @@ public class TabView extends WindowView {
         super(hostWindow);
         setWindow();
         setPreferredSize(mySize);
-        setMinimumSize(mySize);
     }
 
     /**
