@@ -25,13 +25,13 @@ public class PenTrail extends Line2D.Double {
     private double myY1; 
     private double myY2; 
     
-    private boolean myPenUp = false;
+    private boolean myPenDown;
     
     /**
      * Constructor
      */
     public PenTrail () { 
-        super (0,0,0,0); 
+        this (0,0,0,0, true); 
     }
     
     /**
@@ -43,6 +43,7 @@ public class PenTrail extends Line2D.Double {
         super (point1, point2); 
         myP1 = point1; 
         myP2 = point2;    
+        myPenDown = true;
     }
     
     /**
@@ -52,12 +53,13 @@ public class PenTrail extends Line2D.Double {
      * @param y1
      * @param y2
      */
-    public PenTrail (double x1, double x2, double y1, double y2) { 
+    public PenTrail (double x1, double x2, double y1, double y2, boolean pen) { 
         super (x1, x2, y1, y2); 
         myX1 = x1; 
         myX2 = x2; 
         myY1 = y1; 
         myY2 = y2; 
+        myPenDown = pen;
     }
 
     /**
@@ -65,54 +67,47 @@ public class PenTrail extends Line2D.Double {
      * @return myPenUp
      */
     public boolean getPenStatus () { 
-        return myPenUp; 
+        return myPenDown; 
     }
     
     /**
      * toggle for pen
      */
     public void togglePen () { 
-        myPenUp = !(myPenUp); 
+        myPenDown = !(myPenDown); 
     }
     
     public Rectangle2D getBounds2D () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Point2D getP1 () {
-        // TODO Auto-generated method stub
         return myP1; 
     }
 
     @Override
     public Point2D getP2 () {
-        // TODO Auto-generated method stub
         return myP2; 
     }
 
     @Override
     public double getX1 () {
-        // TODO Auto-generated method stub
         return myX1; 
     }
 
     @Override
     public double getX2 () {
-        // TODO Auto-generated method stub
         return myX2; 
     }
 
     @Override
     public double getY1 () {
-        // TODO Auto-generated method stub
         return myY1; 
     }
 
     @Override
     public double getY2 () {
-        // TODO Auto-generated method stub
         return myY2; 
     }
 
@@ -121,9 +116,11 @@ public class PenTrail extends Line2D.Double {
         super.setLine (x1, x2, y1, y2); 
     }
     
-    public void drawLine (Graphics2D pen) { 
+    public void drawLine (Graphics2D pen) {
         pen.setColor(Color.BLACK);
-        pen.drawLine((int)myX1, (int)myY1, (int)myX2, (int)myY2); 
+        if(myPenDown) {
+            pen.drawLine((int)myX1, (int)myY1, (int)myX2, (int)myY2); 
+        }
     }
 
 }

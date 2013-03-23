@@ -1,6 +1,9 @@
 package model;
 
+import java.util.Map;
+import java.util.HashMap;
 import util.Location;
+
 
 
 /**
@@ -13,6 +16,7 @@ public class Status {
     private double myXCoord;
     private double myYCoord;
     private double myHeading;
+    private Map<String, Integer> myUserVariables;
 
     /**
      * Constructor
@@ -22,6 +26,7 @@ public class Status {
         myXCoord = 0;
         myYCoord = 0;
         myHeading = 0;
+        myUserVariables = new HashMap<String, Integer>();
     }
     
     /**
@@ -95,6 +100,23 @@ public class Status {
      */
     public void setMyHeading (double heading) {
         myHeading = heading;
+    }
+    
+    /**
+     * adds a user variable the the user variable list
+     * @param name
+     * @param i
+     */
+    public void addVariable(String name, Integer i) {
+        myUserVariables.put(name,i);
+    }
+    
+    /**
+     * returns the user variables held in this status object
+     * @return myUserVariables
+     */
+    public Map<String, Integer> getVariableMap() {
+        return myUserVariables;
     }
 
 
