@@ -103,5 +103,16 @@ public class UserDefinedCommandNode extends CommandNode {
     public void addCommands(ListCommandNode commands) {
         myCommands = commands;
     }
+    
+    /**
+     * Returns the parameter names of this command.
+     */
+    public List<String> getCopyOfParameterNames() {
+        List<String> result = new ArrayList<String>(myParameterNames.size());
+        for (String param : myParameterNames) {
+            result.add(new String(param));
+        }
+        return result;
+    }
 
 }

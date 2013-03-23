@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import util.Location;
@@ -17,7 +18,7 @@ public class Status {
     private double myYCoord;
     private double myHeading;
     private Map<String, Integer> myUserVariables;
-    private Map<String, Integer> myUserCommands;
+    private Map<String, List<String>> myUserCommands;
 
     /**
      * Constructor
@@ -28,7 +29,7 @@ public class Status {
         myYCoord = 0;
         myHeading = 0;
         myUserVariables = new HashMap<String, Integer>();
-        myUserCommands = new HashMap<String, Integer>();
+        myUserCommands = new HashMap<String, List<String>>();
     }
     
     /**
@@ -114,6 +115,13 @@ public class Status {
     }
     
     /**
+     * adds a user-defined command to the user command list
+     */
+    public void addCommandName(String name, List<String> params) {
+        myUserCommands.put(name, params);
+    }
+    
+    /**
      * returns the user variables held in this status object
      * @return myUserVariables
      */
@@ -121,7 +129,7 @@ public class Status {
         return myUserVariables;
     }
     
-    public Map<String, Integer> getUserCommands() {
+    public Map<String, List<String>> getUserCommands() {
         return myUserCommands;
     }
 
