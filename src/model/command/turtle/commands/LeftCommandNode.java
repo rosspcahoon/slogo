@@ -27,6 +27,9 @@ public class LeftCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
+        if (result < 0) {
+            throw new Exception("Error executing LEFT -- argument value is negative, please use RIGHT");
+        }
 //        System.out.printf("Turn turtle left %d degrees\n", result);
         Room room = getMyRoom();
         room.getTurtle().turnRight(-result);

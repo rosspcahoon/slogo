@@ -27,6 +27,9 @@ public class SetHeadingCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
+        if (result < 0 || result > 360) {
+            throw new Exception("Error executing SETHEADING -- argument value out of bounds, must be between [0, 360]");
+        }
 //        System.out.printf("Set turtle heading to %d degrees\n", result);
         Room room = getMyRoom();
         result = (int) room.getTurtle().jumpTurn(result);

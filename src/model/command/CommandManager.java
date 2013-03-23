@@ -46,7 +46,7 @@ public class CommandManager {
             createTree();
     //        printTree();
             executeTree();
-    //        System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
+            System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
             cleanTree();
         } catch (Exception e) {
             myCurrentError = e.getMessage();            
@@ -67,10 +67,7 @@ public class CommandManager {
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
         myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom);
         if (myCurrentScanner.hasNext()) {
-            while (myCurrentScanner.hasNext()) {
-                System.err.println(myCurrentScanner.next());
-            }
-//            throw new Exception("Error parsing command -- input has too many elements or is badly formed");
+            throw new Exception("Error parsing command -- input has too many elements or is badly formed");
         }
     }
     

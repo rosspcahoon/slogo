@@ -26,6 +26,7 @@ public class Model implements ISLogoModel {
      */
     @Override
     public int processCommand (Room r, String s) {
+        r.getState().setErrorMessage(null);
         int i = myCommandManager.process(r, s);
         return i;
     }
