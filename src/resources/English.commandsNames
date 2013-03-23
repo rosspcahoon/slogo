@@ -1,70 +1,64 @@
-// command names (turtle commands)
-    public static final String COMMAND_NAME_FORWARD = "forward";
-    public static final String COMMAND_NAME_BACK = "back";
-    public static final String COMMAND_NAME_LEFT = "left";
-    public static final String COMMAND_NAME_RIGHT = "right";
-    public static final String COMMAND_NAME_SET_HEADING = "setheading";
-    public static final String COMMAND_NAME_TOWARDS = "towards";
-    public static final String COMMAND_NAME_SETXY = "setxy";
-    public static final String COMMAND_NAME_PENDOWN = "pendown";
-    public static final String COMMAND_NAME_PENUP = "penup";
-    public static final String COMMAND_NAME_SHOW_TURTLE = "showturtle";
-    public static final String COMMAND_NAME_HIDE_TURTLE = "hideturtle";
-    public static final String COMMAND_NAME_HOME = "home";
-    public static final String COMMAND_NAME_CLEAR_SCREEN = "clearscreen";
-    
-    // command aliases (turtle commands)
-    public static final String COMMAND_ALIAS_FD = "fd";
-    public static final String COMMAND_ALIAS_BK = "bk";
-    public static final String COMMAND_ALIAS_LT = "lt";
-    public static final String COMMAND_ALIAS_RT = "rt";
-    public static final String COMMAND_ALIAS_SETH = "seth";
-    public static final String COMMAND_ALIAS_GOTO = "goto"; 
-    public static final String COMMAND_ALIAS_PD = "pd";
-    public static final String COMMAND_ALIAS_PU = "pu";
-    public static final String COMMAND_ALIAS_ST = "st";
-    public static final String COMMAND_ALIAS_HT = "ht";
-    public static final String COMMAND_ALIAS_CS = "cs";
-    
-    // command names (turtle queries)
-    public static final String COMMAND_NAME_XCOR = "xcor";
-    public static final String COMMAND_NAME_YCOR = "ycor";
-    public static final String COMMAND_NAME_HEADING = "heading";
-    public static final String COMMAND_NAME_IS_PENDOWN = "pendown?";
-    public static final String COMMAND_NAME_IS_SHOWING = "showing?";
-    
-    // command aliases (turtle queries)
-    public static final String COMMAND_ALIAS_PENDOWN_P = "pendownp";
-    public static final String COMMAND_ALIAS_SHOWING_P = "showingp";
-    
-    // command names (math)
-    public static final String COMMAND_NAME_SUM = "sum";
-    public static final String COMMAND_NAME_DIFFERENCE = "difference";
-    public static final String COMMAND_NAME_PRODUCT = "product";
-    public static final String COMMAND_NAME_QUOTIENT = "quotient";
-    public static final String COMMAND_NAME_REMAINDER = "remainder";
-    public static final String COMMAND_NAME_MINUS = "minus";
-    public static final String COMMAND_NAME_RANDOM = "random";
-    
-    // command aliases (math)
-    public static final String COMMAND_ALIAS_SUM = "+";
-    public static final String COMMAND_ALIAS_DIFFERENCE = "-";
-    public static final String COMMAND_ALIAS_PRODUCT = "*";
-    public static final String COMMAND_ALIAS_QUOTIENT = "/";
-    public static final String COMMAND_ALIAS_REMAINDER = "%";
-    public static final String COMMAND_ALIAS_MINUS = "~";
-    
-    // command names (booleans)
-    public static final String COMMAND_NAME_IS_LESS = "less?";
-    public static final String COMMAND_NAME_IS_GREATER = "greater?";
-    public static final String COMMAND_NAME_IS_EQUAL = "equal?";
-    public static final String COMMAND_NAME_IS_NOT_EQUAL = "notequal?";
-    public static final String COMMAND_NAME_AND = "and";
-    public static final String COMMAND_NAME_OR = "or";
-    public static final String COMMAND_NAME_NOT = "not";
-    
-    // command aliases (booleans)
-    public static final String COMMAND_ALIAS_IS_LESS = "lessp";
-    public static final String COMMAND_ALIAS_IS_GREATER = "greaterp";
-    public static final String COMMAND_ALIAS_IS_EQUAL = "equalp";
-    public static final String COMMAND_ALIAS_IS_NOT_EQUAL = "notequalp";
+COMMAND_NAME_FORWARD=forward
+COMMAND_NAME_BACK=back
+COMMAND_NAME_LEFT=left
+COMMAND_NAME_RIGHT=right
+COMMAND_NAME_SET_HEADING=setheading
+COMMAND_NAME_TOWARDS=towards
+COMMAND_NAME_SETXY=setxy
+COMMAND_NAME_PENDOWN=pendown
+COMMAND_NAME_PENUP=penup
+COMMAND_NAME_SHOW_TURTLE=showturtle
+COMMAND_NAME_HIDE_TURTLE=hideturtle
+COMMAND_NAME_HOME=home
+COMMAND_NAME_CLEAR_SCREEN=clearscreen
+COMMAND_ALIAS_FD=fd
+COMMAND_ALIAS_BK=bk
+COMMAND_ALIAS_LT=lt
+COMMAND_ALIAS_RT=rt
+COMMAND_ALIAS_SETH=seth
+COMMAND_ALIAS_GOTO=goto
+COMMAND_ALIAS_PD=pd
+COMMAND_ALIAS_PU=pu
+COMMAND_ALIAS_ST=st
+COMMAND_ALIAS_HT=ht
+COMMAND_ALIAS_CS=cs
+COMMAND_NAME_XCOR=xcor
+COMMAND_NAME_YCOR=ycor
+COMMAND_NAME_HEADING=heading
+COMMAND_NAME_IS_PENDOWN=pendown?
+COMMAND_NAME_IS_SHOWING=showing?
+COMMAND_ALIAS_PENDOWN_P=pendownp
+COMMAND_ALIAS_SHOWING_P=showingp
+COMMAND_NAME_SUM=sum
+COMMAND_NAME_DIFFERENCE=difference
+COMMAND_NAME_PRODUCT=product
+COMMAND_NAME_QUOTIENT=quotient
+COMMAND_NAME_REMAINDER=remainder
+COMMAND_NAME_MINUS=minus
+COMMAND_NAME_RANDOM=random
+COMMAND_ALIAS_SUM=+
+COMMAND_ALIAS_DIFFERENCE=-
+COMMAND_ALIAS_PRODUCT=*
+COMMAND_ALIAS_QUOTIENT=/
+COMMAND_ALIAS_REMAINDER=%
+COMMAND_ALIAS_MINUS=~
+COMMAND_NAME_IS_LESS=less?
+COMMAND_NAME_IS_GREATER=greater?
+COMMAND_NAME_IS_EQUAL=equal?
+COMMAND_NAME_IS_NOT_EQUAL=notequal?
+COMMAND_NAME_AND=and
+COMMAND_NAME_OR=or
+COMMAND_NAME_NOT=not
+COMMAND_ALIAS_IS_LESS=lessp
+COMMAND_ALIAS_IS_GREATER=greaterp
+COMMAND_ALIAS_IS_EQUAL=equalp
+COMMAND_ALIAS_IS_NOT_EQUAL=notequalp
+COMMAND_NAME_LIST_OPEN=[
+COMMAND_NAME_LIST_CLOSE=]
+COMMAND_NAME_VARIABLE_START=:
+COMMAND_NAME_MAKE=make
+COMMAND_NAME_REPEAT=repeat
+COMMAND_NAME_IF=if
+COMMAND_NAME_IFELSE=ifelse
+COMMAND_NAME_TO=to
+COMMAND_ALIAS_SET=set

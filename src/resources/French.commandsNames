@@ -1,70 +1,64 @@
-// command names (turtle commands)
-    "devant" = "forward";
-    "derriere" = "back";
-    "gauche" = "left";
-    "droite" = "right";
-    "definirentete" = "setheading";
-    "vers" = "towards";
-    "positionxy" = "setxy";
-    "styloactif" = "pendown";
-    "styloinactif" = "penup";
-    "montrertortue" = "showturtle";
-    "cachertortue" = "hideturtle";
-    "maison" = "home";
-    "effacerecran" = "clearscreen";
-    
-    // command aliases (turtle commands)
-    "dev" = "fd";
-    "der" = "bk";
-    "gc" = "lt";
-    "dr" = "rt";
-    "defett"= "seth";
-    "..." = "goto"; 
-    "sa" = "pd";
-    "si" = "pu";
-    "mt" = "st";
-    "ct" = "ht";
-    "ee" = "cs";
-    
-    // command names (turtle queries)
-    "corx" = "xcor";
-    "cory" = "ycor";
-    "entete" = "heading";
-    "styloactif?" = "pendown?";
-    "visible?" = "showing?";
-    
-    // command aliases (turtle queries)
-    "styloactifp" = "pendownp";
-    "visiblep" = "showingp";
-    
-    // command names (math)
-    "somme" = "sum";
-    "difference" = "difference";
-    "produit" = "product";
-    "quotient" = "quotient";
-    "reste" = "remainder";
-    "moins" = "minus";
-    "aleatoire" = "random";
-    
-    // command aliases (math)
-    "+" = "+";
-    "-" = "-";
-    "*" = "*";
-    "/" = "/";
-    "%" = "%";
-    "~" = "~";
-    
-    // command names (booleans)
-    "inferieur?" = "less?";
-    "superieur?" = "greater?";
-    "egal?" = "equal?";
-    "different?" = "notequal?";
-    "et" = "and";
-    "ou" = "or";
-    "non" = "not";
-    
-    // command aliases (booleans)
-    "inferieurp" = "lessp";
-    "superieurp" = "greaterp";
-    "egalp" = "equalp";
-    "differentp" = "notequalp";
+COMMAND_NAME_FORWARD=devant
+COMMAND_NAME_BACK=derriere
+COMMAND_NAME_LEFT=gauche
+COMMAND_NAME_RIGHT=droite
+COMMAND_NAME_SET_HEADING=definirentete
+COMMAND_NAME_TOWARDS=vers
+COMMAND_NAME_SETXY=positionexy
+COMMAND_NAME_PENUP=styloactif
+COMMAND_NAME_PENUP=styloinactif
+COMMAND_NAME_SHOW_TURTLE=montrertortue
+COMMAND_NAME_HIDE_TURTLE=cachertortue
+COMMAND_NAME_HOME=maison
+COMMAND_NAME_CLEAR_SCREEN=effacerecran
+COMMAND_ALIAS_FD=dev
+COMMAND_ALIAS_BK=der
+COMMAND_ALIAS_LT=gc
+COMMAND_ALIAS_RT=dr
+COMMAND_ALIAS_SETH=defett
+COMMAND_ALIAS_GOTO=É
+COMMAND_ALIAS_PD=sac
+COMMAND_ALIAS_PU=sic
+COMMAND_ALIAS_ST=mt
+COMMAND_ALIAS_HT=ct
+COMMAND_ALIAS_CS=ee
+COMMAND_NAME_XCOR=corx
+COMMAND_NAME_YCOR=cory
+COMMAND_NAME_HEADING=entete
+COMMAND_NAME_IS_PENDOWN=styloactif?
+COMMAND_NAME_IS_SHOWING=visible?
+COMMAND_ALIAS_PENDOWN_P=styloactifp
+COMMAND_ALIAS_SHOWING_P=visiblep
+COMMAND_NAME_SUM=somme
+COMMAND_NAME_DIFFERENCE=difference
+COMMAND_NAME_PRODUCT=produit
+COMMAND_NAME_QUOTIENT=quotient
+COMMAND_NAME_REMAINDER=reste
+COMMAND_NAME_MINUS=moins
+COMMAND_NAME_RANDOM=aleatoire
+COMMAND_ALIAS_SUM=+
+COMMAND_ALIAS_DIFFERENCE=-
+COMMAND_ALIAS_PRODUCT=*
+COMMAND_ALIAS_QUOTIENT=/
+COMMAND_ALIAS_REMAINDER=%
+COMMAND_ALIAS_MINUS=~
+COMMAND_NAME_IS_LESS=inferieur?
+COMMAND_NAME_IS_GREATER=superieur?
+COMMAND_NAME_IS_EQUAL=egal?
+COMMAND_NAME_IS_NOT_EQUAL=different?
+COMMAND_NAME_AND=et
+COMMAND_NAME_OR=ou
+COMMAND_NAME_NOT=non
+COMMAND_ALIAS_IS_LESS=inferieurp
+COMMAND_ALIAS_IS_GREATER=superieurp
+COMMAND_ALIAS_IS_EQUAL=egalp
+COMMAND_ALIAS_IS_NOT_EQUAL=differentp
+COMMAND_NAME_LIST_OPEN=[
+COMMAND_NAME_LIST_CLOSE=]
+COMMAND_NAME_VARIABLE_START=:
+COMMAND_NAME_MAKE=fait
+COMMAND_NAME_REPEAT=repete
+COMMAND_NAME_IF=si
+COMMAND_NAME_IFELSE=sinon
+COMMAND_NAME_TO=to
+COMMAND_ALIAS_SET=rend
