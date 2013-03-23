@@ -51,7 +51,6 @@ public class ListCommandNode extends CommandNode {
             throw new Exception("Error parsing command -- bracketed list contents badly formed");
         }
         while (!nextString.equals(CommandConstants.COMMAND_NAME_LIST_CLOSE)) {           
-            System.out.println("nextString: " + nextString);
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);

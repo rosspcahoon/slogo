@@ -38,7 +38,12 @@ public abstract class CommandNode {
         setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=0; i<expected; i++) {
-            String nextString = s.next();
+            String nextString;
+            try {
+                nextString = s.next();
+            } catch (NoSuchElementException e) {
+                throw new Exception("Error parsing command -- elements missing from input");
+            }
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);            

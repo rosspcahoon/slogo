@@ -27,6 +27,9 @@ public class ForwardCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
+        if (result < 0) {
+            throw new Exception("Error executing FORWARD -- argument value is negative, please use BACK");
+        }
 //        System.out.printf("Move turtle forward %d pixels\n", result);
         Room room = getMyRoom();
         room.getTurtle().moveForward(result);

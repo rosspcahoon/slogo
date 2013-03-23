@@ -31,7 +31,7 @@ public class IfElseCommandNode extends CommandNode {
         CommandNode falseCommands = children.get(2);
         int conditionResult = condition.resolve();
         int result = -1;
-        if (conditionResult > CommandConstants.COMMAND_RETURN_FALSE) {
+        if (conditionResult != CommandConstants.COMMAND_RETURN_FALSE) {
             result = trueCommands.resolve();
         } else {
             result = falseCommands.resolve();

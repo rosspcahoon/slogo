@@ -90,7 +90,7 @@ public class CommandLibrary {
             return result;
         }
         
-        // if the input is a number                        
+        // if the input is an int                       
         try {
             int value = Integer.parseInt(name);
             NumberCommandNode result = new NumberCommandNode();
@@ -100,6 +100,7 @@ public class CommandLibrary {
             
         }
         
+        // if the input is a double (cast to int)
         try {
             double value = Double.parseDouble(name);
             NumberCommandNode result = new NumberCommandNode();

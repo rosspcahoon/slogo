@@ -30,10 +30,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private static Location myInitialLocation = new Location(451, 300); 
     private static double myInitialAngle = 0; 
     private static double myMagnitude = 0; 
-    //Moveable's pen 
-    private boolean myPenDown = true; 
     
+    //Moveable's line trail 
+    private boolean myPenDown = true; 
     private List<PenTrail> myTrail;
+    private float myPenThickness;
+    private float myDashWidth;
+    private boolean myDoubleLineOn;
     
     private int myFrameTop;
     private int myFrameBottom;
@@ -63,6 +66,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myFrameBottom = DEFAULT_FRAME_BOTTOM;
         myFrameRight = DEFAULT_FRAME_RIGHT;
         myFrameLeft = DEFAULT_FRAME_LEFT;
+        myPenThickness = (float)2.0;
+        myDashWidth = (float)4.0;
+        myDoubleLineOn = true;
     }
     
     /**
@@ -71,9 +77,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * @param pen
      */
     public void makeLine () { 
-        PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
-                                          super.getOldLocation().getY(), super.getCurrentLocation().getY(), myPenDown); 
-        myTrail.add(penTrail);
+        PenTrail.makeLine(super.getOldLocation().getX(), super.getCurrentLocation().getX(),
+                          super.getOldLocation().getY(), super.getCurrentLocation().getY(), 
+                          myPenDown, myPenThickness, myDashWidth, myDoubleLineOn, myTrail); 
+    }
+    
+    public void addLine(PenTrail trail) {
+        myTrail.add(trail);
     }
     
     /**
@@ -143,7 +153,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     @Override
     public double turnRight(double degrees) {
-        getHeadingVector().turn(degrees);
+        getHeadingVector().turn(-degrees);
         return degrees;
     }
     

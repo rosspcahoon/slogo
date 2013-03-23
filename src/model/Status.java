@@ -17,6 +17,7 @@ public class Status {
     private double myYCoord;
     private double myHeading;
     private Map<String, Integer> myUserVariables;
+    private Map<String, Integer> myUserCommands;
 
     /**
      * Constructor
@@ -27,6 +28,7 @@ public class Status {
         myYCoord = 0;
         myHeading = 0;
         myUserVariables = new HashMap<String, Integer>();
+        myUserCommands = new HashMap<String, Integer>();
     }
     
     /**
@@ -117,6 +119,10 @@ public class Status {
      */
     public Map<String, Integer> getVariableMap() {
         return myUserVariables;
+    }
+    
+    public Map<String, Integer> getUserCommands() {
+        return myUserCommands;
     }
 
 

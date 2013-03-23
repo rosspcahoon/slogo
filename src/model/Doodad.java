@@ -32,9 +32,9 @@ public abstract class Doodad extends Sprite implements IRoomObject {
      */
     public Doodad (Pixmap image, Location center, Dimension size) {
          super(image, center, size);
-         myCurrentLocation = center;
-         myOldLocation = center;
-         myInitialLocation = center; 
+         myCurrentLocation = new Location(center);
+         myOldLocation = new Location(center);
+         myInitialLocation = new Location(center); 
          myHeading = new Vector(0, 0);
      }
     
@@ -57,7 +57,7 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     public void setCurrentLocation (Location location) { 
 //        System.out.println(myCurrentLocation);
 //        System.out.println(myOldLocation);
-        myCurrentLocation = location; 
+        myCurrentLocation = new Location(location); 
     }
     
     @Override
@@ -118,7 +118,10 @@ public abstract class Doodad extends Sprite implements IRoomObject {
      */
     public double returnHome () { 
         double distanceMoved = distance(myInitialLocation);
-        super.setCenter(myInitialLocation); 
+//        super.setCenter(myInitialLocation);
+        System.out.println("Initial: " + myInitialLocation);
+        System.out.println("Current: " + getCurrentLocation());
+        setCurrentLocation(myInitialLocation);
         return distanceMoved;
     }
     
