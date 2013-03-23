@@ -1,11 +1,12 @@
 package model;
 
-import java.awt.Dimension;  
+import java.awt.Dimension;   
 import java.util.Observable; 
 import java.util.Observer; 
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
+import java.awt.Color;
 import static java.lang.Math.*;
 import util.Location;
 import util.Pixmap;
@@ -31,6 +32,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
     private static Location myInitialLocation = new Location(350,250); 
     private static double myInitialAngle = 0; 
+    private static double myMagnitude = 0; 
     //Moveable's pen 
     private boolean myPenDown = true; 
     
@@ -47,7 +49,8 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private Status myStatus;
     //Moveable's location, magnitude (initialized) and angle/head direction
     private double myHeading;
-    private static double myMagnitude = 0; 
+    private Color myPenColor;
+
     
     /**
      * Constructor
@@ -72,7 +75,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     public void makeLine () { 
         PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
-                                          super.getOldLocation().getY(), super.getCurrentLocation().getY()); 
+                                          super.getOldLocation().getY(), super.getCurrentLocation().getY(), myPenDown); 
         myTrail.add(penTrail);
     }
     
@@ -107,10 +110,19 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
+        pen.setColor(myPenColor);
         super.paint(pen);
         for(PenTrail penT: myTrail) {
             penT.drawLine(pen);
         }
+    }
+    
+    /**
+     * sets myPenColor which will be used by the pen that paints this Actor
+     * @param i index of penColors in PenConstants
+     */
+    public void setPenColor(int i) {
+        myPenColor = PenConstants.penColors.get(i);
     }
     
     
