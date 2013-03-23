@@ -1,0 +1,70 @@
+// command names (turtle commands)
+    "devant" = "forward";
+    "derriere" = "back";
+    "gauche" = "left";
+    "droite" = "right";
+    "definirentete" = "setheading";
+    "vers" = "towards";
+    "positionxy" = "setxy";
+    "styloactif" = "pendown";
+    "styloinactif" = "penup";
+    "montrertortue" = "showturtle";
+    "cachertortue" = "hideturtle";
+    "maison" = "home";
+    "effacerecran" = "clearscreen";
+    
+    // command aliases (turtle commands)
+    "dev" = "fd";
+    "der" = "bk";
+    "gc" = "lt";
+    "dr" = "rt";
+    "defett"= "seth";
+    "..." = "goto"; 
+    "sa" = "pd";
+    "si" = "pu";
+    "mt" = "st";
+    "ct" = "ht";
+    "ee" = "cs";
+    
+    // command names (turtle queries)
+    "corx" = "xcor";
+    "cory" = "ycor";
+    "entete" = "heading";
+    "styloactif?" = "pendown?";
+    "visible?" = "showing?";
+    
+    // command aliases (turtle queries)
+    "styloactifp" = "pendownp";
+    "visiblep" = "showingp";
+    
+    // command names (math)
+    "somme" = "sum";
+    "difference" = "difference";
+    "produit" = "product";
+    "quotient" = "quotient";
+    "reste" = "remainder";
+    "moins" = "minus";
+    "aleatoire" = "random";
+    
+    // command aliases (math)
+    "+" = "+";
+    "-" = "-";
+    "*" = "*";
+    "/" = "/";
+    "%" = "%";
+    "~" = "~";
+    
+    // command names (booleans)
+    "inferieur?" = "less?";
+    "superieur?" = "greater?";
+    "egal?" = "equal?";
+    "different?" = "notequal?";
+    "et" = "and";
+    "ou" = "or";
+    "non" = "not";
+    
+    // command aliases (booleans)
+    "inferieurp" = "lessp";
+    "superieurp" = "greaterp";
+    "egalp" = "equalp";
+    "differentp" = "notequalp";
