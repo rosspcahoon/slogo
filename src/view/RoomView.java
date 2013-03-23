@@ -33,7 +33,7 @@ public class RoomView extends WindowView {
         super(hostTab);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
         myGridToggle = false;
-       
+        
     }
 
     @Override

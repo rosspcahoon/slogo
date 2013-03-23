@@ -1,15 +1,12 @@
 package model;
 
-import java.awt.Dimension;  
-import java.util.Observable; 
-import java.util.Observer; 
+import java.awt.Dimension;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
 import static java.lang.Math.*;
 import util.Location;
 import util.Pixmap;
-import util.Sprite;
 import util.Vector;
 
 /**
@@ -23,13 +20,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
 
     //frame default sizes (as of now)--will remove/replace 
     private static final int DEFAULT_FRAME_TOP = 0; 
-    private static final int DEFAULT_FRAME_BOTTOM = 500; 
-    private static final int DEFAULT_FRAME_RIGHT = 700; 
+    private static final int DEFAULT_FRAME_BOTTOM = 600; 
+    private static final int DEFAULT_FRAME_RIGHT = 875; 
     private static final int DEFAULT_FRAME_LEFT = 0; 
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle1.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
-    private static Location myInitialLocation = new Location(350,250); 
+    private static Location myInitialLocation = new Location(437.5, 300); 
     private static double myInitialAngle = 0; 
     //Moveable's pen 
     private boolean myPenDown = true; 

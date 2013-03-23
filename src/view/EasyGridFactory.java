@@ -84,9 +84,9 @@ public class EasyGridFactory {
         c.gridx = 0;
 
         c.weightx = .625;
-        c.weighty = .75;
+        c.weighty = .875;
         c.gridwidth = 5;
-        c.gridheight = 6;
+        c.gridheight = 7;
         c.gridy = 0;
         parent.add(roomview, c);        
 
@@ -98,9 +98,9 @@ public class EasyGridFactory {
         parent.add(feedback, c);
 
         c.weightx = .375;
-        c.weighty = .75;
+        c.weighty = .875;
         c.gridwidth = 3;
-        c.gridheight = 6;
+        c.gridheight = 7;
         c.gridx = 5;
         c.gridy = 0;
         parent.add(consoleview, c);
