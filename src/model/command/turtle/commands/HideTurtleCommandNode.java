@@ -22,7 +22,7 @@ public class HideTurtleCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
 //        System.out.printf("Turtle visibility off\n");
         Room room = getMyRoom();
         room.getTurtle().setVisibilityStatus(false);

@@ -22,7 +22,7 @@ public class HomeCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
 //        System.out.printf("Moved turtle home\n");
         Room room = getMyRoom();
         int result = (int) room.getTurtle().returnHome();

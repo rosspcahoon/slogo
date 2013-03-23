@@ -23,7 +23,7 @@ public class SetXYCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode xChild = children.get(0);
         CommandNode yChild = children.get(1);

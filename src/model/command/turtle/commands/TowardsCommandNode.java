@@ -23,18 +23,17 @@ public class TowardsCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode xChild = children.get(0);
         CommandNode yChild = children.get(1);
         int xCoord = xChild.resolve();
         int yCoord = yChild.resolve();
         Room room = getMyRoom();
-        // TODO: command to turn towards a certain (x,y) coordinate pair
-        // TODO: make command return degrees moved
+        int result = (int) room.getTurtle().jumpTurn(xCoord, yCoord);
 //        room.getTurtle().
 //        System.out.printf("Turned turtle to face %d %d\n", xCoord, yCoord);
-        return -1;
+        return result;
     }
 
 }

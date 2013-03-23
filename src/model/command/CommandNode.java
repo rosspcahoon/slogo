@@ -22,6 +22,31 @@ public abstract class CommandNode {
     }    
     
     /**
+     * Resolves this node--called by parent in it's own resolve method.
+     * @throws Exception 
+     */
+    public abstract int resolve() throws Exception;
+    
+    /**
+     * Performs basic setup of a node after it is created--involves establishing
+     * its children nodes with the appropriate arguments. The passed scanner holds
+     * the means to continue reading the input string.
+     * @throws Exception 
+     */
+    public void setUp(Scanner s, Room r) throws Exception {
+//        clearChildren();
+        setMyRoom(r);
+        int expected = getMyExpectedArgs();
+        for (int i=0; i<expected; i++) {
+            String nextString = s.next();
+            nextString = nextString.toLowerCase();
+            CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
+            addChild(nextNode);            
+            nextNode.setUp(s, r);
+        }
+    }
+    
+    /**
      * Sets the number of expected args for this node.
      */
     public void setMyExpectedArgs(int args) {
@@ -55,29 +80,6 @@ public abstract class CommandNode {
     public abstract CommandNode getCopyOfInstance();
     
     /**
-     * Resolves this node--called by parent in it's own resolve method.
-     */
-    public abstract int resolve();
-    
-    /**
-     * Performs basic setup of a node after it is created--involves establishing
-     * its children nodes with the appropriate arguments. The passed scanner holds
-     * the means to continue reading the input string.
-     */
-    public void setUp(Scanner s, Room r) throws NoSuchElementException {
-        clearChildren();
-        int expected = getMyExpectedArgs();
-        for (int i=0; i<expected; i++) {
-            String nextString = s.next();
-            nextString = nextString.toLowerCase();
-            CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
-            addChild(nextNode);
-            setMyRoom(r);
-            nextNode.setUp(s, r);
-        }
-    }
-    
-    /**
      * Prints out the CommandNode class type, value (if applicable), and children.
      */
     public String toString() {
@@ -106,7 +108,7 @@ public abstract class CommandNode {
     }
     
     /**
-     * Clears the children.
+     * Removes all children from the node.
      */
     public void clearChildren() {
         myChildren.clear();

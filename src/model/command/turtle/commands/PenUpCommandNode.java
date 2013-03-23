@@ -22,7 +22,7 @@ public class PenUpCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
 //        System.out.printf("Put turtle pen up\n");
         Room room = getMyRoom();
         room.getTurtle().setPenStatus(false);

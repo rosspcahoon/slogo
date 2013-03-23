@@ -24,7 +24,7 @@ public class IfCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode condition = children.get(0);
         CommandNode commands = children.get(1);

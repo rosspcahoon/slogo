@@ -25,27 +25,38 @@ public class UserDefinedCommandNode extends CommandNode {
     }
     
     @Override
-    public CommandNode getCopyOfInstance () {
+    public UserDefinedCommandNode getCopyOfInstance () {
         return new UserDefinedCommandNode();
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
+        
+        // add values of parameter variables to myParameterValues
         myParameterValues.clear();
         for (CommandNode child : children) {
             addUserVariableValue(child.resolve());
         }
+        
+        // adds parameter library to user variable libraries in CommandLibrary
         CommandLibrary.createVariableLibrary(myName, myParameterNames, myParameterValues);
+        
+        // creates the children based on parameter names
         super.clearChildren();
         for (String param : myParameterNames) {
             StringCommandNode newNode = new StringCommandNode();
             newNode.setMyValue(param);
             addChild(newNode);
         }
+        
+        // switch variable libraries in CommandLibrary and execute the user defined command
         CommandLibrary.loadVariableLibrary(myName);
         int result = myCommands.resolve();
+        
+        // load original variable library
         CommandLibrary.loadVariableLibrary();
+        
 //        System.out.printf("User defined command %s executed, returning %d\n", myName, result);
         return result;
     }

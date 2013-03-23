@@ -1,6 +1,7 @@
 package model.command.control;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import model.Room;
 import model.command.CommandConstants;
@@ -24,7 +25,7 @@ public class ListCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         int result = 0;
         for (CommandNode child : children) {
@@ -40,20 +41,29 @@ public class ListCommandNode extends CommandNode {
      * create its children until we encounter its end.
      */
     @Override
-    public void setUp(Scanner s, Room r) {
+    public void setUp(Scanner s, Room r) throws Exception {
+        setMyRoom(r);
         int expected = 0;
-        while (s.hasNext()) {
-            String nextString = s.next();
-            if (nextString.equals(CommandConstants.COMMAND_NAME_LIST_CLOSE)) {
-                break;
-            }
+        String nextString;
+        try {
+            nextString = s.next();
+        } catch (NoSuchElementException e) {
+            throw new Exception("Error parsing command -- bracketed list contents badly formed");
+        }
+        while (!nextString.equals(CommandConstants.COMMAND_NAME_LIST_CLOSE)) {           
+            System.out.println("nextString: " + nextString);
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            setMyRoom(r);
             nextNode.setUp(s, r);
             expected++;
-        }
+            try {
+                nextString = s.next();
+            } catch (NoSuchElementException e) {
+                throw new Exception("Error parsing command -- bracketed list not closed with \"" + 
+                        CommandConstants.COMMAND_NAME_LIST_CLOSE + "\"");
+            }
+        } 
         super.setMyExpectedArgs(expected);
     }
 

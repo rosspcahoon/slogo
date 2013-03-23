@@ -22,7 +22,7 @@ public class MinusCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int childValue = child.resolve();

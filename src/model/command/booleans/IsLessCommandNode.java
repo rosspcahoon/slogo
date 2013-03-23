@@ -22,7 +22,7 @@ public class IsLessCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode childOne = children.get(0);
         CommandNode childTwo = children.get(1);

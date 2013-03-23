@@ -22,7 +22,7 @@ public class ClearScreenCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
 //        System.out.printf("Cleared screen\n");
         Room room = getMyRoom();
         int result = (int) room.clear();

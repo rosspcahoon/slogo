@@ -22,7 +22,7 @@ public class SumCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode one = children.get(0);
         CommandNode two = children.get(1);

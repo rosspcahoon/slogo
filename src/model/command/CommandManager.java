@@ -15,6 +15,7 @@ public class CommandManager {
 
     private CommandNode myCurrentRoot;
     private String myCurrentInput;
+    private String myCurrentError;
     private int myCurrentResult;
     private Room myCurrentRoom;
     private Scanner myCurrentScanner;
@@ -29,6 +30,7 @@ public class CommandManager {
         myCurrentResult = -1;
         myCurrentScanner = null;
         myCurrentRoom = null;
+        myCurrentError = null;
     }
     
     /**
@@ -40,31 +42,41 @@ public class CommandManager {
         myCurrentInput = input;
         myCurrentScanner = new Scanner(myCurrentInput);
         myCurrentRoom = room;
-        createTree();
-//        printTree();
-        executeTree();
-        System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
-        cleanTree();
-        return -1;
+        try {
+            createTree();
+    //        printTree();
+            executeTree();
+    //        System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
+            cleanTree();
+        } catch (Exception e) {
+            myCurrentError = e.getMessage();            
+//            System.err.println("CommandManager caught exception with message: " + myCurrentError);
+            e.printStackTrace();
+            room.getState().setErrorMessage(myCurrentError);
+        }
+        return myCurrentResult;
     }
     
     /**
      * Creates the command tree from the input string.
      */
-    private void createTree() {
+    private void createTree() throws Exception {
         String rootString = myCurrentScanner.next();
         rootString = rootString.toLowerCase();
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
         myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom);
         if (myCurrentScanner.hasNext()) {
-            //TODO: throw bad input error
+            while (myCurrentScanner.hasNext()) {
+                System.err.println(myCurrentScanner.next());
+            }
+//            throw new Exception("Error parsing command -- input has too many elements or is badly formed");
         }
     }
     
     /**
      * Executes the command tree appropriately.
      */
-    private void executeTree() {
+    private void executeTree() throws Exception {
         myCurrentResult = myCurrentRoot.resolve();
     }
     

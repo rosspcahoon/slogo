@@ -66,7 +66,7 @@ public class CommandLibrary {
      * Gets the appropriate command object from the library, or gives an
      * error if none exists.
      */
-    public static CommandNode getCommandNode(String name) {        
+    public static CommandNode getCommandNode(String name) throws Exception {        
         name = getAlias(name);
         
         // if the input is a user variable
@@ -82,21 +82,33 @@ public class CommandLibrary {
             return result;
         }
         
-        // if the input is a number
-        if (!myCommandNodes.containsKey(name)) {
-            try {
-                int value = Integer.parseInt(name);
-                NumberCommandNode result = new NumberCommandNode();
-                result.setMyValue(value);
-                return result;
-            } catch (NumberFormatException e) {
-                // TODO: add code for setting error status in room
-                return null;
-            }
+        // return the command node from the command library
+        if (myCommandNodes.containsKey(name)) {
+            CommandNode result = myCommandNodes.get(name).getCopyOfInstance();
+            return result;
         }
         
-        // return the command node from the command library
-        return myCommandNodes.get(name).getCopyOfInstance();
+        // if the input is a number                        
+        try {
+            int value = Integer.parseInt(name);
+            NumberCommandNode result = new NumberCommandNode();
+            result.setMyValue(value);
+            return result;
+        } catch (NumberFormatException e) {
+            
+        }
+        
+        try {
+            double value = Double.parseDouble(name);
+            NumberCommandNode result = new NumberCommandNode();
+            result.setMyValue((int) value);
+            return result;
+        } catch (NumberFormatException e) {
+
+        }
+        
+        throw new Exception("Error parsing command -- could not interpret input: " + name);
+        
     }
     
     /**
@@ -108,10 +120,11 @@ public class CommandLibrary {
     
     /**
      * Returns the value associated with the input variableName
+     * @throws Exception 
      */
-    public static Integer getUserVariable(String variableName) {
+    public static Integer getUserVariable(String variableName) throws Exception {
         if (!myCurrentUserVariables.containsKey(variableName)) {
-            return -1;
+            throw new Exception("User variable " + variableName + " not found");
         }
         return myCurrentUserVariables.get(variableName);
     }
