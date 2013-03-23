@@ -176,10 +176,21 @@ public class CommandLibrary {
     /**
      * Adds contents of the default user variable library to status.
      */
-    public static void addLibraryToRoomStatus(Room room) {
+    public static void addDefaultVariableLibraryToRoomStatus(Room room) {
         Status status = room.getState();
         for (String key : myDefaultUserVariables.keySet()) {
             status.addVariable(key, myDefaultUserVariables.get(key));
+        }                
+    }
+    
+    /**
+     * Adds contents of the user-defined command library to status.
+     */
+    public static void addCommandLibraryToRoomStatus(Room room) {
+        Status status = room.getState();
+        for (String key : myUserCommands.keySet()) {
+            UserDefinedCommandNode ucdNode = myUserCommands.get(key);            
+            status.addCommandName(key, ucdNode.getCopyOfParameterNames());
         }                
     }
     
