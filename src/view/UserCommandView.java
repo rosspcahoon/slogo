@@ -34,12 +34,16 @@ public class UserCommandView extends WindowView {
         EasyGridFactory.layoutHorizontal(this, new JScrollPane(myUserCommandsArea));
     }
 
-    private void display(List<String> usercommandlist) {
+    private void display(Map<String, List<String>> usercommandlist) {
         myUserCommandsArea.setEditable(true);
         myUserCommandsArea.setText("");
         myUserCommandsArea.append(Window.getResources().getString("UserCommandTitle") + ": \n");      
-        for(String s: usercommandlist){
-            myUserCommandsArea.append(s + "\n");
+        for(String s: usercommandlist.keySet()){
+            myUserCommandsArea.append(s + " ");
+            for(String z: usercommandlist.get(s)) {
+                myUserCommandsArea.append(z + " ");
+            }
+            myUserCommandsArea.append("\n");
         }
         myUserCommandsArea.setEditable(false);
     }
@@ -51,8 +55,8 @@ public class UserCommandView extends WindowView {
     public void render (Renderable p) {
         if (p.getState() != null) {
             Status s = (Status) p.getState();
-            List<String> usercommandlist = new ArrayList<String>();
-           //usercommandlist = s.getUserCommandList();
+            Map<String, List<String>> usercommandlist = new HashMap<String, List<String>>();
+            usercommandlist = s.getUserCommands();
             display(usercommandlist);
         }
     }
