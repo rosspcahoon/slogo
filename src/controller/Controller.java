@@ -114,10 +114,11 @@ public class Controller implements Observer, IController {
      * @param t
      * @param cmd
      */
-    public void processCommand (TabView t, String cmd) {
+    public int processCommand (TabView t, String cmd) {
         Room room = getRoomForTab(t);
-        myModel.processCommand(room, cmd);
+        int res=(int) myModel.processCommand(room, cmd);
         t.setRenderable((Renderable) room);
+        return res;
     }
 
     

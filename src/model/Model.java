@@ -25,9 +25,8 @@ public class Model implements ISLogoModel {
      * @param s command string
      */
     @Override
-    public boolean processCommand (Room r, String s) {
-        myCommandManager.process(r, s);
-        return true;
+    public int processCommand (Room r, String s) {
+        return myCommandManager.process(r, s);
     }
 
 

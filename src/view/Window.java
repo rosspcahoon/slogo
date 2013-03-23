@@ -2,6 +2,8 @@ package view;
 
 
 import controller.Controller;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -13,9 +15,16 @@ import java.io.File;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import model.Renderable;
@@ -247,19 +256,20 @@ public class Window extends JFrame {
                 if(temp != null) {
 //                        temp.setTurtle(img);
                 }
-                registerTurtleShape(imgURL);
-                setTurtleShape();
+                int last = registerTurtleShape(imgURL);
+                setTurtleShape(last);
             }
         }
 
-        private void setTurtleShape () {
+        private void setTurtleShape (int i) {
             TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            myController.processCommand(temp, "setshape "+"last");
+            myController.processCommand(temp, "setshape " + i);
         }
 
-        private void registerTurtleShape (String imgURL) {
+        private int registerTurtleShape (String imgURL) {
             TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            myController.processCommand(temp, "registershape "+imgURL);
+            return (int)myController.processCommand(temp, "registershape " + imgURL);
+            
         }
     }
 
@@ -271,7 +281,115 @@ public class Window extends JFrame {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-            //TODO: Add action
+            PenOptionsView myPOV = new PenOptionsView();
+            myPOV.display();
+            updatePen(myPOV.getUserDownChoice(), myPOV.getUserThicknessChoice(), 
+                      myPOV.getUserTypeChoice());
         }
+
+        private void updatePen(boolean down, String thickness, String type) {
+            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+            myController.processCommand(temp, down ? "pendown" : "penup");
+            myController.processCommand(temp, "setpenthickness " + thickness);
+            myController.processCommand(temp, "setpentype " + type);
+        }
+    }
+    public class PenOptionsView extends JDialog {
+        private Color selectedColor;
+        private boolean penDown;
+        private String penThickness;
+        private String penType;
+        private JTabbedPane povtabbedpane;
+        private JPanel otherProperties;
+        private JComponent penDownUI;
+        private JComponent penThicknessUI; //generalize
+        private JComponent penTypeUI; // generalize
+        private PenOptionsView() { 
+            super(Window.this, "Choose Pen Options");
+            add(povtabbedpane = new JTabbedPane());
+            povtabbedpane.add(new JColorChooser(), "Color");
+            povtabbedpane.add(otherProperties=new JPanel(), "Other");
+            
+            penDownUI = new JCheckBox("Pen Down");
+            ((JCheckBox) penDownUI).setSelected(true);
+            otherProperties.add(penDownUI);
+            
+            penTypeUI = new JPanel();
+            ButtonGroup grouper = new ButtonGroup();
+          //Create the radio buttons.
+            JRadioButton dashed = new JRadioButton("dashed"); //edit for translation
+            dashed.setActionCommand("dashed");
+            dashed.setSelected(true);
+
+            JRadioButton dotted = new JRadioButton("dotted"); //edit for translation
+            dotted.setActionCommand("dotted");
+            dotted.setSelected(true);
+
+            //Group the radio buttons.
+            grouper.add(dashed);
+            grouper.add(dotted);
+            penTypeUI.add(dashed);
+            penTypeUI.add(dotted);
+            
+
+            //Register a listener for the radio buttons.
+//            dashed.addActionListener(this);
+//            dotted.addActionListener(this);
+//        public void actionPerformed(ActionEvent e) {
+//            picture.setIcon(new ImageIcon("images/" 
+//                                          + e.getActionCommand() 
+//                                          + ".gif"));
+//        }
+            otherProperties.add(penTypeUI);
+            
+            
+            penThicknessUI = new JPanel();
+            ButtonGroup grouper2 = new ButtonGroup();
+          //Create the radio buttons.
+            JRadioButton two = new JRadioButton("2"); //edit for translation
+            dashed.setActionCommand("2");
+            dashed.setSelected(true);
+
+            JRadioButton four = new JRadioButton("4"); //edit for translation
+            dotted.setActionCommand("4");
+            dotted.setSelected(true);
+
+            //Group the radio buttons.
+            grouper2.add(two);
+            grouper2.add(four);
+            penTypeUI.add(two);
+            penTypeUI.add(four);
+            
+
+            //Register a listener for the radio buttons.
+//            dashed.addActionListener(this);
+//            dotted.addActionListener(this);
+//        public void actionPerformed(ActionEvent e) {
+//            picture.setIcon(new ImageIcon("images/" 
+//                                          + e.getActionCommand() 
+//                                          + ".gif"));
+//        }
+            otherProperties.add(penThicknessUI);
+        }
+        
+        public void display() {
+            setVisible(true);
+//            JColorChooser.showDialog(
+//                                     Window.this,"",
+//                                     Color.black);
+        }
+        public String getUserTypeChoice () {
+            // TODO Auto-generated method stub
+            return "dashed";
+        }
+        public String getUserThicknessChoice () {
+            // TODO Auto-generated method stub
+            return ""+2;
+        }
+        public boolean getUserDownChoice () {
+            // TODO Auto-generated method stub
+            return true;
+        }
+        
     }
 }
