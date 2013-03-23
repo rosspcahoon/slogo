@@ -26,7 +26,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle1.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
-    private static Location myInitialLocation = new Location(452, 300); 
+    private static Location myInitialLocation = new Location(451, 300); 
     private static double myInitialAngle = 0; 
     //Moveable's pen 
     private boolean myPenDown = true; 
