@@ -15,6 +15,6 @@ public interface ISLogoModel {
      * @param s
      * @return
      */
-    abstract boolean processCommand (Room r, String s);
+    abstract int processCommand (Room r, String s);
     
 }

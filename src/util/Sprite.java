@@ -1,10 +1,11 @@
 package util;
 
-import java.awt.Dimension;
+import java.awt.Dimension; 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.util.Observable;
+import model.ImageConstants;
 
 
 /**
@@ -73,6 +74,10 @@ public abstract class Sprite extends Observable {
     public void translate (Vector v) {
         myCenter.translate(v);
         resetBounds();
+    }
+    
+    public void setImage(int i) {
+        myView = new Pixmap(ImageConstants.imageFiles.get(i));
     }
 
     /**
