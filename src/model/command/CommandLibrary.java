@@ -3,6 +3,8 @@ package model.command;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Room;
+import model.Status;
 import model.command.turtle.commands.*;
 import model.command.turtle.queries.*;
 import model.command.booleans.*;
@@ -168,6 +170,16 @@ public class CommandLibrary {
      */
     public static void addUserDefinedCommand(String name, UserDefinedCommandNode command) {
         myUserCommands.put(name, command);
+    }
+    
+    /**
+     * Adds contents of the default user variable library to status.
+     */
+    public static void addLibraryToRoomStatus(Room room) {
+        Status status = room.getState();
+        for (String key : myDefaultUserVariables.keySet()) {
+            status.addVariable(key, myDefaultUserVariables.get(key));
+        }                
     }
     
     /**

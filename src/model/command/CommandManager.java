@@ -54,6 +54,7 @@ public class CommandManager {
             e.printStackTrace();
             room.getState().setErrorMessage(myCurrentError);
         }
+        CommandLibrary.addLibraryToRoomStatus(room);
         return myCurrentResult;
     }
     
