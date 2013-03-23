@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JComponent;
@@ -40,14 +41,20 @@ public class EasyGridFactory {
     private static void layoutHelper(boolean isHorizontal, Container parent, JComponent ... children) {
         parent.setLayout(new GridBagLayout());
         int size = children.length;
+        int childwidth = parent.getWidth()/size;
+        int childheight = parent.getHeight()/size;
+        
         GridBagConstraints c = new GridBagConstraints();
         configureDefault(c);
         for (int i = 0; i < size; i++) {
-            c.gridx = 0;
-            c.gridy = i;
             if(isHorizontal){
                 c.gridx = i;
                 c.gridy = 0;
+                children[i].setPreferredSize(new Dimension(childwidth, parent.getHeight()));
+            } else {
+                c.gridx = 0;
+                c.gridy = i;
+                children[i].setPreferredSize(new Dimension(parent.getWidth(), childheight));
             }
             parent.add(children[i], c);
         }  
@@ -77,7 +84,7 @@ public class EasyGridFactory {
         c.gridx = 0;
 
         c.weightx = .625;
-        c.weighty = .875;
+        c.weighty = .75;
         c.gridwidth = 5;
         c.gridheight = 6;
         c.gridy = 0;
@@ -91,7 +98,7 @@ public class EasyGridFactory {
         parent.add(feedback, c);
 
         c.weightx = .375;
-        c.weighty = .875;
+        c.weighty = .75;
         c.gridwidth = 3;
         c.gridheight = 6;
         c.gridx = 5;

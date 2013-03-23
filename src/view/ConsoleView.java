@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Stack;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -18,26 +19,11 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ConsoleView extends WindowView {
-
-    /**
-     * Width of the component
-     */
-    public static final int WIDTH = 300;
-
-    /**
-     * Height of the component
-     */
-    public static final int HEIGHT = 700;
-
-    /**
-     * Width of border
-     */
-    public static final int BORDER_WIDTH = 5; 
     private JTextField myTextField;
     private JTextArea myCommandField;
     private Stack<String> myCommandsHistory;
     private Stack<String> myHistoryBrowsingHelper;
-    private Dimension mySize = new Dimension(WIDTH, HEIGHT);
+    private Dimension mySize = ViewConstants.DEFAULT_CONSOLE_SIZE;
 
     /**
      * Default constructor
@@ -46,14 +32,13 @@ public class ConsoleView extends WindowView {
     public ConsoleView (TabView tab) {
         super(tab);
         this.setPreferredSize(mySize);
-        this.setMinimumSize(mySize);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
     }
 
     @Override
     protected void addComponents () {
         EasyGridFactory.layoutDefaultConsole(this, makeClear(), 
-                                             myCommandField, makeSubmit(), myTextField);
+                                             new JScrollPane(myCommandField), makeSubmit(), myTextField);
     }
 
     @Override

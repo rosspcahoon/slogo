@@ -122,10 +122,6 @@ public class PenTrail extends Line2D.Double {
     }
     
     public void drawLine (Graphics2D pen) { 
-        System.out.println(myX1);
-        System.out.println(myX2);
-        System.out.println(myY1);
-        System.out.println(myY2);
         pen.setColor(Color.BLACK);
         pen.drawLine((int)myX1, (int)myY1, (int)myX2, (int)myY2); 
     }

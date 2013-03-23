@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Renderable;
 import model.Status;
@@ -13,7 +11,7 @@ import model.Status;
  */
 @SuppressWarnings("serial")
 public class StateView extends WindowView {
-    private JTextArea myTextArea;
+    private JTextArea myFeedbackText;
 
     /**
      * Constructs the StateView and sets a default border
@@ -26,17 +24,17 @@ public class StateView extends WindowView {
 
     @Override
     protected void addComponents () {
-        myTextArea.setEditable(false);
-        EasyGridFactory.layoutHorizontal(this, new JScrollPane(myTextArea));
+        myFeedbackText.setEditable(false);
+        EasyGridFactory.layoutHorizontal(this, myFeedbackText);        
     }
 
     private void display(double[] array) {
-        myTextArea.setEditable(true);
-        myTextArea.setText("");
-        myTextArea.append(Window.getResources().getString("FeedbackPosition") + 
-                          "(" + array[0] + ", " + array[1] + ")      ");
-        myTextArea.append(Window.getResources().getString("FeedbackHeading") + array[2] + "\n");
-        myTextArea.setEditable(false);
+        myFeedbackText.setEditable(true);
+        myFeedbackText.setText("");
+        myFeedbackText.append(Window.getResources().getString("FeedbackPosition") + 
+                         "(" + array[0] + ", " + array[1] + ")" + "\n");
+        myFeedbackText.append(Window.getResources().getString("FeedbackHeading") + array[2] + "\n");
+        myFeedbackText.setEditable(false);
     }
 
     /**
@@ -53,6 +51,6 @@ public class StateView extends WindowView {
 
     @Override
     protected void initializeVariables () {
-        myTextArea = new JTextArea();
+        myFeedbackText = new JTextArea();
     }
 }

@@ -123,7 +123,7 @@ public class Vector {
     /**
      * Sets this vector's direction to the given value.
      */
-    protected void setDirection (double value) {
+    public void setDirection (double value) {
         myAngle = value;
     }
 

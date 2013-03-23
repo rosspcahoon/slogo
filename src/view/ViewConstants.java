@@ -14,7 +14,7 @@ public class ViewConstants {
     /**
      * The size for Window objects
      */
-    public static final Dimension DEFAULT_WINDOW_SIZE = new Dimension(1200, 700);
+    public static final Dimension DEFAULT_WINDOW_SIZE = new Dimension(1200, 800);
 
     /**
      * The size for TabView objects
@@ -24,8 +24,8 @@ public class ViewConstants {
     /**
      * The size for FeedBackView objects
      */
-    public static final Dimension DEFAULT_FEEDBACK_SIZE = new Dimension(800, 100);
-
+    public static final Dimension DEFAULT_FEEDBACK_SIZE = new Dimension(800, 200);
+    public static final Dimension DEFAULT_CONSOLE_SIZE = new Dimension(300, 700);
     /**
      * The size for RoomView objects
      */

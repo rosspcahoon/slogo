@@ -252,9 +252,15 @@ public abstract class Sprite extends Observable {
     /**
      * Display this shape on the screen.
      */
-    public void paint (Graphics2D pen)
-    {
+    public void paint (Graphics2D pen) {
         myView.paint(pen, myCenter, mySize, myVelocity.getDirection());
+    }
+    
+    /**
+     * Display this shape on the screen.
+     */
+    public void paint (Graphics2D pen, double heading) {
+        myView.paint(pen, myCenter, mySize, heading);
     }
 
     /**
