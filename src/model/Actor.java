@@ -291,4 +291,16 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         return moveVector;
     }
     
+    public void setPenThickness(double thick) {
+        myPenThickness = (float)thick;
+    }
+    
+    public void setDoubleLine(boolean doubleLine) {
+        myDoubleLineOn = doubleLine;
+    }
+    
+    public void setDashWidth(double width) {
+        myDashWidth = (float)width;
+    }
+    
 }
