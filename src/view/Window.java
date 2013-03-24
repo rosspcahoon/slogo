@@ -196,7 +196,7 @@ public class Window extends JFrame {
     protected class ChangeBackgroundAction extends AbstractAction {
         public ChangeBackgroundAction () {
             super(Window.ourResources.getString("ChangeBackground"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
         }
 
         @Override
@@ -221,7 +221,7 @@ public class Window extends JFrame {
     protected class ToggleGridAction extends AbstractAction {
         public ToggleGridAction () {
             super(Window.ourResources.getString("ReferenceCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.ALT_MASK));
         }
         @Override
         public void actionPerformed (ActionEvent e) {
@@ -235,7 +235,7 @@ public class Window extends JFrame {
     protected class ChangeTurtleAction extends AbstractAction {
         public ChangeTurtleAction () {
             super(Window.ourResources.getString("ChangeTurtle"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
         }
 
         @Override
@@ -266,7 +266,7 @@ public class Window extends JFrame {
     protected class ChangePenAction extends AbstractAction {
         public ChangePenAction () {
             super(Window.ourResources.getString("ChangePenProperties"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
         }
 
         @Override
