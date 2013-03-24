@@ -13,6 +13,7 @@ public class FeedbackView extends WindowView {
     private ErrorLogView myErrorLogView;
     private StateView myStateView;
     private VariableView myVariableView;
+    private UserCommandView myUserCommandView;
     private Dimension mySize = ViewConstants.DEFAULT_FEEDBACK_SIZE;
 
     /**
@@ -27,7 +28,7 @@ public class FeedbackView extends WindowView {
 
     @Override
     public void addComponents () {
-        EasyGridFactory.layoutHorizontal(this, myStateView, myVariableView, myErrorLogView);
+        EasyGridFactory.layoutHorizontal(this, myStateView, myUserCommandView, myVariableView, myErrorLogView);
     }
 
     /**
@@ -38,6 +39,7 @@ public class FeedbackView extends WindowView {
         myErrorLogView.render(p);
         myStateView.render(p);
         myVariableView.render(p);
+        myUserCommandView.render(p);
     }
 
     @Override
@@ -45,5 +47,6 @@ public class FeedbackView extends WindowView {
         myErrorLogView = new ErrorLogView(this);
         myStateView = new StateView(this);
         myVariableView = new VariableView(this);
+        myUserCommandView = new UserCommandView(this);
     }
 }

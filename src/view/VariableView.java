@@ -2,6 +2,7 @@ package view;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Renderable;
 import model.Status;
@@ -28,7 +29,7 @@ public class VariableView extends WindowView {
     protected void addComponents () {
         myVariableArea.setEditable(false);
         myVariableArea.append(Window.getResources().getString("VariableTitle") + "\n");
-        EasyGridFactory.layoutHorizontal(this, myVariableArea);
+        EasyGridFactory.layoutHorizontal(this, new JScrollPane(myVariableArea));
     }
 
     private void display(Map<String, Integer> varlist) {
@@ -48,7 +49,6 @@ public class VariableView extends WindowView {
     public void render (Renderable p) {
         if (p.getState() != null) {
             Status s = (Status) p.getState();
-            //All hypothetical
             Map<String, Integer> varlist = new HashMap<String, Integer>();
             varlist = s.getVariableMap();
             display(varlist);
