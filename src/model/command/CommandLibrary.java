@@ -60,7 +60,6 @@ public class CommandLibrary {
         myDefaultUserVariables = new HashMap<String,Integer>();
         myUserVariableLibraries = new HashMap<String,Map<String,Integer>>();
         myUserCommands = new HashMap<String,UserDefinedCommandNode>();
-        myCurrentUserVariables = new HashMap<String,Integer>();
         myCurrentUserVariables = myDefaultUserVariables;
     }
     
@@ -138,7 +137,7 @@ public class CommandLibrary {
      * are associated.
      */
     public static void loadVariableLibrary(String commandName) {
-        if (!myUserVariableLibraries.containsKey(commandName)) {
+        if (!myUserVariableLibraries.containsKey(commandName)) {            
             Map<String,Integer> newLibrary = new HashMap<String,Integer>();
             myUserVariableLibraries.put(commandName, newLibrary);
         }
@@ -157,13 +156,13 @@ public class CommandLibrary {
      */
     public static void createVariableLibrary(String command, List<String> names, List<Integer> values) {
         Map<String,Integer> newLibrary = new HashMap<String,Integer>();
-        if (names.size() != values.size()) {
-            //TODO: throw error
-        }
+//        if (names.size() != values.size()) {
+//            
+//        }
         for (int i=0; i<names.size(); i++) {
             newLibrary.put(names.get(i), values.get(i));
         }
-        myUserVariableLibraries.put(command, newLibrary);
+        myUserVariableLibraries.put(command, newLibrary);        
     }
     
     /**

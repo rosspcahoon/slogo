@@ -2,6 +2,9 @@ package model.command.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import model.Room;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
 import model.command.StringCommandNode;
@@ -26,32 +29,29 @@ public class UserDefinedCommandNode extends CommandNode {
     
     @Override
     public UserDefinedCommandNode getCopyOfInstance () {
-        return new UserDefinedCommandNode();
+        UserDefinedCommandNode result = new UserDefinedCommandNode();
+        result.setMyExpectedArgs(getMyExpectedArgs());
+        result.setParameterNames(getCopyOfParameterNames());
+        return result;
     }
-
+    
     @Override
     public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
-        
+                
         // add values of parameter variables to myParameterValues
         myParameterValues.clear();
         for (CommandNode child : children) {
             addUserVariableValue(child.resolve());
         }
         
-        // adds parameter library to user variable libraries in CommandLibrary
-        CommandLibrary.createVariableLibrary(myName, myParameterNames, myParameterValues);
+        // adds parameter library to user variable libraries in CommandLibrary        
+        CommandLibrary.createVariableLibrary(myName, myParameterNames, myParameterValues);        
         
-        // creates the children based on parameter names
-        super.clearChildren();
-        for (String param : myParameterNames) {
-            StringCommandNode newNode = new StringCommandNode();
-            newNode.setMyValue(param);
-            addChild(newNode);
-        }
+        // switch variable libraries in CommandLibrary
+        CommandLibrary.loadVariableLibrary(myName);       
         
-        // switch variable libraries in CommandLibrary and execute the user defined command
-        CommandLibrary.loadVariableLibrary(myName);
+        // execute the user defined command        
         int result = myCommands.resolve();
         
         // load original variable library
@@ -113,6 +113,13 @@ public class UserDefinedCommandNode extends CommandNode {
             result.add(new String(param));
         }
         return result;
+    }
+    
+    /**
+     * Sets the parameter names of this command.
+     */
+    public void setParameterNames(List<String> names) {
+        myParameterNames = names;
     }
 
 }

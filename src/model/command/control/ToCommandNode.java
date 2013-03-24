@@ -70,10 +70,10 @@ public class ToCommandNode extends CommandNode {
         }
         
         // setup final UserDefinedCommandNode and add to CommandLibrary
-        System.out.println("CommandList from TO: " + commandList);
         result.setMyName(nameString);
         result.addCommands(commandList);
-        result.setMyExpectedArgs(parameters.getChildren().size());        
+        result.setMyExpectedArgs(parameters.getChildren().size());    
+                
         CommandLibrary.addUserDefinedCommand(nameString, result);
 //        System.out.printf("New command %s created, returning %d\n", nameString, CommandConstants.COMMAND_RETURN_TRUE);
         return CommandConstants.COMMAND_RETURN_TRUE;

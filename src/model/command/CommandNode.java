@@ -34,7 +34,7 @@ public abstract class CommandNode {
      * @throws Exception 
      */
     public void setUp(Scanner s, Room r) throws Exception {
-//        clearChildren();
+        clearChildren();
         setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=0; i<expected; i++) {

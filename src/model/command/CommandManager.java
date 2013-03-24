@@ -44,9 +44,9 @@ public class CommandManager {
         myCurrentRoom = room;
         try {
             createTree();
-    //        printTree();
+//            printTree();
             executeTree();
-            System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
+//            System.out.printf("CommandManager resolve got %d\n", myCurrentResult);
             cleanTree();
         } catch (Exception e) {
             myCurrentError = e.getMessage();            
