@@ -37,8 +37,8 @@ public class ConsoleView extends WindowView {
 
     @Override
     protected void addComponents () {
-        EasyGridFactory.layoutDefaultConsole(this, makeClear(), 
-                                             new JScrollPane(myCommandField), makeSubmit(), myTextField);
+        EasyGridFactory.layoutDefaultConsole(this, makeClear(), new JScrollPane(myCommandField), 
+                                             makeSubmit(), myTextField);
     }
 
     @Override

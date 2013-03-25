@@ -33,7 +33,7 @@ public class RoomView extends WindowView {
         super(hostTab);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
         myGridToggle = false;
-        
+
     }
 
     @Override
@@ -57,12 +57,13 @@ public class RoomView extends WindowView {
         if (myBackgroundImage != null) {
             pen.drawImage(myBackgroundImage, 0, 0, getSize().width, getSize().height, null);
         }
-        if(myGridToggle) {
+        if (myGridToggle) {
             URL url = this.getClass().getResource("/images/grid.png");
             try {
                 myGrid = ImageIO.read(url);
             }
             catch (IOException e) {
+                return;
             }
             pen.drawImage(myGrid, 0, 0, null);
         }
@@ -101,9 +102,5 @@ public class RoomView extends WindowView {
     public void toggleGrid() {
         myGridToggle ^= true;  
         repaint();
-    }
-    
-    public void setTurtle(Image img) {
-        //myRoom.setTurtle(img);
     }
 }

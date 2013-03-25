@@ -38,20 +38,22 @@ public class EasyGridFactory {
         layoutHelper(false, parent, children);
     }
 
-    private static void layoutHelper(boolean isHorizontal, Container parent, JComponent ... children) {
+    private static void layoutHelper(boolean isHorizontal, Container parent,
+                                     JComponent ... children) {
         parent.setLayout(new GridBagLayout());
         int size = children.length;
-        int childwidth = parent.getWidth()/size;
-        int childheight = parent.getHeight()/size;
+        int childwidth = parent.getWidth() / size;
+        int childheight = parent.getHeight() / size;
         
         GridBagConstraints c = new GridBagConstraints();
         configureDefault(c);
         for (int i = 0; i < size; i++) {
-            if(isHorizontal){
+            if (isHorizontal) {
                 c.gridx = i;
                 c.gridy = 0;
                 children[i].setPreferredSize(new Dimension(childwidth, parent.getHeight()));
-            } else {
+            } 
+            else {
                 c.gridx = 0;
                 c.gridy = i;
                 children[i].setPreferredSize(new Dimension(parent.getWidth(), childheight));

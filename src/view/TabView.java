@@ -41,7 +41,7 @@ public class TabView extends WindowView {
         this(hostWindow);
         myID = id;       
     }
-    
+
     private void setWindow() {
         myWindow = (Window) getParent();
     }
@@ -54,7 +54,7 @@ public class TabView extends WindowView {
         myRenderable = renderableRoom;
         render(myRenderable);
     }
-    
+
     /**
      * Sets background image for the Roomview
      * @param img the image to be set.
@@ -68,14 +68,7 @@ public class TabView extends WindowView {
     public void toggleGrid() {
         myRoomView.toggleGrid();
     }
-    
-   /**
-    * Sets Turtle image for the RoomView
-    * @param img the image to be set.
-    */
-    public void setTurtle(Image img) {
-        myRoomView.setTurtle(img);
-    }
+
 
     /**
      * Get the ID for this component

@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -29,7 +28,7 @@ public class RadioGroup extends JPanel {
      */
     public RadioGroup(String var, ActionListener listener, JRadioButton ...buttons) {
         myGrouper = new ButtonGroup();
-        myListener=listener;
+        myListener = listener;
         add(buttons);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
     }

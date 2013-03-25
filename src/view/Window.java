@@ -2,7 +2,6 @@ package view;
 
 
 import controller.Controller;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -15,16 +14,10 @@ import java.io.File;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import model.Renderable;
@@ -45,7 +38,7 @@ public class Window extends JFrame {
     private JMenuBar myMenuBar;
     private JFileChooser myChooser;
     private Dimension mySize = ViewConstants.DEFAULT_WINDOW_SIZE;
-    
+
     /**
      * Constructor for Window
      * @param title The title of the View
@@ -123,7 +116,7 @@ public class Window extends JFrame {
     public int processCommand (TabView tabView, String s) {
         return myController.processCommand(tabView, s);
     }
-    
+
     /**
      * Called by a non TabView child view that will request a string to be processed as a Command
      * Uses the active tab
@@ -132,6 +125,14 @@ public class Window extends JFrame {
     public int processCommand (String s) {
         TabView temp = (TabView) myTabbedPane.getSelectedComponent();
         return processCommand(temp, s);
+    }
+    
+    /**
+     * To be refactored, used to delegate logic for retrieving current pen color
+     * @return
+     */
+    private Color getCurrentPenColor() {
+        return Color.BLACK;
     }
 
     /**
@@ -152,6 +153,8 @@ public class Window extends JFrame {
             addTab();
         } 
     }
+
+
 
     protected class OpenFileAction extends AbstractAction {
 
@@ -207,7 +210,7 @@ public class Window extends JFrame {
                 java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
             }
             catch (java.io.IOException er) {
-                System.out.println(er.getMessage());
+                return;
             }
         }
     }
@@ -236,7 +239,7 @@ public class Window extends JFrame {
             }
         }
     }
-    
+
     protected class ToggleGridAction extends AbstractAction {
         public ToggleGridAction () {
             super(Window.ourResources.getString("ReferenceCommand"));
@@ -245,7 +248,7 @@ public class Window extends JFrame {
         @Override
         public void actionPerformed (ActionEvent e) {
             TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            if(temp != null) {
+            if (temp != null) {
                 temp.toggleGrid();
             }
         }
@@ -263,8 +266,8 @@ public class Window extends JFrame {
             if (response == JFileChooser.APPROVE_OPTION) {
                 String imgURL = myChooser.getSelectedFile().getAbsolutePath();
                 TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-                if(temp != null) {
-//                        temp.setTurtle(img);
+                if (temp != null) {
+                    //                        temp.setTurtle(img);
                 }
                 int last = registerTurtleShape(imgURL);
                 setTurtleShape(last);
@@ -279,7 +282,7 @@ public class Window extends JFrame {
         private int registerTurtleShape (String imgURL) {
             TabView temp = (TabView) myTabbedPane.getSelectedComponent();
             return (int)myController.processCommand(temp, "registershape " + imgURL);
-            
+
         }
     }
 
@@ -294,7 +297,7 @@ public class Window extends JFrame {
             (new PenOptionsView(Window.this)).display();
         }
     }
-    
+
     protected class ChangePenColorAction extends AbstractAction {
         public ChangePenColorAction () {
             super(Window.ourResources.getString("ChangePenColor"));
@@ -306,16 +309,8 @@ public class Window extends JFrame {
             Color result = JColorChooser.showDialog(Window.this, 
                                                     Window.ourResources.getString("ChangePenColor"), 
                                                     getCurrentPenColor());
-            int pos = processCommand("registerPenColor "+ result.getRGB());
-            processCommand("setPenColor "+ pos);
+            int pos = processCommand("registerPenColor " + result.getRGB());
+            processCommand("setPenColor " + pos);
         }
-    }
-    
-    /**
-     * To be refactored, used to delegate logic for retrieving current pen color
-     * @return
-     */
-    private Color getCurrentPenColor() {
-        return Color.BLACK;
     }
 }
