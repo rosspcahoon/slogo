@@ -36,6 +36,11 @@ public class ViewConstants {
     public static final Border DEFAULT_BORDER = BorderFactory.createEmptyBorder(5, 5, 5, 5);
     
     /**
+     * The size of the dialog box
+     */
+    public static final Dimension DEFAULT_PEN_OPTIONS_VIEW_SIZE = new Dimension(250, 150);
+    
+    /**
      * Added to fully prevent instantiation of this utility class.
      */
     private ViewConstants() {

@@ -49,7 +49,9 @@ public class MenuBarView extends JMenuBar {
         result.add(myWindow.new ChangeBackgroundAction());
         result.add(myWindow.new ToggleGridAction());
         result.add(myWindow.new ChangeTurtleAction());
-        result.add(myWindow.new ChangePenAction());
+        result.add(new JSeparator());
+        result.add(myWindow.new ChangePenColorAction());
+        result.add(myWindow.new ChangePenPropertiesAction());
         return result;
     }
     

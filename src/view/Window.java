@@ -45,7 +45,7 @@ public class Window extends JFrame {
     private JMenuBar myMenuBar;
     private JFileChooser myChooser;
     private Dimension mySize = ViewConstants.DEFAULT_WINDOW_SIZE;
-
+    
     /**
      * Constructor for Window
      * @param title The title of the View
@@ -120,8 +120,18 @@ public class Window extends JFrame {
      * @param tabView The Tabview that is requesting the string to be processed
      * @param s The string to be processed
      */
-    public void processCommand (TabView tabView, String s) {
-        myController.processCommand(tabView, s);
+    public int processCommand (TabView tabView, String s) {
+        return myController.processCommand(tabView, s);
+    }
+    
+    /**
+     * Called by a non TabView child view that will request a string to be processed as a Command
+     * Uses the active tab
+     * @param s The string to be processed
+     */
+    public int processCommand (String s) {
+        TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+        return processCommand(temp, s);
     }
 
     /**
@@ -273,123 +283,39 @@ public class Window extends JFrame {
         }
     }
 
-    protected class ChangePenAction extends AbstractAction {
-        public ChangePenAction () {
+    protected class ChangePenPropertiesAction extends AbstractAction {
+        public ChangePenPropertiesAction () {
             super(Window.ourResources.getString("ChangePenProperties"));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.SHIFT_MASK));
         }
 
         @Override
         public void actionPerformed (ActionEvent e) {
-            PenOptionsView myPOV = new PenOptionsView();
-            myPOV.display();
-            updatePen(myPOV.getUserDownChoice(), myPOV.getUserThicknessChoice(), 
-                      myPOV.getUserTypeChoice());
-        }
-
-        private void updatePen(boolean down, String thickness, String type) {
-            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            myController.processCommand(temp, down ? "pendown" : "penup");
-            myController.processCommand(temp, "setpenthickness " + thickness);
-            myController.processCommand(temp, "setpentype " + type);
+            (new PenOptionsView(Window.this)).display();
         }
     }
-    public class PenOptionsView extends JDialog {
-        private Color selectedColor;
-        private boolean penDown;
-        private String penThickness;
-        private String penType;
-        private JTabbedPane povtabbedpane;
-        private JPanel otherProperties;
-        private JComponent penDownUI;
-        private JComponent penThicknessUI; //generalize
-        private JComponent penTypeUI; // generalize
-        private PenOptionsView() { 
-            super(Window.this, "Choose Pen Options");
-            add(povtabbedpane = new JTabbedPane());
-            povtabbedpane.add(new JColorChooser(), "Color");
-            povtabbedpane.add(otherProperties=new JPanel(), "Other");
-            
-            penDownUI = new JCheckBox("Pen Down");
-            ((JCheckBox) penDownUI).setSelected(true);
-            otherProperties.add(penDownUI);
-            
-            penTypeUI = new JPanel();
-            ButtonGroup grouper = new ButtonGroup();
-          //Create the radio buttons.
-            JRadioButton dashed = new JRadioButton("dashed"); //edit for translation
-            dashed.setActionCommand("dashed");
-            dashed.setSelected(true);
-
-            JRadioButton dotted = new JRadioButton("dotted"); //edit for translation
-            dotted.setActionCommand("dotted");
-            dotted.setSelected(true);
-
-            //Group the radio buttons.
-            grouper.add(dashed);
-            grouper.add(dotted);
-            penTypeUI.add(dashed);
-            penTypeUI.add(dotted);
-            
-
-            //Register a listener for the radio buttons.
-//            dashed.addActionListener(this);
-//            dotted.addActionListener(this);
-//        public void actionPerformed(ActionEvent e) {
-//            picture.setIcon(new ImageIcon("images/" 
-//                                          + e.getActionCommand() 
-//                                          + ".gif"));
-//        }
-            otherProperties.add(penTypeUI);
-            
-            
-            penThicknessUI = new JPanel();
-            ButtonGroup grouper2 = new ButtonGroup();
-          //Create the radio buttons.
-            JRadioButton two = new JRadioButton("2"); //edit for translation
-            dashed.setActionCommand("2");
-            dashed.setSelected(true);
-
-            JRadioButton four = new JRadioButton("4"); //edit for translation
-            dotted.setActionCommand("4");
-            dotted.setSelected(true);
-
-            //Group the radio buttons.
-            grouper2.add(two);
-            grouper2.add(four);
-            penTypeUI.add(two);
-            penTypeUI.add(four);
-            
-
-            //Register a listener for the radio buttons.
-//            dashed.addActionListener(this);
-//            dotted.addActionListener(this);
-//        public void actionPerformed(ActionEvent e) {
-//            picture.setIcon(new ImageIcon("images/" 
-//                                          + e.getActionCommand() 
-//                                          + ".gif"));
-//        }
-            otherProperties.add(penThicknessUI);
+    
+    protected class ChangePenColorAction extends AbstractAction {
+        public ChangePenColorAction () {
+            super(Window.ourResources.getString("ChangePenColor"));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.SHIFT_MASK));
         }
-        
-        public void display() {
-            setVisible(true);
-//            JColorChooser.showDialog(
-//                                     Window.this,"",
-//                                     Color.black);
+
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            Color result = JColorChooser.showDialog(Window.this, 
+                                                    Window.ourResources.getString("ChangePenColor"), 
+                                                    getCurrentPenColor());
+            int pos = processCommand("registerPenColor "+ result.getRGB());
+            processCommand("setPenColor "+ pos);
         }
-        public String getUserTypeChoice () {
-            // TODO Auto-generated method stub
-            return "dashed";
-        }
-        public String getUserThicknessChoice () {
-            // TODO Auto-generated method stub
-            return ""+2;
-        }
-        public boolean getUserDownChoice () {
-            // TODO Auto-generated method stub
-            return true;
-        }
-        
+    }
+    
+    /**
+     * To be refactored, used to delegate logic for retrieving current pen color
+     * @return
+     */
+    private Color getCurrentPenColor() {
+        return Color.BLACK;
     }
 }
