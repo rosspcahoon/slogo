@@ -23,10 +23,13 @@ public class RandomCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int childValue = child.resolve();
+        if (childValue <= 0) {
+            throw new Exception("Error executing RANDOM -- cannot execute on a nonpositive");
+        }
         Random random = new Random();
         int result = random.nextInt(childValue);
 //        System.out.printf("Random number up to %d got %d\n", childValue, result);

@@ -22,13 +22,11 @@ public class ClearScreenCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
 //        System.out.printf("Cleared screen\n");
         Room room = getMyRoom();
-        // TODO: make this clear the entire screen
-        // TODO: make returnHome return distance moved
-        room.returnHome();
-        return -1;
+        int result = (int) room.clear();
+        return result;
     }
 
 }

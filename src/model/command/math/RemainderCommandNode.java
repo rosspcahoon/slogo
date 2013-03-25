@@ -22,12 +22,15 @@ public class RemainderCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode one = children.get(0);
         CommandNode two = children.get(1);
         int firstOperand = one.resolve();
         int secondOperand = two.resolve();
+        if (secondOperand == 0) {
+            throw new Exception("Error executing REMAINDER -- divide by 0");
+        }        
         int result = firstOperand % secondOperand;
 //        System.out.printf("Divided %d by %d to get remainder %d\n", firstOperand, secondOperand, result);
         return result;

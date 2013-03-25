@@ -15,6 +15,12 @@ public class NumberCommandNode extends CommandNode {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);        
     }
+    
+    public NumberCommandNode(int value) {
+        super();
+        super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
+        myValue = value;
+    }
 
     @Override
     public CommandNode getCopyOfInstance() {

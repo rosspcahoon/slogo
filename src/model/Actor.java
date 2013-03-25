@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Graphics2D;
+import java.awt.Color;
 import static java.lang.Math.*;
 import util.Location;
 import util.Pixmap;
@@ -26,12 +27,16 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     // need turtle image
     private static final Pixmap DEFAULT_TURTLE_IMAGE = new Pixmap("turtle1.png");
     private static final Dimension DEFAULT_TURTLE_SIZE = new Dimension (20,20); 
-    private static Location myInitialLocation = new Location(452, 300); 
+    private static Location myInitialLocation = new Location(451, 300); 
     private static double myInitialAngle = 0; 
-    //Moveable's pen 
-    private boolean myPenDown = true; 
+    private static double myMagnitude = 0; 
     
+    //Moveable's line trail 
+    private boolean myPenDown = true; 
     private List<PenTrail> myTrail;
+    private float myPenThickness;
+    private float myDashWidth;
+    private boolean myDoubleLineOn;
     
     private int myFrameTop;
     private int myFrameBottom;
@@ -44,7 +49,8 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private Status myStatus;
     //Moveable's location, magnitude (initialized) and angle/head direction
     private double myHeading;
-    private static double myMagnitude = 0; 
+    private Color myPenColor;
+
     
     /**
      * Constructor
@@ -60,6 +66,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myFrameBottom = DEFAULT_FRAME_BOTTOM;
         myFrameRight = DEFAULT_FRAME_RIGHT;
         myFrameLeft = DEFAULT_FRAME_LEFT;
+        myPenThickness = (float)2.0;
+        myDashWidth = (float)4.0;
+        myDoubleLineOn = true;
     }
     
     /**
@@ -68,9 +77,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      * @param pen
      */
     public void makeLine () { 
-        PenTrail penTrail = new PenTrail (super.getOldLocation().getX(), super.getCurrentLocation().getX(),
-                                          super.getOldLocation().getY(), super.getCurrentLocation().getY()); 
-        myTrail.add(penTrail);
+        PenTrail.makeLine(super.getOldLocation().getX(), super.getCurrentLocation().getX(),
+                          super.getOldLocation().getY(), super.getCurrentLocation().getY(), 
+                          myPenDown, myPenThickness, myDashWidth, myDoubleLineOn, myTrail); 
+    }
+    
+    public void addLine(PenTrail trail) {
+        myTrail.add(trail);
     }
     
     /**
@@ -104,10 +117,19 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
+        pen.setColor(myPenColor);
         super.paint(pen);
         for(PenTrail penT: myTrail) {
             penT.drawLine(pen);
         }
+    }
+    
+    /**
+     * sets myPenColor which will be used by the pen that paints this Actor
+     * @param i index of penColors in PenConstants
+     */
+    public void setPenColor(int i) {
+        myPenColor = PenConstants.penColors.get(i);
     }
     
     
@@ -131,7 +153,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     @Override
     public double turnRight(double degrees) {
-        getHeadingVector().turn(degrees);
+        getHeadingVector().turn(-degrees);
         return degrees;
     }
     
@@ -267,6 +289,18 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         double excessY = checkY(deltaY + currentY);
         Vector moveVector = new Vector(new Location(excessX, 0), new Location(0, excessY));
         return moveVector;
+    }
+    
+    public void setPenThickness(double thick) {
+        myPenThickness = (float)thick;
+    }
+    
+    public void setDoubleLine(boolean doubleLine) {
+        myDoubleLineOn = doubleLine;
+    }
+    
+    public void setDashWidth(double width) {
+        myDashWidth = (float)width;
     }
     
 }

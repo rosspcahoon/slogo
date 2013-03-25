@@ -24,13 +24,13 @@ public class IfCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode condition = children.get(0);
         CommandNode commands = children.get(1);
         int conditionResult = condition.resolve();
         int result = -1;
-        if (conditionResult > CommandConstants.COMMAND_RETURN_FALSE) {
+        if (conditionResult != CommandConstants.COMMAND_RETURN_FALSE) {
             result = commands.resolve();
         }
 //        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);

@@ -23,10 +23,13 @@ public class BackCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
+        if (result < 0) {
+            throw new Exception("Error executing BACK -- argument value is negative, please use FORWARD");
+        }
 //        System.out.printf("Move turtle backward %d pixels\n", result);
         Room room = getMyRoom();
         room.getTurtle().moveForward(-result);

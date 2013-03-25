@@ -27,7 +27,7 @@ public class MakeCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode name = children.get(0);
         CommandNode value = children.get(1);
@@ -35,9 +35,13 @@ public class MakeCommandNode extends CommandNode {
         if (name instanceof StringCommandNode) {
             variable = (StringCommandNode) name;
         } else {
-            //TODO: error handling
+            throw new Exception("Error executing MAKE -- variable name not a string");
         }
         String nameString = variable.getMyValue();
+        if (!nameString.substring(0, 1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
+            throw new Exception("Error executing MAKE -- variable name must begin with \"" +
+                    CommandConstants.COMMAND_NAME_VARIABLE_START + "\"");
+        }
         int result = value.resolve();
         CommandLibrary.addUserVariable(nameString, result);
 //        System.out.printf("Made variable %s with value %d\n", nameString, result);
@@ -50,7 +54,7 @@ public class MakeCommandNode extends CommandNode {
      * set up as they are before.
      */
     @Override
-    public void setUp(Scanner s, Room r) throws NoSuchElementException {
+    public void setUp(Scanner s, Room r) throws Exception {
         super.clearChildren();
         String varName = s.next();
         varName = varName.toLowerCase();
@@ -61,7 +65,12 @@ public class MakeCommandNode extends CommandNode {
         setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=1; i<expected; i++) {
-            String nextString = s.next();
+            String nextString;
+            try {
+                nextString = s.next();
+            } catch (NoSuchElementException e) {
+                throw new Exception("Error parsing command -- elements missing from input");
+            }
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);

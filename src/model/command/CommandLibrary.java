@@ -3,6 +3,8 @@ package model.command;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Room;
+import model.Status;
 import model.command.turtle.commands.*;
 import model.command.turtle.queries.*;
 import model.command.booleans.*;
@@ -58,7 +60,6 @@ public class CommandLibrary {
         myDefaultUserVariables = new HashMap<String,Integer>();
         myUserVariableLibraries = new HashMap<String,Map<String,Integer>>();
         myUserCommands = new HashMap<String,UserDefinedCommandNode>();
-        myCurrentUserVariables = new HashMap<String,Integer>();
         myCurrentUserVariables = myDefaultUserVariables;
     }
     
@@ -66,7 +67,7 @@ public class CommandLibrary {
      * Gets the appropriate command object from the library, or gives an
      * error if none exists.
      */
-    public static CommandNode getCommandNode(String name) {        
+    public static CommandNode getCommandNode(String name) throws Exception {        
         name = getAlias(name);
         
         // if the input is a user variable
@@ -82,21 +83,34 @@ public class CommandLibrary {
             return result;
         }
         
-        // if the input is a number
-        if (!myCommandNodes.containsKey(name)) {
-            try {
-                int value = Integer.parseInt(name);
-                NumberCommandNode result = new NumberCommandNode();
-                result.setMyValue(value);
-                return result;
-            } catch (NumberFormatException e) {
-                // TODO: add code for setting error status in room
-                return null;
-            }
+        // return the command node from the command library
+        if (myCommandNodes.containsKey(name)) {
+            CommandNode result = myCommandNodes.get(name).getCopyOfInstance();
+            return result;
         }
         
-        // return the command node from the command library
-        return myCommandNodes.get(name).getCopyOfInstance();
+        // if the input is an int                       
+        try {
+            int value = Integer.parseInt(name);
+            NumberCommandNode result = new NumberCommandNode();
+            result.setMyValue(value);
+            return result;
+        } catch (NumberFormatException e) {
+            
+        }
+        
+        // if the input is a double (cast to int)
+        try {
+            double value = Double.parseDouble(name);
+            NumberCommandNode result = new NumberCommandNode();
+            result.setMyValue((int) value);
+            return result;
+        } catch (NumberFormatException e) {
+
+        }
+        
+        throw new Exception("Error parsing command -- could not interpret input: " + name);
+        
     }
     
     /**
@@ -108,10 +122,11 @@ public class CommandLibrary {
     
     /**
      * Returns the value associated with the input variableName
+     * @throws Exception 
      */
-    public static Integer getUserVariable(String variableName) {
+    public static Integer getUserVariable(String variableName) throws Exception {
         if (!myCurrentUserVariables.containsKey(variableName)) {
-            return -1;
+            throw new Exception("User variable " + variableName + " not found");
         }
         return myCurrentUserVariables.get(variableName);
     }
@@ -122,7 +137,7 @@ public class CommandLibrary {
      * are associated.
      */
     public static void loadVariableLibrary(String commandName) {
-        if (!myUserVariableLibraries.containsKey(commandName)) {
+        if (!myUserVariableLibraries.containsKey(commandName)) {            
             Map<String,Integer> newLibrary = new HashMap<String,Integer>();
             myUserVariableLibraries.put(commandName, newLibrary);
         }
@@ -141,13 +156,13 @@ public class CommandLibrary {
      */
     public static void createVariableLibrary(String command, List<String> names, List<Integer> values) {
         Map<String,Integer> newLibrary = new HashMap<String,Integer>();
-        if (names.size() != values.size()) {
-            //TODO: throw error
-        }
+//        if (names.size() != values.size()) {
+//            
+//        }
         for (int i=0; i<names.size(); i++) {
             newLibrary.put(names.get(i), values.get(i));
         }
-        myUserVariableLibraries.put(command, newLibrary);
+        myUserVariableLibraries.put(command, newLibrary);        
     }
     
     /**
@@ -155,6 +170,27 @@ public class CommandLibrary {
      */
     public static void addUserDefinedCommand(String name, UserDefinedCommandNode command) {
         myUserCommands.put(name, command);
+    }
+    
+    /**
+     * Adds contents of the default user variable library to status.
+     */
+    public static void addDefaultVariableLibraryToRoomStatus(Room room) {
+        Status status = room.getState();
+        for (String key : myDefaultUserVariables.keySet()) {
+            status.addVariable(key, myDefaultUserVariables.get(key));
+        }                
+    }
+    
+    /**
+     * Adds contents of the user-defined command library to status.
+     */
+    public static void addCommandLibraryToRoomStatus(Room room) {
+        Status status = room.getState();
+        for (String key : myUserCommands.keySet()) {
+            UserDefinedCommandNode ucdNode = myUserCommands.get(key);            
+            status.addCommandName(key, ucdNode.getCopyOfParameterNames());
+        }                
     }
     
     /**

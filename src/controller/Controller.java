@@ -113,12 +113,13 @@ public class Controller implements Observer, IController {
      * calls model to process the input string command
      * @param t
      * @param cmd
+     * @return ret return int from command process
      */
     public int processCommand (TabView t, String cmd) {
         Room room = getRoomForTab(t);
-        int res=(int) myModel.processCommand(room, cmd);
+        int ret = myModel.processCommand(room, cmd);
         t.setRenderable((Renderable) room);
-        return res;
+        return ret;
     }
 
     

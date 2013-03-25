@@ -1,10 +1,15 @@
 package model;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.Color;
 import java.awt.Graphics2D; 
+import java.awt.BasicStroke;
+import util.Location;
+import util.Vector;
 
 /**
  * 
@@ -25,13 +30,14 @@ public class PenTrail extends Line2D.Double {
     private double myY1; 
     private double myY2; 
     
-    private boolean myPenUp = false;
+    private boolean myPenDown;
+    private BasicStroke myStroke;
     
     /**
      * Constructor
      */
     public PenTrail () { 
-        super (0,0,0,0); 
+        this (0,0,0,0, true, (float)1.0); 
     }
     
     /**
@@ -43,6 +49,7 @@ public class PenTrail extends Line2D.Double {
         super (point1, point2); 
         myP1 = point1; 
         myP2 = point2;    
+        myPenDown = true;
     }
     
     /**
@@ -52,12 +59,35 @@ public class PenTrail extends Line2D.Double {
      * @param y1
      * @param y2
      */
-    public PenTrail (double x1, double x2, double y1, double y2) { 
+    public PenTrail (double x1, double x2, double y1, double y2, boolean pen,
+                     float thickness, float[] dashSize) { 
         super (x1, x2, y1, y2); 
         myX1 = x1; 
         myX2 = x2; 
         myY1 = y1; 
         myY2 = y2; 
+        myPenDown = pen;
+        myStroke = new BasicStroke(thickness, BasicStroke.CAP_BUTT, 
+                                   BasicStroke.JOIN_BEVEL, 0,dashSize, (float)0);
+    }
+    
+    /**
+     * Constructor
+     * @param x1
+     * @param x2
+     * @param y1
+     * @param y2
+     */
+    public PenTrail (double x1, double x2, double y1, double y2, boolean pen,
+                     float thickness) { 
+        super (x1, x2, y1, y2); 
+        myX1 = x1; 
+        myX2 = x2; 
+        myY1 = y1; 
+        myY2 = y2; 
+        myPenDown = pen;
+        myStroke = new BasicStroke(thickness, BasicStroke.CAP_BUTT, 
+                                   BasicStroke.JOIN_BEVEL);
     }
 
     /**
@@ -65,55 +95,98 @@ public class PenTrail extends Line2D.Double {
      * @return myPenUp
      */
     public boolean getPenStatus () { 
-        return myPenUp; 
+        return myPenDown; 
     }
     
     /**
      * toggle for pen
      */
     public void togglePen () { 
-        myPenUp = !(myPenUp); 
+        myPenDown = !(myPenDown); 
     }
     
     public Rectangle2D getBounds2D () {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Point2D getP1 () {
-        // TODO Auto-generated method stub
         return myP1; 
     }
 
     @Override
     public Point2D getP2 () {
-        // TODO Auto-generated method stub
         return myP2; 
     }
 
     @Override
     public double getX1 () {
-        // TODO Auto-generated method stub
         return myX1; 
     }
 
     @Override
     public double getX2 () {
-        // TODO Auto-generated method stub
         return myX2; 
     }
 
     @Override
     public double getY1 () {
-        // TODO Auto-generated method stub
         return myY1; 
     }
 
     @Override
     public double getY2 () {
-        // TODO Auto-generated method stub
         return myY2; 
+    }
+    
+    private static double[] translateParallelCoordinates(double x1, double x2, double y1,
+                                                  double y2, double dist) {
+        double[] coords = new double[4];
+        Vector vec = new Vector(new Point2D.Double(x1, y1), new Point2D.Double(x2,y2));
+        vec.turn(90);
+        vec.setMagnitude(dist);
+        Location loc1 = new Location(x1, y1);
+        Location loc2 = new Location(x2, y2);
+        loc1.translate(vec);
+        loc2.translate(vec);
+        coords[0] = loc1.getX();
+        coords[1] = loc2.getX();
+        coords[2] = loc1.getY();
+        coords[3] = loc2.getY();
+        return coords;
+        
+    }
+    
+    public static void makeLine(double x1, double x2, double y1, double y2, 
+                                boolean pen, float penThick, float dashWidth,
+                                boolean doubleLine, List<PenTrail> trails) {
+        
+        float[] dash = new float[1];
+        dash[0] = dashWidth;
+        if(dashWidth == 0) {
+            PenTrail trail = new PenTrail (x1, x2, y1, y2, pen, penThick); 
+            trails.add(trail);  
+            if(doubleLine) {
+                double[] coordinates = translateParallelCoordinates(x1, x2, y1, y2, (double)penThick*2);
+                PenTrail trail2 = new PenTrail (coordinates[0], coordinates[1], 
+                                               coordinates[2], coordinates[3], 
+                                               pen, penThick); 
+                trails.add(trail2);
+            }
+        }
+        else {
+            PenTrail trail = new PenTrail (x1, x2, y1, y2, pen, penThick, dash); 
+            trails.add(trail);  
+            if(doubleLine) {
+                double[] coordinates = translateParallelCoordinates(x1, x2, y1, y2, (double)penThick*2);
+                PenTrail trail2 = new PenTrail (coordinates[0], coordinates[1], 
+                                               coordinates[2], coordinates[3], 
+                                               pen, penThick, dash); 
+                trails.add(trail2);
+            }
+        }
+        
+        
     }
 
     @Override
@@ -121,9 +194,13 @@ public class PenTrail extends Line2D.Double {
         super.setLine (x1, x2, y1, y2); 
     }
     
-    public void drawLine (Graphics2D pen) { 
+    public void drawLine (Graphics2D pen) {
         pen.setColor(Color.BLACK);
-        pen.drawLine((int)myX1, (int)myY1, (int)myX2, (int)myY2); 
+        pen.setStroke(myStroke);
+        System.out.println(myStroke.getDashPhase());
+        if(myPenDown) {
+            pen.drawLine((int)myX1, (int)myY1, (int)myX2, (int)myY2); 
+        }
     }
 
 }

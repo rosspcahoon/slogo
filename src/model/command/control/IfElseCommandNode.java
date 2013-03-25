@@ -24,14 +24,14 @@ public class IfElseCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode condition = children.get(0);
         CommandNode trueCommands = children.get(1);
         CommandNode falseCommands = children.get(2);
         int conditionResult = condition.resolve();
         int result = -1;
-        if (conditionResult > CommandConstants.COMMAND_RETURN_FALSE) {
+        if (conditionResult != CommandConstants.COMMAND_RETURN_FALSE) {
             result = trueCommands.resolve();
         } else {
             result = falseCommands.resolve();

@@ -24,11 +24,14 @@ public class RepeatCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode iterations = children.get(0);
         CommandNode commands = children.get(1);
         int numIterations = iterations.resolve();
+        if (numIterations <= 0) {
+            throw new Exception("Error executing REPEAT -- number of iterations nonpositive");
+        }
         int result = -1;
         for (int i=0; i<numIterations; i++) {
             result = commands.resolve();

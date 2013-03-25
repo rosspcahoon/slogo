@@ -71,7 +71,9 @@ public class ErrorLogView extends WindowView {
     public void render (Renderable p) {
         if (((Status) p.getState()) != null) {
             Status thisStatus = (Status) p.getState();
-            display(thisStatus.getErrorMessage());
+            if(thisStatus.getErrorMessage() != null){
+                display(thisStatus.getErrorMessage());
+            }
         }
     }
 

@@ -22,7 +22,7 @@ public class AndCommandNode extends CommandNode {
     }
     
     @Override
-    public int resolve() {
+    public int resolve() throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode childOne = children.get(0);
         CommandNode childTwo = children.get(1);
@@ -34,7 +34,7 @@ public class AndCommandNode extends CommandNode {
         } else {
             result = CommandConstants.COMMAND_RETURN_FALSE;
         }
-        System.out.printf("Checked if %d AND %d, got %d\n", firstOperand, secondOperand, result);
+//        System.out.printf("Checked if %d AND %d, got %d\n", firstOperand, secondOperand, result);
         return result;
     }
     

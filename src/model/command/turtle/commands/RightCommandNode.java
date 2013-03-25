@@ -23,10 +23,13 @@ public class RightCommandNode extends CommandNode {
     }
 
     @Override
-    public int resolve () {
+    public int resolve () throws Exception {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
+        if (result < 0) {
+            throw new Exception("Error executing RIGHT -- argument value is negative, please use LEFT");
+        }
 //        System.out.printf("Turn turtle right %d degrees\n", result);
         Room room = getMyRoom();
         room.getTurtle().turnRight(result);

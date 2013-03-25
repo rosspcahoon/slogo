@@ -1,11 +1,9 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import java.util.Map;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import model.Renderable;
 import model.Status;
 
@@ -16,6 +14,7 @@ import model.Status;
  */
 @SuppressWarnings("serial")
 public class VariableView extends WindowView {
+    private JTextArea myVariableArea;
 
     /**
      * Constructs the StateView and sets a default border
@@ -28,24 +27,19 @@ public class VariableView extends WindowView {
 
     @Override
     protected void addComponents () {
-        EasyGridFactory.layoutVertical(this, new JTextArea(Window.getResources().getString("VariableTitle")));        
+        myVariableArea.setEditable(false);
+        myVariableArea.append(Window.getResources().getString("VariableTitle") + "\n");
+        EasyGridFactory.layoutHorizontal(this, new JScrollPane(myVariableArea));
     }
 
-    private void display(HashMap<String, Integer> varlist) {
-        JComponent[] variablePanels;
-        variablePanels = new JComponent[varlist.size()];
-        this.removeAll();
-        int count = 0;        
+    private void display(Map<String, Integer> varlist) {
+        myVariableArea.setEditable(true);
+        myVariableArea.setText("");
+        myVariableArea.append(Window.getResources().getString("VariableTitle") + ": \n");      
         for(String s: varlist.keySet()){
-            
-            JPanel tempPanel = new JPanel();
-            EasyGridFactory.layoutHorizontal(tempPanel, new JTextArea("s"), new JTextField(varlist.get(s)));
-            variablePanels[count] = tempPanel;
-            count++;
+            myVariableArea.append(s + " " + varlist.get(s) + "\n");
         }
-        
-//        EasyGridFactory.layoutVertical(this, new JTextArea(Window.getResources().getString("VariableTitle")), variablePanels));  
-        EasyGridFactory.layoutVertical(this, new JTextArea(Window.getResources().getString("VariableTitle")));  
+        myVariableArea.setEditable(false);
     }
 
     /**
@@ -54,16 +48,15 @@ public class VariableView extends WindowView {
      */
     public void render (Renderable p) {
         if (p.getState() != null) {
-//            Status s = (Status) p.getState();
-            //All hypothetical
-            HashMap<String, Integer> varlist = new HashMap<String, Integer>();
-//            Hasn't been added to Status object yet
-//            varlist = s.getVariables();
+            Status s = (Status) p.getState();
+            Map<String, Integer> varlist = new HashMap<String, Integer>();
+            varlist = s.getVariableMap();
             display(varlist);
         }
     }
 
     @Override
     protected void initializeVariables () {
+        myVariableArea = new JTextArea();
     }
 }
