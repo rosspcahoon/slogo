@@ -298,7 +298,7 @@ public class Window extends JFrame {
     protected class ChangePenColorAction extends AbstractAction {
         public ChangePenColorAction () {
             super(Window.ourResources.getString("ChangePenColor"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.SHIFT_MASK));
+            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
         }
 
         @Override
