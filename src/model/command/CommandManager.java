@@ -63,7 +63,7 @@ public class CommandManager {
         } catch (Exception e) {
             myCurrentError = e.getMessage();            
 //            System.err.println("CommandManager caught exception with message: " + myCurrentError);
-            e.printStackTrace();
+//            e.printStackTrace();
             room.getState().setErrorMessage(myCurrentError);
         }
         CommandLibrary.addDefaultVariableLibraryToRoomStatus(room);
@@ -78,7 +78,7 @@ public class CommandManager {
         String rootString = myCurrentScanner.next();
         rootString = rootString.toLowerCase();
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
-        myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom);
+        myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom, rootString);
         if (myCurrentScanner.hasNext()) {
             throw new Exception("Error parsing command -- input has too many elements or is badly formed");
         }

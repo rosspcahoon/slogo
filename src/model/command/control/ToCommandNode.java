@@ -33,17 +33,17 @@ public class ToCommandNode extends CommandNode {
         CommandNode parameters = children.get(1);
         CommandNode commands = children.get(2);
         UserDefinedCommandNode result = new UserDefinedCommandNode();
-        StringCommandNode nameNode = null;
+        CommandNode nameNode = null;
         ListCommandNode paramList = null;
         ListCommandNode commandList = null;
         
         // establish the command name
         if (name instanceof StringCommandNode) {
-            nameNode = (StringCommandNode) name;
+            nameNode = (CommandNode) name;
         } else {
             throw new Exception("Error executing TO -- user-defined command name not a string");
         }
-        String nameString = nameNode.getMyValue();
+        String nameString = nameNode.getMyString();
         
         // establish the command parameters
         if (parameters instanceof ListCommandNode) {
@@ -53,13 +53,13 @@ public class ToCommandNode extends CommandNode {
         }
         
         for (CommandNode param : paramList.getChildren()) {
-            StringCommandNode currentParam = null;
+            CommandNode currentParam = null;
             if (param instanceof StringCommandNode) {
-                currentParam = (StringCommandNode) param;
+                currentParam = (CommandNode) param;
             } else {
                 throw new Exception("Error executing TO -- command parameter names badly formed");
             }
-            result.addUserVariableName(currentParam.getMyValue());
+            result.addUserVariableName(currentParam.getMyString());
         }
         
         // establish commands to execute
@@ -86,14 +86,15 @@ public class ToCommandNode extends CommandNode {
      * @throws Exception 
      */
     @Override
-    public void setUp(Scanner s, Room r) throws Exception {
+    public void setUp(Scanner s, Room r, String v) throws Exception {
         super.clearChildren();
+        super.setMyString(v);
         String commandName = s.next();
         commandName = commandName.toLowerCase();
-        StringCommandNode nameNode = new StringCommandNode();
-        nameNode.setMyValue(commandName);        
+        CommandNode nameNode = new StringCommandNode();
+//        nameNode.setMyString(commandName);        
         addChild(nameNode);
-        nameNode.setUp(s, r);
+        nameNode.setUp(s, r, commandName);
         setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=1; i<expected; i++) {
@@ -106,7 +107,7 @@ public class ToCommandNode extends CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s, r);
+            nextNode.setUp(s, r, nextString);
         }
     }
 

@@ -16,16 +16,11 @@ public abstract class CommandNode {
     private List<CommandNode> myChildren;
     private int myExpectedArgs;
     private Room myRoom;
+    private String myString;
     
     protected CommandNode() {
         myChildren = new ArrayList<CommandNode>();
     }    
-    
-    /**
-     * Resolves this node--called by parent in it's own resolve method.
-     * @throws Exception 
-     */
-    public abstract int resolve() throws Exception;
     
     /**
      * Performs basic setup of a node after it is created--involves establishing
@@ -33,9 +28,10 @@ public abstract class CommandNode {
      * the means to continue reading the input string.
      * @throws Exception 
      */
-    public void setUp(Scanner s, Room r) throws Exception {
+    public void setUp(Scanner s, Room r, String v) throws Exception {
         clearChildren();
         setMyRoom(r);
+        setMyString(v);
         int expected = getMyExpectedArgs();
         for (int i=0; i<expected; i++) {
             String nextString;
@@ -47,9 +43,20 @@ public abstract class CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);            
-            nextNode.setUp(s, r);
+            nextNode.setUp(s, r, nextString);
         }
     }
+    
+    /**
+     * Resolves this node--called by parent in it's own resolve method.
+     * @throws Exception 
+     */
+    public abstract int resolve() throws Exception;
+    
+    /**
+     * Returns a copy of the command node as a new instance.
+     */
+    public abstract CommandNode getCopyOfInstance();
     
     /**
      * Sets the number of expected args for this node.
@@ -80,22 +87,19 @@ public abstract class CommandNode {
     }
     
     /**
-     * Returns a copy of the command node as a new instance.
+     * Sets the string of this command node (i.e. the element from the user input
+     * that corresponds to this node)
      */
-    public abstract CommandNode getCopyOfInstance();
-    
+    public void setMyString (String value) {
+        myString = value;
+    }
+
     /**
-     * Prints out the CommandNode class type, value (if applicable), and children.
+     * Gets the string of this command node (i.e. the element from the user input
+     * that corresponds to this node)
      */
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(this.getClass());
-        builder.append("\nChildren:\n");
-        for (CommandNode child : getChildren()) {
-            builder.append(child.getClass());
-            builder.append("\n");
-        }
-        return builder.toString();
+    public String getMyString () {
+        return myString;
     }
     
     /**
@@ -117,7 +121,20 @@ public abstract class CommandNode {
      */
     public void clearChildren() {
         myChildren.clear();
-    }
+    }   
     
+    /**
+     * Prints out the CommandNode class type, value (if applicable), and children.
+     */
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.getClass());
+        builder.append("\nChildren:\n");
+        for (CommandNode child : getChildren()) {
+            builder.append(child.getClass());
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
     
 }

@@ -75,8 +75,8 @@ public class CommandLibrary {
         
         // if the input is a user variable
         if (name.substring(0,1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
-            StringCommandNode result = new StringCommandNode();
-            result.setMyValue(name);
+            CommandNode result = new StringCommandNode();
+            result.setMyString(name);
             return result;
         }
 
@@ -200,7 +200,7 @@ public class CommandLibrary {
      * Replaces the command alias with its original name, if it is an alias
      * For instance, replaces fd 50 with forward 50.
      */
-    private static String getAlias(String name) {
+    public static String getAlias(String name) {
         if (!myCommandAliases.containsKey(name)) {
             return name;
         }
@@ -215,38 +215,38 @@ public class CommandLibrary {
         //if this was not static
         //myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new ForwardCommandNode());
         //
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new ForwardCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new BackCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new LeftCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_RIGHT, new RightCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new MoveCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new RotateCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_RIGHT, new RotateCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_HEADING, new SetHeadingCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_TOWARDS, new TowardsCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_SETXY, new SetXYCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_PENDOWN, new PenDownCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_PENUP, new PenUpCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_SHOW_TURTLE, new ShowTurtleCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_HIDE_TURTLE, new HideTurtleCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_HOME, new HomeCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_CLEAR_SCREEN, new ClearScreenCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_XCOR, new XCorCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_YCOR, new YCorCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_PENDOWN, new PenCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_PENUP, new PenCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SHOW_TURTLE, new VisibleCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_HIDE_TURTLE, new VisibleCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_HOME, new ResetRoomCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_CLEAR_SCREEN, new ResetRoomCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_XCOR, new CorCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_YCOR, new CorCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_HEADING, new HeadingCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_PENDOWN, new IsPenDownCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_SHOWING, new IsShowingCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_SUM, new SumCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_DIFFERENCE, new DifferenceCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_PRODUCT, new ProductCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_QUOTIENT, new QuotientCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_REMAINDER, new RemainderCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_MINUS, new MinusCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_RANDOM, new RandomCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_LESS, new IsLessCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_GREATER, new IsGreaterCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_EQUAL, new IsEqualCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_NOT_EQUAL, new IsNotEqualCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_AND, new AndCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_OR, new OrCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_NOT, new NotCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_PENDOWN, new PenCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_SHOWING, new VisibleCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SUM, new TwoOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_DIFFERENCE, new TwoOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_PRODUCT, new TwoOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_QUOTIENT, new TwoOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_REMAINDER, new TwoOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_MINUS, new OneOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_RANDOM, new OneOperandMathCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_LESS, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_GREATER, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_EQUAL, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_IS_NOT_EQUAL, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_AND, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_OR, new TwoOperandBooleanCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_NOT, new OneOperandBooleanCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_LIST_OPEN, new ListCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_MAKE, new MakeCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_REPEAT, new RepeatCommandNode());

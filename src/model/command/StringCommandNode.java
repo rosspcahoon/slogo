@@ -10,18 +10,16 @@ package model.command;
  */
 public class StringCommandNode extends CommandNode {
     
-    private String myValue;
-    
     public StringCommandNode() {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);        
     }
     
-    public StringCommandNode(String value) {
-        super();
-        super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
-        myValue = value;
-    }
+//    public StringCommandNode(String value) {
+//        super();
+//        super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
+//        super.setMyString(value);
+//    }
 
     @Override
     public CommandNode getCopyOfInstance() {
@@ -30,17 +28,9 @@ public class StringCommandNode extends CommandNode {
 
     @Override
     public int resolve() throws Exception {
-        if (!myValue.substring(0, 1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
+        if (!getMyString().substring(0, 1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
             return -1;
         }
-        return CommandLibrary.getUserVariable(myValue);
-    }
-    
-    public void setMyValue(String value) {
-        myValue = value;
-    }
-    
-    public String getMyValue() {
-        return myValue;
+        return CommandLibrary.getUserVariable(getMyString());
     }
 }
