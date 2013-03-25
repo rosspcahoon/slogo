@@ -31,8 +31,9 @@ public class Controller implements Observer, IController {
      * Constructor
      */
     public Controller() {
-        myModel = new Model();
-        myView = new Window("SLogo", "English", this);
+        String language = "English";
+        myModel = new Model(language);
+        myView = new Window("SLogo", language, this);
         myRoom2Tab = new HashMap<Room, TabView>();
         myTab2Room = new HashMap<TabView, Room>();
     }

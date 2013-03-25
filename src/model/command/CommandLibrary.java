@@ -3,6 +3,7 @@ package model.command;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import model.Room;
 import model.Status;
 import model.command.turtle.commands.*;
@@ -50,6 +51,8 @@ public class CommandLibrary {
      * HashMap for user-defined commands.
      */
     private static Map<String,UserDefinedCommandNode> myUserCommands;
+
+    private static ResourceBundle resources;
     
     /**
      * Static initialization block--calls the static buildLibrary() methods.
@@ -209,6 +212,9 @@ public class CommandLibrary {
      */
     private static void buildCommandLibrary() {
         myCommandNodes = new HashMap<String,CommandNode>();
+        //if this was not static
+        //myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new ForwardCommandNode());
+        //
         myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new ForwardCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new BackCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new LeftCommandNode());
@@ -278,5 +284,13 @@ public class CommandLibrary {
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_EQUAL, CommandConstants.COMMAND_NAME_IS_EQUAL);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_NOT_EQUAL, CommandConstants.COMMAND_NAME_IS_NOT_EQUAL);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_SET, CommandConstants.COMMAND_NAME_MAKE);
+    }
+
+    /**
+     * Set the language resources for internationalization
+     * @param ourResources
+     */
+    public static void setResources (ResourceBundle ourResources) {
+        resources = ourResources;
     }
 }

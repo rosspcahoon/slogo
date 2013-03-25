@@ -1,5 +1,6 @@
 package model.command;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import model.Room;
 
@@ -21,16 +22,27 @@ public class CommandManager {
     private Scanner myCurrentScanner;
     
     /**
+     * For translation
+     */
+    private static ResourceBundle ourResources;
+    private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
+    
+    /**
      * Initializes the CommandManager's instance variables and builds its
      * command and alias libraries.
+     * @param language 
      */
-    public CommandManager() {
+    public CommandManager(String language) {
         myCurrentRoot = null;
         myCurrentInput = null;
         myCurrentResult = -1;
         myCurrentScanner = null;
         myCurrentRoom = null;
         myCurrentError = null;
+        
+        //translation 
+        ourResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+        CommandLibrary.setResources(ourResources);
     }
     
     /**

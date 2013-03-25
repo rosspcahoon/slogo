@@ -14,8 +14,8 @@ public class Model implements ISLogoModel {
 
     private CommandManager myCommandManager;
     
-    public Model(){
-        myCommandManager = new CommandManager();
+    public Model(String language){
+        myCommandManager = new CommandManager(language);
     }
     
     /**
