@@ -16,6 +16,7 @@ import model.Status;
 @SuppressWarnings("serial")
 public class UserCommandView extends WindowView {
     private JTextArea myUserCommandsArea;
+    private String myTitle;
 
     /**
      * Constructs the StateView and sets a default border
@@ -24,22 +25,23 @@ public class UserCommandView extends WindowView {
     public UserCommandView (FeedbackView feedbackview) {
         super(feedbackview);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
+        myTitle = Window.getResources().getString("UserCommandTitle");
     }
 
     @Override
     protected void addComponents () {
         myUserCommandsArea.setEditable(false);
-        myUserCommandsArea.append(Window.getResources().getString("UserCommandTitle") + "\n");
+        myUserCommandsArea.append(myTitle + "\n");
         EasyGridFactory.layoutHorizontal(this, new JScrollPane(myUserCommandsArea));
     }
 
     private void display(Map<String, List<String>> usercommandlist) {
         myUserCommandsArea.setEditable(true);
         myUserCommandsArea.setText("");
-        myUserCommandsArea.append(Window.getResources().getString("UserCommandTitle") + ": \n");      
-        for(String s: usercommandlist.keySet()){
+        myUserCommandsArea.append(myTitle + ": \n");      
+        for (String s: usercommandlist.keySet()) {
             myUserCommandsArea.append(s + " ");
-            for(String z: usercommandlist.get(s)) {
+            for (String z: usercommandlist.get(s)) {
                 myUserCommandsArea.append(z + " ");
             }
             myUserCommandsArea.append("\n");

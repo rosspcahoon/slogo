@@ -221,10 +221,18 @@ public class Window extends JFrame {
     }
     
     public void changePenColor() {
-        Color result = JColorChooser.showDialog(this, getLiteral("COMMAND_NAME_SET_PEN_COLOR"), 
+        Color result = JColorChooser.showDialog(this, getLiteral("ChangePenColor"), 
                                                 getCurrentPenColor());
-        int pos = processCommand(getLiteral("COMMAND_NAME_REGISTER_COLOR") + " " + result.getRGB());
+        int pos = processCommand(getLiteral("COMMAND_NAME_SET_PALETTE") +
+                                 " last " 
+                                 + result.getRed() + " "
+                                 + result.getGreen() + " "
+                                 + result.getBlue());
         processCommand(getLiteral("COMMAND_NAME_SET_PEN_COLOR") + " " + pos);
+    }
+    
+    public int getTabCount() {
+        return myTabbedPane.getTabCount();
     }
     
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import view.TabView;
 import view.Window;
 import model.Model;
@@ -31,7 +32,12 @@ public class Controller implements Observer, IController {
      * Constructor
      */
     public Controller() {
-        String language = "French";
+        String[] languages = {"English", "French"};
+        int n = JOptionPane.showOptionDialog(null,
+                            "Choose a language", "Language Selection",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, languages, languages[0]);
+        String language = languages[n];
         myModel = new Model(language);
         myView = new Window("SLogo", language, this);
         myRoom2Tab = new HashMap<Room, TabView>();
