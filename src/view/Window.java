@@ -71,7 +71,7 @@ public class Window extends JFrame {
     /**
      * Way to initialize tab creation from the window
      */
-    private void addTab() {
+    public void addTab() {
         myController.newSLogoSession();
     }
 
@@ -100,19 +100,19 @@ public class Window extends JFrame {
     }
 
     /**
-     * Open the provided file in a new tab
+     * Load the specified file in a new tab
      * @param file2open
      */
-    private void openFile (File file2open) {
+    private void loadFile (File file2open) {
         //TODO 
     }
 
-    private void quit () {
+    public void quit () {
         WindowEvent close = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
     }
 
-    private void saveFile () {
+    public void saveFile () {
     }
 
     /**
@@ -141,181 +141,90 @@ public class Window extends JFrame {
     public static ResourceBundle getResources() {
         return ourResources;
     }
-
-    protected class NewTabAction extends AbstractAction {
-        public NewTabAction() {
-            super(Window.ourResources.getString("NewCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
-        }
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            addTab();
-        } 
-    }
-
-    protected class OpenFileAction extends AbstractAction {
-
-        public OpenFileAction() {
-            super(Window.ourResources.getString("OpenCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-        }
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            int response = myChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                File file2open = myChooser.getSelectedFile();
-                openFile(file2open);
-            }
-        }
-
-    }
-
-    protected class QuitAction extends AbstractAction {
-        public QuitAction() {
-            super(Window.ourResources.getString("QuitCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            quit();
-        }
-    }
-
-    protected class SaveFileAction extends AbstractAction {
-        public SaveFileAction () {
-            super(Window.ourResources.getString("SaveCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            saveFile();
-        }
-    }
-
-    protected class WelcomeAction extends AbstractAction {
-        WelcomeAction() {
-            super(Window.ourResources.getString("WelcomeCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            try {
-                String url = "http://www.cs.duke.edu/courses/spring13/compsci308/assign/03_slogo/";
-                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-            }
-            catch (java.io.IOException er) {
-                System.out.println(er.getMessage());
-            }
-        }
-    }
-
-    protected class ChangeBackgroundAction extends AbstractAction {
-        public ChangeBackgroundAction () {
-            super(Window.ourResources.getString("ChangeBackground"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            int response = myChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                Image img;
-                try {
-                    img = ImageIO.read(myChooser.getSelectedFile());
-                    TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-                    if(temp != null) {
-                        temp.setBackground(img);
-                    }
-                }
-                catch (java.io.IOException er) {
-                    System.out.println(er.getMessage());
-                }
-            }
-        }
-    }
     
-    protected class ToggleGridAction extends AbstractAction {
-        public ToggleGridAction () {
-            super(Window.ourResources.getString("ReferenceCommand"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.ALT_MASK));
-        }
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            if(temp != null) {
-                temp.toggleGrid();
-            }
-        }
-    }
-
-    protected class ChangeTurtleAction extends AbstractAction {
-        public ChangeTurtleAction () {
-            super(Window.ourResources.getString("ChangeTurtle"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            int response = myChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                String imgURL = myChooser.getSelectedFile().getAbsolutePath();
-                TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-                if(temp != null) {
-//                        temp.setTurtle(img);
-                }
-                int last = registerTurtleShape(imgURL);
-                setTurtleShape(last);
-            }
-        }
-
-        private void setTurtleShape (int i) {
-            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            myController.processCommand(temp, "setshape " + i);
-        }
-
-        private int registerTurtleShape (String imgURL) {
-            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-            return (int)myController.processCommand(temp, "registershape " + imgURL);
-            
-        }
-    }
-
-    protected class ChangePenPropertiesAction extends AbstractAction {
-        public ChangePenPropertiesAction () {
-            super(Window.ourResources.getString("ChangePenProperties"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            (new PenOptionsView(Window.this)).display();
-        }
-    }
-    
-    protected class ChangePenColorAction extends AbstractAction {
-        public ChangePenColorAction () {
-            super(Window.ourResources.getString("ChangePenColor"));
-            putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.SHIFT_MASK));
-        }
-
-        @Override
-        public void actionPerformed (ActionEvent e) {
-            Color result = JColorChooser.showDialog(Window.this, 
-                                                    Window.ourResources.getString("ChangePenColor"), 
-                                                    getCurrentPenColor());
-            int pos = processCommand("registerPenColor "+ result.getRGB());
-            processCommand("setPenColor "+ pos);
-        }
+    /**
+     * 
+     * @param s
+     * @return
+     */
+    public static String getLiteral(String s) {
+        return Window.ourResources.getString(s);
     }
     
     /**
      * To be refactored, used to delegate logic for retrieving current pen color
      * @return
      */
-    private Color getCurrentPenColor() {
+    public Color getCurrentPenColor() {
         return Color.BLACK;
     }
+
+    public void openFile () {
+        int response = myChooser.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            File file2open = myChooser.getSelectedFile();
+            loadFile(file2open);
+        }
+    }
+
+    public void changeBackgroung() {
+        int response = myChooser.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            Image img;
+            try {
+                img = ImageIO.read(myChooser.getSelectedFile());
+                TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+                if (temp != null) {
+                    temp.setBackground(img);
+                }
+            }
+            catch (java.io.IOException er) {
+                System.out.println(er.getMessage());
+            }
+        }
+    }
+    
+    public void toggleGrid() {
+        TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+        if (temp != null) {
+            temp.toggleGrid();
+        }
+    }
+    
+    public void changeTurtle() {
+        
+    }
+    
+    public void setTurtleShape () {
+        int response = myChooser.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+            String imgURL = myChooser.getSelectedFile().getAbsolutePath();
+            TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+            if (temp != null) {
+                return;
+            }
+            int last = registerTurtleShape(imgURL);
+            setTurtleShape(last);
+        }
+    }
+
+    private void setTurtleShape (int i) {
+        TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+        processCommand(temp, "setshape " + i);
+    }
+
+    private int registerTurtleShape (String imgURL) {
+        TabView temp = (TabView) myTabbedPane.getSelectedComponent();
+        return (int) processCommand(temp, 
+                                                getLiteral("registershape") + " " + imgURL);
+
+    }
+    
+    public void changePenColor() {
+        Color result = JColorChooser.showDialog(this, getLiteral("ChangePenColor"), 
+                                                getCurrentPenColor());
+        int pos = processCommand(getLiteral("ChangePenColorCommand") + " " + result.getRGB());
+        processCommand(getLiteral("SetPenColorCommand") + " " + pos);
+    }
+    
 }
