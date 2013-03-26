@@ -25,6 +25,10 @@ public class ViewConstants {
      * The size for FeedBackView objects
      */
     public static final Dimension DEFAULT_FEEDBACK_SIZE = new Dimension(800, 100);
+    
+    /**
+     * The size for ConsoleView objects
+     */
     public static final Dimension DEFAULT_CONSOLE_SIZE = new Dimension(500, 700);
     /**
      * The size for RoomView objects

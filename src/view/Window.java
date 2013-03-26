@@ -2,31 +2,20 @@ package view;
 
 
 import controller.Controller;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
-import javax.swing.KeyStroke;
 import model.Renderable;
 
 /**
@@ -100,19 +89,26 @@ public class Window extends JFrame {
     }
 
     /**
-     * Load the specified file in a new tab
+     * Load the specified file in a new tab - TODO
      * @param file2open
      */
     private void loadFile (File file2open) {
-        //TODO 
+        return;
     }
 
+    /**
+     * Close the window
+     */
     public void quit () {
         WindowEvent close = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
     }
-
+    
+    /**
+     * Save the active workspace - TODO
+     */
     public void saveFile () {
+        return;
     }
 
     /**
@@ -143,9 +139,9 @@ public class Window extends JFrame {
     }
     
     /**
-     * 
-     * @param s
-     * @return
+     * Helper Method available to lookup values in the Resources
+     * @param s - string literal to be looked up (key)
+     * @return the string literal specified in the relevant properties file
      */
     public static String getLiteral(String s) {
         return Window.ourResources.getString(s);
@@ -159,6 +155,9 @@ public class Window extends JFrame {
         return Color.BLACK;
     }
 
+    /**
+     * Initiate the opening of a file
+     */
     public void openFile () {
         int response = myChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
@@ -167,6 +166,9 @@ public class Window extends JFrame {
         }
     }
 
+    /**
+     * Initiate the change of background
+     */
     public void changeBackgroung() {
         int response = myChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
@@ -184,6 +186,9 @@ public class Window extends JFrame {
         }
     }
     
+    /**
+     * Toggle the grid off or on
+     */
     public void toggleGrid() {
         TabView temp = (TabView) myTabbedPane.getSelectedComponent();
         if (temp != null) {
@@ -191,10 +196,9 @@ public class Window extends JFrame {
         }
     }
     
-    public void changeTurtle() {
-        
-    }
-    
+    /**
+     * Set the turtle shape
+     */
     public void setTurtleShape () {
         int response = myChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
@@ -218,6 +222,9 @@ public class Window extends JFrame {
                      getLiteral("COMMAND_NAME_REGISTER_SHAPE") + " " + imgURL);
     }
     
+    /**
+     * Change the color of the pen
+     */
     public void changePenColor() {
         Color result = JColorChooser.showDialog(this, getLiteral("ChangePenColor"), 
                                                 getCurrentPenColor());
@@ -229,6 +236,10 @@ public class Window extends JFrame {
         processCommand(getLiteral("COMMAND_NAME_SET_PEN_COLOR") + " " + pos);
     }
     
+    /**
+     * 
+     * @return - number of tabs
+     */
     public int getTabCount() {
         return myTabbedPane.getTabCount();
     }

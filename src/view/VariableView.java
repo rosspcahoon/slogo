@@ -15,28 +15,30 @@ import model.Status;
 @SuppressWarnings("serial")
 public class VariableView extends WindowView {
     private JTextArea myVariableArea;
+    private String myVariableTitle;
 
     /**
      * Constructs the StateView and sets a default border
-     * @param feedbackview The view in which this component resides
+     * @param feedbackview - The view in which this component resides
      */
     public VariableView (FeedbackView feedbackview) {
         super(feedbackview);
         this.setBorder(ViewConstants.DEFAULT_BORDER);
+        myVariableTitle = Window.getResources().getString("VariableTitle");
     }
 
     @Override
     protected void addComponents () {
         myVariableArea.setEditable(false);
-        myVariableArea.append(Window.getResources().getString("VariableTitle") + "\n");
+        myVariableArea.append(myVariableTitle + "\n");
         EasyGridFactory.layoutHorizontal(this, new JScrollPane(myVariableArea));
     }
 
     private void display(Map<String, Integer> varlist) {
         myVariableArea.setEditable(true);
         myVariableArea.setText("");
-        myVariableArea.append(Window.getResources().getString("VariableTitle") + ": \n");      
-        for(String s: varlist.keySet()){
+        myVariableArea.append(myVariableTitle + ": \n");      
+        for (String s: varlist.keySet()) {
             myVariableArea.append(s + " " + varlist.get(s) + "\n");
         }
         myVariableArea.setEditable(false);
