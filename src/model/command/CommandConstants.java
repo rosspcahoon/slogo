@@ -91,6 +91,31 @@ public class CommandConstants {
     // command aliases (control)
     public static final String COMMAND_ALIAS_SET = "set";
     
+    // command names (extended)
+    public static final String COMMAND_NAME_SET_BACKGROUND = "setbackground";
+    public static final String COMMAND_NAME_SET_PEN_COLOR = "setpencolor";
+    public static final String COMMAND_NAME_CHANGE_PEN_SIZE = "setpensize";
+    public static final String COMMAND_NAME_SET_PEN_TYPE = "setpentype";
+    public static final String COMMAND_NAME_SET_SHAPE = "setshape";
+    public static final String COMMAND_NAME_REGISTER_SHAPE = "registershape";
+    public static final String COMMAND_NAME_REGISTER_COLOR = "registercolor";
+    public static final String COMMAND_NAME_SET_PALETTE = "setpalette";
+    public static final String COMMAND_NAME_PEN_COLOR = "pencolor";
+    public static final String COMMAND_NAME_SHAPE = "shape";
+    public static final String COMMAND_NAME_STAMP = "stamp";
+    public static final String COMMAND_NAME_CLEAR_STAMPS = "clearstamps";
+    public static final String COMMAND_NAME_DOTIMES = "dotimes";
+    public static final String COMMAND_NAME_FOR = "for";
+    
+    // command aliases (extended)
+    public static final String COMMAND_ALIAS_SET_BACKGROUND = "setbg";
+    public static final String COMMAND_ALIAS_SET_PEN_COLOR = "setpc";
+    public static final String COMMAND_ALIAS_SET_PEN_SIZE = "setps";
+    public static final String COMMAND_ALIAS_SET_PEN_TYPE = "setpt";
+    public static final String COMMAND_ALIAS_SET_SHAPE = "setsh";
+    public static final String COMMAND_ALIAS_PEN_COLOR = "pc";
+    public static final String COMMAND_ALIAS_SHAPE = "sh";
+    
     // command arg numbers
     public static final int COMMAND_EXPECTED_ARGS_ZERO = 0;
     public static final int COMMAND_EXPECTED_ARGS_ONE = 1;
