@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import util.Pixmap;
@@ -25,8 +26,16 @@ public class ImageConstants {
      * add additional images to the list
      * @param url
      */
-    public static void addImage(String url) {
+    public static int addImage(String url) {
         imageFiles.add(new Pixmap(url));
+        return imageFiles.size()-1;
+    }
+    
+    /**
+     * returns the index of the last image in the list
+     */
+    public static int getLastIndex() {
+        return imageFiles.size()-1;
     }
     
 }

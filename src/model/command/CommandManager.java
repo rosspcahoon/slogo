@@ -51,6 +51,7 @@ public class CommandManager {
      * @param input
      */
     public int process(Room room, String input) {
+        System.out.println(input);
         myCurrentInput = input;
         myCurrentScanner = new Scanner(myCurrentInput);
         myCurrentRoom = room;
@@ -127,20 +128,5 @@ public class CommandManager {
             printNode(child);
         }
     }
-    
-//    public static void main(String[] args) {
-//        CommandManager test = new CommandManager();
-//        test.process(null, "to testcommand [ :a :b ] [ fd random :a bk sum :b 10 ]");
-//        System.out.println();
-//        test.process(null, "testcommand 10 5");
-//        System.out.println();
-//        test.process(null, "testcommand 20 15");
-//        System.out.println();
-//        test.process(null, "ifelse random 2 [ fd 50 rt 30 ] [ bk sum 10 random 5 ]");
-//        System.out.println();
-//        test.process(null, "set :hello random 5");
-//        System.out.println();
-//        test.process(null, "fd :hello");
-//        System.out.println();
-//    }
+
 }

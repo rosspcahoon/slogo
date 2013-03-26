@@ -31,7 +31,6 @@ public class ListCommandNode extends CommandNode {
         for (CommandNode child : children) {
             result = child.resolve();
         }
-//        System.out.printf("Executed command list with final command returning %d\n", result);
         return result;
     }
     

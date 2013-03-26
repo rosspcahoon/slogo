@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Graphics2D;
 import java.util.Observable;
-import util.Location;
 import model.Actor;
 
 
@@ -18,11 +17,6 @@ public class Room extends Observable implements Renderable{
     private Status myStatus;
     
     private Actor myTurtle;
-    
-    private boolean myTurtlePenStatus;
-    private double myTurtleHead; 
-    private Location myTurtleLocation;
-    private boolean myTurtleVisibility; 
 
     /**
      * Constructor

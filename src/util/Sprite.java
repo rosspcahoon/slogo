@@ -35,7 +35,7 @@ public abstract class Sprite extends Observable {
     private Pixmap myOriginalView;
     // cached for efficiency
     private Rectangle myBounds;
-
+    
     /**
      * Create a shape at the given position, with the given size.
      */
@@ -76,10 +76,6 @@ public abstract class Sprite extends Observable {
         resetBounds();
     }
     
-    public void setImage(int i) {
-        myView = new Pixmap(ImageConstants.imageFiles.get(i));
-    }
-
     /**
      * Resets shape's center.
      */
