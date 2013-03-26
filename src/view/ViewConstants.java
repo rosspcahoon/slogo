@@ -42,7 +42,7 @@ public class ViewConstants {
     /**
      * The size of the dialog box
      */
-    public static final Dimension DEFAULT_PEN_OPTIONS_VIEW_SIZE = new Dimension(250, 150);
+    public static final Dimension DEFAULT_PEN_OPTIONS_VIEW_SIZE = new Dimension(300, 150);
     
     /**
      * Added to fully prevent instantiation of this utility class.

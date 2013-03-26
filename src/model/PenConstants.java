@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
+import model.command.CommandLibrary;
 
 /**
  * Pen color constants for actor trails
@@ -18,9 +19,9 @@ public class PenConstants {
     public static final float PEN_DASH_NO_SPACE = (float) 0.0;
     public static final float PEN_DEFAULT_THICKNESS = (float) 2.0;
     
-    public static final String PEN_TYPE_NAME_NORMAL = "normal";
-    public static final String PEN_TYPE_NAME_DASHED = "dashed";
-    public static final String PEN_TYPE_NAME_DOUBLE = "double";
+    public static final String PEN_TYPE_NAME_NORMAL = getLiteral("PEN_TYPE_NAME_NORMAL");
+    public static final String PEN_TYPE_NAME_DASHED = getLiteral("PEN_TYPE_NAME_DASHED");
+    public static final String PEN_TYPE_NAME_DOUBLE = getLiteral("PEN_TYPE_NAME_DOUBLE");
     
     public static final int PEN_TYPE_INDEX_NORMAL = 0;
     public static final int PEN_TYPE_INDEX_DASHED = 1;
@@ -86,5 +87,9 @@ public class PenConstants {
             return -1;
         }
         return PEN_TYPE_NAME_TO_INDEX_MAP.get(name);
+    }
+    
+    private static String getLiteral(String s) {
+        return CommandLibrary.getLiteral(s);
     }
 }

@@ -42,7 +42,8 @@ public class PenOptionsView extends JDialog {
         ((JCheckBox) myPenDownUI).addItemListener(new PenDownListener());
         
         myPenTypeUI = new RadioGroup(new PenTypeListener(), PenConstants.PEN_TYPE_NAME_NORMAL, 
-                                     PenConstants.PEN_TYPE_NAME_DASHED, PenConstants.PEN_TYPE_NAME_DOUBLE);
+                                     PenConstants.PEN_TYPE_NAME_DASHED, 
+                                     PenConstants.PEN_TYPE_NAME_DOUBLE);
 
         myPenThicknessUI = new RadioGroup(new PenThicknessListener(), "2", "4", "6");
         
