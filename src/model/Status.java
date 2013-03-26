@@ -129,6 +129,10 @@ public class Status {
         return myUserVariables;
     }
     
+    /**
+     * Returns the map of user commands
+     * @return myUserCommands
+     */
     public Map<String, List<String>> getUserCommands() {
         return myUserCommands;
     }

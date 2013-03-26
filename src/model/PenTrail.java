@@ -32,12 +32,13 @@ public class PenTrail extends Line2D.Double {
     
     private boolean myPenDown;
     private BasicStroke myStroke;
+    private Color myPenColor;
     
     /**
      * Constructor
      */
     public PenTrail () { 
-        this (0,0,0,0, true, (float)1.0); 
+        this (0,0,0,0, true, (float)1.0, Color.BLACK); 
     }
     
     /**
@@ -50,6 +51,7 @@ public class PenTrail extends Line2D.Double {
         myP1 = point1; 
         myP2 = point2;    
         myPenDown = true;
+        myPenColor = Color.BLACK;
     }
     
     /**
@@ -60,7 +62,7 @@ public class PenTrail extends Line2D.Double {
      * @param y2
      */
     public PenTrail (double x1, double x2, double y1, double y2, boolean pen,
-                     float thickness, float[] dashSize) { 
+                     float thickness, float[] dashSize, Color color) { 
         super (x1, x2, y1, y2); 
         myX1 = x1; 
         myX2 = x2; 
@@ -69,6 +71,7 @@ public class PenTrail extends Line2D.Double {
         myPenDown = pen;
         myStroke = new BasicStroke(thickness, BasicStroke.CAP_BUTT, 
                                    BasicStroke.JOIN_BEVEL, 0,dashSize, (float)0);
+        myPenColor = color;
     }
     
     /**
@@ -79,7 +82,7 @@ public class PenTrail extends Line2D.Double {
      * @param y2
      */
     public PenTrail (double x1, double x2, double y1, double y2, boolean pen,
-                     float thickness) { 
+                     float thickness, Color color) { 
         super (x1, x2, y1, y2); 
         myX1 = x1; 
         myX2 = x2; 
@@ -88,6 +91,7 @@ public class PenTrail extends Line2D.Double {
         myPenDown = pen;
         myStroke = new BasicStroke(thickness, BasicStroke.CAP_BUTT, 
                                    BasicStroke.JOIN_BEVEL);
+        myPenColor = color;
     }
 
     /**
@@ -139,6 +143,16 @@ public class PenTrail extends Line2D.Double {
         return myY2; 
     }
     
+    /**
+     * uses input coordinates to create a parallel line "dist" pixels away from
+     * the original
+     * @param x1
+     * @param x2
+     * @param y1
+     * @param y2
+     * @param dist
+     * @return array of parallel line's coordinates
+     */
     private static double[] translateParallelCoordinates(double x1, double x2, double y1,
                                                   double y2, double dist) {
         double[] coords = new double[4];
@@ -157,32 +171,48 @@ public class PenTrail extends Line2D.Double {
         
     }
     
+    /**
+     * constructs a line from the input states
+     * @param x1
+     * @param x2
+     * @param y1
+     * @param y2
+     * @param pen - pen down
+     * @param penThick - pen thickness
+     * @param dashWidth - distance between dashes
+     * @param doubleLine - double line state (true = 2 lines)
+     * @param trails - list to add new lines to
+     * @param color - pen color
+     */
     public static void makeLine(double x1, double x2, double y1, double y2, 
                                 boolean pen, float penThick, float dashWidth,
-                                boolean doubleLine, List<PenTrail> trails) {
-        
+                                boolean doubleLine, List<PenTrail> trails, Color color) {
         float[] dash = new float[1];
         dash[0] = dashWidth;
-        if(dashWidth == 0) {
-            PenTrail trail = new PenTrail (x1, x2, y1, y2, pen, penThick); 
-            trails.add(trail);  
-            if(doubleLine) {
-                double[] coordinates = translateParallelCoordinates(x1, x2, y1, y2, (double)penThick*2);
-                PenTrail trail2 = new PenTrail (coordinates[0], coordinates[1], 
-                                               coordinates[2], coordinates[3], 
-                                               pen, penThick); 
-                trails.add(trail2);
+        if (pen) {
+            if (dashWidth == 0) {
+                PenTrail trail = new PenTrail(x1, x2, y1, y2, pen, penThick, color);
+                trails.add(trail);
+                if (doubleLine) {
+                    double[] coordinates =
+                            translateParallelCoordinates(x1, x2, y1, y2, (double) penThick * 2);
+                    PenTrail trail2 = new PenTrail(coordinates[0], coordinates[1],
+                                                   coordinates[2], coordinates[3],
+                                                   pen, penThick, color);
+                    trails.add(trail2);
+                }
             }
-        }
-        else {
-            PenTrail trail = new PenTrail (x1, x2, y1, y2, pen, penThick, dash); 
-            trails.add(trail);  
-            if(doubleLine) {
-                double[] coordinates = translateParallelCoordinates(x1, x2, y1, y2, (double)penThick*2);
-                PenTrail trail2 = new PenTrail (coordinates[0], coordinates[1], 
-                                               coordinates[2], coordinates[3], 
-                                               pen, penThick, dash); 
-                trails.add(trail2);
+            else {
+                PenTrail trail = new PenTrail(x1, x2, y1, y2, pen, penThick, dash, color);
+                trails.add(trail);
+                if (doubleLine) {
+                    double[] coordinates =
+                            translateParallelCoordinates(x1, x2, y1, y2, (double) penThick * 2);
+                    PenTrail trail2 = new PenTrail(coordinates[0], coordinates[1],
+                                                   coordinates[2], coordinates[3],
+                                                   pen, penThick, dash, color);
+                    trails.add(trail2);
+                }
             }
         }
         
@@ -194,8 +224,12 @@ public class PenTrail extends Line2D.Double {
         super.setLine (x1, x2, y1, y2); 
     }
     
+    /**
+     * draws this penTrail.
+     * @param pen
+     */
     public void drawLine (Graphics2D pen) {
-        pen.setColor(Color.BLACK);
+        pen.setColor(myPenColor);
         pen.setStroke(myStroke);
 //        System.out.println(myStroke.getDashPhase());
         if(myPenDown) {

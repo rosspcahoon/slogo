@@ -7,17 +7,15 @@ import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JRadioButton;
 
 /**
- * TODO
+ * This specialized UI is intended to allow the user to specify 
+ * Pen Properties: type, thickness, active. 
  * @author Dagbedji Fagnisse
  *
  */
 public class PenOptionsView extends JDialog {
-    /**
-     * TODO
-     */
+
     private static final long serialVersionUID = 7800762411110902427L;
     private Window myParent;
     private boolean myPenDown;
@@ -28,8 +26,8 @@ public class PenOptionsView extends JDialog {
     private JComponent myPenTypeUI;
     
     /**
-     * TODO
-     * @param w - 
+     * Instantiate a view that can be used to set properties of a pen
+     * @param w - Parent window
      */
     public PenOptionsView(Window w) { 
         super(w, "Choose Pen Options");
@@ -41,22 +39,12 @@ public class PenOptionsView extends JDialog {
         ((JCheckBox) myPenDownUI).setSelected(true);
         ((JCheckBox) myPenDownUI).addItemListener(new PenDownListener());
         
-        JRadioButton dashed = makeRadioOption("dashed");
-        JRadioButton dotted = makeRadioOption("dotted");
-        myPenTypeUI = new RadioGroup(myPenType, new PenTypeListener(), dashed, dotted);
+        myPenTypeUI = new RadioGroup(new PenTypeListener(), "dashed", "dotted", "double");
+        myPenThicknessUI = new RadioGroup(new PenThicknessListener(), "2", "4", "6");
         
-        JRadioButton two = makeRadioOption("2");
-        JRadioButton four = makeRadioOption("4");
-        myPenThicknessUI = new RadioGroup(myPenThickness, new PenThicknessListener(), two, four);
         EasyGridFactory.layoutVertical(this, myPenDownUI, myPenThicknessUI, myPenTypeUI);
     }
     
-    private JRadioButton makeRadioOption (String option) {
-        JRadioButton res = new JRadioButton(option);
-        res.setActionCommand(option);
-        res.setSelected(true);
-        return res;
-    }
     
     /**
      * Set visible

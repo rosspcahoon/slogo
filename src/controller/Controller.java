@@ -31,7 +31,7 @@ public class Controller implements Observer, IController {
      * Constructor
      */
     public Controller() {
-        String language = "English";
+        String language = "French";
         myModel = new Model(language);
         myView = new Window("SLogo", language, this);
         myRoom2Tab = new HashMap<Room, TabView>();

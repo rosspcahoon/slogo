@@ -3,12 +3,18 @@ package model;
 import java.util.ArrayList;
 import java.awt.Color;
 
-
+/**
+ * Pen color constants for actor trails
+ * @author mp
+ *
+ */
 public class PenConstants {
     
     public static ArrayList<Color> penColors;
-   // ArrayList<>
 
+    /**
+     * filling the stock colors
+     */
     static {
         penColors = new ArrayList<Color>();
         penColors.add(Color.BLACK);
@@ -27,6 +33,10 @@ public class PenConstants {
         
     }
     
+    /**
+     * add additional colors to the list
+     * @param color
+     */
     public static void addColor(Color color) {
         penColors.add(color);
     }

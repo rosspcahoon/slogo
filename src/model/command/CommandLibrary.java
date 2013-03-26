@@ -259,12 +259,14 @@ public class CommandLibrary {
     /**
      * Builds the command library.
      */
+    /**
+     * Builds the command library.
+     */
     private static void buildCommandLibrary() {
         myCommandNodes = new HashMap<String,CommandNode>();
         //if this was not static
         //myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new ForwardCommandNode());
         //
-//        myCommandNodes.put(resources.getString(CommandConstants.COMMAND_NAME_FORWARD), new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new RotateCommandNode());
@@ -334,6 +336,10 @@ public class CommandLibrary {
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_EQUAL, CommandConstants.COMMAND_NAME_IS_EQUAL);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_IS_NOT_EQUAL, CommandConstants.COMMAND_NAME_IS_NOT_EQUAL);
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_SET, CommandConstants.COMMAND_NAME_MAKE);
+    }
+    
+    public static String getLiteral(String s) {
+        return resources.getString(s);
     }
 
 

@@ -15,6 +15,7 @@ import javax.swing.JSeparator;
 @SuppressWarnings("serial")
 public class MenuBarView extends JMenuBar {
     private Window myWindow;
+    private ActionLibrary myActionLibrary;
     
     /**
      * Constructor for MenuBarView
@@ -23,6 +24,7 @@ public class MenuBarView extends JMenuBar {
     
     public MenuBarView(Window window) {
         myWindow = window;
+        myActionLibrary = new ActionLibrary(myWindow);
         addComponents();
     }
 
@@ -35,30 +37,30 @@ public class MenuBarView extends JMenuBar {
     private JMenu makeFileMenu() {
         JMenu result = new JMenu(Window.getResources().getString("FileMenu"));
         result.setMnemonic(KeyEvent.VK_F);
-        result.add(myWindow.new NewTabAction());
-        result.add(myWindow.new OpenFileAction());
-        result.add(myWindow.new SaveFileAction());
+        result.add(myActionLibrary.new NewTabAction());
+        result.add(myActionLibrary.new OpenFileAction());
+        result.add(myActionLibrary.new SaveFileAction());
         result.add(new JSeparator());
-        result.add(myWindow.new QuitAction());
+        result.add(myActionLibrary.new QuitAction());
         return result;
     }
     
     private JMenu makePreferencesMenu() {
         JMenu result = new JMenu(Window.getResources().getString("PreferencesMenu"));
         result.setMnemonic(KeyEvent.VK_P);
-        result.add(myWindow.new ChangeBackgroundAction());
-        result.add(myWindow.new ToggleGridAction());
-        result.add(myWindow.new ChangeTurtleAction());
+        result.add(myActionLibrary.new ChangeBackgroundAction());
+        result.add(myActionLibrary.new ToggleGridAction());
+        result.add(myActionLibrary.new ChangeTurtleAction());
         result.add(new JSeparator());
-        result.add(myWindow.new ChangePenColorAction());
-        result.add(myWindow.new ChangePenPropertiesAction());
+        result.add(myActionLibrary.new ChangePenColorAction());
+        result.add(myActionLibrary.new ChangePenPropertiesAction());
         return result;
     }
     
     private JMenu makeHelpMenu() {
         JMenu result = new JMenu(Window.getResources().getString("HelpMenu"));
         result.setMnemonic(KeyEvent.VK_H);
-        result.add(myWindow.new WelcomeAction());
+        result.add(myActionLibrary.new WebInfoAction());
         return result;
     }
 }
