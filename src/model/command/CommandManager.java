@@ -42,7 +42,7 @@ public class CommandManager {
         
         //translation 
         ourResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-        CommandLibrary.setResources(ourResources);
+        CommandLibrary.loadResources(ourResources);
     }
     
     /**

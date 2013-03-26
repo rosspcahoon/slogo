@@ -59,11 +59,9 @@ public class CommandLibrary {
     private static ResourceBundle resources;
     
     /**
-     * Static initialization block--calls the static buildLibrary() methods.
+     * Static initialization block.
      */
     static {
-        buildCommandLibrary();
-        buildAliasLibrary();
         myCurrentUserVariables = new HashMap<String,Integer>();       
         myRoomVariableLibraries = new HashMap<Integer,Map<String,Integer>>();
         myRoomUserCommandLibraries = new HashMap<Integer,Map<String,UserDefinedCommandNode>>();
@@ -249,6 +247,16 @@ public class CommandLibrary {
     }
     
     /**
+     * Set the language resources for internationalization
+     * @param ourResources
+     */
+    public static void loadResources (ResourceBundle ourResources) {
+        resources = ourResources;
+        buildCommandLibrary();
+        buildAliasLibrary();
+    }
+    
+    /**
      * Builds the command library.
      */
     private static void buildCommandLibrary() {
@@ -256,6 +264,7 @@ public class CommandLibrary {
         //if this was not static
         //myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new ForwardCommandNode());
         //
+//        myCommandNodes.put(resources.getString(CommandConstants.COMMAND_NAME_FORWARD), new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new RotateCommandNode());
@@ -327,11 +336,5 @@ public class CommandLibrary {
         myCommandAliases.put(CommandConstants.COMMAND_ALIAS_SET, CommandConstants.COMMAND_NAME_MAKE);
     }
 
-    /**
-     * Set the language resources for internationalization
-     * @param ourResources
-     */
-    public static void setResources (ResourceBundle ourResources) {
-        resources = ourResources;
-    }
+
 }
