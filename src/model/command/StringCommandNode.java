@@ -14,12 +14,6 @@ public class StringCommandNode extends CommandNode {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);        
     }
-    
-//    public StringCommandNode(String value) {
-//        super();
-//        super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
-//        super.setMyString(value);
-//    }
 
     @Override
     public CommandNode getCopyOfInstance() {
@@ -30,7 +24,8 @@ public class StringCommandNode extends CommandNode {
     public int resolve() throws Exception {
         if (!getMyString().substring(0, 1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
             return -1;
-        }
-        return CommandLibrary.getUserVariable(getMyString());
+        }     
+        int result = CommandLibrary.getUserVariable(super.getMyString());
+        return result;
     }
 }

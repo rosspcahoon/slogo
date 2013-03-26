@@ -29,7 +29,7 @@ public class OneOperandBooleanCommandNode extends CommandNode {
         CommandNode child = children.get(0);
         int childValue = child.resolve();
         int result;
-        if (childValue > CommandConstants.COMMAND_RETURN_FALSE) {
+        if (childValue != CommandConstants.COMMAND_RETURN_FALSE) {
             result = CommandConstants.COMMAND_RETURN_FALSE;
         } else {
             result = CommandConstants.COMMAND_RETURN_TRUE;

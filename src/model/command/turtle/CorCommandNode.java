@@ -1,4 +1,4 @@
-package model.command.turtle.commands;
+package model.command.turtle;
 
 import model.Room;
 import model.command.CommandConstants;
@@ -6,31 +6,31 @@ import model.command.CommandLibrary;
 import model.command.CommandNode;
 
 /**
- * Node representing a home or clearscreen command (default clearscreen)
+ * Node representing a xcor or ycor command (default xcor)
  * @author james
  *
  */
-public class ResetRoomCommandNode extends CommandNode {
+public class CorCommandNode extends CommandNode {
 
-    public ResetRoomCommandNode() {
+    public CorCommandNode() {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
     }
     
     @Override
     public CommandNode getCopyOfInstance () {
-        return new ResetRoomCommandNode();
+        return new CorCommandNode();
     }
 
     @Override
-    public int resolve () throws Exception {
+    public int resolve () {
         String name = CommandLibrary.getAlias(getMyString());
         Room room = getMyRoom();
         int result;
-        if (name.equals(CommandConstants.COMMAND_NAME_HOME)) {
-            result = (int) room.getTurtle().returnHome();
+        if (name.equals(CommandConstants.COMMAND_NAME_YCOR)) {
+            result = (int) room.getTurtle().getCurrentLocation().getY();
         } else {
-            result = (int) room.clear();
+            result = (int) room.getTurtle().getCurrentLocation().getX();
         }
         return result;
     }

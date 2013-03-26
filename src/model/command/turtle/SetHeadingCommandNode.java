@@ -1,4 +1,4 @@
-package model.command.turtle.commands;
+package model.command.turtle;
 
 import java.util.List;
 import model.Room;

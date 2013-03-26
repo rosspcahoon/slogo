@@ -46,16 +46,16 @@ public class UserDefinedCommandNode extends CommandNode {
         }
         
         // adds parameter library to user variable libraries in CommandLibrary        
-        CommandLibrary.createVariableLibrary(myName, myParameterNames, myParameterValues);        
+        CommandLibrary.createParameterLibrary(myName, myParameterNames, myParameterValues);        
         
         // switch variable libraries in CommandLibrary
-        CommandLibrary.loadVariableLibrary(myName);       
+        CommandLibrary.loadParameterLibrary(myName);       
         
         // execute the user defined command        
-        int result = myCommands.resolve();
+        int result = myCommands.resolve();       
         
-        // load original variable library
-        CommandLibrary.loadVariableLibrary();
+        // switch back to room library
+        CommandLibrary.loadVariableLibrary(super.getMyRoom());
         
 //        System.out.printf("User defined command %s executed, returning %d\n", myName, result);
         return result;

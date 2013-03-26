@@ -22,7 +22,7 @@ public class CommandManager {
     private Scanner myCurrentScanner;
     
     /**
-     * For translation
+     * For language translation.
      */
     private static ResourceBundle ourResources;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
@@ -54,6 +54,8 @@ public class CommandManager {
         myCurrentInput = input;
         myCurrentScanner = new Scanner(myCurrentInput);
         myCurrentRoom = room;
+        CommandLibrary.loadVariableLibrary(room);
+        CommandLibrary.loadCommandLibrary(room);
         try {
             createTree();
 //            printTree();
@@ -66,7 +68,7 @@ public class CommandManager {
 //            e.printStackTrace();
             room.getState().setErrorMessage(myCurrentError);
         }
-        CommandLibrary.addDefaultVariableLibraryToRoomStatus(room);
+        CommandLibrary.addUserVariableLibraryToRoomStatus(room);
         CommandLibrary.addCommandLibraryToRoomStatus(room);
         return myCurrentResult;
     }

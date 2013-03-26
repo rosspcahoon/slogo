@@ -33,7 +33,7 @@ public class TwoOperandBooleanCommandNode extends CommandNode {
         int secondOperand = childTwo.resolve();
         int result;
         if (name.equals(CommandConstants.COMMAND_NAME_AND)) {
-            if (firstOperand > CommandConstants.COMMAND_RETURN_FALSE && secondOperand > CommandConstants.COMMAND_RETURN_FALSE) {
+            if (firstOperand != CommandConstants.COMMAND_RETURN_FALSE && secondOperand != CommandConstants.COMMAND_RETURN_FALSE) {
                 result = CommandConstants.COMMAND_RETURN_TRUE;
             } else {
                 result = CommandConstants.COMMAND_RETURN_FALSE;
@@ -63,7 +63,7 @@ public class TwoOperandBooleanCommandNode extends CommandNode {
                 result = CommandConstants.COMMAND_RETURN_FALSE;
             }
         } else {
-            if (firstOperand > CommandConstants.COMMAND_RETURN_FALSE || secondOperand > CommandConstants.COMMAND_RETURN_FALSE) {
+            if (firstOperand != CommandConstants.COMMAND_RETURN_FALSE || secondOperand != CommandConstants.COMMAND_RETURN_FALSE) {
                 result = CommandConstants.COMMAND_RETURN_TRUE;
             } else {
                 result = CommandConstants.COMMAND_RETURN_FALSE;

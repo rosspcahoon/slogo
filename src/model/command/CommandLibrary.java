@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import model.Room;
 import model.Status;
-import model.command.turtle.commands.*;
-import model.command.turtle.queries.*;
+import model.command.turtle.*;
 import model.command.booleans.*;
 import model.command.math.*;
 import model.command.control.*;
@@ -20,37 +19,42 @@ import model.command.control.*;
 public class CommandLibrary {
 
     /**
-     * HashMap holding mappings between command names and command objects.
+     * Map holding mappings between command names and command objects.
      * Command names defined according to the CommandKeywords class.
      */
     private static Map<String,CommandNode> myCommandNodes;
     
     /**
-     * HashMap matching command names to their aliases.
+     * Map matching command names to their aliases.
      */
     private static Map<String,String> myCommandAliases;
     
     /**
-     * HashMap for user-created variables. Changes based on the context in which
+     * Map for user-created variables. Changes based on the context in which
      * we are executing, i.e. if we are executing normal commands or user defined
      * commands which have their own custom set argument names
      */
     private static Map<String,Integer> myCurrentUserVariables;
     
     /**
-     * HashMap for globally defined user variables.
+     * Map pointing to different user-defined command parameter sets.
      */
-    private static Map<String,Integer> myDefaultUserVariables;
+    private static Map<String,Map<String,Integer>> myCommandParameterLibraries;
     
     /**
-     * HashMap pointing to different user-defined variable sets.
+     * Map pointing to different user-defined variable sets.
      */
-    private static Map<String,Map<String,Integer>> myUserVariableLibraries;
+    private static Map<Integer,Map<String,Integer>> myRoomVariableLibraries;
     
     /**
-     * HashMap for user-defined commands.
+     * Map pointing to different user-defined command libraries, organized by room.
      */
-    private static Map<String,UserDefinedCommandNode> myUserCommands;
+    private static Map<Integer,Map<String,UserDefinedCommandNode>> myRoomUserCommandLibraries;
+    
+    /**
+     * Map for user-defined commands. Changes based on the room we are currently in.
+     */
+    private static Map<String,UserDefinedCommandNode> myCurrentUserCommands;
 
     private static ResourceBundle resources;
     
@@ -60,10 +64,11 @@ public class CommandLibrary {
     static {
         buildCommandLibrary();
         buildAliasLibrary();
-        myDefaultUserVariables = new HashMap<String,Integer>();
-        myUserVariableLibraries = new HashMap<String,Map<String,Integer>>();
-        myUserCommands = new HashMap<String,UserDefinedCommandNode>();
-        myCurrentUserVariables = myDefaultUserVariables;
+        myCurrentUserVariables = new HashMap<String,Integer>();       
+        myRoomVariableLibraries = new HashMap<Integer,Map<String,Integer>>();
+        myRoomUserCommandLibraries = new HashMap<Integer,Map<String,UserDefinedCommandNode>>();
+        myCommandParameterLibraries = new HashMap<String,Map<String,Integer>>();
+        myCurrentUserCommands = new HashMap<String,UserDefinedCommandNode>();
     }
     
     /**
@@ -81,8 +86,8 @@ public class CommandLibrary {
         }
 
         // if the input is a user defined command
-        if (myUserCommands.containsKey(name)) {
-            UserDefinedCommandNode result = myUserCommands.get(name);
+        if (myCurrentUserCommands.containsKey(name)) {
+            UserDefinedCommandNode result = myCurrentUserCommands.get(name);
             return result;
         }
         
@@ -129,7 +134,7 @@ public class CommandLibrary {
      */
     public static Integer getUserVariable(String variableName) throws Exception {
         if (!myCurrentUserVariables.containsKey(variableName)) {
-            throw new Exception("User variable " + variableName + " not found");
+            throw new Exception("Error retrieving user variable -- user variable " + variableName + " not found");
         }
         return myCurrentUserVariables.get(variableName);
     }
@@ -139,49 +144,85 @@ public class CommandLibrary {
      * are identified by the name of the user-defined command with which they
      * are associated.
      */
-    public static void loadVariableLibrary(String commandName) {
-        if (!myUserVariableLibraries.containsKey(commandName)) {            
+    public static void loadParameterLibrary(String commandName) {
+        if (!myCommandParameterLibraries.containsKey(commandName)) {            
             Map<String,Integer> newLibrary = new HashMap<String,Integer>();
-            myUserVariableLibraries.put(commandName, newLibrary);
+            myCommandParameterLibraries.put(commandName, newLibrary);
         }
-        myCurrentUserVariables = myUserVariableLibraries.get(commandName);
+        myCurrentUserVariables = myCommandParameterLibraries.get(commandName);
     }
     
     /**
-     * If no command name is specified, load the default library.
+     * Sets a certain user-defined variable library as the current. Libraries
+     * are identified by the id of the room with which they are associated.
      */
-    public static void loadVariableLibrary() {
-        myCurrentUserVariables = myDefaultUserVariables;
+    public static void loadVariableLibrary(Room room) {
+        int id = room.getID();
+        if (!myRoomVariableLibraries.containsKey(id)) {            
+            Map<String,Integer> newLibrary = new HashMap<String,Integer>();
+            myRoomVariableLibraries.put(id, newLibrary);
+        }
+        myCurrentUserVariables = myRoomVariableLibraries.get(id);
+    }    
+    
+    /**
+     * Sets a certain user-defined variable library as the current. Libraries
+     * are identified by the id of the room with which they are associated.
+     */
+    public static void loadCommandLibrary(Room room) {
+        int id = room.getID();
+        if (!myRoomUserCommandLibraries.containsKey(id)) {            
+            Map<String,UserDefinedCommandNode> newLibrary = new HashMap<String,UserDefinedCommandNode>();
+            myRoomUserCommandLibraries.put(id, newLibrary);
+        }
+        myCurrentUserCommands = myRoomUserCommandLibraries.get(id);
+    }   
+    
+    /**
+     * Creates a new user variable library and adds it to the list.
+     * @throws Exception 
+     */
+    public static void createParameterLibrary(String name, List<String> names, List<Integer> values) throws Exception {
+        Map<String,Integer> newLibrary = new HashMap<String,Integer>();
+        if (names.size() != values.size()) {
+            throw new Exception("Error creating variable library -- parameter and value list size mismatch");
+        }
+        for (int i=0; i<names.size(); i++) {
+            newLibrary.put(names.get(i), values.get(i));
+        }
+        myCommandParameterLibraries.put(name, newLibrary);        
     }
     
     /**
      * Creates a new user variable library and adds it to the list.
+     * @throws Exception 
      */
-    public static void createVariableLibrary(String command, List<String> names, List<Integer> values) {
+    public static void createRoomVariableLibrary(int id, List<String> names, List<Integer> values) throws Exception {
         Map<String,Integer> newLibrary = new HashMap<String,Integer>();
-//        if (names.size() != values.size()) {
-//            
-//        }
+        if (names.size() != values.size()) {
+            throw new Exception("Error creating variable library -- parameter and value list size mismatch");
+        }
         for (int i=0; i<names.size(); i++) {
             newLibrary.put(names.get(i), values.get(i));
         }
-        myUserVariableLibraries.put(command, newLibrary);        
+        myRoomVariableLibraries.put(id, newLibrary);        
     }
     
     /**
      * Adds a user defined command to the library.
      */
     public static void addUserDefinedCommand(String name, UserDefinedCommandNode command) {
-        myUserCommands.put(name, command);
+        myCurrentUserCommands.put(name, command);
     }
     
     /**
-     * Adds contents of the default user variable library to status.
+     * Adds contents of the user variable library for the given room to room status.
      */
-    public static void addDefaultVariableLibraryToRoomStatus(Room room) {
+    public static void addUserVariableLibraryToRoomStatus(Room room) {
         Status status = room.getState();
-        for (String key : myDefaultUserVariables.keySet()) {
-            status.addVariable(key, myDefaultUserVariables.get(key));
+        Map<String,Integer> vars = myRoomVariableLibraries.get(room.getID());
+        for (String key : vars.keySet()) {
+            status.addVariable(key, vars.get(key));
         }                
     }
     
@@ -190,8 +231,8 @@ public class CommandLibrary {
      */
     public static void addCommandLibraryToRoomStatus(Room room) {
         Status status = room.getState();
-        for (String key : myUserCommands.keySet()) {
-            UserDefinedCommandNode ucdNode = myUserCommands.get(key);            
+        for (String key : myCurrentUserCommands.keySet()) {
+            UserDefinedCommandNode ucdNode = myCurrentUserCommands.get(key);            
             status.addCommandName(key, ucdNode.getCopyOfParameterNames());
         }                
     }
