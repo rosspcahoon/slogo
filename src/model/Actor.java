@@ -32,7 +32,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private static double myMagnitude = 0; 
     
     //Moveable's line trail 
-    private boolean myPenDown = true; 
+    private boolean myPenDown; 
     private List<PenTrail> myTrail;
     private float myPenThickness;
     private float myDashWidth;
@@ -44,7 +44,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private int myFrameLeft;
     
     //is it on the screen/visible
-    private boolean myVisibility = false; 
+    private boolean myVisibility; 
     
     private Status myStatus;
     //Moveable's location, magnitude (initialized) and angle/head direction
@@ -69,6 +69,8 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myPenThickness = (float)2.0;
         myDashWidth = (float)4.0;
         myDoubleLineOn = true;
+        myVisibility = true;
+        myPenDown = true;
     }
     
     /**
@@ -118,7 +120,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         pen.setColor(myPenColor);
-        super.paint(pen);
+        if(myVisibility) {
+            super.paint(pen);   
+        }
         for(PenTrail penT: myTrail) {
             penT.drawLine(pen);
         }
