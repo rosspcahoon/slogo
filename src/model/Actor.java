@@ -43,9 +43,6 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     private int myFrameRight;
     private int myFrameLeft;
     
-    //is it on the screen/visible
-    private boolean myVisibility; 
-    
     private Status myStatus;
     //Moveable's location, magnitude (initialized) and angle/head direction
     private double myHeading;
@@ -69,7 +66,6 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myPenThickness = (float)2.0;
         myDashWidth = (float)4.0;
         myDoubleLineOn = true;
-        myVisibility = true;
         myPenDown = true;
     }
     
@@ -81,9 +77,14 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void makeLine () { 
         PenTrail.makeLine(super.getOldLocation().getX(), super.getCurrentLocation().getX(),
                           super.getOldLocation().getY(), super.getCurrentLocation().getY(), 
-                          myPenDown, myPenThickness, myDashWidth, myDoubleLineOn, myTrail); 
+                          myPenDown, myPenThickness, myDashWidth, myDoubleLineOn, 
+                          myTrail, myPenColor); 
     }
     
+    /**
+     * adds a line to the turtle's trail
+     * @param trail
+     */
     public void addLine(PenTrail trail) {
         myTrail.add(trail);
     }
@@ -120,7 +121,7 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     public void paint(Graphics2D pen) {
         updateStatus(myStatus);
         pen.setColor(myPenColor);
-        if(myVisibility) {
+        if(getVisibilityStatus()) {
             super.paint(pen);   
         }
         for(PenTrail penT: myTrail) {
@@ -283,6 +284,11 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         return getCurrentLocation().getY() - yLoc;
     }
     
+    /**
+     * handles the wraparound of the turtle
+     * @param distMove
+     * @return
+     */
     public Vector wrapAround(double distMove) {
         Vector vec = new Vector(getHeading(), distMove);
         double deltaX = vec.getXChange();
@@ -295,14 +301,26 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         return moveVector;
     }
     
+    /**
+     * sets the thickness of the pen
+     * @param thick
+     */
     public void setPenThickness(double thick) {
         myPenThickness = (float)thick;
     }
     
+    /**
+     * sets the double line state for the trail (true = 2 lines// false = 1)
+     * @param doubleLine
+     */
     public void setDoubleLine(boolean doubleLine) {
         myDoubleLineOn = doubleLine;
     }
     
+    /**
+     * sets the distance between dashes
+     * @param width
+     */
     public void setDashWidth(double width) {
         myDashWidth = (float)width;
     }
