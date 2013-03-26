@@ -204,7 +204,7 @@ public class ActionLibrary {
 
     private Window myWindow;
     public ActionLibrary(Window w) {
-        myWindow=w;
+        myWindow = w;
     }
     private String getLiteral (String string) {
         return Window.getLiteral(string);

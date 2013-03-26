@@ -264,8 +264,8 @@ public class CommandLibrary {
         //if this was not static
         //myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new ForwardCommandNode());
         //
-//        myCommandNodes.put(resources.getString(CommandConstants.COMMAND_NAME_FORWARD), new MoveCommandNode());
-        myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommandNode());
+        myCommandNodes.put(resources.getString("COMMAND_NAME_FORWARD"), new MoveCommandNode());
+//        myCommandNodes.put(CommandConstants.COMMAND_NAME_FORWARD, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_BACK, new MoveCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_LEFT, new RotateCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_RIGHT, new RotateCommandNode());

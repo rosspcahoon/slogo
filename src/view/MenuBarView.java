@@ -15,7 +15,7 @@ import javax.swing.JSeparator;
 @SuppressWarnings("serial")
 public class MenuBarView extends JMenuBar {
     private Window myWindow;
-    private ActionLibrary myActionLibrary = new ActionLibrary(myWindow);
+    private ActionLibrary myActionLibrary;
     
     /**
      * Constructor for MenuBarView
@@ -24,6 +24,7 @@ public class MenuBarView extends JMenuBar {
     
     public MenuBarView(Window window) {
         myWindow = window;
+        myActionLibrary = new ActionLibrary(myWindow);
         addComponents();
     }
 
