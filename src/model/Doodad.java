@@ -145,11 +145,18 @@ public abstract class Doodad extends Sprite implements IRoomObject {
         return myVisibility; 
     }
     
+    /**
+     * paints this doodad
+     */
     public void paint(Graphics2D pen) {
         super.setCenter(myCurrentLocation);
         super.paint(pen, myHeading.getDirection());
     }
     
+    /**
+     * returns the heading vector of this object
+     * @return heading Vector
+     */
     public Vector getHeadingVector() {
         return myHeading;
     }
