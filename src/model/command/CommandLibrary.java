@@ -309,8 +309,13 @@ public class CommandLibrary {
         myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_SHAPE, new SetGraphicsCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_REGISTER_COLOR, new RegisterGraphicsCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_REGISTER_SHAPE, new RegisterGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_PALETTE, new SetPaletteCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_PEN_COLOR, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SHAPE, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LAST_PEN_COLOR_INDEX, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LAST_SHAPE_INDEX, new GetGraphicsCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_DOTIMES, new DoTimesCommandNode());
-
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_FOR, new ForCommandNode());
     }
 
     /**

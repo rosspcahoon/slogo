@@ -51,10 +51,11 @@ public class CommandManager {
      * @param input
      */
     public int process(Room room, String input) {
-        System.out.println(input);
+//        System.out.println(input);
         myCurrentInput = input;
         myCurrentScanner = new Scanner(myCurrentInput);
         myCurrentRoom = room;
+        myCurrentResult = -1;
         CommandLibrary.loadVariableLibrary(room);
         CommandLibrary.loadCommandLibrary(room);
         try {
@@ -101,7 +102,6 @@ public class CommandManager {
         myCurrentScanner.close();
         myCurrentRoot = null;
         myCurrentInput = null;
-        myCurrentResult = -1;
         myCurrentScanner = null;
     }
     

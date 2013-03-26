@@ -51,14 +51,14 @@ public class SetGraphicsCommandNode extends CommandNode {
                 if (child.getMyString().equals(CommandConstants.COMMAND_SETTER_LAST_ITEM)) {
                     room.getTurtle().setShape(ImageConstants.getLastIndex());
                 } else {
-                    throw new Exception("Error executing SETSHAPE -- color index could not be interpreted");
+                    throw new Exception("Error executing SETSHAPE -- shape index could not be interpreted");
                 }
             }
             try {
                 room.getTurtle().setShape(childValue);
                 return childValue;
             } catch (IndexOutOfBoundsException e) {
-                throw new Exception("Error executing SETSHAPE -- color index out of bounds");
+                throw new Exception("Error executing SETSHAPE -- shape index out of bounds");
             }
         } else if (name.equals(CommandConstants.COMMAND_NAME_SET_PEN_SIZE)) {
             room.getTurtle().setPenThickness(childValue);

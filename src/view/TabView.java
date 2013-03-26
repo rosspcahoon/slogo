@@ -73,9 +73,9 @@ public class TabView extends WindowView {
     * Sets Turtle image for the RoomView
     * @param img the image to be set.
     */
-    public void setTurtle(Image img) {
-        myRoomView.setTurtle(img);
-    }
+//    public void setTurtle(Image img) {
+//        myRoomView.setTurtle(img);
+//    }
 
     /**
      * Get the ID for this component

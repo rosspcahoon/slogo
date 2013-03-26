@@ -1,10 +1,13 @@
 package view;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
+import javax.swing.Timer;
 
 
 /**
@@ -14,8 +17,13 @@ import javax.swing.JSeparator;
  */
 @SuppressWarnings("serial")
 public class MenuBarView extends JMenuBar {
+    private static final int DEFAULT_DELAY = 100;
     private Window myWindow;
     private ActionLibrary myActionLibrary;
+    private JMenu myFileMenu;
+    private JMenu myPreferencesMenu;
+    private JMenu myHelpMenu;
+    private Timer myTimer;
     
     /**
      * Constructor for MenuBarView
@@ -26,6 +34,15 @@ public class MenuBarView extends JMenuBar {
         myWindow = window;
         myActionLibrary = new ActionLibrary(myWindow);
         addComponents();
+        ActionListener prefListener =  new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                if (myWindow.getTabCount() > 0) {
+                    enablePreferences();
+                }
+            }
+        };
+        myTimer = new Timer(DEFAULT_DELAY, prefListener);
+        myTimer.start();
     }
 
     private void addComponents () {
@@ -42,7 +59,8 @@ public class MenuBarView extends JMenuBar {
         result.add(myActionLibrary.new SaveFileAction());
         result.add(new JSeparator());
         result.add(myActionLibrary.new QuitAction());
-        return result;
+        myFileMenu = result;
+        return myFileMenu;
     }
     
     private JMenu makePreferencesMenu() {
@@ -54,13 +72,24 @@ public class MenuBarView extends JMenuBar {
         result.add(new JSeparator());
         result.add(myActionLibrary.new ChangePenColorAction());
         result.add(myActionLibrary.new ChangePenPropertiesAction());
-        return result;
+        result.setEnabled(false);
+        myPreferencesMenu = result;
+        return myPreferencesMenu;
     }
     
     private JMenu makeHelpMenu() {
         JMenu result = new JMenu(Window.getResources().getString("HelpMenu"));
         result.setMnemonic(KeyEvent.VK_H);
         result.add(myActionLibrary.new WebInfoAction());
-        return result;
+        myHelpMenu = result;
+        return myHelpMenu;
     }
+    
+    /**
+     * Make the preferences menu active
+     */
+    private void enablePreferences() {
+        myPreferencesMenu.setEnabled(true);
+    }
+    
 }

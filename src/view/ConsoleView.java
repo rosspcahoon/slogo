@@ -17,8 +17,11 @@ import javax.swing.JTextField;
  *
  */
 
-@SuppressWarnings("serial")
 public class ConsoleView extends WindowView {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 577016600494466197L;
     private JTextField myTextField;
     private JTextArea myCommandField;
     private Stack<String> myCommandsHistory;
@@ -38,7 +41,7 @@ public class ConsoleView extends WindowView {
     @Override
     protected void addComponents () {
         EasyGridFactory.layoutDefaultConsole(this, makeClear(), 
-                                             new JScrollPane(myCommandField), makeSubmit(), myTextField);
+                        new JScrollPane(myCommandField), makeSubmit(), myTextField);
     }
 
     @Override

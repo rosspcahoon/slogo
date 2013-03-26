@@ -116,6 +116,10 @@ public class CommandConstants {
     public static final String COMMAND_ALIAS_PEN_COLOR = getLiteral("COMMAND_ALIAS_PEN_COLOR");
     public static final String COMMAND_ALIAS_SHAPE = getLiteral("COMMAND_ALIAS_SHAPE");
     
+    // command names (misc support)
+    public static final String COMMAND_NAME_LAST_SHAPE_INDEX = getLiteral("COMMAND_NAME_LAST_SHAPE_INDEX");
+    public static final String COMMAND_NAME_LAST_PEN_COLOR_INDEX = getLiteral("COMMAND_NAME_LAST_PEN_COLOR_INDEX");
+    
     // command arg numbers
     public static final int COMMAND_EXPECTED_ARGS_ZERO = 0;
     public static final int COMMAND_EXPECTED_ARGS_ONE = 1;

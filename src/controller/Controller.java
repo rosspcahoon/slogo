@@ -6,11 +6,12 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
-import view.TabView;
-import view.Window;
+import javax.swing.JOptionPane;
 import model.Model;
 import model.Renderable;
 import model.Room;
+import view.TabView;
+import view.Window;
 
 /**
  * The controller is responsible for interfacing between the View and the Model.
@@ -31,7 +32,12 @@ public class Controller implements Observer, IController {
      * Constructor
      */
     public Controller() {
-        String language = "English";
+        String[] languages = {"English", "French"};
+        int n = JOptionPane.showOptionDialog(null,
+                            "Choose a language", "Language Selection",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, languages, languages[0]);
+        String language = languages[n];
         myModel = new Model(language);
         myView = new Window("SLogo", language, this);
         myRoom2Tab = new HashMap<Room, TabView>();
@@ -57,10 +63,11 @@ public class Controller implements Observer, IController {
     }
 
     /**
-     * Load a file in a specific tab
-     * @param f
+     * Load a file in a specific tab - TODO
+     * @param f - File to be loaded.
+     * @param t - Tab where file is to be loaded.
      */
-    private void loadFile (TabView t, File f) {
+    public void loadFile (TabView t, File f) {
 
     }
 
@@ -88,33 +95,12 @@ public class Controller implements Observer, IController {
         getTabForRoom(r).setRenderable((Renderable) r);
     }
 
-    /**
-     * Model side notify - calls to view to render
-     * @param r - updated room
-     */
-    private void update(Room r) {
-        getTabForRoom(r).render((Renderable) r);
-    }
-
-    /**
-     * View side notify - calls model to process the input command
-     * @param t
-     * @param arg
-     */
-    private void update(TabView t, Object arg) {
-        if (arg instanceof File) {
-            loadFile(t, (File)arg);
-        }
-        if (arg instanceof String) {
-//            myModel.processCommand(getRoomForTab(t), (String) arg);
-        }
-    }
 
     /**
      * calls model to process the input string command
-     * @param t
-     * @param cmd
-     * @return ret return int from command process
+     * @param t - 
+     * @param cmd - command to process
+     * @return ret - return int from command process
      */
     public int processCommand (TabView t, String cmd) {
         Room room = getRoomForTab(t);
