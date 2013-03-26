@@ -31,6 +31,7 @@ public class Room extends Observable implements Renderable{
     public Room (int id) {
         myID = id;
         myTurtle = new Actor(0);
+        myTurtle.setPenColor(0);
         myStatus = new Status();
     }
 
