@@ -36,6 +36,7 @@ public abstract class Doodad extends Sprite implements IRoomObject {
          myOldLocation = new Location(center);
          myInitialLocation = new Location(center); 
          myHeading = new Vector(0, 0);
+         myVisibility=true;
      }
     
     /**
