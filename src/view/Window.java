@@ -215,16 +215,16 @@ public class Window extends JFrame {
 
     private int registerTurtleShape (String imgURL) {
         TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-        return (int) processCommand(temp, 
-                                                getLiteral("registershape") + " " + imgURL);
+        return processCommand(temp, 
+                     getLiteral("COMMAND_NAME_REGISTER_SHAPE") + " " + imgURL);
 
     }
     
     public void changePenColor() {
-        Color result = JColorChooser.showDialog(this, getLiteral("ChangePenColor"), 
+        Color result = JColorChooser.showDialog(this, getLiteral("COMMAND_NAME_SET_PEN_COLOR"), 
                                                 getCurrentPenColor());
-        int pos = processCommand(getLiteral("ChangePenColorCommand") + " " + result.getRGB());
-        processCommand(getLiteral("SetPenColorCommand") + " " + pos);
+        int pos = processCommand(getLiteral("COMMAND_NAME_REGISTER_COLOR") + " " + result.getRGB());
+        processCommand(getLiteral("COMMAND_NAME_SET_PEN_COLOR") + " " + pos);
     }
     
 }
