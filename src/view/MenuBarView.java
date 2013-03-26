@@ -34,14 +34,14 @@ public class MenuBarView extends JMenuBar {
         myWindow = window;
         myActionLibrary = new ActionLibrary(myWindow);
         addComponents();
-        myTimer = new Timer(DEFAULT_DELAY,
-                            new ActionListener() {
-                                public void actionPerformed (ActionEvent e) {
-                                    if (myWindow.getTabCount() > 0) {
-                                        enablePreferences();
-                                    }
-                                }
-                            });
+        ActionListener prefListener =  new ActionListener() {
+            public void actionPerformed (ActionEvent e) {
+                if (myWindow.getTabCount() > 0) {
+                    enablePreferences();
+                }
+            }
+        };
+        myTimer = new Timer(DEFAULT_DELAY, prefListener);
         myTimer.start();
     }
 

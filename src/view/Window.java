@@ -88,7 +88,7 @@ public class Window extends JFrame {
      * @param p The Renderable that it is associated with
      */
     public void addTab (TabView tab, Renderable p) {
-        myTabbedPane.addTab("Tab" + tab.getID(), tab);
+        myTabbedPane.addTab(getLiteral("TabTitle") + " " + (tab.getID() + 1), tab);
         tab.setRenderable(p);
     }
     /**
@@ -214,10 +214,8 @@ public class Window extends JFrame {
     }
 
     private int registerTurtleShape (String imgURL) {
-        TabView temp = (TabView) myTabbedPane.getSelectedComponent();
-        return processCommand(temp, 
+        return processCommand(
                      getLiteral("COMMAND_NAME_REGISTER_SHAPE") + " " + imgURL);
-
     }
     
     public void changePenColor() {

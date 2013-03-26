@@ -28,7 +28,9 @@ public class FeedbackView extends WindowView {
 
     @Override
     public void addComponents () {
-        EasyGridFactory.layoutHorizontal(this, myStateView, myUserCommandView, myVariableView, myErrorLogView);
+        EasyGridFactory.layoutHorizontal(this, 
+                        myStateView, myUserCommandView, myVariableView, 
+                        myErrorLogView);
     }
 
     /**

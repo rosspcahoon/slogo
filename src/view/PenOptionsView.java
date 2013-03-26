@@ -39,7 +39,7 @@ public class PenOptionsView extends JDialog {
         ((JCheckBox) myPenDownUI).setSelected(true);
         ((JCheckBox) myPenDownUI).addItemListener(new PenDownListener());
         
-        myPenTypeUI = new RadioGroup(new PenTypeListener(), "dashed", "dotted", "double");
+        myPenTypeUI = new RadioGroup(new PenTypeListener(), "dashed", "normal", "double");
         myPenThicknessUI = new RadioGroup(new PenThicknessListener(), "2", "4", "6");
         
         EasyGridFactory.layoutVertical(this, myPenDownUI, myPenThicknessUI, myPenTypeUI);
