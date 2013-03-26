@@ -45,8 +45,9 @@ public class Actor extends Doodad implements Renderable, IMoveable {
     
     private Status myStatus;
     //Moveable's location, magnitude (initialized) and angle/head direction
-    private double myHeading;
     private Color myPenColor;
+    private int myPenIndex;
+    private int myShapeIndex;
 
     
     /**
@@ -63,10 +64,13 @@ public class Actor extends Doodad implements Renderable, IMoveable {
         myFrameBottom = DEFAULT_FRAME_BOTTOM;
         myFrameRight = DEFAULT_FRAME_RIGHT;
         myFrameLeft = DEFAULT_FRAME_LEFT;
-        myPenThickness = (float)2.0;
-        myDashWidth = (float)4.0;
-        myDoubleLineOn = true;
+        myPenThickness = PenConstants.PEN_DEFAULT_THICKNESS;
+        myDashWidth = PenConstants.PEN_DASH_NO_SPACE;
+        myDoubleLineOn = false;
         myPenDown = true;
+        myPenColor = Color.BLACK;
+        myPenIndex = 0;
+        myShapeIndex = 0;
     }
     
     /**
@@ -135,8 +139,31 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     public void setPenColor(int i) {
         myPenColor = PenConstants.penColors.get(i);
+        myPenIndex = i;
     }
     
+    /**
+     * gets the current pen color index in PenConstants
+     */
+    public int getPenIndex() {
+        return myPenIndex;
+    }
+    
+    /**
+     * sets myShape which will is the shape this turtle appears as in the view
+     * @param i index of imageFiles in ImageConstants
+     */
+    public void setShape(int i) {
+        super.setView(ImageConstants.imageFiles.get(i));
+        myPenIndex = i;
+    }
+    
+    /**
+     * gets the current shape index in ImageConstants
+     */
+    public int getShapeIndex() {
+        return myShapeIndex;
+    }
     
     /**
      * moves forward the given distance (negative numbers move backwards)
@@ -323,6 +350,5 @@ public class Actor extends Doodad implements Renderable, IMoveable {
      */
     public void setDashWidth(double width) {
         myDashWidth = (float)width;
-    }
-    
+    }    
 }

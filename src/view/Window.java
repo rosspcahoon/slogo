@@ -169,7 +169,7 @@ public class Window extends JFrame {
     /**
      * Initiate the change of background
      */
-    public void changeBackgroung() {
+    public void changeBackground() {
         int response = myChooser.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
             Image img;
@@ -228,8 +228,9 @@ public class Window extends JFrame {
     public void changePenColor() {
         Color result = JColorChooser.showDialog(this, getLiteral("ChangePenColor"), 
                                                 getCurrentPenColor());
-        int pos = processCommand(getLiteral("COMMAND_NAME_SET_PALETTE") +
-                                 " last " 
+        int pos = processCommand(getLiteral("COMMAND_NAME_LAST_PEN_COLOR_INDEX"));
+        processCommand(getLiteral("COMMAND_NAME_SET_PALETTE") +
+                                 " " + pos + " " 
                                  + result.getRed() + " "
                                  + result.getGreen() + " "
                                  + result.getBlue());

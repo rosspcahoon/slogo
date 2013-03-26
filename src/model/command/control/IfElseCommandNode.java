@@ -1,9 +1,7 @@
 package model.command.control;
 
 import java.util.List;
-import java.util.Scanner;
 import model.command.CommandConstants;
-import model.command.CommandLibrary;
 import model.command.CommandNode;
 
 /**
@@ -36,7 +34,6 @@ public class IfElseCommandNode extends CommandNode {
         } else {
             result = falseCommands.resolve();
         }
-//        System.out.printf("If condition evaluated to %d, returning %d\n", conditionResult, result);
         return result;
     }
 

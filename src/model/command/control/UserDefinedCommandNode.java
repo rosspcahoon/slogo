@@ -2,12 +2,8 @@ package model.command.control;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import model.Room;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
-import model.command.StringCommandNode;
 
 /**
  * Command node representing the contents of a list as defined by brackets.
@@ -57,7 +53,6 @@ public class UserDefinedCommandNode extends CommandNode {
         // switch back to room library
         CommandLibrary.loadVariableLibrary(super.getMyRoom());
         
-//        System.out.printf("User defined command %s executed, returning %d\n", myName, result);
         return result;
     }
     

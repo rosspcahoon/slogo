@@ -10,6 +10,7 @@ import model.command.turtle.*;
 import model.command.booleans.*;
 import model.command.math.*;
 import model.command.control.*;
+import model.command.extended.*;
 
 /**
  * Class holding static mappings for command keywords to command objects.
@@ -255,10 +256,7 @@ public class CommandLibrary {
         buildCommandLibrary();
         buildAliasLibrary();
     }
-    
-    /**
-     * Builds the command library.
-     */
+
     /**
      * Builds the command library.
      */
@@ -305,6 +303,19 @@ public class CommandLibrary {
         myCommandNodes.put(CommandConstants.COMMAND_NAME_IF, new IfCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_IFELSE, new IfElseCommandNode());
         myCommandNodes.put(CommandConstants.COMMAND_NAME_TO, new ToCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_PEN_COLOR, new SetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_PEN_SIZE, new SetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_PEN_TYPE, new SetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_SHAPE, new SetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_REGISTER_COLOR, new RegisterGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_REGISTER_SHAPE, new RegisterGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SET_PALETTE, new SetPaletteCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_PEN_COLOR, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_SHAPE, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LAST_PEN_COLOR_INDEX, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_LAST_SHAPE_INDEX, new GetGraphicsCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_DOTIMES, new DoTimesCommandNode());
+        myCommandNodes.put(CommandConstants.COMMAND_NAME_FOR, new ForCommandNode());
     }
 
     /**

@@ -7,6 +7,8 @@ import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import model.PenConstants;
+import model.command.CommandConstants;
 
 /**
  * This specialized UI is intended to allow the user to specify 
@@ -39,7 +41,9 @@ public class PenOptionsView extends JDialog {
         ((JCheckBox) myPenDownUI).setSelected(true);
         ((JCheckBox) myPenDownUI).addItemListener(new PenDownListener());
         
-        myPenTypeUI = new RadioGroup(new PenTypeListener(), "dashed", "normal", "double");
+        myPenTypeUI = new RadioGroup(new PenTypeListener(), PenConstants.PEN_TYPE_NAME_NORMAL, 
+                                     PenConstants.PEN_TYPE_NAME_DASHED, PenConstants.PEN_TYPE_NAME_DOUBLE);
+
         myPenThicknessUI = new RadioGroup(new PenThicknessListener(), "2", "4", "6");
         
         EasyGridFactory.layoutVertical(this, myPenDownUI, myPenThicknessUI, myPenTypeUI);
@@ -56,12 +60,13 @@ public class PenOptionsView extends JDialog {
     
     private String updateUserTypeChoice (String type) {
         myPenType = type;
-        myParent.processCommand("setpentype " + myPenType);
+        int index = PenConstants.getIndexForPenTypeName(type);
+        myParent.processCommand(CommandConstants.COMMAND_NAME_SET_PEN_TYPE + " " + index);
         return myPenType;
     }
     private String updateUserThicknessChoice (String thickness) {
         myPenThickness = thickness;
-        myParent.processCommand("setpenthickness " + thickness);
+        myParent.processCommand(CommandConstants.COMMAND_NAME_SET_PEN_SIZE + " " + thickness);
         return myPenThickness;
     }
     private boolean updateUserDownChoice (boolean down) {

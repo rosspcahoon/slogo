@@ -47,7 +47,7 @@ public class ActionLibrary {
 
         @Override
         public void actionPerformed (ActionEvent e) {
-            myWindow.changeBackgroung();
+            myWindow.changeBackground();
         }
     }
     

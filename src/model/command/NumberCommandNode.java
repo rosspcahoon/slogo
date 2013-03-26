@@ -1,7 +1,5 @@
 package model.command;
 
-import java.util.Scanner;
-
 /**
  * Node representing a single number or value.
  * @author james

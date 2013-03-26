@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Dimension; 
-import java.util.Observable;
 import util.Location;
 import util.Pixmap;
 import util.Sprite; 
@@ -20,7 +19,6 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     private Location myOldLocation; 
     private Location myInitialLocation; 
     private boolean myVisibility;
-    private boolean myPenStatus;
     private Vector myHeading;
      
     

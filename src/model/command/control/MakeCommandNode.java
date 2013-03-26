@@ -45,7 +45,6 @@ public class MakeCommandNode extends CommandNode {
         int result = value.resolve();
         CommandLibrary.loadVariableLibrary(super.getMyRoom());
         CommandLibrary.addUserVariable(nameString, result);
-//        System.out.printf("Made variable %s with value %d\n", nameString, result);
         return result;
     }
 

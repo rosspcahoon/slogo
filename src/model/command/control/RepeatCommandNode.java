@@ -1,7 +1,6 @@
 package model.command.control;
 
 import java.util.List;
-import java.util.Scanner;
 import model.command.CommandConstants;
 import model.command.CommandLibrary;
 import model.command.CommandNode;
@@ -34,9 +33,10 @@ public class RepeatCommandNode extends CommandNode {
         }
         int result = -1;
         for (int i=0; i<numIterations; i++) {
+            CommandLibrary.loadVariableLibrary(super.getMyRoom());
+            CommandLibrary.addUserVariable(CommandConstants.COMMAND_REPEAT_COUNT_VAR_NAME, i+1);
             result = commands.resolve();
         }
-//        System.out.printf("Repeated %d times, returning %d\n", numIterations, result);
         return result;
     }
 
