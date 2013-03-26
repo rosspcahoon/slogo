@@ -1,4 +1,4 @@
-package model.command.turtle.commands;
+package model.command.turtle;
 
 import java.util.List;
 import model.Room;
@@ -6,20 +6,20 @@ import model.command.CommandConstants;
 import model.command.CommandNode;
 
 /**
- * Node representing a left command
+ * Node representing a setheading command
  * @author james
  *
  */
-public class LeftCommandNode extends CommandNode {
+public class SetHeadingCommandNode extends CommandNode {
 
-    public LeftCommandNode() {
+    public SetHeadingCommandNode() {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ONE);
     }
     
     @Override
     public CommandNode getCopyOfInstance () {
-        return new LeftCommandNode();
+        return new SetHeadingCommandNode();
     }
 
     @Override
@@ -27,12 +27,12 @@ public class LeftCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode child = children.get(0);
         int result = child.resolve();
-        if (result < 0) {
-            throw new Exception("Error executing LEFT -- argument value is negative, please use RIGHT");
+        if (result < 0 || result > 360) {
+            throw new Exception("Error executing SETHEADING -- argument value out of bounds, must be between [0, 360]");
         }
-//        System.out.printf("Turn turtle left %d degrees\n", result);
+//        System.out.printf("Set turtle heading to %d degrees\n", result);
         Room room = getMyRoom();
-        room.getTurtle().turnRight(-result);
+        result = (int) room.getTurtle().jumpTurn(result);
         return result;
     }
 

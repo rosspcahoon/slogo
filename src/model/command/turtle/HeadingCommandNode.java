@@ -1,31 +1,30 @@
-package model.command.turtle.commands;
+package model.command.turtle;
 
 import model.Room;
 import model.command.CommandConstants;
 import model.command.CommandNode;
 
 /**
- * Node representing a home command
+ * Node representing a heading command
  * @author james
  *
  */
-public class HomeCommandNode extends CommandNode {
+public class HeadingCommandNode extends CommandNode {
 
-    public HomeCommandNode() {
+    public HeadingCommandNode() {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_ZERO);
     }
     
     @Override
     public CommandNode getCopyOfInstance () {
-        return new HomeCommandNode();
+        return new HeadingCommandNode();
     }
 
     @Override
-    public int resolve () throws Exception {
-//        System.out.printf("Moved turtle home\n");
+    public int resolve () {
         Room room = getMyRoom();
-        int result = (int) room.getTurtle().returnHome();
+        int result = (int) room.getTurtle().getHeading();
         return result;
     }
 

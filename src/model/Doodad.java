@@ -92,8 +92,8 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     
     public void setOldLocation(Location loc) {
         myOldLocation = loc;
-        System.out.println(myOldLocation);
-        System.out.println(myCurrentLocation);
+//        System.out.println(myOldLocation);
+//        System.out.println(myCurrentLocation);
     }
     
     /**
@@ -119,8 +119,8 @@ public abstract class Doodad extends Sprite implements IRoomObject {
     public double returnHome () { 
         double distanceMoved = distance(myInitialLocation);
 //        super.setCenter(myInitialLocation);
-        System.out.println("Initial: " + myInitialLocation);
-        System.out.println("Current: " + getCurrentLocation());
+//        System.out.println("Initial: " + myInitialLocation);
+//        System.out.println("Current: " + getCurrentLocation());
         setCurrentLocation(myInitialLocation);
         return distanceMoved;
     }

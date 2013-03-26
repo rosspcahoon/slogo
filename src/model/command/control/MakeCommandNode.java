@@ -31,18 +31,19 @@ public class MakeCommandNode extends CommandNode {
         List<CommandNode> children = super.getChildren();
         CommandNode name = children.get(0);
         CommandNode value = children.get(1);
-        StringCommandNode variable = null;
+        CommandNode variable = null;
         if (name instanceof StringCommandNode) {
-            variable = (StringCommandNode) name;
+            variable = (CommandNode) name;
         } else {
             throw new Exception("Error executing MAKE -- variable name not a string");
         }
-        String nameString = variable.getMyValue();
+        String nameString = variable.getMyString();
         if (!nameString.substring(0, 1).equals(CommandConstants.COMMAND_NAME_VARIABLE_START)) {
             throw new Exception("Error executing MAKE -- variable name must begin with \"" +
                     CommandConstants.COMMAND_NAME_VARIABLE_START + "\"");
         }
         int result = value.resolve();
+        CommandLibrary.loadVariableLibrary(super.getMyRoom());
         CommandLibrary.addUserVariable(nameString, result);
 //        System.out.printf("Made variable %s with value %d\n", nameString, result);
         return result;
@@ -54,14 +55,15 @@ public class MakeCommandNode extends CommandNode {
      * set up as they are before.
      */
     @Override
-    public void setUp(Scanner s, Room r) throws Exception {
+    public void setUp(Scanner s, Room r, String v) throws Exception {
         super.clearChildren();
+        super.setMyString(v);
         String varName = s.next();
         varName = varName.toLowerCase();
-        StringCommandNode nameNode = new StringCommandNode();
-        nameNode.setMyValue(varName);
+        CommandNode nameNode = new StringCommandNode();
+//        nameNode.setMyString(varName);
         addChild(nameNode);
-        nameNode.setUp(s, r);
+        nameNode.setUp(s, r, varName);
         setMyRoom(r);
         int expected = getMyExpectedArgs();
         for (int i=1; i<expected; i++) {
@@ -74,7 +76,7 @@ public class MakeCommandNode extends CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s, r);
+            nextNode.setUp(s, r, nextString);
         }
     }
 }

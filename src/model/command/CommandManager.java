@@ -22,7 +22,7 @@ public class CommandManager {
     private Scanner myCurrentScanner;
     
     /**
-     * For translation
+     * For language translation.
      */
     private static ResourceBundle ourResources;
     private static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
@@ -42,7 +42,7 @@ public class CommandManager {
         
         //translation 
         ourResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-        CommandLibrary.setResources(ourResources);
+        CommandLibrary.loadResources(ourResources);
     }
     
     /**
@@ -54,6 +54,8 @@ public class CommandManager {
         myCurrentInput = input;
         myCurrentScanner = new Scanner(myCurrentInput);
         myCurrentRoom = room;
+        CommandLibrary.loadVariableLibrary(room);
+        CommandLibrary.loadCommandLibrary(room);
         try {
             createTree();
 //            printTree();
@@ -63,10 +65,10 @@ public class CommandManager {
         } catch (Exception e) {
             myCurrentError = e.getMessage();            
 //            System.err.println("CommandManager caught exception with message: " + myCurrentError);
-            e.printStackTrace();
+//            e.printStackTrace();
             room.getState().setErrorMessage(myCurrentError);
         }
-        CommandLibrary.addDefaultVariableLibraryToRoomStatus(room);
+        CommandLibrary.addUserVariableLibraryToRoomStatus(room);
         CommandLibrary.addCommandLibraryToRoomStatus(room);
         return myCurrentResult;
     }
@@ -78,7 +80,7 @@ public class CommandManager {
         String rootString = myCurrentScanner.next();
         rootString = rootString.toLowerCase();
         myCurrentRoot = CommandLibrary.getCommandNode(rootString);
-        myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom);
+        myCurrentRoot.setUp(myCurrentScanner, myCurrentRoom, rootString);
         if (myCurrentScanner.hasNext()) {
             throw new Exception("Error parsing command -- input has too many elements or is badly formed");
         }

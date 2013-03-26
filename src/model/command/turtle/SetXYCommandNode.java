@@ -1,4 +1,4 @@
-package model.command.turtle.commands;
+package model.command.turtle;
 
 import java.util.List;
 import model.Room;
@@ -6,20 +6,20 @@ import model.command.CommandConstants;
 import model.command.CommandNode;
 
 /**
- * Node representing a towards command
+ * Node representing a setxy command
  * @author james
  *
  */
-public class TowardsCommandNode extends CommandNode {
+public class SetXYCommandNode extends CommandNode {
 
-    public TowardsCommandNode() {
+    public SetXYCommandNode() {
         super();
         super.setMyExpectedArgs(CommandConstants.COMMAND_EXPECTED_ARGS_TWO);
     }
     
     @Override
     public CommandNode getCopyOfInstance () {
-        return new TowardsCommandNode();
+        return new SetXYCommandNode();
     }
 
     @Override
@@ -29,10 +29,10 @@ public class TowardsCommandNode extends CommandNode {
         CommandNode yChild = children.get(1);
         int xCoord = xChild.resolve();
         int yCoord = yChild.resolve();
+        // TODO: do not allow turtle to move out of bounds
+//        System.out.printf("Moved turtle to location %d %d\n", xCoord, yCoord);
         Room room = getMyRoom();
-        int result = (int) room.getTurtle().jumpTurn(xCoord, yCoord);
-//        room.getTurtle().
-//        System.out.printf("Turned turtle to face %d %d\n", xCoord, yCoord);
+        int result = (int) room.getTurtle().jumpMove(xCoord, yCoord);
         return result;
     }
 

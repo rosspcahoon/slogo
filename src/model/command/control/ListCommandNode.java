@@ -41,8 +41,9 @@ public class ListCommandNode extends CommandNode {
      * create its children until we encounter its end.
      */
     @Override
-    public void setUp(Scanner s, Room r) throws Exception {
+    public void setUp(Scanner s, Room r, String v) throws Exception {
         setMyRoom(r);
+        setMyString(v);
         int expected = 0;
         String nextString;
         try {
@@ -54,7 +55,7 @@ public class ListCommandNode extends CommandNode {
             nextString = nextString.toLowerCase();
             CommandNode nextNode = CommandLibrary.getCommandNode(nextString);
             addChild(nextNode);
-            nextNode.setUp(s, r);
+            nextNode.setUp(s, r, nextString);
             expected++;
             try {
                 nextString = s.next();
