@@ -139,6 +139,19 @@ public class CommandLibrary {
     }
     
     /**
+     * Gets the key associated with the current parameter library. Returns null
+     * if no parameter library is currently loaded.
+     */
+    public static String getCurrentParameterLibraryKey() {
+        for (String key : myCommandParameterLibraries.keySet()) {
+            if (myCommandParameterLibraries.get(key).equals(myCurrentUserVariables)) {
+                return key;
+            }
+        }
+        return null;
+    }
+    
+    /**
      * Sets a certain user-defined variable library as the current. Libraries
      * are identified by the name of the user-defined command with which they
      * are associated.

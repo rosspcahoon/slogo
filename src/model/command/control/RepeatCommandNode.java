@@ -33,8 +33,12 @@ public class RepeatCommandNode extends CommandNode {
         }
         int result = -1;
         for (int i=0; i<numIterations; i++) {
+            String currentKey = CommandLibrary.getCurrentParameterLibraryKey();
             CommandLibrary.loadVariableLibrary(super.getMyRoom());
             CommandLibrary.addUserVariable(CommandConstants.COMMAND_REPEAT_COUNT_VAR_NAME, i+1);
+            if (currentKey != null) {
+                CommandLibrary.loadParameterLibrary(currentKey);
+            }
             result = commands.resolve();
         }
         return result;
